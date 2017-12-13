@@ -1,0 +1,43 @@
+<div class="mat-toolbar mat-primary">
+  <div class="mat-toolbar-layout"><div class="mat-toolbar-row" style="flex-direction: row; box-sizing: border-box; display: flex;">
+  <!--<button _ngcontent-c1="" class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
+    <span class="mat-button-wrapper">
+      <mat-icon _ngcontent-c1="" class="mat-icon ng-tns-c1-0 material-icons" role="img" aria-hidden="true">menu</mat-icon>
+    </span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
+  </button>-->
+  <a _ngcontent-c1="" class="logo ng-tns-c1-0" fxhide="true" fxhide.gt-sm="false" href="/" style="display: block;">
+    <img _ngcontent-c1="" class="ng-tns-c1-0" src="../assets/images/logo.png">
+  </a>
+</div>
+  </div>
+</div>
+<div >
+  <div class="form-card">
+    
+    <form>
+      <div class="form-img">
+        <img src="../assets/images/login-logo.png" width="187" height="50" class="md-card-image" alt="Point Centric"><br>
+      <small>Sign in via your current account</small><br><md-divider></md-divider><br>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="User Name" [formControl]="username" required>
+          <mat-error *ngIf="username.hasError('required')">
+            You must enter a value for User  Name
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" [formControl]="password" required>
+          <mat-error *ngIf="password.hasError('required')">
+            You must enter a value for Password
+          </mat-error>
+        </mat-form-field>
+
+        
+          <button mat-raised-button color="primary">SignIn</button>
+       
+      </div>
+
+    </form>
+  </div>
+  </div>

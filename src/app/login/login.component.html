@@ -1,0 +1,34 @@
+<div class="mat-toolbar mat-primary">
+  <div class="mat-toolbar-layout">
+    <div class="mat-toolbar-row" style="flex-direction: row; box-sizing: border-box; display: flex;">
+      <a _ngcontent-c1="" class="logo ng-tns-c1-0" fxhide="true" fxhide.gt-sm="false" href="/" style="display: block;">
+        <img _ngcontent-c1="" class="ng-tns-c1-0" src="../assets/images/logo.png">
+      </a>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="form-card">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" novalidate>
+      <div class="form-img">
+        <img src="../assets/images/login-logo.png" width="187" height="50" class="md-card-image" alt="Point Centric"><br>
+        <small>Sign in via your current account</small><br><md-divider></md-divider><br>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="User Name" formControlName="username" required>
+          <mat-error *ngIf="username.hasError('required')">
+            This is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <mat-error *ngIf="password.hasError('required')">
+            This is required
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary">Sign In</button>
+      </div>
+    </form>
+  </div>
+</div>
