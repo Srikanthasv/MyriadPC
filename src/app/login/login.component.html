@@ -16,18 +16,18 @@
       </div>
       <div class="example-container">
         <mat-form-field>
-          <input matInput placeholder="User Name" formControlName="username" required>
-          <mat-error *ngIf="username.hasError('required')">
+          <input matInput placeholder="User Name" [(ngModel)]="username" name="username" [formControl]="loginForm.controls['username']" required>
+          <mat-error *ngIf="loginForm.controls['username'].hasError('required') &&  formSubmitted">
             This is required
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput type="password" placeholder="Password" formControlName="password" required>
-          <mat-error *ngIf="password.hasError('required')">
+          <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" [formControl]="loginForm.controls['password']" required>
+          <mat-error *ngIf="loginForm.controls['password'].hasError('required') &&  formSubmitted">
             This is required
           </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary">Sign In</button>
+        <button mat-raised-button color="primary" [disabled]="!loginForm.valid">Sign In</button>
       </div>
     </form>
   </div>

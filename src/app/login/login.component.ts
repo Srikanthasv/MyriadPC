@@ -11,21 +11,21 @@ import 'rxjs/add/operator/map'
 
 @Component({
   moduleId: module.id,
-  selector: 'app-root',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['../app.component.css','../bootstrap.css']
 })
 
 
 export class LoginComponent implements OnInit {
-
+  public loginForm: FormGroup;
+formSubmitted: boolean = false;
   public user = new User('', '');
   //logoPath: string;
   //loginLogo: string;
   public token: string;
   public errorMsg = '';
-  public loginForm: FormGroup;
-
+  
   constructor(private route: ActivatedRoute,
     private router: Router,
     private loginService: LoginService,
@@ -37,14 +37,20 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this.fb.group({username: [''], password: ['']});
-    this.loginService.logout();
+    this.loginForm = this.fb.group({
+      'username' : [null, Validators.compose([Validators.required])],
+      'password' : [null, Validators.compose([Validators.required])],
+      // Validators.pattern('[a-zA-Z ]*')
+    });
+    //this.loginService.logout();
 
   }
   onSubmit(form:any) {
+   this.formSubmitted = true;
+
     //console.log("Data:" + form.username);
-    let link = ['/home'];
-    if (form.username != '' || form.password != '') {
+ this.router.navigateByUrl('/home');
+    /*if (form.username != '' || form.password != '') {
       this.loginService.login(form.username, form.password)
         .subscribe(res => {
           //console.log("Data:" + res);
@@ -58,7 +64,7 @@ export class LoginComponent implements OnInit {
         () => this.router.navigate(link)
 
         );
-    }
+    }*/
   }
 
 }
