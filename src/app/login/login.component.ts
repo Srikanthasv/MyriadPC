@@ -42,19 +42,17 @@ formSubmitted: boolean = false;
       'password' : [null, Validators.compose([Validators.required])],
       // Validators.pattern('[a-zA-Z ]*')
     });
-    //this.loginService.logout();
+    this.loginService.logout();
 
   }
   onSubmit(form:any) {
-   this.formSubmitted = true;
-
-    //console.log("Data:" + form.username);
- this.router.navigateByUrl('/home');
+  if (this.loginForm.valid) {
+   let link = ['/home'];
+   this.router.navigate(link);
+    console.log("Data:" + form.username);
     /*if (form.username != '' || form.password != '') {
       this.loginService.login(form.username, form.password)
         .subscribe(res => {
-          //console.log("Data:" + res);
-          let link = ['/home'];
           this.router.navigate(link);
         },
         err => {
@@ -66,5 +64,6 @@ formSubmitted: boolean = false;
         );
     }*/
   }
+}
 
 }
