@@ -49,6 +49,7 @@ import {
   MatStepperModule,MatFormFieldModule, 
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
+import { AdvertisingComponent } from './Configuration/Codes/advertising/advertising.component';
 
 @NgModule({
 	exports: [
@@ -88,7 +89,8 @@ import {CdkTableModule} from '@angular/cdk/table';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    AdvertisingComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,
