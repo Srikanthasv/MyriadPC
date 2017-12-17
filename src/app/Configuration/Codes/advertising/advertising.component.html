@@ -90,7 +90,8 @@
 
                  <div class="" style="padding:15px 19px 28px 19px;" *ngIf="addFlag">
     <form [formGroup]="codeForm" (ngSubmit)="savecode(codeForm.value)" novalidate>
-      
+              <span (click)="addcodeback()">Back</span>
+
       <div class="example-container">
                 <div class="row">
             <div class="col-lg-6">
@@ -122,6 +123,51 @@
       </div>
     </form>
   </div>
+
+   <div class="" style="padding:15px 19px 28px 19px;" *ngIf="editFlag">
+    <form [formGroup]="codeeditForm" (ngSubmit)="saveeditcode(editcode,codeeditForm.value)" novalidate>
+      
+      <div class="example-container">
+                <div class="row">
+            <div class="col-lg-6">
+        <mat-form-field>
+          <input matInput placeholder="Code" disabled value="{{editcode}}" >
+        </mat-form-field>
+        </div>
+            <div class="col-lg-6">
+        <mat-form-field>
+          <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
+          <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
+            This is required
+          </mat-error>
+        </mat-form-field></div></div>
+<div class="row">
+            <div class="col-lg-6">
+        <mat-form-field>
+          <input matInput  placeholder="Effective Date" disabled value="{{effectiveDate}}" >
+        
+        </mat-form-field>
+        </div>
+            <div class="col-lg-6">
+        <mat-form-field>
+          <input matInput type="date" placeholder="Discontinued Date" [(ngModel)]="discontinuedDate" name="discontinuedDate" [formControl]="codeeditForm.controls['discontinuedDate']" required>
+          <mat-error *ngIf="codeeditForm.controls['discontinuedDate'].hasError('required') ">
+            This is required
+          </mat-error>
+        </mat-form-field></div></div>
+        <div class="col-lg-6">
+
+              <div class="col-lg-8">
+               <!--  <button type="button" class="btn btn-default btn-lg" (click)="clearaddcodes()">Clear</button> -->
+        <button mat-raised-button type="submit" color="primary" >Update</button>
+              </div>
+
+
+            </div>
+
+      </div>
+    </form>
+  </div>
                   <div class="row table-responsive" *ngIf="displayFlag" style="width:90%;height: 400px; overflow:scroll; ">
 
                     <table id="example" class="table table-striped table-bordered table-responsive" cellspacing="0" width="100%">
@@ -144,7 +190,7 @@
                        <tr *ngFor="let codes of codesList.Data">
                           <td>{{codes.Code}} <br> Description: {{codes.Description}}</td>
                           <td>Effective date: {{codes.StartDate}}<br>Discontinued Date:{{codes.EndDate}}</td>
-                          <td><a class='btn btn-info btn-xs' (click)="editcodes(codes.id,codes.Code,codes.Description);"><span class="glyphicon glyphicon-edit"></span> Edit</a>  </td>
+                          <td><a class='btn btn-info btn-xs' (click)="editcodes(codes.id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><span class="glyphicon glyphicon-edit"></span> Edit</a>  </td>
 
                         </tr>
                         <!-- <tr>
