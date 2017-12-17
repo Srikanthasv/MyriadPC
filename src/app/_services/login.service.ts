@@ -31,7 +31,7 @@ export class LoginService {
     var params = 'grant_type=password&client_id=js&username=' + username + '&password=' + password + '&client_secret=609642b3-0eee-4254-9f8f-362cd00f7d9d';
     return this.http.post('http://pointcentricapi-local:5000/connect/token', params, { headers: headers })
       .map((response: Response) => {
-        let token = response.json() && response.json().refresh_token;
+        let token = response.json() && response.json().access_token;
         if (token) {
           this.token = token;
           localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
