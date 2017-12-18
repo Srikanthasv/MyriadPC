@@ -8,27 +8,27 @@
   </div>
 </div>
 <div>
-  <div class="form-card" style="padding:15px 19px 28px 19px;">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" novalidate>
+  <div flex-offset-lg="30" flex="40" flex-offset-sm="20" flex-sm="50" flex-offset-md="30" flex-md="33" flex-xs="100">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" novalidate style="padding: 10px 20px 20px 20px;">
       <div class="form-img">
         <img src="../assets/images/login-logo.png" width="187" height="50" class="md-card-image" alt="Point Centric"><br>
         <small>Sign in via your current account</small><br><md-divider></md-divider><br>
       </div>
       <div style="color:red">{{errorMsg}}</div><br />
-      <div class="example-container">
-        <mat-form-field>
+      <div class="" >
+        <mat-form-field style="width:100%">
           <input matInput placeholder="User Name" [(ngModel)]="username" name="username" [formControl]="loginForm.controls['username']" required>
           <mat-error *ngIf="loginForm.controls['username'].hasError('required') ">
             This is required
           </mat-error>
-        </mat-form-field>
-        <mat-form-field>
+        </mat-form-field><br>
+        <mat-form-field style="width:100%">
           <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" [formControl]="loginForm.controls['password']" required>
           <mat-error *ngIf="loginForm.controls['password'].hasError('required') ">
             This is required
           </mat-error>
-        </mat-form-field>
-        <button mat-raised-button type="submit" color="primary" >Sign In</button>
+        </mat-form-field><br><br><br>
+        <button mat-raised-button type="submit" color="primary" style="width:100%; padding:5px 0;">Sign In</button>
       </div>
     </form>
   </div>

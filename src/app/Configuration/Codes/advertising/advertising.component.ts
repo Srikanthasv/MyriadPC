@@ -26,7 +26,9 @@ description:any;
 editFlag:boolean=false;
 effectiveDate:any;
 discontinuedDate:any;
-editdescription:any;
+  editdescription: any;
+  prevDescription: any;
+  prevDiscDate: any;
 editcode:any;
 id: any;
 acToken: any;
@@ -56,24 +58,12 @@ getData(){
   this.http.get("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/", options)
     .map(res => res.json())
     .subscribe(res => this.codesList = res);
-  //  .subscribe(
-  //  data => {
-  //    console.log("res:: " + JSON.stringify(data));
-  //    this.codesList = JSON.stringify(data);
-  //  },
-  //  err => {
-  //    err = err
-  //    console.log(err);
-  //  }
-  //);
-  
-  //this.codesList={ 'Data': [ { 'Id': 1, 'Code': 'B', 'Description': 'BILLBOARD', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBM=' }, { 'Id': 2, 'Code': 'CM', 'Description': 'CUSTOMER MAILER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBI=' }, { 'Id': 3, 'Code': 'CPN', 'Description': 'Coupon', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBE=' }, { 'Id': 4, 'Code': 'EML', 'Description': 'Email', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBA=' }, { 'Id': 5, 'Code': 'FB', 'Description': 'FaceBook', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA8=' }, { 'Id': 6, 'Code': 'INT', 'Description': 'Interior Design spec magazine', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA4=' }, { 'Id': 7, 'Code': 'N', 'Description': 'NEWSPAPER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA0=' }, { 'Id': 8, 'Code': 'NP', 'Description': 'NON PROFIT - MUST HAVE NP ID #', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAw=' }, { 'Id': 9, 'Code': 'PIN', 'Description': 'Pinterest', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAs=' }, { 'Id': 10, 'Code': 'R', 'Description': 'RADIO', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAo=' }, { 'Id': 11, 'Code': 'RP', 'Description': 'REPEAT CUSTOMER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAk=' }, { 'Id': 12, 'Code': 'W', 'Description': 'WORD OF MOUTH', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAg=' }, { 'Id': 13, 'Code': 'TWEET', 'Description': 'Twitter', 'StartDate': '2016-12-13T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAc=' } ], 'Total': 13, 'AggregateResults': null, 'Errors': null } ;
-  //this.codesList = { "Data": [{ "Id": 1, "Code": "B", "Description": "BILLBOARD", "StartDate": "2014-07-20T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEBM=" }, { "Id": 2, "Code": "CM", "Description": "CUSTOMER MAILER", "StartDate": "2014-07-20T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEBI=" }, { "Id": 3, "Code": "CPN", "Description": "Coupon", "StartDate": "2014-10-14T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEBE=" }, { "Id": 4, "Code": "EML", "Description": "Email", "StartDate": "2014-10-14T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEBA=" }, { "Id": 5, "Code": "FB", "Description": "FaceBook", "StartDate": "2014-09-17T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEA8=" }, { "Id": 6, "Code": "INT", "Description": "Interior Design spec magazine", "StartDate": "2014-10-14T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEA4=" }, { "Id": 7, "Code": "N", "Description": "NEWSPAPER", "StartDate": "2014-07-20T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEA0=" }, { "Id": 8, "Code": "NP", "Description": "NON PROFIT - MUST HAVE NP ID #", "StartDate": "2014-07-20T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEAw=" }, { "Id": 9, "Code": "PIN", "Description": "Pinterest", "StartDate": "2014-09-17T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEAs=" }, { "Id": 10, "Code": "R", "Description": "RADIO", "StartDate": "2014-07-20T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEAo=" }, { "Id": 11, "Code": "RP", "Description": "REPEAT CUSTOMER", "StartDate": "2014-07-20T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEAk=" }, { "Id": 12, "Code": "W", "Description": "WORD OF MOUTH", "StartDate": "2014-07-20T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEAg=" }, { "Id": 13, "Code": "TWEET", "Description": "Twitter", "StartDate": "2016-12-13T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAYEAc=" }, { "Id": 14, "Code": "FOO", "Description": "Foo Bar", "StartDate": "2014-07-20T00:00:00", "EndDate": null, "TimeStamp": "AAAAAAAjP3I=" }], "Total": 14, "AggregateResults": null, "Errors": null };
 }
 
-  ngOnInit() {
-    this.getData();
-
+ngOnInit() {
+  this.getData();
+ // this.sortcodes();
+      
   this.codeForm = this.fb.group({
       'code' : [null, Validators.compose([Validators.required])],
       'description' : [null, Validators.compose([Validators.required])],
@@ -85,12 +75,9 @@ getData(){
       // Validators.pattern('[a-zA-Z ]*')
   });
   }
-  callcodes(){
-  	console.log("Codes entered");
+  callcodes(){  	
   	this.addFlag=true;
-  	this.displayFlag=false;
-  	//this.code="";
-	//this.description="";
+  	this.displayFlag=false;  	
   }
   savecode(value){
   	if (this.codeForm.valid)
@@ -136,14 +123,22 @@ addcodeback(){
   	this.code="";
   	this.description="";
 }
+  editcodeback(){
+    this.editFlag=false;
+    this.displayFlag=true;
+    this.editcode="";
+    this.editdescription="";
+}
    editcodes(id,code,desc,startDate,endDate){
   	this.editFlag=true;
   	this.displayFlag=false;
   	this.editcode=code;
-  	this.editdescription=desc;
+    this.editdescription = desc;
+    this.prevDescription = desc;
   	var splitted = startDate.split("T", 2); 
   	this.effectiveDate=splitted[0];
-    this.id = id;        
+    this.id = id;
+    this.prevDiscDate = endDate;
   }
 saveeditcode(code,value){
 
@@ -190,10 +185,17 @@ saveeditcode(code,value){
 	this.code="";
 	this.description="";
   }
+  cleareditcodes() {
+    this.editdescription = this.prevDescription;
+    this.discontinuedDate = this.prevDiscDate;
+  }
+
   
   sortcodes(){
   	let  orderType=this.sortorder
-  	let currentField=this.sortby;
+        let currentField = this.sortby;
+        console.log("Order:: " + this.sortorder);
+        console.log("sort:: " + this.sortby);
   	 // this.searchbox=false;
 
     this.codesList.Data.sort((a: any, b: any) => {

@@ -3713,9 +3713,11 @@ body:not(.page-horizontal-bar):not(.small-sidebar) .menu.accordion-menu a {
 /* Page Inner */
 
 .page-inner {
-	padding: 0 0 50px 0;
-    background: #F1F4F9;
-    position: relative;
+  padding: 0 0 50px 0;
+  /*background: #F1F4F9;*/
+  background: #f5f7fa;
+  position: relative;
+  margin-top:7px;
 }
 
 .page-header-fixed:not(.page-sidebar-fixed):not(.page-horizontal-bar) .page-inner {
@@ -3754,10 +3756,16 @@ body:not(.page-horizontal-bar):not(.small-sidebar) .menu.accordion-menu a {
 /* Page Title */
 
 .page-title {
-    padding: 20px;
-    background: #e9edf2;
-    border-bottom: 1px solid #dee2e8;
+  padding: 10px 0 10px 20px;
+  background: #fafbfc;
+  border-bottom: 1px solid #dee2e8;
+  font-size: 24px;
+  color: #929292 !important;
+  font-weight:normal;
 }
+.page-title span {
+    color: #929292 !important;
+  }
 
 .page-title h3 {
     font-size: 24px;
@@ -3765,7 +3773,7 @@ body:not(.page-horizontal-bar):not(.small-sidebar) .menu.accordion-menu a {
     color: #74767d;
     padding: 0px;
     margin: 0 0 4px 0;
-}
+  }
 
 
 /* Page Settings */

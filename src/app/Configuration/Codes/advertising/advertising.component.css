@@ -156,10 +156,14 @@ form {
   color: #555;
   background-color: #fff;
 }
+.add-adv {
+  box-shadow: none !important;
+  background-color: inherit !important;
+  margin:0 auto !important;
+}
 .example-container {
   display: flex;
   flex-direction: column;
-  
 }
 
 .example-container > * {
@@ -204,7 +208,7 @@ form {
     color: #fff;*/
     background: #2e9cf4 !important;
     color: #fff;
-    margin: -8px -8px 0 -8px !important;
+    /*margin: -8px -8px 0 -8px !important;*/
     padding: 20px 0 0 5px;
     box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
   }

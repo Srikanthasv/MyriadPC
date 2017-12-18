@@ -73,49 +73,52 @@
     </mat-sidenav>
 
 
-    <div class="page-inner">
+    <div class="page-inner container">
       <div class="page-title">
-        <h3>Advertising</h3>
+        <span>Advertising</span>
 
       </div>
       <div id="main-wrapper">
         <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-white">
+          <div class="">
+            <div class="row panel panel-white" >
 
-              <div class="panel-body">
+              <div class="panel-body" style="border:1px solid #e6e6e6;">
 
 
-                <div class="container">
+                <div class="">
 
                  <div class="" style="padding:15px 19px 28px 19px;" *ngIf="addFlag">
-    <form [formGroup]="codeForm" (ngSubmit)="savecode(codeForm.value)" novalidate>
-              <span (click)="addcodeback()">Back</span>
+    <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="savecode(codeForm.value)" novalidate>
+      <button id="addback" (click)="addcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;">Back</button>
+      <br><br><br><br>
+      <!--<button class="" (click)="addcodeback()">Back</button>-->
 
-      <div class="example-container">
+      <!--<div class="example-container">-->
+      <div class="">
                 <div class="row">
             <div class="col-lg-6">
-        <mat-form-field>
-          <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required>
-          <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
-            This is required
-          </mat-error>
-        </mat-form-field>
+              <mat-form-field style="width:100%"  hintLabel="">
+                <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
+                <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
+                  This is required
+                </mat-error>
+              </mat-form-field>
         </div>
             <div class="col-lg-6">
-        <mat-form-field>
-          <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required>
-          <mat-error *ngIf="codeForm.controls['description'].hasError('required') ">
+        <mat-form-field style="width:100%">
+          <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required maxlength="30">
+              <mat-error *ngIf="codeForm.controls['description'].hasError('required') ">
             This is required
           </mat-error>
         </mat-form-field></div>
+        <br><br><br><br>
+        <div class="" align="right">
 
-        <div class="col-lg-6">
-
-              <div class="col-lg-8">
-                <button type="button" class="btn btn-default btn-lg" (click)="clearaddcodes()">Clear</button>
-        <button mat-raised-button type="submit" color="primary" >Save</button>
-              </div>
+          <div class="">
+            <button mat-raised-button type="button" (click)="clearaddcodes()" style="line-height:36px;">Cancel</button>
+            <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
+          </div>
 
 
             </div></div>
@@ -125,73 +128,58 @@
   </div>
 
    <div class="" style="padding:15px 19px 28px 19px;" *ngIf="editFlag">
-    <form [formGroup]="codeeditForm" (ngSubmit)="saveeditcode(editcode,codeeditForm.value)" novalidate>
-      
+    <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="saveeditcode(editcode,codeeditForm.value)" novalidate>
+      <button id="editback" (click)="editcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;">Back</button>
+      <br><br><br><br>
       <div class="example-container">
                 <div class="row">
             <div class="col-lg-6">
-        <mat-form-field>
+        <mat-form-field style="width:100%">
           <input matInput placeholder="Code" disabled value="{{editcode}}" >
         </mat-form-field>
         </div>
             <div class="col-lg-6">
-        <mat-form-field>
+        <mat-form-field style="width:100%">
           <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
           <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
             This is required
           </mat-error>
-        </mat-form-field></div></div>
-<div class="row">
-            <div class="col-lg-6">
-        <mat-form-field>
-          <input matInput  placeholder="Effective Date" disabled value="{{effectiveDate}}" >
-        
-        </mat-form-field>
-        </div>
-            <div class="col-lg-6">
-        <mat-form-field>
-          <input matInput type="date" placeholder="Discontinued Date" [(ngModel)]="discontinuedDate" name="discontinuedDate" [formControl]="codeeditForm.controls['discontinuedDate']" required>
-          <mat-error *ngIf="codeeditForm.controls['discontinuedDate'].hasError('required') ">
-            This is required
-          </mat-error>
-        </mat-form-field></div></div>
-        <div class="col-lg-6">
-
-              <div class="col-lg-8">
-               <!--  <button type="button" class="btn btn-default btn-lg" (click)="clearaddcodes()">Clear</button> -->
-        <button mat-raised-button type="submit" color="primary" >Update</button>
+          </mat-form-field></div></div>
+        <div class="row">
+              <div class="col-lg-6">
+                <mat-form-field style="width:100%">
+                  <input matInput  placeholder="Effective Date" disabled value="{{effectiveDate}}" >
+                </mat-form-field>
               </div>
-
-
+              <div class="col-lg-6">
+          <mat-form-field style="width:100%">
+            <input matInput type="date" placeholder="Discontinued Date" [(ngModel)]="discontinuedDate" name="discontinuedDate" [formControl]="codeeditForm.controls['discontinuedDate']">
+            </mat-form-field></div>
+        </div>
+        <div class="" align="right">
+              <div class="">
+              <button mat-raised-button type="button" (click)="cleareditcodes()" style="line-height:36px;">Cancel</button>
+              <button mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
+              </div>
             </div>
-
-      </div>
+        </div>
     </form>
   </div>
-                  <div class="row table-responsive" *ngIf="displayFlag" style="width:90%;height: 400px; overflow:scroll; ">
-
+                  <div class="row table-responsive" *ngIf="displayFlag" style="height: 400px; overflow:scroll; ">
+                    <mat-content class="codes-color">
+                      <a style="margin-right: 15px;" class="codes-color" (click)="callcodes();"> 
+                      <i class="codes-color glyphicon glyphicon-plus"></i> Code</a> &nbsp;
+                      <a class="codes-color waves-effect waves-button waves-classic" id="showRight">
+                        <md-card class="btn-filter">
+                       <i class="glyphicon glyphicon-filter"></i> Filter</md-card>
+                      </a>
+                    </mat-content>
                     <table id="example1" class="table table-striped table-bordered table-responsive" cellspacing="0" width="100%">
-                      <thead class="widget">
-                        <tr class="widget-header">
-                          <th></th>
-                          <th></th>
-                          <th>
-                            <a style="margin-right: 15px;" class="btn btn-primary btn-success" (click)="callcodes();"> <span class="glyphicon glyphicon-plus"></span> &nbsp; Code</a> &nbsp;
-                            <a  class="waves-effect waves-button waves-classic" id="showRight" >
-                            <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button></a>
-
-
-
-                          </th>
-
-                        </tr>
-                      </thead>
-
                       <tbody>
                        <tr *ngFor="let codes of codesList.Data">
                           <td>{{codes.Code}} <br> Description: {{codes.Description}}</td>
                           <td>Effective date: {{codes.StartDate}}<br>Discontinued Date:{{codes.EndDate}}</td>
-                          <td><a class='btn btn-info btn-xs' (click)="editcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><span class="glyphicon glyphicon-edit"></span> Edit</a>  </td>
+                          <td class='edit'><a  (click)="editcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i><!--<span class="glyphicon glyphicon-edit"></span>--> Edit</a>  </td>
 
                         </tr>
                           </tbody>
@@ -208,7 +196,7 @@
       </div>
     </div>
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right  strip-bg-cus" id="cbp-spmenu-s1" >
-      <h3><span class="pull-left">Search</span><a href="javascript:void(0);" class="pull-right" id="closeRight"><i class="fa fa-times"></i></a></h3>
+      <h3><span class="pull-left" style="color:white; font-size:18px">Search</span><a href="javascript:void(0);" style="color:white" class="pull-right" id="closeRight"><i class="fa fa-times"></i></a></h3>
       <div class="slimscroll">
         <div class="demo">
           <!-- Standard Select -->
@@ -239,8 +227,15 @@
 
               </div>
             </div>
+            <br><br>
+            <div class="col-lg-12" align="right" style="margin-top:15px;">
+              <div class="">
+                <button type="button" mat-raised-button class="" (click)="clearsort()" style="line-height:36px">Clear</button>
+                <button type="button" mat-raised-button color="primary" class="" (click)="sortcodes()" style="line-height:36px">Search</button>
+              </div>
+            </div>
 
-            <div class="col-lg-12">
+            <!--<div class="col-lg-12">
 
               <div class="col-lg-8">
                 <button type="button" class="btn btn-default btn-lg" (click)="clearsort()">Clear</button>
@@ -248,7 +243,7 @@
               </div>
 
 
-            </div>
+            </div>-->
 
           </div>
 
