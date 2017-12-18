@@ -4,6 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 //import { ActivatedRoute, Params } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 
 @Component({
@@ -14,7 +15,15 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 })
 export class AdvertisingComponent implements OnInit {
 
+displayedColumns = ['Id', 'Code', 'Description','StartDate', 'EndDate','TimeStamp'];
+  dataSource: MatTableDataSource<UserData>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
 public codesList:any="";
+//this.codesList={ 'Data': [ { 'Id': 1, 'Code': 'B', 'Description': 'BILLBOARD', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBM=' }, { 'Id': 2, 'Code': 'CM', 'Description': 'CUSTOMER MAILER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBI=' }, { 'Id': 3, 'Code': 'CPN', 'Description': 'Coupon', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBE=' }, { 'Id': 4, 'Code': 'EML', 'Description': 'Email', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBA=' }, { 'Id': 5, 'Code': 'FB', 'Description': 'FaceBook', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA8=' }, { 'Id': 6, 'Code': 'INT', 'Description': 'Interior Design spec magazine', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA4=' }, { 'Id': 7, 'Code': 'N', 'Description': 'NEWSPAPER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA0=' }, { 'Id': 8, 'Code': 'NP', 'Description': 'NON PROFIT - MUST HAVE NP ID #', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAw=' }, { 'Id': 9, 'Code': 'PIN', 'Description': 'Pinterest', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAs=' }, { 'Id': 10, 'Code': 'R', 'Description': 'RADIO', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAo=' }, { 'Id': 11, 'Code': 'RP', 'Description': 'REPEAT CUSTOMER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAk=' }, { 'Id': 12, 'Code': 'W', 'Description': 'WORD OF MOUTH', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAg=' }, { 'Id': 13, 'Code': 'TWEET', 'Description': 'Twitter', 'StartDate': '2016-12-13T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAc=' } ], 'Total': 13, 'AggregateResults': null, 'Errors': null } ;
+
   public codeForm: FormGroup;
   codeeditForm: FormGroup;
 addFlag:boolean=false;
@@ -33,6 +42,7 @@ editcode:any;
 id: any;
 acToken: any;
 //searchbox:boolean=true;
+  
 
 constructor(private fb: FormBuilder,
     private router: Router,
@@ -40,6 +50,8 @@ constructor(private fb: FormBuilder,
 ) {
   this.sortby="Code";
   this.sortorder = "asc";
+  
+ // this.getData1();
 }
 
 getData(){
@@ -58,12 +70,17 @@ getData(){
   this.http.get("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/", options)
     .map(res => res.json())
     .subscribe(res => this.codesList = res);
+      this.dataSource = new MatTableDataSource(this.codesList.Data);
+
 }
 
+getData1(){
+this.codesList={ 'Data': [ { 'Id': 1, 'Code': 'B', 'Description': 'BILLBOARD', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBM=' }, { 'Id': 2, 'Code': 'CM', 'Description': 'CUSTOMER MAILER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBI=' }, { 'Id': 3, 'Code': 'CPN', 'Description': 'Coupon', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBE=' }, { 'Id': 4, 'Code': 'EML', 'Description': 'Email', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBA=' }, { 'Id': 5, 'Code': 'FB', 'Description': 'FaceBook', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA8=' }, { 'Id': 6, 'Code': 'INT', 'Description': 'Interior Design spec magazine', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA4=' }, { 'Id': 7, 'Code': 'N', 'Description': 'NEWSPAPER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA0=' }, { 'Id': 8, 'Code': 'NP', 'Description': 'NON PROFIT - MUST HAVE NP ID #', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAw=' }, { 'Id': 9, 'Code': 'PIN', 'Description': 'Pinterest', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAs=' }, { 'Id': 10, 'Code': 'R', 'Description': 'RADIO', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAo=' }, { 'Id': 11, 'Code': 'RP', 'Description': 'REPEAT CUSTOMER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAk=' }, { 'Id': 12, 'Code': 'W', 'Description': 'WORD OF MOUTH', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAg=' }, { 'Id': 13, 'Code': 'TWEET', 'Description': 'Twitter', 'StartDate': '2016-12-13T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAc=' } ], 'Total': 13, 'AggregateResults': null, 'Errors': null } ;
+     this.dataSource = new MatTableDataSource(this.codesList.Data);
+}
 ngOnInit() {
-  this.getData();
- // this.sortcodes();
-      
+ this.getData();
+	
   this.codeForm = this.fb.group({
       'code' : [null, Validators.compose([Validators.required])],
       'description' : [null, Validators.compose([Validators.required])],
@@ -122,12 +139,14 @@ addcodeback(){
   	this.displayFlag=true;
   	this.code="";
   	this.description="";
-}
+
+ }
   editcodeback(){
     this.editFlag=false;
     this.displayFlag=true;
     this.editcode="";
     this.editdescription="";
+
 }
    editcodes(id,code,desc,startDate,endDate){
   	this.editFlag=true;
@@ -210,6 +229,9 @@ saveeditcode(code,value){
                 }
 
     });
+          this.dataSource = new MatTableDataSource(this.codesList.Data);
+    this.dataSource.paginator = this.paginator;
+
     return this.codesList.Data;
   }
 
@@ -220,5 +242,17 @@ saveeditcode(code,value){
         }
         return array;
     }*/
+      ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
 }
 
+export interface UserData {
+  Id: any;
+  Code: any;
+  StartDate: any;
+  EndDate: any;
+  Description:any;
+  TimeStamp:any;
+}

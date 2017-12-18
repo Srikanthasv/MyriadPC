@@ -14,7 +14,6 @@ import { enableProdMode } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 enableProdMode();
-
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -46,13 +45,14 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatStepperModule,MatFormFieldModule, 
+  MatStepperModule,
 } from '@angular/material';
+
 import {CdkTableModule} from '@angular/cdk/table';
 import { AdvertisingComponent } from './Configuration/Codes/advertising/advertising.component';
 
 @NgModule({
-	exports: [
+exports: [
     CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
@@ -84,9 +84,9 @@ import { AdvertisingComponent } from './Configuration/Codes/advertising/advertis
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,MatFormFieldModule,MatStepperModule,
+    MatTooltipModule,
   ],
-  declarations: [
+   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
@@ -94,14 +94,12 @@ import { AdvertisingComponent } from './Configuration/Codes/advertising/advertis
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,
-    BrowserModule,
+    BrowserModule,BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
     HttpClientModule,
     JsonpModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,MatFormFieldModule,MatInputModule,BrowserAnimationsModule,MatIconModule,MatTableModule,MatButtonModule,MatMenuModule,MatSelectModule,
-	MatTabsModule ],
+MatInputModule,MatIconModule,MatTableModule,MatButtonModule,MatMenuModule,MatSelectModule,
+	MatTabsModule,MatNativeDateModule,MatSidenavModule,MatPaginatorModule ,MatSortModule],
   providers: [LoginService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

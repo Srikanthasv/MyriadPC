@@ -1,4 +1,4 @@
-<mat-sidenav-container class="mat-drawer-container mat-sidenav-container mat-drawer-transition">
+<div class="mat-drawer-container mat-sidenav-container mat-drawer-transition">
   <div class="mat-codes-toolbar mat-codes-primary">
     <div class="mat-toolbar-layout">
       <div class="mat-toolbar-row" style="flex-direction: row; box-sizing: border-box; display: flex;">
@@ -14,8 +14,8 @@
       </div>
     </div>
   </div>
-  <mat-sidenav-container layout="row" flex="100" flex-sm="100" flex-md="100" flex-xs="100">
-    <mat-sidenav flex="20" flex-sm="30" flex-md="25" flex-xs="100" class="docs-component-viewer-sidenav mat-drawer mat-sidenav ng-tns-c13-25 ng-trigger ng-trigger-transform ng-star-inserted mat-drawer-side" fixedtopgap="92" tabindex="-1" style="transform: translate3d(0px, 0px, 0px); visibility: visible; margin-left:-7px; margin-top:7px; padding-left:0px;">
+  <div layout="row" flex="100" flex-sm="100" flex-md="100" flex-xs="100">
+    <div flex="20" flex-sm="30" flex-md="25" flex-xs="100" class="docs-component-viewer-sidenav mat-drawer mat-sidenav ng-tns-c13-25 ng-trigger ng-trigger-transform ng-star-inserted mat-drawer-side" fixedtopgap="92" tabindex="-1" style="transform: translate3d(0px, 0px, 0px); visibility: visible; margin-left:-7px; margin-top:7px; padding-left:0px;">
       <nav class="ng-star-inserted" style="">
         <ul style="list-style-type:none; padding-left:0px;">
                  <li class="ng-star-inserted">
@@ -70,7 +70,7 @@
                  </li>
                </ul>
       </nav>
-    </mat-sidenav>
+    </div>
 
 
     <div class="page-inner container">
@@ -166,37 +166,12 @@
     </form>
   </div>
                   <div class="row table-responsive" *ngIf="displayFlag" style="height: 400px; overflow:scroll; ">
-                    <mat-content class="codes-color">
-                      <a style="margin-right: 15px;" class="codes-color" (click)="callcodes();"> 
-                      <i class="codes-color glyphicon glyphicon-plus"></i> Code</a> &nbsp;
-                      <a class="codes-color waves-effect waves-button waves-classic" id="showRight">
-                        <md-card class="btn-filter">
-                       <i class="glyphicon glyphicon-filter"></i> Filter</md-card>
-                      </a>
-                    </mat-content>
-                    <table id="example1" class="table table-striped table-bordered table-responsive" cellspacing="0" width="100%">
-                      <tbody>
-                       <tr *ngFor="let codes of codesList.Data">
-                          <td>{{codes.Code}} <br> Description: {{codes.Description}}</td>
-                          <td>Effective date: {{codes.StartDate}}<br>Discontinued Date:{{codes.EndDate}}</td>
-                          <td class='edit'><a  (click)="editcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i><!--<span class="glyphicon glyphicon-edit"></span>--> Edit</a>  </td>
-
-                        </tr>
-                          </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div><!-- Row -->
-      </div><!-- Main Wrapper -->
-      <div class="page-footer">
-        <p class="no-s"> &copy; 2017 PointCentric.</p>
-      </div>
-    </div>
-    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right  strip-bg-cus" id="cbp-spmenu-s1" >
-      <h3><span class="pull-left" style="color:white; font-size:18px">Search</span><a href="javascript:void(0);" style="color:white" class="pull-right" id="closeRight"><i class="fa fa-times"></i></a></h3>
+                    
+                      
+                      
+                      <mat-sidenav-container class="example-container" >
+  <mat-sidenav #sidenav1 mode="over" position="end" disableClose >
+     <h3><span class="pull-left" style="color:white; font-size:18px">Search</span><a href="javascript:void(0);" style="color:red" class="pull-right" id="closeRight" (click)="sidenav1.close()"><i class="fa fa-times"></i></a></h3>
       <div class="slimscroll">
         <div class="demo">
           <!-- Standard Select -->
@@ -235,23 +210,89 @@
               </div>
             </div>
 
-            <!--<div class="col-lg-12">
-
-              <div class="col-lg-8">
-                <button type="button" class="btn btn-default btn-lg" (click)="clearsort()">Clear</button>
-                <button type="button" class="btn btn-primary btn-lg" (click)="sortcodes()">Search</button>
-              </div>
-
-
-            </div>-->
-
+      
           </div>
 
 
 
         </div>
       </div>
-    </nav>
+  </mat-sidenav>
 
+  <mat-sidenav-content>
+  <mat-content class="codes-color">
+                      <a style="margin-right: 15px;" class="codes-color" (click)="callcodes();"> 
+                      <i class="codes-color glyphicon glyphicon-plus"></i> Code</a> &nbsp;
+    <a class="codes-color1 waves-effect waves-button waves-classic" id="showRight1" (click)="sidenav1.open()">
+                        <md-card class="btn-filter">
+                       <i class="glyphicon glyphicon-filter"></i> Filter</md-card>
+                      </a>
+   </mat-content>
+  <!--  <table id="example1" class="table table-striped table-bordered table-responsive" cellspacing="0" width="100%">
+                      <tbody>
+                       <tr *ngFor="let codes of codesList.Data">
+                          <td>{{codes.Code}} <br> Description: {{codes.Description}}</td>
+                          <td>Effective date: {{codes.StartDate}}<br>Discontinued Date:{{codes.EndDate}}</td>
+                          <td class='edit'><a  (click)="editcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> Edit</a>  </td>
+
+                        </tr>
+                          </tbody>
+                    </table> -->
+<div style="padding-right: -100px;">
+
+  <mat-table [dataSource]="dataSource" class="table1" width="100%">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="Id">
+
+      <mat-cell *matCellDef="let row"> {{row.Code}} <br> Description: {{row.Description}}</mat-cell>
+    </ng-container>
+ <ng-container matColumnDef="Code">
+
+      <mat-cell *matCellDef="let row"> </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Description" >
+      <mat-cell *matCellDef="let codes" stye="width:200px;"> Effective date: {{codes.StartDate}}<br>Discontinued Date:{{codes.EndDate}} </mat-cell>
+    </ng-container>
+     <ng-container matColumnDef="StartDate">
+
+      <mat-cell *matCellDef="let row"></mat-cell>
+    </ng-container>
+    <!-- Progress Column -->
+    
+     <ng-container matColumnDef="TimeStamp">
+
+      <mat-cell *matCellDef="let row"> </mat-cell>
+    </ng-container>
+ <ng-container matColumnDef="EndDate">
+      <mat-cell *matCellDef="let codes"> <a  (click)="editcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> Edit </a>
+      </mat-cell>
+    </ng-container> 
+   
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
-</mat-sidenav-container>
+                    
+                                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- Row -->
+      </div><!-- Main Wrapper -->
+      <div class="page-footer">
+        <p class="no-s"> &copy; 2017 PointCentric.</p>
+      </div>
+    </div>
+    
+
+</div>
+</div>
