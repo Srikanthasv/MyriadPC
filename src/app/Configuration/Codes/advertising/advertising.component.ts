@@ -16,7 +16,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 export class AdvertisingComponent implements OnInit {
 
 displayedColumns = ['Id', 'Code', 'Description','StartDate', 'EndDate','TimeStamp'];
-  dataSource: MatTableDataSource<UserData>;
+dataSource: MatTableDataSource<CodeData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -43,7 +43,7 @@ id: any;
 acToken: any;
 //searchbox:boolean=true;
   
-
+data: any[];
 constructor(private fb: FormBuilder,
     private router: Router,
     private http: Http
@@ -59,7 +59,6 @@ getData(){
   var obj1 = JSON.parse(localStorage.getItem('currentUser'));
   this.acToken = obj1 && obj1.token;
   var codes;
-  //console.log("here:  " + this.acToken);
   var token = 'Bearer ';
   token = token.concat(this.acToken);
   console.log("token:  " + token);
@@ -69,15 +68,18 @@ getData(){
   //console.log("options:  " +  options);
   this.http.get("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/", options)
     .map(res => res.json())
-    .subscribe(res => this.codesList = res);
-      this.dataSource = new MatTableDataSource(this.codesList.Data);
+    .subscribe(res => {
+      this.codesList = res;
+      console.log("codeist:  " + this.codesList.Data);
+      this.data = this.codesList.Data;
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+      this.sortcodes();
+    });
+
 
 }
 
-getData1(){
-this.codesList={ 'Data': [ { 'Id': 1, 'Code': 'B', 'Description': 'BILLBOARD', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBM=' }, { 'Id': 2, 'Code': 'CM', 'Description': 'CUSTOMER MAILER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBI=' }, { 'Id': 3, 'Code': 'CPN', 'Description': 'Coupon', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBE=' }, { 'Id': 4, 'Code': 'EML', 'Description': 'Email', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBA=' }, { 'Id': 5, 'Code': 'FB', 'Description': 'FaceBook', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA8=' }, { 'Id': 6, 'Code': 'INT', 'Description': 'Interior Design spec magazine', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA4=' }, { 'Id': 7, 'Code': 'N', 'Description': 'NEWSPAPER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA0=' }, { 'Id': 8, 'Code': 'NP', 'Description': 'NON PROFIT - MUST HAVE NP ID #', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAw=' }, { 'Id': 9, 'Code': 'PIN', 'Description': 'Pinterest', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAs=' }, { 'Id': 10, 'Code': 'R', 'Description': 'RADIO', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAo=' }, { 'Id': 11, 'Code': 'RP', 'Description': 'REPEAT CUSTOMER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAk=' }, { 'Id': 12, 'Code': 'W', 'Description': 'WORD OF MOUTH', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAg=' }, { 'Id': 13, 'Code': 'TWEET', 'Description': 'Twitter', 'StartDate': '2016-12-13T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAc=' } ], 'Total': 13, 'AggregateResults': null, 'Errors': null } ;
-     this.dataSource = new MatTableDataSource(this.codesList.Data);
-}
 ngOnInit() {
  this.getData();
 	
@@ -88,7 +90,7 @@ ngOnInit() {
     });
   this.codeeditForm = this.fb.group({
       'editdescription' : [null, Validators.compose([Validators.required])],
-      'discontinuedDate': [null, Validators.compose([Validators.required])],
+     // 'discontinuedDate': [null, Validators.compose([Validators.required])],
       // Validators.pattern('[a-zA-Z ]*')
   });
   }
@@ -116,21 +118,18 @@ ngOnInit() {
           .map(res => res.json())
           .subscribe(
           data => {
-            console.log("res from Save:: " + JSON.stringify(data));
-            this.http.get("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/", options)
-              .map(res => res.json())
-              .subscribe(res => this.codesList = res);
+            //console.log("res from Save:: " + JSON.stringify(data));
+            console.log("Save Success:: ");
           },
           err => {
             err = err
-            console.log(err);
+            console.log("Error" + err);
           }
           );
         this.addFlag = false;
         this.codesList = "";
-       // this.getData();
-
-  	this.displayFlag=true;
+        this.displayFlag = true;
+        this.getData(); 	
 
   }
 }
@@ -139,13 +138,15 @@ addcodeback(){
   	this.displayFlag=true;
   	this.code="";
   	this.description="";
-
+    this.getData();
  }
   editcodeback(){
     this.editFlag=false;
     this.displayFlag=true;
     this.editcode="";
-    this.editdescription="";
+    this.editdescription = "";
+    this.getData();
+
 
 }
    editcodes(id,code,desc,startDate,endDate){
@@ -185,9 +186,9 @@ saveeditcode(code,value){
           .subscribe(
           data => {
             //console.log("res from Save:: " + JSON.stringify(data));
-            this.http.get("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/", options)
-              .map(res => res.json())
-              .subscribe(res => this.codesList = res);          },
+            this.getData();
+
+          },
           err => {
             err = err
             console.log(err);
@@ -229,9 +230,9 @@ saveeditcode(code,value){
                 }
 
     });
-          this.dataSource = new MatTableDataSource(this.codesList.Data);
+    this.data = this.codesList.Data;
+    this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
-
     return this.codesList.Data;
   }
 
@@ -243,12 +244,11 @@ saveeditcode(code,value){
         return array;
     }*/
       ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
 }
 
-export interface UserData {
+export interface CodeData {
   Id: any;
   Code: any;
   StartDate: any;

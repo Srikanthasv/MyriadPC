@@ -99,7 +99,7 @@ exports: [
     HttpClientModule,
     JsonpModule,
 MatInputModule,MatIconModule,MatTableModule,MatButtonModule,MatMenuModule,MatSelectModule,
-	MatTabsModule,MatNativeDateModule,MatSidenavModule,MatPaginatorModule ,MatSortModule],
+    MatTabsModule, MatNativeDateModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatListModule],
   providers: [LoginService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

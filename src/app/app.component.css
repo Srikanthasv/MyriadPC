@@ -40,7 +40,22 @@
   z-index: 3;
 }
 /*search bard code end*/
+.ng-star-inserted {
+  padding-top: 5px;
+}
 
+  .ng-star-inserted ul li a {
+    color: #999;
+  }
+
+.table strong, span {
+  color: #18b5f9;
+}
+
+.ng-star-inserted ul li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
 .badge1 {
   margin-left: -5px;
   display: inline-block;

@@ -1,4 +1,6 @@
-
+.pagae-title, .h3 {
+  padding-left:20px !important;
+}
 /* search bar code start*/
 #custom-search-input {
   margin: 0;

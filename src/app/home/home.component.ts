@@ -11,8 +11,8 @@ export class HomeComponent implements OnInit
   username: string;
   constructor()
   {
-    //var obj1 = JSON.parse(localStorage.getItem('currentUser'));
-    //this.username = obj1.username;
+    var obj1 = JSON.parse(localStorage.getItem('currentUser'));
+    this.username = obj1.username;
   }
   ngOnInit() { }
 

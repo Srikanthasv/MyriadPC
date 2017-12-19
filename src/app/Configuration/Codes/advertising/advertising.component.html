@@ -1,298 +1,286 @@
-<div class="mat-drawer-container mat-sidenav-container mat-drawer-transition">
-  <div class="mat-codes-toolbar mat-codes-primary">
-    <div class="mat-toolbar-layout">
-      <div class="mat-toolbar-row" style="flex-direction: row; box-sizing: border-box; display: flex;">
-        <a _ngcontent-c1="" class="logo ng-tns-c1-0" fxhide="true" fxhide.gt-sm="false" href="/" style="display: block; padding-left:20px; padding-top:0px;">
-          <img _ngcontent-c1="" class="ng-tns-c1-0" src="../assets/images/logo-white.png">
-        </a>
-        <button _ngcontent-c1="" class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
-          <span class="mat-button-wrapper" style="color:#fff;">
-            <mat-icon _ngcontent-c1="" class="mat-icon ng-tns-c1-0 material-icons" role="img" aria-hidden="true">menu</mat-icon>
-          </span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
-        </button>
-        <span _ngcontent-c1="" fxflex="" class="ng-tns-c1-0" style="flex: 1 1 1e-09px; box-sizing: border-box;"></span>
-      </div>
+<mat-content class="mat-codes-toolbar mat-codes-primary">
+  <mat-card class="mat-toolbar-layout">
+    <div class="mat-toolbar-row" style="flex-direction: row; box-sizing: border-box; display: flex;">
+      <a _ngcontent-c1="" class="logo ng-tns-c1-0" fxhide="true" fxhide.gt-sm="false" href="/" style="display: block; padding-left:20px; padding-top:0px;">
+        <img _ngcontent-c1="" class="ng-tns-c1-0" src="../assets/images/logo-white.png">
+      </a>
+      <button _ngcontent-c1="" class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
+        <span class="mat-button-wrapper" style="color:#fff;">
+          <mat-icon _ngcontent-c1="" class="mat-icon ng-tns-c1-0 material-icons" role="img" aria-hidden="true" mat-button (click)="sidenavleft.toggle()">menu</mat-icon>
+        </span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
+      </button>
+      <span _ngcontent-c1="" fxflex="" class="ng-tns-c1-0" style="flex: 1 1 1e-09px; box-sizing: border-box;"></span>
     </div>
-  </div>
-  <div layout="row" flex="100" flex-sm="100" flex-md="100" flex-xs="100">
-    <div flex="20" flex-sm="30" flex-md="25" flex-xs="100" class="docs-component-viewer-sidenav mat-drawer mat-sidenav ng-tns-c13-25 ng-trigger ng-trigger-transform ng-star-inserted mat-drawer-side" fixedtopgap="92" tabindex="-1" style="transform: translate3d(0px, 0px, 0px); visibility: visible; margin-left:-7px; margin-top:7px; padding-left:0px;">
-      <nav class="ng-star-inserted" style="">
-        <ul style="list-style-type:none; padding-left:0px;">
-                 <li class="ng-star-inserted">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected">
-                     <i class="material-icons">widgets</i>&nbsp;&nbsp; Dashboard<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-                 <li class="ng-star-inserted">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-                     <i class="material-icons">lock</i>&nbsp;&nbsp; Sales<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-                 <li class="ng-star-inserted">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-                     <i class="material-icons">label</i>&nbsp;&nbsp; Inventory<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-                 <li class="ng-star-inserted">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-                     <i class="material-icons">assignment_ind</i>&nbsp;&nbsp; Marchandising<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-                 <li class="ng-star-inserted">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-                     <i class="material-icons">domain</i>&nbsp;&nbsp; A/R<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-                 <li class="ng-star-inserted">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
-                     <i class="material-icons">tab</i>&nbsp;&nbsp; Accounting<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-                 <li class="ng-star-inserted">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-                     <i class="material-icons">assignment</i>&nbsp;&nbsp; Reports<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-                 <li class="ng-star-inserted">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-                     <i class="material-icons">shopping_basket</i>&nbsp;&nbsp; Configuration<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-                 <li class="ng-star-inserted" style="padding-left:35px;">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-                     Codes<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-                 <li class="ng-star-inserted" style="padding-left:45px;">
-                   <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-                     Adverstising<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
-                   </a>
-                 </li>
-               </ul>
-      </nav>
-    </div>
+  </mat-card>
+</mat-content>
+<mat-sidenav-container autosize class="mat-drawer-container mat-sidenav-container mat-drawer-transition">
+  <!--<mat-sidenav #sidenavright class="example-sidenav" mode="riht" position="end">
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-sidenav>-->
+  <!--<mat-sidenav-content class="">
+    <button type="button" mat-button (click)="sidenavright.toggle()">
+      Toggle sidenav
+    </button>
+  </mat-sidenav-content>-->
 
+  <mat-sidenav #sidenavleft class="example-sidenav" mode="side" position="left" opened="true">
+    <nav class="ng-star-inserted" style="">
+      <ul style="list-style-type:none; padding-left:0px;">
+        <li class="ng-star-inserted">
+          <a routerlinkactive="docs-component-viewer-sidenav-item-selected">
+            <i class="material-icons">widgets</i>&nbsp;&nbsp; Dashboard<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
+          </a>
+        </li>
+        <li class="ng-star-inserted">
+          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+            <i class="material-icons">lock</i>&nbsp;&nbsp; Sales<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
+          </a>
+        </li>
+        <li class="ng-star-inserted">
+          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+            <i class="material-icons">label</i>&nbsp;&nbsp; Inventory<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
+          </a>
+        </li>
+        <li class="ng-star-inserted">
+          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+            <i class="material-icons">assignment_ind</i>&nbsp;&nbsp; Marchandising<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
+          </a>
+        </li>
+        <li class="ng-star-inserted">
+          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+            <i class="material-icons">domain</i>&nbsp;&nbsp; A/R<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
+          </a>
+        </li>
+        <li class="ng-star-inserted">
+          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
+            <i class="material-icons">tab</i>&nbsp;&nbsp; Accounting<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
+          </a>
+        </li>
+        <li class="ng-star-inserted">
+          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+            <i class="material-icons">assignment</i>&nbsp;&nbsp; Reports<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
+          </a>
+        </li>
+        <li class="ng-star-inserted">
+          <a class="" (click)="showFiller = !showFiller">
+            <i class="material-icons">shopping_basket</i>&nbsp;&nbsp; Configuration<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
+          </a>
+        </li>
+        <ul style="list-style-type:none;" *ngIf="showFiller">
+          <li class="ng-star-inserted">
+            <a routerlinkactive="" class="">
+              <span (click)="showFiller1 = !showFiller1">Codes</span>
+            </a>
+          </li>
+        </ul>
+        <ul style="list-style-type:none; padding-left:50px;" *ngIf="showFiller1">
+          <li class="ng-star-inserted">
+            <a routerlinkactive="" class="">
+              <span>Adverstising</span>
+            </a>
+          </li>
+        </ul>
 
-    <div class="page-inner container">
-      <div class="page-title">
-        <span>Advertising</span>
-
-      </div>
-      <div id="main-wrapper">
-        <div class="row">
-          <div class="">
-            <div class="row panel panel-white" >
-
-              <div class="panel-body" style="border:1px solid #e6e6e6;">
-
-
-                <div class="">
-
-                 <div class="" style="padding:15px 19px 28px 19px;" *ngIf="addFlag">
-    <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="savecode(codeForm.value)" novalidate>
-      <button id="addback" (click)="addcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;">Back</button>
-      <br><br><br><br>
-      <!--<button class="" (click)="addcodeback()">Back</button>-->
-
-      <!--<div class="example-container">-->
-      <div class="">
-                <div class="row">
-            <div class="col-lg-6">
-              <mat-form-field style="width:100%"  hintLabel="">
-                <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
-                <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
-                  This is required
-                </mat-error>
-              </mat-form-field>
-        </div>
-            <div class="col-lg-6">
-        <mat-form-field style="width:100%">
-          <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required maxlength="30">
-              <mat-error *ngIf="codeForm.controls['description'].hasError('required') ">
-            This is required
-          </mat-error>
-        </mat-form-field></div>
-        <br><br><br><br>
-        <div class="" align="right">
-
-          <div class="">
-            <button mat-raised-button type="button" (click)="clearaddcodes()" style="line-height:36px;">Cancel</button>
-            <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
-          </div>
-
-
-            </div></div>
-
-      </div>
-    </form>
-  </div>
-
-   <div class="" style="padding:15px 19px 28px 19px;" *ngIf="editFlag">
-    <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="saveeditcode(editcode,codeeditForm.value)" novalidate>
-      <button id="editback" (click)="editcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;">Back</button>
-      <br><br><br><br>
-      <div class="example-container">
-                <div class="row">
-            <div class="col-lg-6">
-        <mat-form-field style="width:100%">
-          <input matInput placeholder="Code" disabled value="{{editcode}}" >
-        </mat-form-field>
-        </div>
-            <div class="col-lg-6">
-        <mat-form-field style="width:100%">
-          <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
-          <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
-            This is required
-          </mat-error>
-          </mat-form-field></div></div>
-        <div class="row">
-              <div class="col-lg-6">
-                <mat-form-field style="width:100%">
-                  <input matInput  placeholder="Effective Date" disabled value="{{effectiveDate}}" >
-                </mat-form-field>
-              </div>
-              <div class="col-lg-6">
-          <mat-form-field style="width:100%">
-            <input matInput type="date" placeholder="Discontinued Date" [(ngModel)]="discontinuedDate" name="discontinuedDate" [formControl]="codeeditForm.controls['discontinuedDate']">
-            </mat-form-field></div>
-        </div>
-        <div class="" align="right">
-              <div class="">
-              <button mat-raised-button type="button" (click)="cleareditcodes()" style="line-height:36px;">Cancel</button>
-              <button mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
-              </div>
-            </div>
-        </div>
-    </form>
-  </div>
-                  <div class="row table-responsive" *ngIf="displayFlag" style="height: 400px; overflow:scroll; ">
-                    
-                      
-                      
-                      <mat-sidenav-container class="example-container" >
-  <mat-sidenav #sidenav1 mode="over" position="end" disableClose >
-     <h3><span class="pull-left" style="color:white; font-size:18px">Search</span><a href="javascript:void(0);" style="color:red" class="pull-right" id="closeRight" (click)="sidenav1.close()"><i class="fa fa-times"></i></a></h3>
-      <div class="slimscroll">
-        <div class="demo">
-          <!-- Standard Select -->
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mdl-selectfield p-h-xs-cust">
-                <label>Sort By</label>
-                <select class="form-control m-b-sm" [(ngModel)]="sortby">
-                  <option value="Code" selected="selected">Code</option>
-                  <option value="Description">Description</option>
-                  
-                </select>
-
-
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="mdl-selectfield p-h-xs-cust">
-                <label>Sort Order</label>
-                <select class="form-control m-b-sm" [(ngModel)]="sortorder">
-                  <option value="asc" selected="selected">Ascending</option>
-                  <option value="dec">Descending</option>
-                 
-                </select>
-
-
-              </div>
-            </div>
-            <br><br>
-            <div class="col-lg-12" align="right" style="margin-top:15px;">
-              <div class="">
-                <button type="button" mat-raised-button class="" (click)="clearsort()" style="line-height:36px">Clear</button>
-                <button type="button" mat-raised-button color="primary" class="" (click)="sortcodes()" style="line-height:36px">Search</button>
-              </div>
-            </div>
-
-      
-          </div>
-
-
-
-        </div>
-      </div>
+          <!--<li class="ng-star-inserted" style="padding-left:45px;">
+            <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+              Adverstising<i class="material-icons" style="float:right;">keyboard_arrow_right</i>
+            </a>
+          </li>-->
+        </ul>
+</nav>
   </mat-sidenav>
 
-  <mat-sidenav-content>
-  <mat-content class="codes-color">
-                      <a style="margin-right: 15px;" class="codes-color" (click)="callcodes();"> 
-                      <i class="codes-color glyphicon glyphicon-plus"></i> Code</a> &nbsp;
-    <a class="codes-color1 waves-effect waves-button waves-classic" id="showRight1" (click)="sidenav1.open()">
-                        <md-card class="btn-filter">
-                       <i class="glyphicon glyphicon-filter"></i> Filter</md-card>
-                      </a>
-   </mat-content>
-  <!--  <table id="example1" class="table table-striped table-bordered table-responsive" cellspacing="0" width="100%">
-                      <tbody>
-                       <tr *ngFor="let codes of codesList.Data">
-                          <td>{{codes.Code}} <br> Description: {{codes.Description}}</td>
-                          <td>Effective date: {{codes.StartDate}}<br>Discontinued Date:{{codes.EndDate}}</td>
-                          <td class='edit'><a  (click)="editcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> Edit</a>  </td>
+  <!-- for filter start-->
+  <mat-sidenav #sidenav1 mode="over" position="end" disableClose>
+    <mat-content style="background-color:#2196f3; padding:10px;">
+    <span class="pull-left" style="color:white; font-size:20px">Search</span>
+    <a style="color:white; font-size:18px" class="pull-right" (click)="sidenav1.close()"><i class="material-icons">clear</i></a>
+    </mat-content>
+    <br />
+        
+    <div>
+      <mat-card flex="50">
+        <mat-form-field>
+          <mat-select placeholder="Sort By" [(ngModel)]="sortby">
+            <mat-option value="Code" selected="selected">Code</mat-option>
+            <mat-option value="Description">Description</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Sort Order" [(ngModel)]="sortorder">
+            <mat-option value="asc" selected="selected">Ascending</mat-option>
+            <mat-option value="dec">Descending</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<label>Sort By</label>
+  <select class="form-control m-b-sm" [(ngModel)]="sortby">
+    <option value="Code" selected="selected">Code</option>
+    <option value="Description">Description</option>
 
-                        </tr>
-                          </tbody>
-                    </table> -->
-<div style="padding-right: -100px;">
-
-  <mat-table [dataSource]="dataSource" class="table1" width="100%">
-
-    <!-- ID Column -->
-    <ng-container matColumnDef="Id">
-
-      <mat-cell *matCellDef="let row"> {{row.Code}} <br> Description: {{row.Description}}</mat-cell>
-    </ng-container>
- <ng-container matColumnDef="Code">
-
-      <mat-cell *matCellDef="let row"> </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Description" >
-      <mat-cell *matCellDef="let codes" stye="width:200px;"> Effective date: {{codes.StartDate}}<br>Discontinued Date:{{codes.EndDate}} </mat-cell>
-    </ng-container>
-     <ng-container matColumnDef="StartDate">
-
-      <mat-cell *matCellDef="let row"></mat-cell>
-    </ng-container>
-    <!-- Progress Column -->
-    
-     <ng-container matColumnDef="TimeStamp">
-
-      <mat-cell *matCellDef="let row"> </mat-cell>
-    </ng-container>
- <ng-container matColumnDef="EndDate">
-      <mat-cell *matCellDef="let codes"> <a  (click)="editcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> Edit </a>
-      </mat-cell>
-    </ng-container> 
-   
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;">
-    </mat-row>
-
-  </mat-table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </select>-->
+      </mat-card><br><br>
+                     <mat-card class="" align="right" style="margin-top:15px;">
+                       <button type="button" mat-raised-button class="" (click)="clearsort()" style="line-height:36px">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                       <button type="button" mat-raised-button color="primary" class="" (click)="sortcodes();sidenav1.close();" style="line-height:36px">Search</button>
+                     </mat-card>
 </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
-                    
-                                      </div>
+      
+    
+  </mat-sidenav>
+  <!-- for filter end-->
+
+  <mat-sidenav-content class="">
+    <div class="page-inner">
+
+      <div class="page-title" style="border-bottom:1px solid #ccc; margin-bottom:20px;">
+        <h3 class="h3">Advertising</h3>
+      </div>
+      <div id="main-wrapper">
+
+        <!-- Add CODES Start -->
+        <div class="" style="padding:15px 19px 28px 19px; border:1px solid #ccc; margin:10px; background-color:#fff;" *ngIf="addFlag">
+          <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="savecode(codeForm.value)" novalidate>
+            <button id="addback" (click)="addcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;">Back</button>
+            <br><br><br><br>
+            <!--<button class="" (click)="addcodeback()">Back</button>-->
+            <!--<div class="example-container">-->
+            <div class="">
+              <div class="row">
+                <div class="col-lg-6">
+                  <mat-form-field style="width:100%" hintLabel="">
+                    <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
+                    <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                  <mat-form-field style="width:100%" hintLabel="">
+                    <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required maxlength="30">
+                    <mat-error *ngIf="codeForm.controls['description'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <br><br><br><br>
+                <div class="" align="right">
+
+                  <div class="">
+                    <button mat-raised-button type="button" (click)="clearaddcodes()" style="line-height:36px;">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <!-- Add CODES end -->
+        <!-- for edit CODES start -->
+        <div class="" style="padding:15px 19px 28px 19px; border:1px solid #ccc; margin:10px; background-color:#fff;" *ngIf="editFlag">
+          <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="saveeditcode(editcode,codeeditForm.value)" novalidate>
+            <button id="editback" (click)="editcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;">Back</button>
+            <br><br><br><br>
+            <div class="example-container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <mat-form-field style="width:100%">
+                    <input matInput placeholder="Code" disabled value="{{editcode}}">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                  <mat-form-field style="width:100%">
+                    <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
+                    <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <mat-form-field style="width:100%">
+                    <input matInput placeholder="Effective Date" disabled value="{{effectiveDate}}">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                  <mat-form-field style="width:100%">
+                    <input matInput type="date" placeholder="Discontinued Date" [(ngModel)]="discontinuedDate" name="discontinuedDate" [formControl]="codeeditForm.controls['discontinuedDate']">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="" align="right">
+                <div class="">
+                  <button mat-raised-button type="button" (click)="cleareditcodes()" style="line-height:36px;">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
                 </div>
               </div>
             </div>
-          </div>
-        </div><!-- Row -->
-      </div><!-- Main Wrapper -->
-      <div class="page-footer">
-        <p class="no-s"> &copy; 2017 PointCentric.</p>
+          </form>
+        </div>
+        <!-- edit CODES end -->
+
+        <mat-content class="codes-color" *ngIf="displayFlag">
+
+          <a style="margin-right: 15px;" class="codes-color" (click)="callcodes();">
+            <i class="codes-color glyphicon glyphicon-plus"></i> Code
+          </a> &nbsp;
+          <a class="codes-color" (click)="sidenav1.open()">
+            <!--<md-card class="btn-filter">-->
+              <i class="glyphicon glyphicon-filter"></i> Filter
+            <!--</md-card>-->
+          </a>
+        </mat-content>
+        <mat-table [dataSource]="dataSource" class="table1" width="100%" *ngIf="displayFlag">
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="Id">
+
+            <mat-cell *matCellDef="let row" flex="25"> {{row.Code}} <br> Description: {{row.Description}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Code">
+
+            <mat-cell *matCellDef="let row" flex="1"> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Description">
+            <mat-cell *matCellDef="let codes" flex="30"> Effective date: {{codes.StartDate}}<br>Discontinued Date:{{codes.EndDate}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="StartDate">
+
+            <mat-cell *matCellDef="let row" flex="1"></mat-cell>
+          </ng-container>
+          <!-- Progress Column -->
+
+          <ng-container matColumnDef="TimeStamp">
+
+            <mat-cell *matCellDef="let row" flex="1"> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="EndDate">
+            <mat-cell *matCellDef="let codes" flex="15">
+              <a style="cursor:pointer" (click)="editcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> Edit </a>
+            </mat-cell>
+          </ng-container>
+
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" *ngIf="displayFlag"></mat-paginator>
       </div>
     </div>
-    
 
-</div>
-</div>
+    <mat-content>
+      <div style="border-top:1px solid #ccc; margin-top:10%; padding:10px;">&copy; 2017 - PointCentric</div>
+    </mat-content>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

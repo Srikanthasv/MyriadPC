@@ -49,9 +49,9 @@ formSubmitted: boolean = false;
     if (this.loginForm.valid)
     {
       let link = ['/home'];
-      this.router.navigate(link);
+      //this.router.navigate(link);
       // console.log("Data:" + form.username);
-    /*if (form.username != '' || form.password != '') {
+    if (form.username != '' || form.password != '') {
       this.loginService.login(form.username, form.password)
         .subscribe(res => {
           this.router.navigate(link);
@@ -63,7 +63,7 @@ formSubmitted: boolean = false;
         () => this.router.navigate(link)
 
         );
-    }*/
+    }
   }
 }
 
