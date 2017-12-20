@@ -66,27 +66,27 @@
 
                   <img src="assets/images/user-icon.png" width="30" [matMenuTriggerFor]="user" />
                   <mat-menu #user="matMenu">
-                    <div class="mat-menu-content ng-trigger ng-trigger-fadeInItems" style="opacity: 1; padding:20px; width:235px;">
-                      <mat-list class="mat-list ng-tns-c1-0" role="list">
-                        <mat-list-item class="mat-list-item ng-tns-c1-0 mat-list-item-avatar mat-2-line" role="listitem">
+                    <div class="mat-menu-content ng-trigger ng-trigger-fadeInItems" style="opacity: 1; width:235px;">
+                      <mat-list class="mat-list" role="list">
+                        <mat-list-item class="mat-list-item mat-list-item-avatar mat-2-line" role="listitem">
                           <div class="mat-list-item-content">
-                            <img src="assets/images/user-icon.png" width="30">&nbsp;&nbsp;{{username}}<br />
+                            <img src="assets/images/user-icon.png" width="30">&nbsp;&nbsp;{{username}}
                           </div>
                         </mat-list-item>
                         <hr />
-                      </mat-list><br />
+                      </mat-list>
 
-                      <mat-nav-list class="mat-nav-list ng-tns-c1-0" role="list">
-                        <a class="mat-list-item ng-tns-c1-0" mat-list-item="" role="listitem">
+                      <mat-nav-list class="mat-nav-list" role="list">
+                        <mat-list-item class="mat-list-item" mat-list-item="" role="listitem" style="cursor:auto;">
                           <div class="mat-list-item-content" style="color:#ccc;">
-                            <mat-icon class="icon-color mat-icon ng-tns-c28-91 material-icons" role="img" aria-hidden="true" style="color:#ccc;">person</mat-icon>&nbsp;&nbsp;Profile & Settings
+                            <mat-icon class="icon-color mat-icon material-icons" role="img" aria-hidden="true" style="color:#ccc;">person</mat-icon>&nbsp;&nbsp;Profile & Settings
                           </div>
-                        </a><br /><hr /><br />
-                        <a class="mat-list-item ng-tns-c1-0" mat-list-item="" role="listitem">
+                        </mat-list-item><hr />
+                        <mat-list-item class="mat-list-item" mat-list-item="" role="listitem">
                           <div class="mat-list-item-content">
-                            <mat-icon class="icon-color mat-icon ng-tns-c28-91 material-icons" role="img" aria-hidden="true">exit_to_app</mat-icon><a href="index.html">&nbsp;&nbsp;Sign Out</a>
+                            <mat-icon class="icon-color mat-icon material-icons" role="img" aria-hidden="true">exit_to_app</mat-icon><a href="index.html">&nbsp;&nbsp;Sign Out</a>
                           </div>
-                        </a>
+                        </mat-list-item>
                       </mat-nav-list>
                     </div>
                   </mat-menu>
@@ -165,47 +165,61 @@
           <!---->
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
-              <i class="material-icons">widgets</i>&nbsp;&nbsp; Model<!--<i class="material-icons" style="float:right;">keyboard_arrow_right</i>-->
+              <mat-icon>home</mat-icon>&nbsp;&nbsp; Dashboard<!--<i class="material-icons" style="float:right;">keyboard_arrow_right</i>-->
             </a>
           </li>
           <li class="ng-star-inserted">
             <a [routerLink]="['/advertising']" class="">
-              <i class="material-icons">lock</i>&nbsp;&nbsp; Advertising Codes
+              <mat-icon class="material-icons">shopping_cart</mat-icon>&nbsp;&nbsp; Sales
             </a>
           </li>
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-              <i class="material-icons">label</i>&nbsp;&nbsp; BarCode
+              <mat-icon class="material-icons">label</mat-icon>&nbsp;&nbsp; Inventory
             </a>
           </li>
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-              <i class="material-icons">assignment_ind</i>&nbsp;&nbsp; Vendor Code
+              <mat-icon class="material-icons">layers</mat-icon>&nbsp;&nbsp; Merchandising
             </a>
           </li>
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-              <i class="material-icons">domain</i>&nbsp;&nbsp; Department Code
+              <mat-icon class="material-icons">inbox</mat-icon>&nbsp;&nbsp; A/R
             </a>
           </li>
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
-              <i class="material-icons">tab</i>&nbsp;&nbsp; Category
+              <mat-icon class="material-icons">exposure</mat-icon>&nbsp;&nbsp; Accounting
             </a>
           </li>
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-              <i class="material-icons">assignment</i>&nbsp;&nbsp; Custome Items
+              <mat-icon class="material-icons">exposure</mat-icon>&nbsp;&nbsp; Reports
             </a>
           </li>
           <li class="ng-star-inserted">
-            <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-              <i class="material-icons">shopping_basket</i>&nbsp;&nbsp; Custome Stock ID
+            <a routerlinkactive="docs-component-viewer-sidenav-item-selected" (click)="showFiller = !showFiller" style="cursor:pointer">
+              <mat-icon class="material-icons">settings</mat-icon>&nbsp;&nbsp; Configuration
             </a>
           </li>
+          <ul style="list-style-type:none;" *ngIf="showFiller">
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class=""  style="cursor:pointer">
+                <span (click)="showFiller1 = !showFiller1">Codes</span>
+              </a>
+            </li>
+          </ul>
+          <ul style="list-style-type:none; padding-left:50px;" *ngIf="showFiller1">
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/advertising']">
+                <span>Advertising</span>
+              </a>
+            </li>
+          </ul>
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-              <i class="material-icons">select_all</i>&nbsp;&nbsp; Mail Custome Section
+              <mat-icon class="material-icons">build</mat-icon>&nbsp;&nbsp; System
             </a>
           </li>
         </ul>
@@ -213,28 +227,23 @@
     </mat-sidenav>
 
     <mat-sidenav-content >
-      <mat-tab-group style="background-color:#fff; padding-left:20px; border-top: 1px solid #ccc;">
+      <mat-tab-group style="background-color:#f2f2f2; padding-left:20px; border-top: 1px solid #ccc;">
         <mat-tab label="Tab 1">
           <ng-template mat-tab-label>
             <button class="butt"><i class="material-icons">view_module</i></button>
           </ng-template>
           <div class="demo-tab-content" style="margin-top:20px;">
-            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" style="background-color:#fff; padding:10px; float:left;">
-              <mat-card class="example-card">
+            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" class="home-mat-cards">
+              <mat-card class="example-card" style="">
 
-                <img mat-card-image src="assets/images/sofa1.png" class="img-responsive">
-                <mat-card-title><h4>NATUZZI</h4></mat-card-title>
+                <img mat-card-image src="assets/images/sofa1.png" class="img-responsive"><br>
+                <mat-card-title>NATUZZI</mat-card-title><br><br>
                 <mat-card-content>
-
-                  <span>Category: SOFA</span><br /><br />
-
-                  <span>Model Id: 2490492</span><br /><br />
-
-                  <span>Cover name: Lilac & Black</span><br /><br />
-
-                  <span>Main: F393883</span><br /><br />
-
-                  <span>Stock ID: F393883DC</span><br /><br />
+                  <span class="color1">Category:</span> <span class="color2">SOFA</span><br /><br />
+                  <span class="color1"> Model Id:</span> <span class="color2">2490492</span><br /><br />
+                  <span class="color1">Cover name:</span> <span class="color2"> Lilac & Black</span><br /><br />
+                  <span class="color1">Main:</span> <span class="color2"> F393883</span><br /><br />
+                  <span class="color1">Stock ID: F393883DC</span><br /><br />
                   <img src="assets/images/warehouse.png" width="20" class=""><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/showroom.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/purchase-orders.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
@@ -245,22 +254,17 @@
 
               </mat-card>
             </div>
-            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" style="background-color:#fff; padding:10px; float:left;">
+            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" class="home-mat-cards">
               <mat-card class="example-card">
 
-                <img mat-card-image src="assets/images/sofa2.png" class="img-responsive">
-                <mat-card-title><h4>NATUZZI</h4></mat-card-title>
+                <img mat-card-image src="assets/images/sofa2.png" class="img-responsive"><br>
+                <mat-card-title>NATUZZI</mat-card-title><br><br>
                 <mat-card-content>
-
-                  <span>Category: SOFA</span><br /><br />
-
-                  <span>Model Id: 2490492</span><br /><br />
-
-                  <span>Cover name: Lilac & Black</span><br /><br />
-
-                  <span>Main: F393883</span><br /><br />
-
-                  <span>Stock ID: F393883DC</span><br /><br />
+                  <span class="color1">Category:</span> <span class="color2">SOFA</span><br /><br />
+                  <span class="color1"> Model Id:</span> <span class="color2">2490492</span><br /><br />
+                  <span class="color1">Cover name:</span> <span class="color2"> Lilac & Black</span><br /><br />
+                  <span class="color1">Main:</span> <span class="color2"> F393883</span><br /><br />
+                  <span class="color1">Stock ID: F393883DC</span><br /><br />
                   <img src="assets/images/warehouse.png" width="20" class=""><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/showroom.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/purchase-orders.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
@@ -271,49 +275,17 @@
 
               </mat-card>
             </div>
-            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" style="background-color:#fff; padding:10px; float:left;">
+            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" class="home-mat-cards">
               <mat-card class="example-card">
 
-                <img mat-card-image src="assets/images/sofa4.png" class="img-responsive">
-                <mat-card-title><h4>NATUZZI</h4></mat-card-title>
+                <img mat-card-image src="assets/images/sofa4.png" class="img-responsive"><br>
+                <mat-card-title>NATUZZI</mat-card-title><br><br>
                 <mat-card-content>
-
-                  <span>Category: SOFA</span><br /><br />
-
-                  <span>Model Id: 2490492</span><br /><br />
-
-                  <span>Cover name: Lilac & Black</span><br /><br />
-
-                  <span>Main: F393883</span><br /><br />
-
-                  <span>Stock ID: F393883DC</span><br /><br />
-                  <img src="assets/images/warehouse.png" width="20" class=""><div class="badge1 badge-info1">2</div>
-                  <img src="assets/images/showroom.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
-                  <img src="assets/images/purchase-orders.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
-                  <img src="assets/images/customer-reserved.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
-                  <img src="assets/images/customer-backorder.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div><br />
-                  <button class="box_but_blue"><i class="material-icons">brush</i>&nbsp;&nbsp; Customize</button>
-                </mat-card-content>
-
-              </mat-card>
-            </div>
-
-            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" style="background-color:#fff; padding:10px; float:left;">
-              <mat-card class="example-card">
-
-                <img mat-card-image src="assets/images/sofa5.png" class="img-responsive">
-                <mat-card-title><h4>NATUZZI</h4></mat-card-title>
-                <mat-card-content>
-
-                  <span>Category: SOFA</span><br /><br />
-
-                  <span>Model Id: 2490492</span><br /><br />
-
-                  <span>Cover name: Lilac & Black</span><br /><br />
-
-                  <span>Main: F393883</span><br /><br />
-
-                  <span>Stock ID: F393883DC</span><br /><br />
+                  <span class="color1">Category:</span> <span class="color2">SOFA</span><br /><br />
+                  <span class="color1"> Model Id:</span> <span class="color2">2490492</span><br /><br />
+                  <span class="color1">Cover name:</span> <span class="color2"> Lilac & Black</span><br /><br />
+                  <span class="color1">Main:</span> <span class="color2"> F393883</span><br /><br />
+                  <span class="color1">Stock ID: F393883DC</span><br /><br />
                   <img src="assets/images/warehouse.png" width="20" class=""><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/showroom.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/purchase-orders.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
@@ -325,22 +297,17 @@
               </mat-card>
             </div>
 
-            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" style="background-color:#fff; padding:10px; float:left;">
+            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" class="home-mat-cards">
               <mat-card class="example-card">
 
-                <img mat-card-image src="assets/images/sofa3.png" class="img-responsive">
-                <mat-card-title><h4>NATUZZI</h4></mat-card-title>
+                <img mat-card-image src="assets/images/sofa5.png" class="img-responsive"><br>
+                <mat-card-title>NATUZZI</mat-card-title><br><br>
                 <mat-card-content>
-
-                  <span>Category: SOFA</span><br /><br />
-
-                  <span>Model Id: 2490492</span><br /><br />
-
-                  <span>Cover name: Lilac & Black</span><br /><br />
-
-                  <span>Main: F393883</span><br /><br />
-
-                  <span>Stock ID: F393883DC</span><br /><br />
+                  <span class="color1">Category:</span> <span class="color2">SOFA</span><br /><br />
+                  <span class="color1"> Model Id:</span> <span class="color2">2490492</span><br /><br />
+                  <span class="color1">Cover name:</span> <span class="color2"> Lilac & Black</span><br /><br />
+                  <span class="color1">Main:</span> <span class="color2"> F393883</span><br /><br />
+                  <span class="color1">Stock ID: F393883DC</span><br /><br />
                   <img src="assets/images/warehouse.png" width="20" class=""><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/showroom.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/purchase-orders.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
@@ -352,22 +319,39 @@
               </mat-card>
             </div>
 
-            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" style="background-color:#fff; padding:10px; float:left;">
+            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" class="home-mat-cards">
               <mat-card class="example-card">
 
-                <img mat-card-image src="assets/images/sofa6.png" class="img-responsive">
-                <mat-card-title><h4>NATUZZI</h4></mat-card-title>
+                <img mat-card-image src="assets/images/sofa3.png" class="img-responsive"><br>
+                <mat-card-title>NATUZZI</mat-card-title><br><br>
                 <mat-card-content>
+                  <span class="color1">Category:</span> <span class="color2">SOFA</span><br /><br />
+                  <span class="color1"> Model Id:</span> <span class="color2">2490492</span><br /><br />
+                  <span class="color1">Cover name:</span> <span class="color2"> Lilac & Black</span><br /><br />
+                  <span class="color1">Main:</span> <span class="color2"> F393883</span><br /><br />
+                  <span class="color1">Stock ID: F393883DC</span><br /><br />
+                  <img src="assets/images/warehouse.png" width="20" class=""><div class="badge1 badge-info1">2</div>
+                  <img src="assets/images/showroom.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
+                  <img src="assets/images/purchase-orders.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
+                  <img src="assets/images/customer-reserved.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
+                  <img src="assets/images/customer-backorder.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div><br />
+                  <button class="box_but_blue"><i class="material-icons">brush</i>&nbsp;&nbsp; Customize</button>
+                </mat-card-content>
 
-                  <span>Category: SOFA</span><br /><br />
+              </mat-card>
+            </div>
 
-                  <span>Model Id: 2490492</span><br /><br />
+            <div flex="30" flex-sm="50" flex-md="33" flex-xs="100" class="home-mat-cards">
+              <mat-card class="example-card">
 
-                  <span>Cover name: Lilac & Black</span><br /><br />
-
-                  <span>Main: F393883</span><br /><br />
-
-                  <span>Stock ID: F393883DC</span><br /><br />
+                <img mat-card-image src="assets/images/sofa6.png" class="img-responsive"><br>
+                <mat-card-title>NATUZZI</mat-card-title><br><br>
+                <mat-card-content>
+                  <span class="color1">Category:</span> <span class="color2">SOFA</span><br /><br />
+                  <span class="color1"> Model Id:</span> <span class="color2">2490492</span><br /><br />
+                  <span class="color1">Cover name:</span> <span class="color2"> Lilac & Black</span><br /><br />
+                  <span class="color1">Main:</span> <span class="color2"> F393883</span><br /><br />
+                  <span class="color1">Stock ID: F393883DC</span><br /><br />
                   <img src="assets/images/warehouse.png" width="20" class=""><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/showroom.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>
                   <img src="assets/images/purchase-orders.png" width="20" class="left-margin"><div class="badge1 badge-info1">2</div>

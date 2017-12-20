@@ -35,12 +35,21 @@ description:any;
 editFlag:boolean=false;
 effectiveDate:any;
 discontinuedDate:any;
-  editdescription: any;
-  prevDescription: any;
-  prevDiscDate: any;
+editdescription: any;
+prevDescription: any;
+prevDiscDate: any;
 editcode:any;
 id: any;
 acToken: any;
+codeerrorMsg: string ='';
+descerrorMsg: string = '';
+editcodeerrorMsg: string = '';
+editdescerrorMsg: string = '';
+errormsg: string;
+bReturn: boolean = false;
+editerrormsg: string = "";
+pgTitle: string = "Advertising";
+minDate: Date;
 //searchbox:boolean=true;
   
 data: any[];
@@ -50,6 +59,7 @@ constructor(private fb: FormBuilder,
 ) {
   this.sortby="Code";
   this.sortorder = "asc";
+  //this.minDate = new Date();
   
  // this.getData1();
 }
@@ -81,11 +91,12 @@ getData(){
 }
 
 ngOnInit() {
- this.getData();
+  this.getData();
+  
 	
   this.codeForm = this.fb.group({
       'code' : [null, Validators.compose([Validators.required])],
-      'description' : [null, Validators.compose([Validators.required])],
+      'description': [null, Validators.compose([Validators.required])],
       // Validators.pattern('[a-zA-Z ]*')
     });
   this.codeeditForm = this.fb.group({
@@ -93,81 +104,129 @@ ngOnInit() {
      // 'discontinuedDate': [null, Validators.compose([Validators.required])],
       // Validators.pattern('[a-zA-Z ]*')
   });
-  }
-  callcodes(){  	
-  	this.addFlag=true;
-  	this.displayFlag=false;  	
-  }
-  savecode(value){
-  	if (this.codeForm.valid)
-    {
-  	
-    //need to integrate the save code service here
-        var body = JSON.stringify({ "Code": this.code, "Description": this.description, "StartDate": new Date(), "EndDate": null });
-         
-        var obj1 = JSON.parse(localStorage.getItem('currentUser'));
-        var token = 'Bearer ';
-        token = token.concat(obj1 && obj1.token);
-        console.log("token in Save:  " + token);
-        var headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        headers.append("authorization", token);
-        let options = new RequestOptions({ headers: headers });
-        //console.log("options:  " +  options);
-        this.http.post("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource", body, options)
-          .map(res => res.json())
-          .subscribe(
-          data => {
-            //console.log("res from Save:: " + JSON.stringify(data));
-            console.log("Save Success:: ");
-          },
-          err => {
-            err = err
-            console.log("Error" + err);
-          }
-          );
-        this.addFlag = false;
-        this.codesList = "";
-        this.displayFlag = true;
-        this.getData(); 	
-
-  }
 }
-addcodeback(){
+
+callcodes()
+{  	
+    this.addFlag=true;
+    this.displayFlag = false;
+    this.errormsg = "";
+    this.codeerrorMsg = "";
+    this.descerrorMsg = "";
+    this.code = "";
+    this.description = "";
+    this.pgTitle = "Add Advertising";
+ }
+addcodeback()
+{
 	this.addFlag=false;
   	this.displayFlag=true;
   	this.code="";
   	this.description="";
-    this.getData();
- }
-  editcodeback(){
-    this.editFlag=false;
-    this.displayFlag=true;
-    this.editcode="";
-    this.editdescription = "";
-    this.getData();
-
-
+        this.getData();
+        this.pgTitle = "Advertising";
 }
-   editcodes(id,code,desc,startDate,endDate){
+clearaddcodes() {
+  this.code = "";
+  this.description = "";
+  this.errormsg = "";
+  this.codeerrorMsg = "";
+  this.descerrorMsg = ""
+}
+savecode(value)
+{
+      this.errormsg = "";
+      this.codeerrorMsg = "";
+      this.descerrorMsg = "";
+      if (this.codeForm.valid) {
+      if ((this.code || '').trim().length === 0) {
+        this.codeerrorMsg = "Please enter valid input for Code.";
+        return false;
+      }
+      if ((this.description || '').trim().length === 0) {
+        this.descerrorMsg = "Please enter valid input for Description."
+        return false;
+      }
+      var body = JSON.stringify({ "Code": this.code, "Description": this.description, "StartDate": new Date(), "EndDate": null });
+
+      var obj1 = JSON.parse(localStorage.getItem('currentUser'));
+      var token = 'Bearer ';
+      token = token.concat(obj1 && obj1.token);
+      console.log("token in Save:  " + token);
+      var headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("authorization", token);
+      let options = new RequestOptions({ headers: headers });
+      //console.log("options:  " +  options);
+      this.http.post("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource", body, options)
+        .map(res => res.json())
+        .subscribe(
+        data => {
+          //console.log("res from Save:: " + JSON.stringify(data));
+          //console.log("Save Success:: ");
+          this.addFlag = false;
+          this.codesList = "";
+          this.displayFlag = true;
+          this.getData();
+          this.pgTitle = "Advertising";
+        },
+        err => {
+          err = err
+          console.log("Error" + err);
+          this.errormsg = "Failed to save the code details.";
+        }
+        );
+
+    }
+  }
+editcodes(id, code, desc, startDate, endDate)
+{
   	this.editFlag=true;
   	this.displayFlag=false;
   	this.editcode=code;
     this.editdescription = desc;
     this.prevDescription = desc;
   	var splitted = startDate.split("T", 2); 
-  	this.effectiveDate=splitted[0];
+    this.effectiveDate = splitted[0];    
+    //if (endDate || '')
+    //{
+    //  splitted = '';
+    //  console.log("End Date:: " + endDate);
+    //  splitted = endDate.split("T", 2);;
+    //  console.log("End Date1:: " + splitted);
+    //  this.discontinuedDate = new Date(splitted[0]);
+    //}
+    this.discontinuedDate = endDate;
     this.id = id;
     this.prevDiscDate = endDate;
+    this.editerrormsg = "";
+    this.editcodeerrorMsg = "";
+    this.editdescerrorMsg = "";
+    this.pgTitle = "Edit Advertising";
   }
-saveeditcode(code,value){
+saveeditcode(code, value)
+   {
+      this.editerrormsg = "";
+        if (this.codeeditForm.valid)
+        {
+          if ((this.editcode || '').trim().length === 0) {
+            this.editcodeerrorMsg = "Please enter valid input for Code."
+            return false;
+          }
+          if ((this.editdescription || '').trim().length === 0) {
+            this.editdescerrorMsg = "Please enter valid input for Description."
+            return false;
+          }
+          //if ((this.effectiveDate || '').trim().length > 0)
+          //{
 
-  	if (this.codeeditForm.valid)
-    {
-  	this.editFlag=false;
-  	this.displayFlag=true;
-//vaues awi get in variables like this.id,this.editcode,this.editdescription,this.effectiveDate,this.discontinuedDate
-//need to integrate the update code service here
+          //}
+
+  	    this.editFlag=false;
+            this.displayFlag = true;
+            console.log("Discont Date:: " + this.discontinuedDate);
+        //vaues awi get in variables like this.id,this.editcode,this.editdescription,this.effectiveDate,this.discontinuedDate
+        //need to integrate the update code service here
         var body = JSON.stringify({ "Id": this.id, "Code": this.editcode, "Description": this.editdescription, "StartDate": this.effectiveDate, "EndDate": this.discontinuedDate });
         console.log("ID:  " + this.id);
         var obj1 = JSON.parse(localStorage.getItem('currentUser'));
@@ -186,30 +245,43 @@ saveeditcode(code,value){
           .subscribe(
           data => {
             //console.log("res from Save:: " + JSON.stringify(data));
+            this.editFlag = false;
+            this.codesList = "";
+            this.displayFlag = true;
             this.getData();
-
+            this.id = "";
+            this.pgTitle = "Advertising";
           },
           err => {
             err = err
             console.log(err);
+            this.editerrormsg = "Failed to update the code details.";
           }
           );
-  	//this.getData();
-  }
+      }
+    }
+
+editcodeback() {
+  this.editFlag = false;
+  this.displayFlag = true;
+  this.editcode = "";
+  this.editdescription = "";
+  this.getData();
+  this.pgTitle = "Advertising";
+  this.id = "";
 }
   clearsort(){
-	this.sortby="Code";
-	this.sortorder="asc";
+	  this.sortby="Code";
+    this.sortorder = "asc";
   }
-  clearaddcodes(){
-	this.code="";
-	this.description="";
-  }
+ 
   cleareditcodes() {
     this.editdescription = this.prevDescription;
     this.discontinuedDate = this.prevDiscDate;
+    this.editerrormsg = "";
+    this.editcodeerrorMsg = "";
+    this.editdescerrorMsg = "";
   }
-
   
   sortcodes(){
   	let  orderType=this.sortorder
@@ -245,7 +317,6 @@ saveeditcode(code,value){
     }*/
       ngAfterViewInit() {
   }
-
 }
 
 export interface CodeData {

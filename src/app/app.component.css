@@ -1,3 +1,33 @@
+/*body {
+  font-family: Roboto,sans-serif !important;
+}*/
+@font-face {
+  font-family: 'robotobold';
+  src: url('../assets/fonts/roboto-bold-webfont.woff2') format('woff2'), url('../assets/fonts/roboto-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotolight';
+  src: url('../assets/fonts/roboto-light-webfont.woff2') format('woff2'), url('../assets/fonts/roboto-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotomedium';
+  src: url('../assets/fonts/roboto-medium-webfont.woff2') format('woff2'), url('../assets/fonts/roboto-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotoregular';
+  src: url('../assets/fonts/roboto-regular-webfont.woff2') format('woff2'), url('../assets/fonts/roboto-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* search bar code start*/
 #custom-search-input {
@@ -20,7 +50,8 @@
     border-bottom: 1px solid #ccc;
     margin-top: 10px;
     box-shadow: none;
-    border-radius:0;
+    border-radius: 0;
+    font-family: 'robotoregular';
   }
 
   #custom-search-input button {
@@ -40,12 +71,37 @@
   z-index: 3;
 }
 /*search bard code end*/
+mat-card-title h4 {
+  font-size:20px;
+}
+.home-mat-cards {
+  background-color: #fff;
+  padding: 10px;
+  margin: 0px 0 20px 20px;
+  float: left;
+  -webkit-box-shadow: 2px 2px 4px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 2px 2px 4px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 2px 2px 4px 0px rgba(50, 50, 50, 0.75);
+}
+.color1 {
+  color: #999 !important;
+}
+.color2 {
+  color: #666 !important;
+}
 .ng-star-inserted {
   padding-top: 5px;
+  font-family: 'robotoregular';
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: 0.5px;
 }
-
+.ng-star-inserted .material-icons{
+  font-size:18px !important;
+}
   .ng-star-inserted ul li a {
-    color: #999;
+    color: #515253;
   }
 
 .table strong, span {
@@ -53,8 +109,8 @@
 }
 
 .ng-star-inserted ul li {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  padding: 15px;
+  /*border-bottom: 1px solid #ccc;*/
 }
 .badge1 {
   margin-left: -5px;
@@ -2573,6 +2629,9 @@ input.mat-input-element {
 
 .mat-accent .mat-option.mat-selected:not(.mat-option-disabled) {
   color: #ff5722
+}
+.mat-warn {
+  color: #f44336;
 }
 
 .mat-warn .mat-option.mat-selected:not(.mat-option-disabled) {
@@ -6875,8 +6934,10 @@ router-outlet ~ * {
 }
 
 .mat-sidenav {
-  width: 300px;
-  box-shadow: 0 8px 10px -5px rgba(0,0,0,.2),0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12)
+  width: 250px;
+  /*box-shadow: 0 8px 10px -5px rgba(0,0,0,.2),0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12)*/
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
 }
 
 .perfect-scrollbar {
