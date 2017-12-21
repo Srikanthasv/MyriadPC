@@ -133,9 +133,6 @@
                       This is required
                     </mat-error>
                   </mat-form-field>
-                  <span class="mat-warn">{{codeerrorMsg}}</span>
-             
-               
                   <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
                     <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required maxlength="30">
                     <mat-hint placeholder="Description" align="end">{{description.length || 0}}/30</mat-hint>
@@ -143,10 +140,12 @@
                       This is required
                     </mat-error>
                   </mat-form-field>
-                  <span class="mat-warn">{{descerrorMsg}}</span>
                   </div>
-                
-                <br/><br/><br/><br/>
+                <div layout="row">
+                  <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
+                  <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
+                </div>
+                <br/><br/>
                 <div class="" align="right">
                   <div class="">
                     <button mat-raised-button type="button" (click)="clearaddcodes()" style="line-height:36px;">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -168,18 +167,17 @@
                   <mat-form-field flex="50" flex-sm="50" flex-md="50">
                     <input matInput placeholder="Code" disabled value="{{editcode}}">
                   </mat-form-field>
-                  <span class="mat-warn">{{edicodeerrorMsg}}</span>
-                
+                  <span class="mat-warn">{{edicodeerrorMsg}}</span>              
                 
                   <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
+                    <mat-hint placeholder="Description" align="end">{{editdescription.length || 0}}/30</mat-hint>
                     <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
                     <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
                       This is required
                     </mat-error>
-                  </mat-form-field>
-                  <span class="mat-warn">{{editdescerrorMsg}}</span>                
+                  </mat-form-field>               
               </div>
-
+            <div layout="row"><span flex="50">&nbsp;</span><span class="mat-warn" flex="50" style="margin-left:20px;">{{editdescerrorMsg}}</span></div>
               <div layout="row">
                   <mat-form-field flex="50" flex-sm="50" flex-md="50">
                     <input matInput placeholder="Effective Date" disabled value="{{effectiveDate | date: 'MM/dd/yyyy'}}">
