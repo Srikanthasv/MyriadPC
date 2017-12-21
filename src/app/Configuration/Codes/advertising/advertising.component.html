@@ -67,7 +67,7 @@
         </ul>
         <ul style="list-style-type:none; padding-left:50px;" *ngIf="showFiller1">
           <li class="ng-star-inserted">
-            <a routerlinkactive="" class="" [routerLink]="['/advertising']">
+            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/advertising']">
               <span>Advertising</span>
             </a>
           </li>
@@ -112,15 +112,15 @@
   <mat-sidenav-content class="">
     <div class="page-inner">
 
-      <div class="page-title" style="border-bottom:2px solid #ccc; margin-bottom:20px; padding:20px;">
-        <span class="h3">{{pgTitle}}</span>
+      <div class="page-title" style="border-bottom:2px solid #ccc; margin-bottom:20px; padding:20px;" >
+        <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;"><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>&nbsp;&nbsp;Back</button>
+        <button id="editback" *ngIf="editFlag" (click)="editcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;"><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>&nbsp;&nbsp;Back</button>
       </div>
       <div id="main-wrapper">
         <!-- Add CODES Start -->
         <div class="" style="padding:15px 19px 28px 19px; border:1px solid #ccc; margin:10px; background-color:#fff;" *ngIf="addFlag">
           <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="savecode(codeForm.value)" novalidate>
-            <button id="addback" (click)="addcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;"><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>&nbsp;&nbsp;Back</button>
-            <br/><br/>
+            <!--<br/><br/>-->
             <!--<button class="" (click)="addcodeback()">Back</button>-->
             <!--<div class="example-container">-->
 			    <div class="mat-warn">{{errormsg}}</div><br />
@@ -128,8 +128,8 @@
               <div class="row">
                 <div class="col-lg-6">
                   <mat-form-field style="width:100%" hintLabel="">
-                    <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
-                    <!--<mat-hint placeholder="Code" align="end">{{Codes.value.length || 0}}/6</mat-hint>-->
+                    <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6" >
+                    <mat-hint placeholder="Code" align="end">{{code.length || 0}}/6</mat-hint>
                     <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
                       This is required
                     </mat-error>
@@ -139,7 +139,7 @@
                 <div class="col-lg-6">
                   <mat-form-field style="width:100%" hintLabel="">
                     <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required maxlength="30">
-                    <!--<mat-hint placeholder="Description" align="end">{{Description.value.length || 0}}/30</mat-hint>-->
+                    <mat-hint placeholder="Description" align="end">{{description.length || 0}}/30</mat-hint>
                     <mat-error *ngIf="codeForm.controls['description'].hasError('required') ">
                       This is required
                     </mat-error>
@@ -161,8 +161,7 @@
         <!-- for edit CODES start -->
         <div class="" style="padding:15px 19px 28px 19px; border:1px solid #ccc; margin:10px; background-color:#fff;" *ngIf="editFlag">
           <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="saveeditcode(editcode,codeeditForm.value)" novalidate>
-            <button id="editback" (click)="editcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;"><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>&nbsp;&nbsp;Back</button>
-            <br/><br/>
+            <!--<br/><br/>-->
             <div class="mat-warn">{{editerrormsg}}</div><br />
             <div class="example-container">
               <div class="row">
@@ -190,7 +189,9 @@
                 </div>
                 <div class="col-lg-6">
                   <mat-form-field style="width:100%">
-                    <input matInput type="date" placeholder="Discontinued Date" [(ngModel)]="discontinuedDate" name="discontinuedDate" [formControl]="codeeditForm.controls['discontinuedDate']">
+                    <input matInput placeholder="Discontinued Date"  [min]="effectiveDate" [matDatepicker]="dp3" [(ngModel)]="discontinuedDate" [ngModelOptions]="{standalone: true}" name="discontinuedDate" disabled>
+                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
                   </mat-form-field>
                 </div>
               </div>
@@ -221,14 +222,14 @@
           <!-- ID Column -->
           <ng-container matColumnDef="Id">
 
-            <mat-cell *matCellDef="let row" flex="25"> {{row.Code}} <br> Description: {{row.Description}}</mat-cell>
+            <mat-cell *matCellDef="let row" flex="40"> {{row.Code}} <br> Description: {{row.Description}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="Code">
 
             <mat-cell *matCellDef="let row" flex="1"> </mat-cell>
           </ng-container>
           <ng-container matColumnDef="Description">
-            <mat-cell *matCellDef="let codes" flex="30"> Effective date: {{codes.StartDate}}<br>Discontinued Date:{{codes.EndDate}} </mat-cell>
+            <mat-cell *matCellDef="let codes" flex="40"> Effective date: {{codes.StartDate | date: 'dd/MM/yyyy'}}<br>Discontinued Date:{{codes.EndDate | date: 'dd/MM/yyyy'}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="StartDate">
 
@@ -241,7 +242,7 @@
             <mat-cell *matCellDef="let row" flex="1"> </mat-cell>
           </ng-container>
           <ng-container matColumnDef="EndDate">
-            <mat-cell *matCellDef="let codes" flex="15">
+            <mat-cell *matCellDef="let codes" flex="10">
               <a style="cursor:pointer" (click)="editcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> Edit </a>
             </mat-cell>
           </ng-container>

@@ -95,7 +95,7 @@ ngOnInit() {
   
 	
   this.codeForm = this.fb.group({
-      'code' : [null, Validators.compose([Validators.required])],
+    'code': [null, Validators.compose([Validators.required])],
       'description': [null, Validators.compose([Validators.required])],
       // Validators.pattern('[a-zA-Z ]*')
     });
@@ -188,15 +188,15 @@ editcodes(id, code, desc, startDate, endDate)
     this.prevDescription = desc;
   	var splitted = startDate.split("T", 2); 
     this.effectiveDate = splitted[0];    
-    //if (endDate || '')
-    //{
-    //  splitted = '';
-    //  console.log("End Date:: " + endDate);
-    //  splitted = endDate.split("T", 2);;
-    //  console.log("End Date1:: " + splitted);
-    //  this.discontinuedDate = new Date(splitted[0]);
-    //}
-    this.discontinuedDate = endDate;
+    if (endDate || '')
+    {
+      splitted = '';
+      console.log("End Date:: " + endDate);
+      splitted = endDate.split("T", 2);;
+      console.log("End Date1:: " + splitted);
+      this.discontinuedDate = splitted[0];
+    }
+    //this.discontinuedDate = endDate;
     this.id = id;
     this.prevDiscDate = endDate;
     this.editerrormsg = "";
@@ -217,10 +217,10 @@ saveeditcode(code, value)
             this.editdescerrorMsg = "Please enter valid input for Description."
             return false;
           }
-          //if ((this.effectiveDate || '').trim().length > 0)
-          //{
+          if ((this.effectiveDate || '').trim().length > 0)
+          {
 
-          //}
+          }
 
   	    this.editFlag=false;
             this.displayFlag = true;
