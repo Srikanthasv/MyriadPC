@@ -88,25 +88,25 @@
     </mat-content>
     <br />        
     <div style="padding:20px;">
-      <mat-card flex="50">
-        <mat-form-field>
-          <mat-select placeholder="Sort By" [(ngModel)]="sortby">
-            <mat-option value="Code" selected="selected">Code</mat-option>
-            <mat-option value="Description">Description</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select placeholder="Sort Order" [(ngModel)]="sortorder">
-            <mat-option value="asc" selected="selected">Ascending</mat-option>
-            <mat-option value="dec">Descending</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-card><br><br>
-      <mat-card class="" align="right" style="margin-top:15px;">
-        <button type="button" mat-raised-button class="" (click)="clearsort()" style="line-height:36px">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" mat-raised-button color="primary" class="" (click)="sortcodes();sidenav1.close();" style="line-height:36px">Search</button>
-      </mat-card>
-</div>    
+        <mat-card layout="">
+          <mat-form-field flex="50" flex-sm="50" flex-md="50">
+            <mat-select placeholder="Sort By" [(ngModel)]="sortby">
+              <mat-option value="Code" selected="selected">Code</mat-option>
+              <mat-option value="Description">Description</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:10px;">
+            <mat-select placeholder="Sort Order" [(ngModel)]="sortorder">
+              <mat-option value="asc" selected="selected">Ascending</mat-option>
+              <mat-option value="dec">Descending</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card><br><br>
+        <mat-card style="float:right;">
+          <button type="button" mat-raised-button class="" (click)="clearsort()" style="line-height:36px">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="button" mat-raised-button color="primary" class="" (click)="sortcodes();sidenav1.close();" style="line-height:36px">Search</button>
+        </mat-card>
+    </div>    
   </mat-sidenav>
   <!-- for filter end-->
   <mat-sidenav-content class="">
@@ -123,11 +123,10 @@
             <!--<br/><br/>-->
             <!--<button class="" (click)="addcodeback()">Back</button>-->
             <!--<div class="example-container">-->
-			    <div class="mat-warn">{{errormsg}}</div><br />
-            <div class="">
-              <div class="row">
-                <div class="col-lg-6">
-                  <mat-form-field style="width:100%" hintLabel="">
+			    <div class="mat-warn">{{errormsg}}</div><br />           
+              
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
                     <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6" >
                     <mat-hint placeholder="Code" align="end">{{code.length || 0}}/6</mat-hint>
                     <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
@@ -135,9 +134,9 @@
                     </mat-error>
                   </mat-form-field>
                   <span class="mat-warn">{{codeerrorMsg}}</span>
-                </div>
-                <div class="col-lg-6">
-                  <mat-form-field style="width:100%" hintLabel="">
+             
+               
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
                     <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required maxlength="30">
                     <mat-hint placeholder="Description" align="end">{{description.length || 0}}/30</mat-hint>
                     <mat-error *ngIf="codeForm.controls['description'].hasError('required') ">
@@ -145,7 +144,8 @@
                     </mat-error>
                   </mat-form-field>
                   <span class="mat-warn">{{descerrorMsg}}</span>
-                </div>
+                  </div>
+                
                 <br/><br/><br/><br/>
                 <div class="" align="right">
                   <div class="">
@@ -153,8 +153,8 @@
                     <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
                   </div>
                 </div>
-              </div>
-            </div>
+              
+           
           </form>
         </div>
         <!-- Add CODES end -->
@@ -163,45 +163,41 @@
           <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="saveeditcode(editcode,codeeditForm.value)" novalidate>
             <!--<br/><br/>-->
             <div class="mat-warn">{{editerrormsg}}</div><br />
-            <div class="example-container">
-              <div class="row">
-                <div class="col-lg-6">
-                  <mat-form-field style="width:100%">
+            
+              <div layout="row">                
+                  <mat-form-field flex="50" flex-sm="50" flex-md="50">
                     <input matInput placeholder="Code" disabled value="{{editcode}}">
                   </mat-form-field>
                   <span class="mat-warn">{{edicodeerrorMsg}}</span>
-                </div>
-                <div class="col-lg-6">
-                  <mat-form-field style="width:100%">
+                
+                
+                  <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
                     <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
                     <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
                       This is required
                     </mat-error>
                   </mat-form-field>
-                  <span class="mat-warn">{{editdescerrorMsg}}</span>
-                </div>
+                  <span class="mat-warn">{{editdescerrorMsg}}</span>                
               </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <mat-form-field style="width:100%">
-                    <input matInput placeholder="Effective Date" disabled value="{{effectiveDate}}">
-                  </mat-form-field>
-                </div>
-                <div class="col-lg-6">
-                  <mat-form-field style="width:100%">
+
+              <div layout="row">
+                  <mat-form-field flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Effective Date" disabled value="{{effectiveDate | date: 'MM/dd/yyyy'}}">
+                  </mat-form-field> 
+                  <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
                     <input matInput placeholder="Discontinued Date"  [min]="effectiveDate" [matDatepicker]="dp3" [(ngModel)]="discontinuedDate" [ngModelOptions]="{standalone: true}" name="discontinuedDate" disabled>
                     <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
                     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-                  </mat-form-field>
-                </div>
+                  </mat-form-field>               
               </div>
+
               <div class="" align="right">
                 <div class="">
                   <button mat-raised-button type="button" (click)="cleareditcodes()" style="line-height:36px;">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
                   <button mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
                 </div>
               </div>
-            </div>
+           
           </form>
         </div>
         <!-- edit CODES end -->
@@ -229,7 +225,7 @@
             <mat-cell *matCellDef="let row" flex="1"> </mat-cell>
           </ng-container>
           <ng-container matColumnDef="Description">
-            <mat-cell *matCellDef="let codes" flex="40"> Effective date: {{codes.StartDate | date: 'dd/MM/yyyy'}}<br>Discontinued Date:{{codes.EndDate | date: 'dd/MM/yyyy'}} </mat-cell>
+            <mat-cell *matCellDef="let codes" flex="40"> Effective date: {{codes.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{codes.EndDate | date: 'MM/dd/yyyy'}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="StartDate">
 

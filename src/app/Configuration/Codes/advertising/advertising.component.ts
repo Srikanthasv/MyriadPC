@@ -4,14 +4,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 //import { ActivatedRoute, Params } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+
 
 
 @Component({
   moduleId: module.id,
   selector: 'app-advertising',
   templateUrl: './advertising.component.html',
-  styleUrls: ['./advertising.component.css', '../../../bootstrap.css']
+  styleUrls: ['./advertising.component.css', '../../../bootstrap.css']  
 })
 export class AdvertisingComponent implements OnInit {
 
@@ -217,14 +219,10 @@ saveeditcode(code, value)
             this.editdescerrorMsg = "Please enter valid input for Description."
             return false;
           }
-          if ((this.effectiveDate || '').trim().length > 0)
-          {
-
-          }
 
   	    this.editFlag=false;
-            this.displayFlag = true;
-            console.log("Discont Date:: " + this.discontinuedDate);
+        this.displayFlag = true;
+        console.log("Discont Date:: " + this.discontinuedDate);
         //vaues awi get in variables like this.id,this.editcode,this.editdescription,this.effectiveDate,this.discontinuedDate
         //need to integrate the update code service here
         var body = JSON.stringify({ "Id": this.id, "Code": this.editcode, "Description": this.editdescription, "StartDate": this.effectiveDate, "EndDate": this.discontinuedDate });
