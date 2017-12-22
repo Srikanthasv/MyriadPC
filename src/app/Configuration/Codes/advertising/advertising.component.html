@@ -117,7 +117,7 @@
   <mat-sidenav-content class="">
     <div class="page-inner">
 
-      <div class="page-title" style="border-bottom:2px solid #ccc; margin-bottom:20px; padding:20px;" >
+      <div class="page-title" style="border-bottom:2px solid #ccc; margin-bottom:20px; padding:5px;" >
         <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;"><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>&nbsp;&nbsp;Back</button>
         <button id="editback" *ngIf="editFlag" (click)="editcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;"><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>&nbsp;&nbsp;Back</button>
       </div>
@@ -204,16 +204,9 @@
           </form>
         </div>
         <!-- edit CODES end -->
-
-        <mat-content class="codes-color" *ngIf="displayFlag">
-          <a style="margin-right: 15px;" class="codes-color" (click)="callcodes();">
-            <mat-icons class="material-icons">add</mat-icons> Code
-          </a> &nbsp;
-          <a class="codes-color" (click)="sidenav1.open()">
-            <!--<md-card class="btn-filter">-->
-            <mat-icons class="material-icons">filter_list</mat-icons> Filter
-            <!--</md-card>-->
-          </a>
+        <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="displayFlag">
+          <mat-icons class="material-icons" flex="1" (click)="callcodes();">add</mat-icons><span (click)="callcodes();" style="color:white">&nbsp;Code</span>
+          <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;Filter</span>
         </mat-content>
         <mat-table [dataSource]="dataSource" class="table1" width="100%" *ngIf="displayFlag">
 
