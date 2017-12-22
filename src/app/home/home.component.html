@@ -2,68 +2,52 @@
   <mat-content class="mat-toolbar mat-primary">
     <div class="mat-toolbar-layout">
       <div class="mat-toolbar-row" style="flex-direction: row; box-sizing: border-box; display: flex;">
-        <button class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
+        <button class="mat-icon-button" mat-icon-button="">
           <span class="mat-button-wrapper">
             <mat-icon class="mat-icon ng-tns-c1-0 material-icons" role="img" aria-hidden="true" (click)="sidenav.toggle()">menu</mat-icon>
           </span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
         </button>
-        <a class="logo ng-tns-c1-0" fxhide="true" fxhide.gt-sm="false" href="/" style="display: block;">
-          <img class="ng-tns-c1-0" src="../assets/images/logo.png">
+        <a class="logo" fxhide="true" fxhide.gt-sm="false" href="/" style="display: block;">
+          <img src="../assets/images/logo.png">
         </a>
-        <span fxflex="" class="ng-tns-c1-0" style="flex: 1 1 1e-09px; box-sizing: border-box;"></span>
+        <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box;"></span>
         <div class="rightside-header">
 
-          <button aria-haspopup="true" class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
-            <div class="mat-button-wrapper">
-              <div class="">
-                <div class="td-notification-content">
-                  <mat-icon class="icon-color mat-icon ng-tns-c28-91 material-icons" role="img" aria-hidden="true" [matMenuTriggerFor]="cart">shopping_cart</mat-icon>
+          <button aria-haspopup="true" class="mat-icon-button" mat-icon-button="">
+            <div class="mat-button-wrapper">  
+                  <mat-icon class="icon-color mat-icon material-icons" role="img" aria-hidden="true" [matMenuTriggerFor]="cart">shopping_cart</mat-icon>
                   <mat-menu #cart="matMenu">
                     <span mat-menu-item>Item 1</span>
                     <span mat-menu-item>Item 2</span>
-                  </mat-menu>
-                </div>
+                  </mat-menu>                
                 <div class="td-notification-count td-notification-after">
                   99+
                 </div>
-              </div>
-            </div><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
+            </div>
+            <!--<div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>-->
           </button>
-          <button aria-haspopup="true" class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
-            <div class="mat-button-wrapper">
-              <div class="">
-                <div class="td-notification-content">
-
+          <button aria-haspopup="true" class="mat-icon-button">
+            <div class="mat-button-wrapper"> 
                   <mat-icon class="icon-color mat-icon ng-tns-c28-91 material-icons" role="img" aria-hidden="true" [matMenuTriggerFor]="notification">notifications</mat-icon>
                   <mat-menu #notification="matMenu">
                     <span mat-menu-item>Notification 1</span>
                     <span mat-menu-item>Notification 1</span>
-                  </mat-menu>
-                </div>
+                  </mat-menu>                
                 <div class="td-notification-count td-notification-after">
                   10
                 </div>
-              </div>
-            </div><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
+            </div>
+            <!--<div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>-->
           </button>
-          <button aria-haspopup="true" class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
+          <button aria-haspopup="true" class="mat-icon-button">
             <div class="mat-button-wrapper">
-              <div class="">
-                <div class="td-notification-content">
-
                   <mat-icon class="icon-color mat-icon ng-tns-c28-91 material-icons" role="img" aria-hidden="true">help</mat-icon>
-
-                </div>
-
-              </div>
-            </div><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
+            </div>
+            <!--<div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>-->
           </button>
 
           <button aria-haspopup="true" class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
             <div class="mat-button-wrapper">
-              <div class="">
-                <div class="td-notification-content">
-
                   <img src="assets/images/user-icon.png" width="30" [matMenuTriggerFor]="user" />
                   <mat-menu #user="matMenu">
                     <div class="mat-menu-content ng-trigger ng-trigger-fadeInItems" style="opacity: 1; width:235px;">
@@ -75,7 +59,6 @@
                         </mat-list-item>
                         <hr />
                       </mat-list>
-
                       <mat-nav-list class="mat-nav-list" role="list">
                         <mat-list-item class="mat-list-item" mat-list-item="" role="listitem" style="cursor:auto;">
                           <div class="mat-list-item-content" style="color:#ccc;">
@@ -90,10 +73,9 @@
                       </mat-nav-list>
                     </div>
                   </mat-menu>
-                </div>
+            </div>
 
-              </div>
-            </div><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
+            <!--<div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>-->
           </button>
 
         </div>
@@ -104,9 +86,9 @@
   </mat-content>
   </mat-tool-bar>
   <mat-tool-bar>
-    <mat-content class="mat-second-header" style="">
-      <div id="custom-search-input">
-        <div class="input-group col-md-3 col-sm-3 col-xs-12">
+    <mat-content class="mat-second-header" layout="row">
+      <div id="custom-search-input"  flex="20" flex-sm="20" flex-md="20" flex-xs="100">
+        <div class="input-group">
           <input type="text" class="  search-query form-control" placeholder="Search" />
           <span class="input-group-btn">
             <button class="btn btn-danger" type="button">
@@ -116,7 +98,7 @@
         </div>
       </div>
       <span _ngcontent-c1="" fxflex="" class="ng-tns-c1-0" style="flex: 1 1 1e-09px; box-sizing: border-box;"></span>
-      <div class="col-md-2 col-sm-2 col-xs-4">
+      <div flex="20" flex-sm="20" flex-md="20" flex-xs="100">
         <mat-form-field>
           <mat-select placeholder="Select">
             <mat-option>None</mat-option>
@@ -126,7 +108,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-md-2 col-sm-2  col-xs-4">
+      <div flex="20" flex-sm="20" flex-md="20" flex-xs="100">
         <mat-form-field>
           <mat-select placeholder="Select">
             <mat-option>None</mat-option>
@@ -136,7 +118,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-md-2 col-sm-2  col-xs-4">
+      <div flex="20" flex-sm="20" flex-md="20" flex-xs="100">
         <mat-form-field>
           <mat-select placeholder="Select">
             <mat-option>None</mat-option>
@@ -146,13 +128,13 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-md-1 col-sm-1  col-xs-4" style="margin-top:15px;">
+      <div flex="10" flex-sm="10" flex-md="10" flex-xs="33" style="margin-top:15px;">
         <button class="butt"><i class="material-icons">list</i></button>
       </div>
-      <div class="col-md-1 col-sm-1  col-xs-4" style="margin-top:15px;">
+      <div flex="10" flex-sm="10" flex-md="10" flex-xs="33" style="margin-top:15px;">
         <button class="butt"><i class="material-icons">view_module</i></button>
       </div>
-      <div class="col-md-1 col-sm-1  col-xs-4" style="margin-top:15px;">
+      <div flex="10" flex-sm="10" flex-md="10" flex-xs="33" style="margin-top:15px;">
         <button class="butt"><i class="material-icons">more_vert</i></button>
       </div>
     </mat-content>
@@ -164,7 +146,7 @@
         <ul style="list-style-type:none; padding-left:0px;">
           <!---->
           <li class="ng-star-inserted">
-            <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
+            <a >
               <mat-icon>home</mat-icon>&nbsp;&nbsp; Dashboard<!--<i class="material-icons" style="float:right;">keyboard_arrow_right</i>-->
             </a>
           </li>
@@ -205,7 +187,7 @@
           </li>
           <ul style="list-style-type:none;" *ngIf="showFiller">
             <li class="ng-star-inserted">
-              <a routerlinkactive="" class=""  style="cursor:pointer">
+              <a routerlinkactive=""  style="cursor:pointer">
                 <span (click)="showFiller1 = !showFiller1">Codes</span>
               </a>
             </li>
@@ -216,9 +198,14 @@
                 <span>Advertising</span>
               </a>
             </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/arfinance']">
+                <span>A/R Finance</span>
+              </a>
+            </li>
           </ul>
           <li class="ng-star-inserted">
-            <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+            <a routerlinkactive="docs-component-viewer-sidenav-item-selected" >
               <mat-icon class="material-icons">build</mat-icon>&nbsp;&nbsp; System
             </a>
           </li>

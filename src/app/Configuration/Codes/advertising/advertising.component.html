@@ -54,13 +54,13 @@
           </a>
         </li>
         <li class="ng-star-inserted">
-          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" (click)="showFiller = !showFiller">
+          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" (click)="showFiller = !showFiller" style="cursor:pointer">
             <mat-icon class="material-icons">settings</mat-icon>&nbsp;&nbsp; Configuration
           </a>
         </li>
         <ul style="list-style-type:none;" *ngIf="showFiller">
           <li class="ng-star-inserted">
-            <a routerlinkactive="" class="">
+            <a style="cursor:pointer">
               <span (click)="showFiller1 = !showFiller1">Codes</span>
             </a>
           </li>
@@ -69,6 +69,11 @@
           <li class="ng-star-inserted">
             <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/advertising']">
               <span>Advertising</span>
+            </a>
+          </li>
+          <li class="ng-star-inserted">
+            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/arfinance']">
+              <span>A/R Finance</span>
             </a>
           </li>
         </ul>
@@ -201,13 +206,12 @@
         <!-- edit CODES end -->
 
         <mat-content class="codes-color" *ngIf="displayFlag">
-
           <a style="margin-right: 15px;" class="codes-color" (click)="callcodes();">
-            <i class="codes-color glyphicon glyphicon-plus"></i> Code
+            <mat-icons class="material-icons">add</mat-icons> Code
           </a> &nbsp;
           <a class="codes-color" (click)="sidenav1.open()">
             <!--<md-card class="btn-filter">-->
-              <i class="glyphicon glyphicon-filter"></i> Filter
+            <mat-icons class="material-icons">filter_list</mat-icons> Filter
             <!--</md-card>-->
           </a>
         </mat-content>

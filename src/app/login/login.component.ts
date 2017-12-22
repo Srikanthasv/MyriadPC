@@ -21,8 +21,6 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
 formSubmitted: boolean = false;
   public user = new User('', '');
-  //logoPath: string;
-  //loginLogo: string;
   public token: string;
   public errorMsg = '';
   
@@ -31,8 +29,6 @@ formSubmitted: boolean = false;
     private loginService: LoginService,
     private http: Http,
     private fb: FormBuilder) {
-    //this.logoPath = 'assets/images/logo.png';
-    //this.loginLogo = 'assets/images/login-logo.png';
     this.errorMsg = '';
   }
 
@@ -40,17 +36,13 @@ formSubmitted: boolean = false;
     this.loginForm = this.fb.group({
       'username' : [null, Validators.compose([Validators.required])],
       'password' : [null, Validators.compose([Validators.required])],
-      // Validators.pattern('[a-zA-Z ]*')
     });
     this.loginService.logout();
-
   }
   onSubmit(form:any) {
     if (this.loginForm.valid)
     {
       let link = ['/home'];
-      //this.router.navigate(link);
-      // console.log("Data:" + form.username);
     if (form.username != '' || form.password != '') {
       this.loginService.login(form.username, form.password)
         .subscribe(res => {
@@ -61,7 +53,6 @@ formSubmitted: boolean = false;
           console.log("error:" + err);
         },
         () => this.router.navigate(link)
-
         );
     }
   }

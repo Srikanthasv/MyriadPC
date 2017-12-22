@@ -13,7 +13,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
   moduleId: module.id,
   selector: 'app-advertising',
   templateUrl: './advertising.component.html',
-  styleUrls: ['./advertising.component.css', '../../../bootstrap.css']  
+  styleUrls: ['../../../../assets/css/configuration/configuration.css'] 
 })
 export class AdvertisingComponent implements OnInit {
 

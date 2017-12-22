@@ -7,11 +7,14 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { routing } from './app.routes';  
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { LoginService } from './_services/login.service';
 import { enableProdMode } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { CdkTableModule } from '@angular/cdk/table';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { AdvertisingComponent } from './Configuration/Codes/advertising/advertising.component';
+import { ARFinanceComponent } from './Configuration/Codes/arfinance/arfinance.component';
 
 enableProdMode();
 import {
@@ -48,8 +51,7 @@ import {
   MatStepperModule,
 } from '@angular/material';
 
-import {CdkTableModule} from '@angular/cdk/table';
-import { AdvertisingComponent } from './Configuration/Codes/advertising/advertising.component';
+
 
 @NgModule({
 exports: [
@@ -90,7 +92,8 @@ exports: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    AdvertisingComponent
+    AdvertisingComponent,
+    ARFinanceComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,
