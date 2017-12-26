@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AdvertisingComponent } from './Configuration/Codes/advertising/advertising.component';
 import { ARFinanceComponent } from './Configuration/Codes/arfinance/arfinance.component';
+import { ChargebackComponent } from './Configuration/Codes/chargeback/chargeback.component';
 
 enableProdMode();
 import {
@@ -50,6 +51,7 @@ import {
   MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
+import { FollowupComponent } from './Configuration/Codes/followup/followup.component';
 
 
 
@@ -93,7 +95,9 @@ exports: [
     LoginComponent,
     HomeComponent,
     AdvertisingComponent,
-    ARFinanceComponent
+     ARFinanceComponent,
+     ChargebackComponent,
+     FollowupComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,

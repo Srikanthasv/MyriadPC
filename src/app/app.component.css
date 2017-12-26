@@ -188,7 +188,7 @@ mat-card-title h4 {
 
 form {
   font-family: 'roboto', sans-serif;
-  margin: 100px auto 0;
+  margin: 85px auto 0;
   box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.2);
   padding: 0 0 40px;
   border-radius: 3px;
@@ -220,6 +220,13 @@ form {
 }
 .form-img {
   padding:20px 0 0 5px;
+}
+.form-img small {
+    color: #999 !important;
+  }
+
+hr {
+  border: .5px solid #e4e4e4 !important;
 }
 .mat-toolbar.mat-primary {
   /*background: #03a9f4 !important;
@@ -3655,8 +3662,8 @@ input.mat-input-element {
     color: #fff;*/
     background: #f5f5f5 !important;
     color: #fff;
-    /*margin: -8px -8px 0 -8px !important;*/
-    padding: 10px 0 0 30px;
+    margin: -8px -8px 0 -8px !important;
+    padding: 10px 0 10px 30px;
   }
 
   .mat-toolbar.mat-accent {

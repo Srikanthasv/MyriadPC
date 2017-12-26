@@ -5,28 +5,24 @@ import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { ARFinService } from '../../../_services/arfinance.service';
+import { ChargebackService } from '../../../_services/chargeback.service';
 
 @Component({
   moduleId: module.id,
-  templateUrl: './arfinance.component.html',
+  templateUrl: './chargeback.component.html',
   styleUrls: ['../../../../assets/css/configuration/configuration.css'],
-  providers: [ARFinService]
+  providers: [ChargebackService]
 })
-export class ARFinanceComponent implements OnInit {
-  displayedColumns = ['Id', 'Code', 'Description', 'StartDate', 'EndDate', 'TimeStamp'];
-  dataSource: MatTableDataSource<ARCodeData>;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
+export class ChargebackComponent implements OnInit {
   public codesList: any = "";
   public codeForm: FormGroup;
   codeeditForm: FormGroup;
-  addFlag: boolean = false;
-  displayFlag: boolean = true;
   sortby: any;
   sortorder: any;
+  data: any[];
+  errorMsg: string = "";
+  addFlag: boolean = false;
+  displayFlag: boolean = true;
   code: any;
   description: any;
   editFlag: boolean = false;
@@ -37,7 +33,6 @@ export class ARFinanceComponent implements OnInit {
   prevDiscDate: any;
   editcode: any;
   id: any;
-  
   codeerrorMsg: string = '';
   descerrorMsg: string = '';
   editcodeerrorMsg: string = '';
@@ -45,39 +40,26 @@ export class ARFinanceComponent implements OnInit {
   errormsg: string;
   bReturn: boolean = false;
   editerrormsg: string = "";
-  pgTitle: string = "A/R Finance";
+  pgTitle: string = "Chargeback";
   minDate: Date;
-  errorMsg: string = "";
-  
-  data: any[];
+
   constructor(private fb: FormBuilder,
     private router: Router,
     private http: Http,
-    private arFinService: ARFinService) {
+    private ChargebackService: ChargebackService) {
     this.sortby = "Code";
     this.sortorder = "asc";
     this.getData();
   }
-  
-  getData() {
 
-    this.arFinService.getARData()
-      .subscribe(res => {
-        this.codesList = res;
-        this.data = this.codesList.Data;
-        this.dataSource = new MatTableDataSource(this.data);
-        this.dataSource.paginator = this.paginator;
-        this.sortARcodes();
-      },
-      err => {
-        this.errorMsg = "A/R Finance codes not found.";
-        console.log("error:" + err);
-      }
-    );
-   }
+  displayedColumns = ['Id', 'Code', 'Description', 'StartDate', 'EndDate', 'TimeStamp'];
+  dataSource: MatTableDataSource<CBCodeData>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
-      this.codeForm = this.fb.group({
+    this.codeForm = this.fb.group({
       'code': [null, Validators.compose([Validators.required])],
       'description': [null, Validators.compose([Validators.required])],
       // Validators.pattern('[a-zA-Z ]*')
@@ -89,7 +71,24 @@ export class ARFinanceComponent implements OnInit {
     });
   }
 
-  callARCodes() {
+  getData() {
+
+    this.ChargebackService.getCBData()
+      .subscribe(res => {
+        this.codesList = res;
+        this.data = this.codesList.Data;
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
+        this.sortCBcodes();
+      },
+      err => {
+        this.errorMsg = "Chargeback codes not found.";
+        console.log("error:" + err);
+      }
+      );
+  }
+
+  callCBCodes() {
     this.addFlag = true;
     this.displayFlag = false;
     this.errormsg = "";
@@ -97,24 +96,24 @@ export class ARFinanceComponent implements OnInit {
     this.descerrorMsg = "";
     this.code = "";
     this.description = "";
-    this.pgTitle = "Add A/R Finance Code";
+    this.pgTitle = "Add Chargeback Code";
   }
-  addARcodeback() {
+  addCBcodeback() {
     this.addFlag = false;
     this.displayFlag = true;
     this.code = "";
     this.description = "";
     this.getData();
-    this.pgTitle = "A/R Finance";
+    this.pgTitle = "Chargeback";
   }
-  clearARaddcodes() {
+  clearCBaddcodes() {
     this.code = "";
     this.description = "";
     this.errormsg = "";
     this.codeerrorMsg = "";
     this.descerrorMsg = ""
   }
-  saveARcode(value) {
+  saveCBcode(value) {
     this.errormsg = "";
     this.codeerrorMsg = "";
     this.descerrorMsg = "";
@@ -133,14 +132,14 @@ export class ARFinanceComponent implements OnInit {
         "StartDate": new Date(),
         "EndDate": null
       });
-      
-      this.arFinService.submitAR(body)
+
+      this.ChargebackService.submitCB(body)
         .subscribe(res => {
           this.addFlag = false;
           this.codesList = "";
           this.displayFlag = true;
           this.getData();
-          this.pgTitle = "A/R Finance";
+          this.pgTitle = "Chargeback";
         },
         err => {
           err = err
@@ -150,7 +149,7 @@ export class ARFinanceComponent implements OnInit {
         );
     }
   }
-  editARcodes(id, code, desc, startDate, endDate) {
+  editCBcodes(id, code, desc, startDate, endDate) {
     this.editFlag = true;
     this.displayFlag = false;
     this.editcode = code;
@@ -168,9 +167,9 @@ export class ARFinanceComponent implements OnInit {
     this.editerrormsg = "";
     this.editcodeerrorMsg = "";
     this.editdescerrorMsg = "";
-    this.pgTitle = "Edit A/R Finance Code";
+    this.pgTitle = "Edit Chargeback Code";
   }
-  updateAReditcode(code, value) {
+  updateCBeditcode(code, value) {
     this.editerrormsg = "";
     if (this.codeeditForm.valid) {
       if ((this.editcode || '').trim().length === 0) {
@@ -184,7 +183,7 @@ export class ARFinanceComponent implements OnInit {
 
       this.editFlag = false;
       this.displayFlag = true;
-      
+
       var body = JSON.stringify({
         "Id": this.id,
         "Code": this.editcode,
@@ -192,14 +191,14 @@ export class ARFinanceComponent implements OnInit {
         "StartDate": this.effectiveDate,
         "EndDate": this.discontinuedDate
       });
-      this.arFinService.updateAR(this.id,body)
+      this.ChargebackService.updateCB(this.id, body)
         .subscribe(res => {
           this.editFlag = false;
           this.codesList = "";
           this.displayFlag = true;
           this.getData();
           this.id = "";
-          this.pgTitle = "A/R Finance";
+          this.pgTitle = "Chargeback";
         },
         err => {
           err = err
@@ -210,21 +209,21 @@ export class ARFinanceComponent implements OnInit {
     }
   }
 
-  editARcodeback() {
+  editCBcodeback() {
     this.editFlag = false;
     this.displayFlag = true;
     this.editcode = "";
     this.editdescription = "";
     this.getData();
-    this.pgTitle = "A/R Finance";
+    this.pgTitle = "Chargeback";
     this.id = "";
   }
-  clearARsort() {
+  clearCBsort() {
     this.sortby = "Code";
     this.sortorder = "asc";
   }
 
-  clearAReditcodes() {
+  clearCBeditcodes() {
     this.editdescription = this.prevDescription;
     this.discontinuedDate = this.prevDiscDate;
     this.editerrormsg = "";
@@ -232,7 +231,7 @@ export class ARFinanceComponent implements OnInit {
     this.editdescerrorMsg = "";
   }
 
-  sortARcodes() {
+  sortCBcodes() {
     let orderType = this.sortorder
     let currentField = this.sortby;
     console.log("Order:: " + this.sortorder);
@@ -254,10 +253,10 @@ export class ARFinanceComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     return this.codesList.Data;
-  }  
-}
+  } 
 
-export interface ARCodeData {
+}
+export interface CBCodeData {
   Id: any;
   Code: any;
   StartDate: any;

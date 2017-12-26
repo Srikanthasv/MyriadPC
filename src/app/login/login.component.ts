@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map'
   moduleId: module.id,
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../app.component.css','../bootstrap.css']
+  styleUrls: ['../app.component.css']
 })
 
 

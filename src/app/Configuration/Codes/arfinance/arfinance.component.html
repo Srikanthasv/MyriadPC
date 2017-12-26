@@ -76,6 +76,11 @@
               <span>A/R Finance</span>
             </a>
           </li>
+          <li class="ng-star-inserted">
+            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/chargeback']">
+              <span>Chargeback</span>
+            </a>
+          </li>
         </ul>
         <li class="ng-star-inserted">
           <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
@@ -108,8 +113,8 @@
         </mat-form-field>
       </mat-card><br><br>
       <mat-card style="float:right;">
-        <button type="button" mat-raised-button class="" (click)="clearARsort()" style="line-height:36px">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" mat-raised-button color="primary" class="" (click)="sortARcodes();sidenav1.close();" style="line-height:36px">Search</button>
+        <button type="button" mat-raised-button class="" (click)="clearARsort()" style="line-height:36px">CLEAR</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" mat-raised-button color="primary" class="" (click)="sortARcodes();sidenav1.close();" style="line-height:36px">SEARCH</button>
       </mat-card>
     </div>
   </mat-sidenav>
@@ -117,13 +122,13 @@
   <mat-sidenav-content class="">
     <div class="page-inner">
 
-      <div class="page-title" style="border-bottom:2px solid #ccc; margin-bottom:20px; padding:5px;">
-        <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addARcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;"><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>&nbsp;&nbsp;Back</button>
-        <button id="editback" *ngIf="editFlag" (click)="editARcodeback()" class="mat-raised-button" mat-raised-button="" style="float:right; line-height:36px;"><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>&nbsp;&nbsp;Back</button>
+      <div class="page-title rightside-title">
+        <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addARcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
+        <button id="editback" *ngIf="editFlag" (click)="editARcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
       </div>
-      <div id="main-wrapper">
+      <div id="main-wrapper" class="mat-sidenav-margin">
         <!-- Add CODES Start -->
-        <div class="" style="padding:15px 19px 28px 19px; border:1px solid #ccc; margin:10px; background-color:#fff;" *ngIf="addFlag">
+        <div class="rightside-content" *ngIf="addFlag">
           <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="saveARcode(codeForm.value)" novalidate>
             <div class="mat-warn">{{errormsg}}</div><br />
             <div layout="row">
@@ -149,15 +154,15 @@
             <br /><br />
             <div class="" align="right">
               <div class="">
-                <button mat-raised-button type="button" (click)="clearARaddcodes()" style="line-height:36px;">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
+                <button mat-raised-button type="button" (click)="clearARaddcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
               </div>
             </div>
           </form>
         </div>
         <!-- Add CODES end -->
         <!-- for edit CODES start -->
-        <div class="" style="padding:15px 19px 28px 19px; border:1px solid #ccc; margin:10px; background-color:#fff;" *ngIf="editFlag">
+        <div class="rightside-content" *ngIf="editFlag">
           <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="updateAReditcode(editcode,codeeditForm.value)" novalidate>
             <!--<br/><br/>-->
             <div class="mat-warn">{{editerrormsg}}</div><br />
@@ -190,8 +195,8 @@
 
             <div class="" align="right">
               <div class="">
-                <button mat-raised-button type="button" (click)="clearAReditcodes()" style="line-height:36px;">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button mat-raised-button type="submit" color="primary" style="line-height:36px;">Save</button>
+                <button mat-raised-button type="button" (click)="clearAReditcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
               </div>
             </div>
 
@@ -199,10 +204,10 @@
         </div>
         <!-- edit CODES end -->
         <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="displayFlag">
-          <mat-icons class="material-icons" (click)="callARCodes();" flex="1">add</mat-icons><span (click)="callARCodes();" style="color:white">&nbsp;Code</span>
-          <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;Filter</span>
+          <mat-icons class="material-icons" (click)="callARCodes();" flex="1">add</mat-icons><span (click)="callARCodes();" style="color:white">&nbsp;CODE</span>
+          <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;FILTER</span>
         </mat-content>
-        <mat-table [dataSource]="dataSource" class="table1" width="100%" *ngIf="displayFlag">
+        <mat-table [dataSource]="dataSource" class="table1 tblborder" width="100%" *ngIf="displayFlag">
 
           <!-- ID Column -->
           <ng-container matColumnDef="Id">
@@ -228,10 +233,10 @@
           </ng-container>
           <ng-container matColumnDef="EndDate">
             <mat-cell *matCellDef="let codes" flex="10">
-              <a style="cursor:pointer" (click)="editARcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> Edit </a>
+              <a style="cursor:pointer" (click)="editARcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> EDIT </a>
             </mat-cell>
           </ng-container>
-          <mat-header-row *matHeaderRowDef="displayedColumns" style="margin-top:-48px;"></mat-header-row>
+          <mat-header-row *matHeaderRowDef="displayedColumns" style="margin-top:-49px;"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;">
           </mat-row>
 
