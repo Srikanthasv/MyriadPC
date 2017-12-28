@@ -16,6 +16,8 @@ import { HomeComponent } from './home/home.component';
 import { AdvertisingComponent } from './Configuration/Codes/advertising/advertising.component';
 import { ARFinanceComponent } from './Configuration/Codes/arfinance/arfinance.component';
 import { ChargebackComponent } from './Configuration/Codes/chargeback/chargeback.component';
+import {MatPaginatorIntl} from '@angular/material';
+import { CustomPaginator } from './_services/CustomPaginator';
 
 enableProdMode();
 import {
@@ -52,7 +54,12 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import { FollowupComponent } from './Configuration/Codes/followup/followup.component';
-
+import { InventorytranComponent } from './Configuration/Codes/inventory/inventorytran/inventorytran.component';
+import { InventoryadjComponent } from './Configuration/Codes/inventory/inventoryadj/inventoryadj.component';
+import { InventorystatusComponent } from './Configuration/Codes/inventory/inventorystatus/inventorystatus.component';
+import { OpportunityComponent } from './Configuration/Codes/opportunity/opportunity.component';
+import { OpportunityresultComponent } from './Configuration/Codes/opportunityresult/opportunityresult.component';
+import { PayableholdComponent } from './Configuration/Codes/payablehold/payablehold.component';
 
 
 @NgModule({
@@ -97,7 +104,13 @@ exports: [
     AdvertisingComponent,
      ARFinanceComponent,
      ChargebackComponent,
-     FollowupComponent
+     FollowupComponent,
+     InventorytranComponent,
+     InventoryadjComponent,
+     InventorystatusComponent,
+     OpportunityComponent,
+     OpportunityresultComponent,
+     PayableholdComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,
@@ -107,7 +120,7 @@ exports: [
     JsonpModule,
 MatInputModule,MatIconModule,MatTableModule,MatButtonModule,MatMenuModule,MatSelectModule,
     MatTabsModule, MatNativeDateModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatListModule, MatDatepickerModule],
-  providers: [LoginService],
+  providers: [LoginService,{ provide: MatPaginatorIntl, useClass: CustomPaginator}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
