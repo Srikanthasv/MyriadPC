@@ -215,9 +215,50 @@
           <mat-icons class="material-icons" flex="1" (click)="callcodes();">add</mat-icons><span (click)="callcodes();" style="color:white">&nbsp;CODE</span>
           <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;FILTER</span>
         </mat-content>
-        <mat-table [dataSource]="dataSource" class="table1 tblborder" width="100%" *ngIf="displayFlag">
+        <table class="table1 tblborder" width="100%" *ngIf="displayFlag">
+          <tr *ngFor="let row of pagedItems" >
+<td>{{row.Code}} <br> Description: {{row.Description}}</td>
+<td>Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
+<td><a style="cursor:pointer" (click)="editcodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+          </tr>
+        </table>
+        <!-- pager -->
+            <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
+              <span class="mat-paginator-page">Page : <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)">
+                <option value="{{page}}" *ngFor="let page of pager.pages" >{{page}}</option>
+                
+              </select></span>
+              <span class="mat-paginator-page">Rows Per Page : <select name="rowspage" [(ngModel)]="rowspage" (change)="changePage(selectpage)">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select></span>
+              <!--<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="setPage(page)">{{page}}</a>
+                </li>-->
+                <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
+                <span class="mat-paginator-page" [ngClass]="{disabled:pager.currentPage === 1}" style="cursor: pointer;">
+                    <a (click)="setPage(1)"> |< </a>
+                </span>
+                <span class="mat-paginator-page" style="cursor: pointer;" *ngIf="pager.currentPage !== 1">
+                    <a (click)="setPage(pager.currentPage - 1)"> < </a>
+                </span>
+                <span class="mat-paginator-page" style="cursor: not-allowed;" *ngIf="pager.currentPage === 1">
+                    <a > < </a>
+                </span>
+                <span class="mat-paginator-page" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages">
+                    <a (click)="setPage(pager.currentPage + 1)"> > </a>
+                </span>
+                <span class="mat-paginator-page" style="cursor: not-allowed;" *ngIf="pager.currentPage == pager.totalPages">
+                    <a > > </a>
+                </span>
+                <span class="mat-paginator-page"style="cursor: pointer;"  [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.totalPages)"> >| </a>
+                </span>
+            </div>
+       <!--  <mat-table [dataSource]="dataSource" class="table1 tblborder" width="100%" *ngIf="displayFlag">
 
-          <!-- ID Column -->
           <ng-container matColumnDef="Id">
 
             <mat-cell *matCellDef="let row" flex="40"> {{row.Code}} <br> Description: {{row.Description}}</mat-cell>
@@ -233,8 +274,7 @@
 
             <mat-cell *matCellDef="let row" flex="1"></mat-cell>
           </ng-container>
-          <!-- Progress Column -->
-
+          
           <ng-container matColumnDef="TimeStamp">
 
             <mat-cell *matCellDef="let row" flex="1"> </mat-cell>
@@ -251,7 +291,7 @@
         </mat-table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" *ngIf="displayFlag"></mat-paginator>
-      </div>
+ -->      </div>
     </div>
   <div class="footer">&copy; 2017 - PointCentric</div>
     

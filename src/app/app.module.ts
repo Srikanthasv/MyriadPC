@@ -60,7 +60,7 @@ import { InventorystatusComponent } from './Configuration/Codes/inventory/invent
 import { OpportunityComponent } from './Configuration/Codes/opportunity/opportunity.component';
 import { OpportunityresultComponent } from './Configuration/Codes/opportunityresult/opportunityresult.component';
 import { PayableholdComponent } from './Configuration/Codes/payablehold/payablehold.component';
-
+import {PagerService} from './_services/PagerService';
 
 @NgModule({
 exports: [
@@ -120,7 +120,7 @@ exports: [
     JsonpModule,
 MatInputModule,MatIconModule,MatTableModule,MatButtonModule,MatMenuModule,MatSelectModule,
     MatTabsModule, MatNativeDateModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatListModule, MatDatepickerModule],
-  providers: [LoginService,{ provide: MatPaginatorIntl, useClass: CustomPaginator}],
+  providers: [LoginService,PagerService,{ provide: MatPaginatorIntl, useClass: CustomPaginator}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

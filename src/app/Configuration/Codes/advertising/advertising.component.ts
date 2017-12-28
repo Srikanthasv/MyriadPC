@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as _ from 'underscore';
+import {PagerService} from '../../../_services/PagerService';
 
 @Component({
   moduleId: module.id,
@@ -13,11 +13,6 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 })
 export class AdvertisingComponent implements OnInit {
 
-displayedColumns = ['Id', 'Code', 'Description','StartDate', 'EndDate','TimeStamp'];
-dataSource: MatTableDataSource<CodeData>;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
 public codesList:any="";
   public codeForm: FormGroup;
@@ -49,17 +44,44 @@ minDate: Date;
 //searchbox:boolean=true;
   
 data: any[];
+ // pager object
+    pager: any = {};
+
+    // paged items
+    pagedItems: any[];
+    selectpage:number=1;
+    rowspage:number=5;
 constructor(private fb: FormBuilder,
     private router: Router,
-    private http: Http
+    private http: Http, private pagerService: PagerService
 ) {
   this.sortby="Code";
   this.sortorder = "asc";
-  //this.minDate = new Date();
   
- // this.getData1();
+  
 }
+setPage(page: number) {
+     this.selectpage=Number(page);
+        if (page < 1 || page > this.pager.totalPages) {
+            return;
+        }
+        // get pager object from service
+        this.pager = this.pagerService.getPager(this.codesList.Data.length, this.selectpage,this.rowspage);
+        // get current page of items
+        this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
 
+    }
+    changePage(page: number) {
+     this.selectpage=Number(page);
+        if (page < 1 || page > this.pager.totalPages) {
+            return;
+        }
+        // get pager object from service
+        this.pager = this.pagerService.getPager(this.codesList.Data.length, 1,this.rowspage);
+        // get current page of items
+        this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        
+    }
 getData(){
 	//integrate getcodesist service
   var obj1 = JSON.parse(localStorage.getItem('currentUser'));
@@ -71,24 +93,22 @@ getData(){
   var headers = new Headers();
   headers.append("authorization", token);
   let options = new RequestOptions({ headers: headers });
-  //console.log("options:  " +  options);
   this.http.get("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/", options)
     .map(res => res.json())
     .subscribe(res => {
       this.codesList = res;
       console.log("codeist:  " + this.codesList.Data);
-      this.data = this.codesList.Data;
-      this.dataSource = new MatTableDataSource(this.data);
-      this.dataSource.paginator = this.paginator;
       this.sortcodes();
     });
 
+  //this.codesList={ 'Data': [ { 'Id': 1, 'Code': 'B', 'Description': 'BILLBOARD', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBM=' }, { 'Id': 2, 'Code': 'CM', 'Description': 'CUSTOMER MAILER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBI=' }, { 'Id': 3, 'Code': 'CPN', 'Description': 'Coupon', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBE=' }, { 'Id': 4, 'Code': 'EML', 'Description': 'Email', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBA=' }, { 'Id': 5, 'Code': 'FB', 'Description': 'FaceBook', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA8=' }, { 'Id': 6, 'Code': 'INT', 'Description': 'Interior Design spec magazine', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA4=' }, { 'Id': 7, 'Code': 'N', 'Description': 'NEWSPAPER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA0=' }, { 'Id': 8, 'Code': 'NP', 'Description': 'NON PROFIT - MUST HAVE NP ID #', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAw=' }, { 'Id': 9, 'Code': 'PIN', 'Description': 'Pinterest', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAs=' }, { 'Id': 10, 'Code': 'R', 'Description': 'RADIO', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAo=' }, { 'Id': 11, 'Code': 'RP', 'Description': 'REPEAT CUSTOMER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAk=' }, { 'Id': 12, 'Code': 'W', 'Description': 'WORD OF MOUTH', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAg=' }, { 'Id': 13, 'Code': 'TWEET', 'Description': 'Twitter', 'StartDate': '2016-12-13T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAc=' } ], 'Total': 13, 'AggregateResults': null, 'Errors': null } ;
 
 }
 
 ngOnInit() {
   this.getData();
-  
+  // initialize to page 1
+  this.setPage(1);
 	
   this.codeForm = this.fb.group({
     'code': [null, Validators.compose([Validators.required])],
@@ -294,9 +314,7 @@ editcodeback() {
                 }
 
     });
-    this.data = this.codesList.Data;
-    this.dataSource = new MatTableDataSource(this.data);
-    this.dataSource.paginator = this.paginator;
+    
     return this.codesList.Data;
   }
 
@@ -308,6 +326,8 @@ editcodeback() {
         return array;
     }*/
       ngAfterViewInit() {
+        
+
   }
 }
 
