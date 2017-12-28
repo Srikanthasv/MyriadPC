@@ -16,6 +16,8 @@ import { HomeComponent } from './home/home.component';
 import { AdvertisingComponent } from './Configuration/Codes/advertising/advertising.component';
 import { ARFinanceComponent } from './Configuration/Codes/arfinance/arfinance.component';
 import { ChargebackComponent } from './Configuration/Codes/chargeback/chargeback.component';
+import {MatPaginatorIntl} from '@angular/material';
+import { CustomPaginator } from './_services/CustomPaginator';
 
 enableProdMode();
 import {
@@ -107,7 +109,8 @@ exports: [
     JsonpModule,
 MatInputModule,MatIconModule,MatTableModule,MatButtonModule,MatMenuModule,MatSelectModule,
     MatTabsModule, MatNativeDateModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatListModule, MatDatepickerModule],
-  providers: [LoginService],
+  providers: [LoginService,{ provide: MatPaginatorIntl, useClass: CustomPaginator}],
+
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
