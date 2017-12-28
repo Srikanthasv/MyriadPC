@@ -10,9 +10,13 @@ import { FollowupService } from '../../../_services/followup.service';
 @Component({
   moduleId: module.id,
   selector: 'app-followup',
+<<<<<<< HEAD
   templateUrl: './followup.component.html',
   styleUrls: ['../../../../assets/css/configuration/configuration.css'],
   providers: [FollowupService]
+=======
+  templateUrl: './followup.component.html'
+>>>>>>> c499974582a85b2f8876d7bfe2220949d3e79897
 })
 export class FollowupComponent implements OnInit {
 
