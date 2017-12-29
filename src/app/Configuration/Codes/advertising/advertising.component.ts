@@ -46,8 +46,7 @@ minDate: Date;
 data: any[];
  // pager object
     pager: any = {};
-
-    // paged items
+     // paged items
     pagedItems: any[];
     selectpage:number=1;
     rowspage:number=5;
@@ -72,7 +71,7 @@ setPage(page: number) {
 
     }
     changePage(page: number) {
-     this.selectpage=Number(page);
+     //this.selectpage=Number(page);
         if (page < 1 || page > this.pager.totalPages) {
             return;
         }
@@ -80,7 +79,7 @@ setPage(page: number) {
         this.pager = this.pagerService.getPager(this.codesList.Data.length, 1,this.rowspage);
         // get current page of items
         this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
-        
+        this.selectpage = 1;
     }
 getData(){
 	//integrate getcodesist service
@@ -97,9 +96,10 @@ getData(){
     .map(res => res.json())
     .subscribe(res => {
       this.codesList = res;
-      this.setPage(1);
+      
       console.log("codeist:  " + this.codesList.Data);
       this.sortcodes();
+      this.setPage(1);
     });
 
   //this.codesList={ 'Data': [ { 'Id': 1, 'Code': 'B', 'Description': 'BILLBOARD', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBM=' }, { 'Id': 2, 'Code': 'CM', 'Description': 'CUSTOMER MAILER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBI=' }, { 'Id': 3, 'Code': 'CPN', 'Description': 'Coupon', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBE=' }, { 'Id': 4, 'Code': 'EML', 'Description': 'Email', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBA=' }, { 'Id': 5, 'Code': 'FB', 'Description': 'FaceBook', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA8=' }, { 'Id': 6, 'Code': 'INT', 'Description': 'Interior Design spec magazine', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA4=' }, { 'Id': 7, 'Code': 'N', 'Description': 'NEWSPAPER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA0=' }, { 'Id': 8, 'Code': 'NP', 'Description': 'NON PROFIT - MUST HAVE NP ID #', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAw=' }, { 'Id': 9, 'Code': 'PIN', 'Description': 'Pinterest', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAs=' }, { 'Id': 10, 'Code': 'R', 'Description': 'RADIO', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAo=' }, { 'Id': 11, 'Code': 'RP', 'Description': 'REPEAT CUSTOMER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAk=' }, { 'Id': 12, 'Code': 'W', 'Description': 'WORD OF MOUTH', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAg=' }, { 'Id': 13, 'Code': 'TWEET', 'Description': 'Twitter', 'StartDate': '2016-12-13T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAc=' } ], 'Total': 13, 'AggregateResults': null, 'Errors': null } ;
@@ -185,6 +185,7 @@ savecode(value)
           this.displayFlag = true;
           this.getData();
           this.pgTitle = "Advertising";
+          this.setPage(1);
         },
         err => {
           err = err
@@ -263,6 +264,7 @@ saveeditcode(code, value)
             this.getData();
             this.id = "";
             this.pgTitle = "Advertising";
+            this.setPage(1);
           },
           err => {
             err = err
@@ -314,7 +316,7 @@ editcodeback() {
                 }
 
     });
-    
+    this.setPage(1);
     return this.codesList.Data;
   }
 

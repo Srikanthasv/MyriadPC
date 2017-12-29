@@ -205,7 +205,7 @@
                 
                   <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
                     <mat-hint placeholder="Description" align="end">{{editdescription.length || 0}}/30</mat-hint>
-                    <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
+                    <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required maxlength="30">
                     <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
                       This is required
                     </mat-error>
@@ -241,61 +241,53 @@
             <td style="width:40%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
             <td style="width:10%;"><a style="cursor:pointer" (click)="editcodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
           </tr>
+          <tr>
+            <td colspan="3" align="right"><div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
+                <span class="mat-paginator-page" flex="5">Page :
+                  <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)" class="select-border">
+                      <option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</option>
+                    </select>
+                </span>
+                <span class="mat-paginator-page" flex="5">
+                  Rows per page : 
+                    <select name="rowspage" [(ngModel)]="rowspage" (change)="changePage(selectpage)" class="select-border">
+                      <option value="5" selected="selected">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                    </select>
+                </span>
+                <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
+                <span class="first-enable" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
+                  <a  style="visibility:hidden;"> First </a>
+                </span>
+                <span class="first-disable" *ngIf="pager.currentPage === 1"  >
+                <a style="visibility:hidden;"> First </a>
+                 </span>
+                <span class="prev-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
+                  <a  style="visibility:hidden;"> Previous </a>
+                </span>
+                <span class="prev-disable"  *ngIf="pager.currentPage === 1">
+                  <a style="visibility:hidden;"> Previous </a>
+                </span>
+                <span class="next-enable" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages" (click)="setPage(pager.currentPage + 1)">
+                  <a style="visibility:hidden;"> Next </a>
+                </span>
+                <span class="next-disable"  *ngIf="pager.currentPage === pager.totalPages">
+                  <a style="visibility:hidden;"> Next </a>
+                </span>
+                <span class="last-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
+                  <a style="visibility:hidden;"> Last </a>
+                </span>
+               <span class="last-disable"  *ngIf="pager.currentPage === pager.totalPages">
+               <a style="visibility:hidden;"> Last </a>
+                </span>
+              </div></td>
+          </tr>
         </table>
         <!-- pager -->
 
-        <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
-          <span class="mat-paginator-page">
-            Page :
-            <mat-form-field flex="10">
-              <mat-select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)">
-                <mat-option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!--<select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)">
-      <option value="{{page}}" *ngFor="let page of pager.pages">{{page}}</option>
-
-    </select>-->
-          </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span class="mat-paginator-page">
-            Rows per page : <mat-form-field flex="10">
-              <mat-select name="rowspage" [(ngModel)]="rowspage" (change)="changePage(selectpage)">
-                <mat-option value="5" selected="selected">5</mat-option>
-                <mat-option value="10">10</mat-option>
-                <mat-option value="15">15</mat-option>
-                <mat-option value="20">20</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!--<select name="rowspage" [(ngModel)]="rowspage" (change)="changePage(selectpage)">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="15">15</option>
-      <option value="20">20</option>
-    </select>-->
-          </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <!--<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-      <a (click)="setPage(page)">{{page}}</a>
-  </li>-->
-          <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span class="mat-paginator-page" [ngClass]="{disabled:pager.currentPage === 1}" style="cursor: pointer;">
-            <a (click)="setPage(1)"> |< </a>
-          </span>&nbsp;&nbsp;
-          <span class="mat-paginator-page" style="cursor: pointer;" *ngIf="pager.currentPage !== 1">
-            <a (click)="setPage(pager.currentPage - 1)"> < </a>
-          </span>&nbsp;&nbsp;
-          <span class="mat-paginator-page" style="cursor: not-allowed;" *ngIf="pager.currentPage === 1">
-            <a> < </a>
-          </span>&nbsp;&nbsp;
-          <span class="mat-paginator-page" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages">
-            <a (click)="setPage(pager.currentPage + 1)"> > </a>
-          </span>
-          <span class="mat-paginator-page" style="cursor: not-allowed;" *ngIf="pager.currentPage == pager.totalPages">
-            <a> > </a>
-          </span>&nbsp;&nbsp;
-          <span class="mat-paginator-page" style="cursor: pointer;" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-            <a (click)="setPage(pager.totalPages)"> >| </a>
-          </span>
-        </div>
+        
 
        <!--  <mat-table [dataSource]="dataSource" class="table1 tblborder" width="100%" *ngIf="displayFlag">
 

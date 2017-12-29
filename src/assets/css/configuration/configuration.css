@@ -46,9 +46,11 @@
 
 
 .mat-paginator-container{
-  margin-left:40%;
-  margin-top:1%;
-  /*float:right;*/
+   margin-top:0%;
+}
+
+.mat-paginator-page {
+  margin-left: 2%;
 }
 
 .mat-paginator-container span {
@@ -91,7 +93,7 @@
 
   .tblborder td {
     border-bottom: 1px solid rgba(33,33,33,.12);
-    padding: 15px;
+    padding: 8px;
   }
 
   #custom-search-input .search-query {
@@ -25494,5 +25496,62 @@ background: linear-gradient(top, #fafafa 0%, #e9e9e9 100%);*/
   .edit a {
     color: #766855 !important;
   }
+.first-enable {
+  background-image: url(../../images/first-enable.png);
+  height:24px;
+  width:15px;
+  background-repeat:no-repeat;
+}
 
+.first-disable {
+  background-image: url(../../images/first-disable.png);
+  height: 24px;
+  width: 15px;
+  background-repeat: no-repeat;
+}
+.select-border {
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+.last-enable {
+  background-image: url(../../images/last-enable.png);
+  height: 24px;
+  width: 15px;
+  background-repeat: no-repeat;
+}
+
+.last-disable {
+  background-image: url(../../images/last-disable.png);
+  height: 24px;
+  width: 15px;
+  background-repeat: no-repeat;
+}
+
+.next-disable {
+  background-image: url(../../images/next-disable.png);
+  height: 24px;
+  width: 15px;
+  background-repeat: no-repeat;
+}
+
+.next-enable {
+  background-image: url(../../images/next-enable.png);
+  height: 24px;
+  width: 15px;
+  background-repeat: no-repeat;
+}
+
+.prev-disable {
+  background-image: url(../../images/prev-disable.png);
+  height: 24px;
+  width: 15px;
+  background-repeat: no-repeat;
+}
+
+.prev-enable {
+  background-image: url(../../images/prev-enable.png);
+  height: 24px;
+  width: 15px;
+  background-repeat: no-repeat;
+}
 /** custom css end */

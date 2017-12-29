@@ -10,6 +10,7 @@ import { ChargebackComponent } from './Configuration/Codes/chargeback/chargeback
 import { FollowupComponent } from './Configuration/Codes/followup/followup.component';
 import { InventoryadjComponent } from './Configuration/Codes/inventory/inventoryadj/inventoryadj.component';
 import { InventorystatusComponent } from './Configuration/Codes/inventory/inventorystatus/inventorystatus.component';
+import { InventorytranComponent } from './Configuration/Codes/inventory/inventorytran/inventorytran.component';
 
 
 // Route Configuration  
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'app/configuration/codes/followup', component: FollowupComponent },
   { path: 'app/configuration/codes/inventory/inventoryadj', component: InventoryadjComponent },
   { path: 'app/configuration/codes/inventory/inventorystatus', component: InventorystatusComponent },
+  { path: 'app/configuration/codes/inventory/inventorytran', component: InventorytranComponent },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);  
