@@ -97,6 +97,7 @@ getData(){
     .map(res => res.json())
     .subscribe(res => {
       this.codesList = res;
+      this.setPage(1);
       console.log("codeist:  " + this.codesList.Data);
       this.sortcodes();
     });
@@ -108,7 +109,6 @@ getData(){
 ngOnInit() {
   this.getData();
   // initialize to page 1
-  this.setPage(1);
 	
   this.codeForm = this.fb.group({
     'code': [null, Validators.compose([Validators.required])],

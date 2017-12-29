@@ -43,6 +43,18 @@
   font-family: 'robotoregular';
   color:#929292 !important;
 }
+
+
+.mat-paginator-container{
+  margin-left:40%;
+  margin-top:1%;
+  /*float:right;*/
+}
+
+.mat-paginator-container span {
+  color:#444 !important;
+}
+
 /* search bar code start*/
 #custom-search-input {
   margin: 0;
@@ -74,7 +86,13 @@
 
 .tblborder {
   border: 1px solid rgba(33,33,33,.12);
+  background-color:#fff;
 }
+
+  .tblborder td {
+    border-bottom: 1px solid rgba(33,33,33,.12);
+    padding: 15px;
+  }
 
   #custom-search-input .search-query {
     padding-right: 3px;

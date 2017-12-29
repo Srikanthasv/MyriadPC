@@ -66,28 +66,50 @@
               <span (click)="showFiller1 = !showFiller1">Codes</span>
             </a>
           </li>
-        </ul>
-        <ul style="list-style-type:none; padding-left:50px;" *ngIf="showFiller1">
+          <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFiller1">
+            <li class="ng-star-inserted">
+              <a [routerLink]="['/app/configuration/codes/advertising']">
+                <span>Advertising</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/arfinance']">
+                <span>A/R Finance</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/chargeback']">
+                <span>Chargeback</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/followup']">
+                <span>Follow Up</span>
+              </a>
+            </li>
+          </ul>
           <li class="ng-star-inserted">
-            <a [routerLink]="['/app/configuration/codes/advertising']">
-              <span>Advertising</span>
+            <a style="cursor:pointer">
+              <span (click)="showFillerinventory = !showFillerinventory">Inventory</span>
             </a>
           </li>
-          <li class="ng-star-inserted">
-            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/arfinance']">
-              <span>A/R Finance</span>
-            </a>
-          </li>
-          <li class="ng-star-inserted">
-            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/chargeback']">
-              <span>Chargeback</span>
-            </a>
-          </li>
-          <li class="ng-star-inserted">
-            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/followup']">
-              <span>Follow Up</span>
-            </a>
-          </li>
+          <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillerinventory">
+            <li class="ng-star-inserted">
+              <a [routerLink]="['/app/configuration/codes/inventory/inventoryadj']">
+                <span>Adjustment</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorystatus']">
+                <span>Status</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorytran']">
+                <span>Transfer</span>
+              </a>
+            </li>
+          </ul>
         </ul>
         <li class="ng-star-inserted">
           <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
@@ -210,7 +232,7 @@
         </div>
         <!-- edit CODES end -->
         <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="displayFlag">
-          <mat-icons class="material-icons" (click)="callCBCodes();" flex="1">add</mat-icons><span (click)="callFUCodes();" style="color:white">&nbsp;CODE</span>
+          <mat-icons class="material-icons" (click)="callFUCodes();" flex="1">add</mat-icons><span (click)="callFUCodes();" style="color:white">&nbsp;CODE</span>
           <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;FILTER</span>
         </mat-content>
         <mat-table [dataSource]="dataSource" class="table1 tblborder" width="100%" *ngIf="displayFlag">

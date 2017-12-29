@@ -20,11 +20,13 @@
         <!---->
         <li class="ng-star-inserted">
           <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
-            <mat-icon>home</mat-icon>&nbsp;&nbsp; Dashboard<!--<i class="material-icons" style="float:right;">keyboard_arrow_right</i>-->
+            <mat-icon>home</mat-icon>&nbsp;&nbsp;<a routerlinkactive="" class="" [routerLink]="['/home']">
+              <span>Dashboard</span>
+            </a>
           </a>
         </li>
         <li class="ng-star-inserted">
-          <a [routerLink]="['/advertising']" class="">
+          <a class="">
             <mat-icon class="material-icons">shopping_cart</mat-icon>&nbsp;&nbsp; Sales
           </a>
         </li>
@@ -64,28 +66,50 @@
               <span (click)="showFiller1 = !showFiller1">Codes</span>
             </a>
           </li>
-        </ul>
-        <ul style="list-style-type:none; padding-left:50px;" *ngIf="showFiller1">
+          <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFiller1">
+            <li class="ng-star-inserted">
+              <a [routerLink]="['/app/configuration/codes/advertising']">
+                <span>Advertising</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/arfinance']">
+                <span>A/R Finance</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/chargeback']">
+                <span>Chargeback</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/followup']">
+                <span>Follow Up</span>
+              </a>
+            </li>
+          </ul>
           <li class="ng-star-inserted">
-            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/advertising']">
-              <span>Advertising</span>
+            <a style="cursor:pointer">
+              <span (click)="showFillerinventory = !showFillerinventory">Inventory</span>
             </a>
           </li>
-          <li class="ng-star-inserted">
-            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/arfinance']">
-              <span>A/R Finance</span>
-            </a>
-          </li>
-          <li class="ng-star-inserted">
-            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/chargeback']">
-              <span>Chargeback</span>
-            </a>
-          </li>
-          <li class="ng-star-inserted">
-            <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/followup']">
-              <span>Follow Up</span>
-            </a>
-          </li>
+          <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillerinventory">
+            <li class="ng-star-inserted">
+              <a [routerLink]="['/app/configuration/codes/inventory/inventoryadj']">
+                <span>Adjustment</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorystatus']">
+                <span>Status</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorytran']">
+                <span>Transfer</span>
+              </a>
+            </li>
+          </ul>
         </ul>
         <li class="ng-star-inserted">
           <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
@@ -126,7 +150,6 @@
   <!-- for filter end-->
   <mat-sidenav-content class="">
     <div class="page-inner">
-
       <div class="page-title rightside-title">
         <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
         <button id="editback" *ngIf="editFlag" (click)="editcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
@@ -173,8 +196,7 @@
         <div class="rightside-content" *ngIf="editFlag">
           <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="saveeditcode(editcode,codeeditForm.value)" novalidate>
             <!--<br/><br/>-->
-            <div class="mat-warn">{{editerrormsg}}</div><br />
-            
+            <div class="mat-warn">{{editerrormsg}}</div><br />            
               <div layout="row">                
                   <mat-form-field flex="50" flex-sm="50" flex-md="50">
                     <input matInput placeholder="Code" disabled value="{{editcode}}">
@@ -200,14 +222,12 @@
                     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
                   </mat-form-field>               
               </div>
-
               <div class="" align="right">
                 <div class="">
                   <button mat-raised-button type="button" (click)="cleareditcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
                   <button mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
                 </div>
-              </div>
-           
+              </div>           
           </form>
         </div>
         <!-- edit CODES end -->
@@ -215,48 +235,68 @@
           <mat-icons class="material-icons" flex="1" (click)="callcodes();">add</mat-icons><span (click)="callcodes();" style="color:white">&nbsp;CODE</span>
           <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;FILTER</span>
         </mat-content>
-        <table class="table1 tblborder" width="100%" *ngIf="displayFlag">
-          <tr *ngFor="let row of pagedItems" >
-<td>{{row.Code}} <br> Description: {{row.Description}}</td>
-<td>Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
-<td><a style="cursor:pointer" (click)="editcodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+        <table class="table1 tblborder" width="100%" *ngIf="displayFlag" cellpadding="0" cellspacing="0">
+          <tr *ngFor="let row of pagedItems" class="tblbordertr">
+            <td style="width:40%;">{{row.Code}} <br> Description: {{row.Description}}</td>
+            <td style="width:40%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
+            <td style="width:10%;"><a style="cursor:pointer" (click)="editcodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
           </tr>
         </table>
         <!-- pager -->
-            <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
-              <span class="mat-paginator-page">Page : <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)">
-                <option value="{{page}}" *ngFor="let page of pager.pages" >{{page}}</option>
-                
-              </select></span>
-              <span class="mat-paginator-page">Rows Per Page : <select name="rowspage" [(ngModel)]="rowspage" (change)="changePage(selectpage)">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-              </select></span>
-              <!--<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                    <a (click)="setPage(page)">{{page}}</a>
-                </li>-->
-                <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
-                <span class="mat-paginator-page" [ngClass]="{disabled:pager.currentPage === 1}" style="cursor: pointer;">
-                    <a (click)="setPage(1)"> |< </a>
-                </span>
-                <span class="mat-paginator-page" style="cursor: pointer;" *ngIf="pager.currentPage !== 1">
-                    <a (click)="setPage(pager.currentPage - 1)"> < </a>
-                </span>
-                <span class="mat-paginator-page" style="cursor: not-allowed;" *ngIf="pager.currentPage === 1">
-                    <a > < </a>
-                </span>
-                <span class="mat-paginator-page" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages">
-                    <a (click)="setPage(pager.currentPage + 1)"> > </a>
-                </span>
-                <span class="mat-paginator-page" style="cursor: not-allowed;" *ngIf="pager.currentPage == pager.totalPages">
-                    <a > > </a>
-                </span>
-                <span class="mat-paginator-page"style="cursor: pointer;"  [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                    <a (click)="setPage(pager.totalPages)"> >| </a>
-                </span>
-            </div>
+
+        <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
+          <span class="mat-paginator-page">
+            Page :
+            <mat-form-field flex="10">
+              <mat-select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)">
+                <mat-option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!--<select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)">
+      <option value="{{page}}" *ngFor="let page of pager.pages">{{page}}</option>
+
+    </select>-->
+          </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="mat-paginator-page">
+            Rows per page : <mat-form-field flex="10">
+              <mat-select name="rowspage" [(ngModel)]="rowspage" (change)="changePage(selectpage)">
+                <mat-option value="5" selected="selected">5</mat-option>
+                <mat-option value="10">10</mat-option>
+                <mat-option value="15">15</mat-option>
+                <mat-option value="20">20</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!--<select name="rowspage" [(ngModel)]="rowspage" (change)="changePage(selectpage)">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+    </select>-->
+          </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <!--<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+      <a (click)="setPage(page)">{{page}}</a>
+  </li>-->
+          <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="mat-paginator-page" [ngClass]="{disabled:pager.currentPage === 1}" style="cursor: pointer;">
+            <a (click)="setPage(1)"> |< </a>
+          </span>&nbsp;&nbsp;
+          <span class="mat-paginator-page" style="cursor: pointer;" *ngIf="pager.currentPage !== 1">
+            <a (click)="setPage(pager.currentPage - 1)"> < </a>
+          </span>&nbsp;&nbsp;
+          <span class="mat-paginator-page" style="cursor: not-allowed;" *ngIf="pager.currentPage === 1">
+            <a> < </a>
+          </span>&nbsp;&nbsp;
+          <span class="mat-paginator-page" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages">
+            <a (click)="setPage(pager.currentPage + 1)"> > </a>
+          </span>
+          <span class="mat-paginator-page" style="cursor: not-allowed;" *ngIf="pager.currentPage == pager.totalPages">
+            <a> > </a>
+          </span>&nbsp;&nbsp;
+          <span class="mat-paginator-page" style="cursor: pointer;" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages)"> >| </a>
+          </span>
+        </div>
+
        <!--  <mat-table [dataSource]="dataSource" class="table1 tblborder" width="100%" *ngIf="displayFlag">
 
           <ng-container matColumnDef="Id">
