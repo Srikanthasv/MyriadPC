@@ -121,8 +121,23 @@
             </li>
             <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillermodel">
               <li class="ng-star-inserted">
+                <a [routerLink]="['/app/configuration/codes/modelcost']">
+                  <span>Cost</span>
+                </a>
+              </li>
+              <li class="ng-star-inserted">
                 <a [routerLink]="['/app/configuration/codes/modeldiscontd']">
                   <span>Discontinued</span>
+                </a>
+              </li>
+              <li class="ng-star-inserted">
+                <a>
+                  <span>Price</span>
+                </a>
+              </li>
+              <li class="ng-star-inserted">
+                <a [routerLink]="['/app/configuration/codes/modelpromo']">
+                  <span>Promotion</span>
                 </a>
               </li>
             </ul>
