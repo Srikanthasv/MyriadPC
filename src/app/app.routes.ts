@@ -11,7 +11,7 @@ import { FollowupComponent } from './Configuration/Codes/followup/followup.compo
 import { InventoryadjComponent } from './Configuration/Codes/inventory/inventoryadj/inventoryadj.component';
 import { InventorystatusComponent } from './Configuration/Codes/inventory/inventorystatus/inventorystatus.component';
 import { InventorytranComponent } from './Configuration/Codes/inventory/inventorytran/inventorytran.component';
-
+import { OpportunityComponent } from './Configuration/Codes/opportunity/opportunity.component';
 
 // Route Configuration  
 export const routes: Routes = [  
@@ -25,6 +25,7 @@ export const routes: Routes = [
   { path: 'app/configuration/codes/inventory/inventoryadj', component: InventoryadjComponent },
   { path: 'app/configuration/codes/inventory/inventorystatus', component: InventorystatusComponent },
   { path: 'app/configuration/codes/inventory/inventorytran', component: InventorytranComponent },
+  { path: 'app/configuration/codes/opportunity', component: OpportunityComponent },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);  
