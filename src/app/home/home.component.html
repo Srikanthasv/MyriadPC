@@ -251,8 +251,29 @@
                   <span>Payable Hold</span>
                 </a>
               </li>
-            </ul>
-            
+              <li class="ng-star-inserted">
+                <a style="cursor:pointer">
+                  <span (click)="showFillermodel = !showFillermodel">Model</span>
+                </a>
+              </li>
+              <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillermodel">
+                <li class="ng-star-inserted">
+                  <a [routerLink]="['/app/configuration/codes/modeldiscontd']">
+                    <span>Discontinued</span>
+                  </a>
+                </li>
+                <li class="ng-star-inserted">
+                  <a>
+                    <span>Price</span>
+                  </a>
+                </li>
+                <li class="ng-star-inserted">
+                  <a [routerLink]="['/app/configuration/codes/modelpromo']">
+                    <span>Promotion</span>
+                  </a>
+                </li>
+              </ul>
+            </ul>            
           </ul>
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">

@@ -266,7 +266,7 @@
           </ng-container>
           <ng-container matColumnDef="EndDate">
             <mat-cell *matCellDef="let codes" flex="10">
-              <a style="cursor:pointer" *ngIf="!codes.IsSystem" (click)="editOCcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate,codes.IsSystem);"><i class="material-icons">create</i> EDIT </a>
+              <a style="cursor:pointer" (click)="editOCcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> EDIT </a>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns" style="margin-top:-49px;"></mat-header-row>
