@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-modeldiscontd',
   templateUrl: './modeldiscontd.component.html',
-  styleUrls: ['./modeldiscontd.component.css']
+  styleUrls: ['../../../../assets/css/configuration/configuration.css']
 })
 export class ModeldiscontdComponent implements OnInit {
 
