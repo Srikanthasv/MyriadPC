@@ -12,6 +12,11 @@ import { InventoryadjComponent } from './Configuration/Codes/inventory/inventory
 import { InventorystatusComponent } from './Configuration/Codes/inventory/inventorystatus/inventorystatus.component';
 import { InventorytranComponent } from './Configuration/Codes/inventory/inventorytran/inventorytran.component';
 import { OpportunityComponent } from './Configuration/Codes/opportunity/opportunity.component';
+import { OpportunityresultComponent } from './Configuration/Codes/opportunityresult/opportunityresult.component';
+import { PayableholdComponent } from './Configuration/Codes/payablehold/payablehold.component';
+import { ModelcostComponent } from './Configuration/Codes/modelcost/modelcost.component';
+import { ModeldiscontdComponent } from './Configuration/Codes/modeldiscontd/modeldiscontd.component';
+import { ModelpromoComponent } from './Configuration/Codes/modelpromo/modelpromo.component';
 
 // Route Configuration  
 export const routes: Routes = [  
@@ -26,6 +31,11 @@ export const routes: Routes = [
   { path: 'app/configuration/codes/inventory/inventorystatus', component: InventorystatusComponent },
   { path: 'app/configuration/codes/inventory/inventorytran', component: InventorytranComponent },
   { path: 'app/configuration/codes/opportunity', component: OpportunityComponent },
+  { path: 'app/configuration/codes/opportunityresult', component: OpportunityresultComponent },
+  { path: 'app/configuration/codes/payablehold', component: PayableholdComponent },
+  { path: 'app/configuration/codes/modelcost', component: ModelcostComponent },
+  { path: 'app/configuration/codes/modeldiscontd', component: ModeldiscontdComponent },
+  { path: 'app/configuration/codes/modelpromo', component: ModelpromoComponent },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);  

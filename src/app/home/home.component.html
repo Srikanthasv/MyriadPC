@@ -215,33 +215,44 @@
                 </a>
               </li>
               <li class="ng-star-inserted">
+                <a style="cursor:pointer">
+                  <span (click)="showFillerinventory = !showFillerinventory">Inventory</span>
+                </a>
+              </li>
+              <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillerinventory">
+                <li class="ng-star-inserted">
+                  <a [routerLink]="['/app/configuration/codes/inventory/inventoryadj']">
+                    <span>Adjustment</span>
+                  </a>
+                </li>
+                <li class="ng-star-inserted">
+                  <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorystatus']">
+                    <span>Status</span>
+                  </a>
+                </li>
+                <li class="ng-star-inserted">
+                  <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorytran']">
+                    <span>Transfer</span>
+                  </a>
+                </li>
+              </ul>
+              <li class="ng-star-inserted">
                 <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunity']">
                   <span>Opportunity</span>
                 </a>
               </li>
-            </ul>
-            <li class="ng-star-inserted">
-              <a style="cursor:pointer">
-                <span (click)="showFillerinventory = !showFillerinventory">Inventory</span>
-              </a>
-            </li>
-            <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillerinventory">
               <li class="ng-star-inserted">
-                <a [routerLink]="['/app/configuration/codes/inventory/inventoryadj']">
-                  <span>Adjustment</span>
+                <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunityresult']">
+                  <span>Opportunity Result</span>
                 </a>
               </li>
               <li class="ng-star-inserted">
-                <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorystatus']">
-                  <span>Status</span>
-                </a>
-              </li>
-              <li class="ng-star-inserted">
-                <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorytran']">
-                  <span>Transfer</span>
+                <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/payablehold']">
+                  <span>Payable Hold</span>
                 </a>
               </li>
             </ul>
+            
           </ul>
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">

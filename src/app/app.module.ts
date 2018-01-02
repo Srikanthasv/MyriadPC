@@ -61,6 +61,9 @@ import { OpportunityComponent } from './Configuration/Codes/opportunity/opportun
 import { OpportunityresultComponent } from './Configuration/Codes/opportunityresult/opportunityresult.component';
 import { PayableholdComponent } from './Configuration/Codes/payablehold/payablehold.component';
 import {PagerService} from './_services/PagerService';
+import { ModelcostComponent } from './Configuration/Codes/modelcost/modelcost.component';
+import { ModeldiscontdComponent } from './Configuration/Codes/modeldiscontd/modeldiscontd.component';
+import { ModelpromoComponent } from './Configuration/Codes/modelpromo/modelpromo.component';
 
 @NgModule({
 exports: [
@@ -110,7 +113,10 @@ exports: [
      InventorystatusComponent,
      OpportunityComponent,
      OpportunityresultComponent,
-     PayableholdComponent
+     PayableholdComponent,
+     ModelcostComponent,
+     ModeldiscontdComponent,
+     ModelpromoComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,

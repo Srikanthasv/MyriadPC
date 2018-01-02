@@ -87,29 +87,39 @@
                 <span>Follow Up</span>
               </a>
             </li>
-          </ul>
-          <li class="ng-star-inserted">
-            <a style="cursor:pointer">
-              <span (click)="showFillerinventory = !showFillerinventory">Inventory</span>
-            </a>
-          </li>
-          <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillerinventory">
             <li class="ng-star-inserted">
-              <a [routerLink]="['/app/configuration/codes/inventory/inventoryadj']">
-                <span>Adjustment</span>
+              <a style="cursor:pointer">
+                <span (click)="showFillerinventory = !showFillerinventory">Inventory</span>
+              </a>
+            </li>
+            <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillerinventory">
+              <li class="ng-star-inserted">
+                <a [routerLink]="['/app/configuration/codes/inventory/inventoryadj']">
+                  <span>Adjustment</span>
+                </a>
+              </li>
+              <li class="ng-star-inserted">
+                <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorystatus']">
+                  <span>Status</span>
+                </a>
+              </li>
+              <li class="ng-star-inserted">
+                <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorytran']">
+                  <span>Transfer</span>
+                </a>
+              </li>
+            </ul>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunity']">
+                <span>Opportunity</span>
               </a>
             </li>
             <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorystatus']">
-                <span>Status</span>
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunityresult']">
+                <span>Opportunity Result</span>
               </a>
             </li>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorytran']">
-                <span>Transfer</span>
-              </a>
-            </li>
-          </ul>
+          </ul>          
         </ul>
         <li class="ng-star-inserted">
           <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
@@ -243,12 +253,12 @@
           </tr>
           <tr>
             <td colspan="3" align="right"><div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
-                <span class="mat-paginator-page" flex="5">Page :
+                <span class="mat-paginator-page">Page :
                   <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)" class="select-border">
                       <option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</option>
                     </select>
                 </span>
-                <span class="mat-paginator-page" flex="5">
+                <span class="mat-paginator-page">
                   Rows per page : 
                     <select name="rowspage" [(ngModel)]="rowspage" (change)="changePage(selectpage)" class="select-border">
                       <option value="5" selected="selected">5</option>
