@@ -115,6 +115,16 @@
               </a>
             </li>
             <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunityresult']">
+                <span>Opportunity Result</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/payablehold']">
+                <span>Payable Hold</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
               <a style="cursor:pointer">
                 <span (click)="showFillermodel = !showFillermodel">Model</span>
               </a>
@@ -131,7 +141,7 @@
                 </a>
               </li>
               <li class="ng-star-inserted">
-                <a>
+                <a [routerLink]="['/app/configuration/codes/modelprice']">
                   <span>Price</span>
                 </a>
               </li>
@@ -141,6 +151,46 @@
                 </a>
               </li>
             </ul>
+            <li class="ng-star-inserted">
+              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/purchaseorder']">
+                <span>Purchase Order</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/purchaseorderdiscount']">
+                <span>Purchase Order Discount</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/sodiscount']">
+                <span>Sales Order Discount</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/soreferral']">
+                <span>Sales Order Referral</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/returnreason']">
+                <span>Return Reason</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/salesservicepersontype']">
+                <span>Sales/Service Person</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/serviceorder']">
+                <span>Service Order</span>
+              </a>
+            </li>
+            <li class="ng-star-inserted">
+              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/serviceorderreason']">
+                <span>Service Order Reason</span>
+              </a>
+            </li>
           </ul>
         </ul>
         <li class="ng-star-inserted">
@@ -237,7 +287,7 @@
 
               <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
                 <mat-hint placeholder="Description" align="end">{{editdescription.length || 0}}/30</mat-hint>
-                <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
+                <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required maxlength="30">
                 <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
                   This is required
                 </mat-error>

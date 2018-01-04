@@ -17,6 +17,15 @@ import { PayableholdComponent } from './Configuration/Codes/payablehold/payableh
 import { ModelcostComponent } from './Configuration/Codes/modelcost/modelcost.component';
 import { ModeldiscontdComponent } from './Configuration/Codes/modeldiscontd/modeldiscontd.component';
 import { ModelpromoComponent } from './Configuration/Codes/modelpromo/modelpromo.component';
+import { ReturnreasonComponent } from './Configuration/Codes/returnreason/returnreason.component';
+import { ModelpriceComponent } from './Configuration/Codes/modelprice/modelprice.component';
+import { SoreferralComponent } from './Configuration/Codes/soreferral/soreferral.component';
+import { SodiscountComponent } from './Configuration/Codes/sodiscount/sodiscount.component';
+import { PurchaseorderComponent } from './Configuration/Codes/purchaseorder/purchaseorder.component';
+import { PurchaseorderdiscountComponent } from './Configuration/Codes/purchaseorderdiscount/purchaseorderdiscount.component';
+import { SalesservicepersontypeComponent } from './Configuration/Codes/salesservicepersontype/salesservicepersontype.component';
+import { ServiceorderComponent } from './Configuration/Codes/serviceorder/serviceorder.component';
+import { ServiceorderreasonComponent } from './Configuration/Codes/serviceorderreason/serviceorderreason.component';
 
 // Route Configuration  
 export const routes: Routes = [  
@@ -36,6 +45,15 @@ export const routes: Routes = [
   { path: 'app/configuration/codes/modelcost', component: ModelcostComponent },
   { path: 'app/configuration/codes/modeldiscontd', component: ModeldiscontdComponent },
   { path: 'app/configuration/codes/modelpromo', component: ModelpromoComponent },
+  { path: 'app/configuration/codes/returnreason', component: ReturnreasonComponent },
+  { path: 'app/configuration/codes/modelprice', component: ModelpriceComponent },
+  { path: 'app/configuration/codes/soreferral', component: SoreferralComponent },
+  { path: 'app/configuration/codes/sodiscount', component: SodiscountComponent },
+  { path: 'app/configuration/codes/purchaseorder', component: PurchaseorderComponent },
+  { path: 'app/configuration/codes/purchaseorderdiscount', component: PurchaseorderdiscountComponent },
+  { path: 'app/configuration/codes/salesservicepersontype', component: SalesservicepersontypeComponent },
+  { path: 'app/configuration/codes/serviceorder', component: ServiceorderComponent },
+  { path: 'app/configuration/codes/serviceorderreason', component: ServiceorderreasonComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);  

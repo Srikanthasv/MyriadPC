@@ -64,6 +64,15 @@ import {PagerService} from './_services/PagerService';
 import { ModelcostComponent } from './Configuration/Codes/modelcost/modelcost.component';
 import { ModeldiscontdComponent } from './Configuration/Codes/modeldiscontd/modeldiscontd.component';
 import { ModelpromoComponent } from './Configuration/Codes/modelpromo/modelpromo.component';
+import { ReturnreasonComponent } from './Configuration/Codes/returnreason/returnreason.component';
+import { ModelpriceComponent } from './Configuration/Codes/modelprice/modelprice.component';
+import { SoreferralComponent } from './Configuration/Codes/soreferral/soreferral.component';
+import { SodiscountComponent } from './Configuration/Codes/sodiscount/sodiscount.component';
+import { PurchaseorderComponent } from './Configuration/Codes/purchaseorder/purchaseorder.component';
+import { PurchaseorderdiscountComponent } from './Configuration/Codes/purchaseorderdiscount/purchaseorderdiscount.component';
+import { SalesservicepersontypeComponent } from './Configuration/Codes/salesservicepersontype/salesservicepersontype.component';
+import { ServiceorderComponent } from './Configuration/Codes/serviceorder/serviceorder.component';
+import { ServiceorderreasonComponent } from './Configuration/Codes/serviceorderreason/serviceorderreason.component';
 
 @NgModule({
 exports: [
@@ -116,7 +125,16 @@ exports: [
      PayableholdComponent,
      ModelcostComponent,
      ModeldiscontdComponent,
-     ModelpromoComponent
+     ModelpromoComponent,
+     ReturnreasonComponent,
+     ModelpriceComponent,
+     SoreferralComponent,
+     SodiscountComponent,
+     PurchaseorderComponent,
+     PurchaseorderdiscountComponent,
+     SalesservicepersontypeComponent,
+     ServiceorderComponent,
+     ServiceorderreasonComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,
