@@ -332,7 +332,7 @@
                 </span>
                 <span class="mat-paginator-page">
                   Rows per page : 
-                    <select name="rowspage" [(ngModel)]="rowspage" (change)="changePage(selectpage)" class="select-border">
+                    <select name="rowspage" [(ngModel)]="rowspage" (change)="setPage(selectpage)" class="select-border">
                       <option value="5" selected="selected">5</option>
                       <option value="10">10</option>
                       <option value="15">15</option>
@@ -340,17 +340,17 @@
                     </select>
                 </span>
                 <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
-                <span class="first-enable" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
+                <span class="first-enable mat-paginator-page" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
                   <a  style="visibility:hidden;"> First </a>
                 </span>
-                <span class="first-disable" *ngIf="pager.currentPage === 1"  >
+                <span class="first-disable mat-paginator-page" *ngIf="pager.currentPage === 1"  >
                 <a style="visibility:hidden;"> First </a>
                  </span>
                 <span class="prev-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
-                  <a  style="visibility:hidden;"> Previous </a>
+                  <a  style="visibility:hidden;"> Prev </a>
                 </span>
                 <span class="prev-disable"  *ngIf="pager.currentPage === 1">
-                  <a style="visibility:hidden;"> Previous </a>
+                  <a style="visibility:hidden;"> Prev </a>
                 </span>
                 <span class="next-enable" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages" (click)="setPage(pager.currentPage + 1)">
                   <a style="visibility:hidden;"> Next </a>

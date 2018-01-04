@@ -4,19 +4,28 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import * as _ from 'underscore';
-import {PagerService} from '../../../_services/PagerService';
+import { PagerService } from '../../../_services/PagerService';
+import { AdvertisingService } from '../../../_services/advertising.service';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @Component({
   moduleId: module.id,
   templateUrl: './advertising.component.html',
-  styleUrls: ['../../../../assets/css/configuration/configuration.css'] 
+  styleUrls: ['../../../../assets/css/configuration/configuration.css'],
+  providers: [AdvertisingService]
 })
 export class AdvertisingComponent implements OnInit {
 
+  displayedColumns = ['Id', 'Code', 'Description', 'StartDate', 'EndDate', 'TimeStamp'];
+  dataSource: MatTableDataSource<CodeData>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
 public codesList:any="";
-  public codeForm: FormGroup;
-  codeeditForm: FormGroup;
+public codeForm: FormGroup;
+codeeditForm: FormGroup;
 addFlag:boolean=false;
 displayFlag:boolean=true;
 sortby:any;
@@ -41,69 +50,49 @@ bReturn: boolean = false;
 editerrormsg: string = "";
 pgTitle: string = "Advertising";
 minDate: Date;
-//searchbox:boolean=true;
-  
 data: any[];
- // pager object
-    pager: any = {};
-     // paged items
-    pagedItems: any[];
-    selectpage:number=1;
-    rowspage:number=5;
-constructor(private fb: FormBuilder,
-    private router: Router,
-    private http: Http, private pagerService: PagerService
-) {
-  this.sortby="Code";
-  this.sortorder = "asc";
-  
-  
-}
-setPage(page: number) {
-     this.selectpage=Number(page);
-        if (page < 1 || page > this.pager.totalPages) {
-            return;
-        }
-        // get pager object from service
-        this.pager = this.pagerService.getPager(this.codesList.Data.length, this.selectpage,this.rowspage);
-        // get current page of items
-        this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
+pager: any = {};
+pagedItems: any[];
+selectpage:number=1;
+rowspage: number = 5;
+errorMsg: string = "";
 
-    }
-    changePage(page: number) {
-     //this.selectpage=Number(page);
-        if (page < 1 || page > this.pager.totalPages) {
-            return;
-        }
-        // get pager object from service
-        this.pager = this.pagerService.getPager(this.codesList.Data.length, 1,this.rowspage);
-        // get current page of items
-        this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
-        this.selectpage = 1;
-    }
+constructor(private fb: FormBuilder,
+  private router: Router,
+  private http: Http,
+  private AdvertisingService: AdvertisingService, private pagerService: PagerService)
+{
+  this.sortby = "Code";
+  this.sortorder = "asc";
+  this.getData();
+}
+
+
+setPage(page: number) {
+  this.selectpage = Number(page);
+
+  if (page < 1 || page > this.pager.totalPages) {
+    return;
+  }
+  this.pager = this.pagerService.getPager(this.codesList.Data.length, this.selectpage, this.rowspage);
+  this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  this.selectpage = Number(this.pager.currentPage);
+}
+   
 getData(){
-	//integrate getcodesist service
-  var obj1 = JSON.parse(localStorage.getItem('currentUser'));
-  this.acToken = obj1 && obj1.token;
-  var codes;
-  var token = 'Bearer ';
-  token = token.concat(this.acToken);
-  console.log("token:  " + token);
-  var headers = new Headers();
-  headers.append("authorization", token);
-  let options = new RequestOptions({ headers: headers });
-  this.http.get("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/", options)
-    .map(res => res.json())
+  this.AdvertisingService.getAdvData()
     .subscribe(res => {
       this.codesList = res;
-      
-      console.log("codeist:  " + this.codesList.Data);
+      this.data = this.codesList.Data;
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
       this.sortcodes();
-      this.setPage(1);
-    });
-
-  //this.codesList={ 'Data': [ { 'Id': 1, 'Code': 'B', 'Description': 'BILLBOARD', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBM=' }, { 'Id': 2, 'Code': 'CM', 'Description': 'CUSTOMER MAILER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBI=' }, { 'Id': 3, 'Code': 'CPN', 'Description': 'Coupon', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBE=' }, { 'Id': 4, 'Code': 'EML', 'Description': 'Email', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEBA=' }, { 'Id': 5, 'Code': 'FB', 'Description': 'FaceBook', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA8=' }, { 'Id': 6, 'Code': 'INT', 'Description': 'Interior Design spec magazine', 'StartDate': '2014-10-14T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA4=' }, { 'Id': 7, 'Code': 'N', 'Description': 'NEWSPAPER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEA0=' }, { 'Id': 8, 'Code': 'NP', 'Description': 'NON PROFIT - MUST HAVE NP ID #', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAw=' }, { 'Id': 9, 'Code': 'PIN', 'Description': 'Pinterest', 'StartDate': '2014-09-17T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAs=' }, { 'Id': 10, 'Code': 'R', 'Description': 'RADIO', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAo=' }, { 'Id': 11, 'Code': 'RP', 'Description': 'REPEAT CUSTOMER', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAk=' }, { 'Id': 12, 'Code': 'W', 'Description': 'WORD OF MOUTH', 'StartDate': '2014-07-20T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAg=' }, { 'Id': 13, 'Code': 'TWEET', 'Description': 'Twitter', 'StartDate': '2016-12-13T00:00:00', 'EndDate': null, 'TimeStamp': 'AAAAAAAYEAc=' } ], 'Total': 13, 'AggregateResults': null, 'Errors': null } ;
-
+    },
+    err => {
+      this.errorMsg = "Advertising codes not found.";
+      console.log("error:" + err);
+    }
+    );
 }
 
 ngOnInit() {
@@ -165,21 +154,8 @@ savecode(value)
       }
       var body = JSON.stringify({ "Code": this.code, "Description": this.description, "StartDate": new Date(), "EndDate": null });
 
-      var obj1 = JSON.parse(localStorage.getItem('currentUser'));
-      var token = 'Bearer ';
-      token = token.concat(obj1 && obj1.token);
-      console.log("token in Save:  " + token);
-      var headers = new Headers();
-      headers.append("Content-Type", "application/json");
-      headers.append("authorization", token);
-      let options = new RequestOptions({ headers: headers });
-      //console.log("options:  " +  options);
-      this.http.post("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource", body, options)
-        .map(res => res.json())
-        .subscribe(
-        data => {
-          //console.log("res from Save:: " + JSON.stringify(data));
-          //console.log("Save Success:: ");
+      this.AdvertisingService.submitAdv(body)
+        .subscribe(res => {
           this.addFlag = false;
           this.codesList = "";
           this.displayFlag = true;
@@ -193,7 +169,6 @@ savecode(value)
           this.errormsg = "Failed to save the code details.";
         }
         );
-
     }
   }
 editcodes(id, code, desc, startDate, endDate)
@@ -221,7 +196,7 @@ editcodes(id, code, desc, startDate, endDate)
     this.editdescerrorMsg = "";
     this.pgTitle = "Edit Advertising Code";
   }
-saveeditcode(code, value)
+  saveeditcode(code, value)
    {
       this.editerrormsg = "";
         if (this.codeeditForm.valid)
@@ -237,27 +212,13 @@ saveeditcode(code, value)
 
   	    this.editFlag=false;
         this.displayFlag = true;
-        console.log("Discont Date:: " + this.discontinuedDate);
+        //console.log("Discont Date:: " + this.discontinuedDate);
         //vaues awi get in variables like this.id,this.editcode,this.editdescription,this.effectiveDate,this.discontinuedDate
         //need to integrate the update code service here
         var body = JSON.stringify({ "Id": this.id, "Code": this.editcode, "Description": this.editdescription, "StartDate": this.effectiveDate, "EndDate": this.discontinuedDate });
-        console.log("ID:  " + this.id);
-        var obj1 = JSON.parse(localStorage.getItem('currentUser'));
-        var token = 'Bearer ';
-        token = token.concat(obj1 && obj1.token);
-        console.log("token in edit:  " + token);
-        var strUrl = "http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/";
-        strUrl = strUrl.concat(this.id)
-        var headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        headers.append("authorization", token);
-        let options = new RequestOptions({ headers: headers });
-        //console.log("options:  " +  options);
-        this.http.put( strUrl , body, options)
-          .map(res => res.json())
-          .subscribe(
-          data => {
-            //console.log("res from Save:: " + JSON.stringify(data));
+
+        this.AdvertisingService.updateAdv(this.id, body)
+          .subscribe(res => {
             this.editFlag = false;
             this.codesList = "";
             this.displayFlag = true;
@@ -271,7 +232,7 @@ saveeditcode(code, value)
             console.log(err);
             this.editerrormsg = "Failed to update the code details.";
           }
-          );
+          );        
       }
     }
 
