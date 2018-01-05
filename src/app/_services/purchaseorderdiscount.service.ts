@@ -38,7 +38,7 @@ export class PurchaseorderdiscountService {
 
   getPODSData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5002/api/PoSortCode/", options)
+    return this.http.get("http://pointcentricapi-local:5002/api/PoDiscountCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -51,7 +51,7 @@ export class PurchaseorderdiscountService {
 
   submitPODS(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5002/api/PoSortCode", body, options)
+    return this.http.post("http://pointcentricapi-local:5002/api/PoDiscountCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -63,7 +63,7 @@ export class PurchaseorderdiscountService {
   }
 
   updatePODS(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5002/api/PoSortCode/";
+    var strUrl = "http://pointcentricapi-local:5002/api/PoDiscountCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

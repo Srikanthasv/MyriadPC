@@ -4,6 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { PagerService } from '../../../_services/PagerService';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { ARFinService } from '../../../_services/arfinance.service';
 
@@ -47,16 +48,31 @@ export class ARFinanceComponent implements OnInit {
   editerrormsg: string = "";
   pgTitle: string = "A/R Finance";
   minDate: Date;
-  errorMsg: string = "";
-  
+  pager: any = {};
+  pagedItems: any[];
+  selectpage: number = 1;
+  rowspage: number = 5;
+  errorMsg: string = "";  
   data: any[];
+
   constructor(private fb: FormBuilder,
     private router: Router,
     private http: Http,
-    private arFinService: ARFinService) {
+    private arFinService: ARFinService, private pagerService: PagerService) {
     this.sortby = "Code";
     this.sortorder = "asc";
     this.getData();
+  }
+
+  setPage(page: number) {
+    this.selectpage = Number(page);
+
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.pager = this.pagerService.getPager(this.codesList.Data.length, this.selectpage, this.rowspage);
+    this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    this.selectpage = Number(this.pager.currentPage);
   }
   
   getData() {
@@ -141,6 +157,7 @@ export class ARFinanceComponent implements OnInit {
           this.displayFlag = true;
           this.getData();
           this.pgTitle = "A/R Finance";
+          this.setPage(1);
         },
         err => {
           err = err
@@ -200,6 +217,7 @@ export class ARFinanceComponent implements OnInit {
           this.getData();
           this.id = "";
           this.pgTitle = "A/R Finance";
+          this.setPage(1);
         },
         err => {
           err = err
@@ -250,6 +268,7 @@ export class ARFinanceComponent implements OnInit {
       }
 
     });
+    this.setPage(1);
     this.data = this.codesList.Data;
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;

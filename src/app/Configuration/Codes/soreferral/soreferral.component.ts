@@ -6,6 +6,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { MatPaginator, MatSort, MatTableDataSource, MatPaginatorModule } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { SoreferralService } from '../../../_services/soreferral.service';
+import { PagerService } from '../../../_services/PagerService';
 
 @Component({
   selector: 'app-soreferral',
@@ -44,13 +45,29 @@ export class SoreferralComponent implements OnInit {
   pgTitle: string = "Sales Order Referral";
   minDate: Date;
 
+  pager: any = {};
+  pagedItems: any[];
+  selectpage: number = 1;
+  rowspage: number = 5;
+
   constructor(private fb: FormBuilder,
     private router: Router,
     private http: Http,
-    private SoreferralService: SoreferralService) {
+    private SoreferralService: SoreferralService, private pagerService: PagerService) {
     this.sortby = "Code";
     this.sortorder = "asc";
     this.getData();
+  }
+
+  setPage(page: number) {
+    this.selectpage = Number(page);
+
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.pager = this.pagerService.getPager(this.codesList.Data.length, this.selectpage, this.rowspage);
+    this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    this.selectpage = Number(this.pager.currentPage);
   }
 
   displayedColumns = ['Id', 'Code', 'Description', 'StartDate', 'EndDate', 'TimeStamp'];
@@ -140,6 +157,7 @@ export class SoreferralComponent implements OnInit {
           this.displayFlag = true;
           this.getData();
           this.pgTitle = "Sales Order Referral";
+          this.setPage(1);
         },
         err => {
           err = err
@@ -199,6 +217,7 @@ export class SoreferralComponent implements OnInit {
           this.getData();
           this.id = "";
           this.pgTitle = "Sales Order Referral";
+          this.setPage(1);
         },
         err => {
           err = err
@@ -249,6 +268,7 @@ export class SoreferralComponent implements OnInit {
     this.data = this.codesList.Data;
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
+    this.setPage(1);
     return this.codesList.Data;
   }
 

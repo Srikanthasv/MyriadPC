@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { MatPaginator, MatSort, MatTableDataSource, MatPaginatorModule } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { PagerService } from '../../../../_services/PagerService';
 import { InventoryTranService } from '../../../../_services/inventorytran.service';
 
 @Component({
@@ -45,14 +46,29 @@ export class InventorytranComponent implements OnInit {
   editerrormsg: string = "";
   pgTitle: string = "Inventory Transfer";
   minDate: Date;
+  pager: any = {};
+  pagedItems: any[];
+  selectpage: number = 1;
+  rowspage: number = 5;
 
   constructor(private fb: FormBuilder,
     private router: Router,
     private http: Http,
-    private InventoryTranService: InventoryTranService) {
+    private InventoryTranService: InventoryTranService, private pagerService: PagerService) {
     this.sortby = "Code";
     this.sortorder = "asc";
     this.getData();
+  }
+
+  setPage(page: number) {
+    this.selectpage = Number(page);
+
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.pager = this.pagerService.getPager(this.codesList.Data.length, this.selectpage, this.rowspage);
+    this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    this.selectpage = Number(this.pager.currentPage);
   }
 
   displayedColumns = ['Id', 'Code', 'Description', 'StartDate', 'EndDate', 'TimeStamp'];
@@ -128,6 +144,7 @@ export class InventorytranComponent implements OnInit {
         this.descerrorMsg = "Please enter valid input for Description."
         return false;
       }
+      console.log("IsSystem :: " + this.IsSystem);
       var body = JSON.stringify({
         "Code": this.code,
         "Description": this.description,
@@ -143,6 +160,7 @@ export class InventorytranComponent implements OnInit {
           this.displayFlag = true;
           this.getData();
           this.pgTitle = "Inventory Transfer";
+          this.setPage(1);
         },
         err => {
           err = err
@@ -204,6 +222,7 @@ export class InventorytranComponent implements OnInit {
           this.getData();
           this.id = "";
           this.pgTitle = "Inventory Transfer";
+          this.setPage(1);
         },
         err => {
           err = err
@@ -253,6 +272,7 @@ export class InventorytranComponent implements OnInit {
       }
 
     });
+    this.setPage(1);
     this.data = this.codesList.Data;
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;

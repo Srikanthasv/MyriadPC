@@ -38,7 +38,7 @@ export class ModelcostService {
 
   getMCData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5006/api/ProductModelCostCode/", options)
+    return this.http.get("http://pointcentricapi-local:5005/api/ProductModelCostCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -51,7 +51,7 @@ export class ModelcostService {
 
   submitMC(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5006/api/ProductModelCostCode", body, options)
+    return this.http.post("http://pointcentricapi-local:5005/api/ProductModelCostCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -63,7 +63,7 @@ export class ModelcostService {
   }
 
   updateMC(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5006/api/ProductModelCostCode/";
+    var strUrl = "http://pointcentricapi-local:5005/api/ProductModelCostCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

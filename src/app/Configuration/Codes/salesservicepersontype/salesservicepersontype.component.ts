@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { MatPaginator, MatSort, MatTableDataSource, MatPaginatorModule } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { PagerService } from '../../../_services/PagerService';
 import { SalesservicepersontypeService } from '../../../_services/salesservicepersontype.service';
 
 @Component({
@@ -43,14 +44,29 @@ export class SalesservicepersontypeComponent implements OnInit {
   editerrormsg: string = "";
   pgTitle: string = "Sales/Service Person Type";
   minDate: Date;
+  pager: any = {};
+  pagedItems: any[];
+  selectpage: number = 1;
+  rowspage: number = 5;
 
   constructor(private fb: FormBuilder,
     private router: Router,
     private http: Http,
-    private SalesservicepersontypeService: SalesservicepersontypeService) {
+    private SalesservicepersontypeService: SalesservicepersontypeService, private pagerService: PagerService) {
     this.sortby = "Code";
     this.sortorder = "asc";
     this.getData();
+  }
+
+  setPage(page: number) {
+    this.selectpage = Number(page);
+
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.pager = this.pagerService.getPager(this.codesList.Data.length, this.selectpage, this.rowspage);
+    this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    this.selectpage = Number(this.pager.currentPage);
   }
 
   displayedColumns = ['Id', 'Code', 'Description', 'StartDate', 'EndDate', 'TimeStamp'];
@@ -140,6 +156,7 @@ export class SalesservicepersontypeComponent implements OnInit {
           this.displayFlag = true;
           this.getData();
           this.pgTitle = "Sales/Service Person Type";
+          this.setPage(1);
         },
         err => {
           err = err
@@ -199,6 +216,7 @@ export class SalesservicepersontypeComponent implements OnInit {
           this.getData();
           this.id = "";
           this.pgTitle = "Sales/Service Person Type";
+          this.setPage(1);
         },
         err => {
           err = err
@@ -246,6 +264,7 @@ export class SalesservicepersontypeComponent implements OnInit {
       }
 
     });
+    this.setPage(1);
     this.data = this.codesList.Data;
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;

@@ -318,42 +318,59 @@
           <mat-icons class="material-icons" (click)="callARCodes();" flex="1">add</mat-icons><span (click)="callARCodes();" style="color:white">&nbsp;CODE</span>
           <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;FILTER</span>
         </mat-content>
-        <mat-table [dataSource]="dataSource" class="table1 tblborder" width="100%" *ngIf="displayFlag">
-
-          <!-- ID Column -->
-          <ng-container matColumnDef="Id">
-
-            <mat-cell *matCellDef="let row" flex="40"> {{row.Code}} <br> Description: {{row.Description}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="Code">
-
-            <mat-cell *matCellDef="let row" flex="1"> </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="Description">
-            <mat-cell *matCellDef="let codes" flex="40"> Effective date: {{codes.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{codes.EndDate | date: 'MM/dd/yyyy'}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="StartDate">
-
-            <mat-cell *matCellDef="let row" flex="1"></mat-cell>
-          </ng-container>
-          <!-- Progress Column -->
-
-          <ng-container matColumnDef="TimeStamp">
-
-            <mat-cell *matCellDef="let row" flex="1"> </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="EndDate">
-            <mat-cell *matCellDef="let codes" flex="10">
-              <a style="cursor:pointer" (click)="editARcodes(codes.Id,codes.Code,codes.Description,codes.StartDate,codes.EndDate);"><i class="material-icons">create</i> EDIT </a>
-            </mat-cell>
-          </ng-container>
-          <mat-header-row *matHeaderRowDef="displayedColumns" style="margin-top:-49px;"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;">
-          </mat-row>
-
-        </mat-table>
-
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" *ngIf="displayFlag"></mat-paginator>
+        <table class="table1 tblborder" width="100%" *ngIf="displayFlag" cellpadding="0" cellspacing="0">
+          <tr *ngFor="let row of pagedItems" class="tblbordertr">
+            <td style="width:40%;">{{row.Code}} <br> Description: {{row.Description}}</td>
+            <td style="width:40%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
+            <td style="width:10%;"><a style="cursor:pointer" (click)="editARcodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+          </tr>
+          <tr>
+            <td colspan="3" align="right">
+              <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
+                <span class="mat-paginator-page">
+                  Page :
+                  <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)" class="select-border">
+                    <option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</option>
+                  </select>
+                </span>
+                <span class="mat-paginator-page">
+                  Rows per page :
+                  <select name="rowspage" [(ngModel)]="rowspage" (change)="setPage(selectpage)" class="select-border">
+                    <option value="5" selected="selected">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                  </select>
+                </span>
+                <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
+                <span class="first-enable mat-paginator-page" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
+                  <a style="visibility:hidden;"> First </a>
+                </span>
+                <span class="first-disable mat-paginator-page" *ngIf="pager.currentPage === 1">
+                  <a style="visibility:hidden;"> First </a>
+                </span>
+                <span class="prev-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
+                  <a style="visibility:hidden;"> Prev </a>
+                </span>
+                <span class="prev-disable" *ngIf="pager.currentPage === 1">
+                  <a style="visibility:hidden;"> Prev </a>
+                </span>
+                <span class="next-enable" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages" (click)="setPage(pager.currentPage + 1)">
+                  <a style="visibility:hidden;"> Next </a>
+                </span>
+                <span class="next-disable" *ngIf="pager.currentPage === pager.totalPages">
+                  <a style="visibility:hidden;"> Next </a>
+                </span>
+                <span class="last-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
+                  <a style="visibility:hidden;"> Last </a>
+                </span>
+                <span class="last-disable" *ngIf="pager.currentPage === pager.totalPages">
+                  <a style="visibility:hidden;"> Last </a>
+                </span>
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
     <div class="footer">&copy; 2017 - PointCentric</div>
