@@ -1,206 +1,4 @@
-<mat-content class="mat-codes-toolbar mat-codes-primary">
-  <mat-card class="mat-toolbar-layout">
-    <div class="mat-toolbar-row" style="flex-direction: row; box-sizing: border-box; display: flex;">
-      <a _ngcontent-c1="" class="logo ng-tns-c1-0" fxhide="true" fxhide.gt-sm="false" href="/" style="display: block; padding-left:20px; padding-top:0px;">
-        <img _ngcontent-c1="" class="ng-tns-c1-0" src="../assets/images/logo-white.png">
-      </a>
-      <button _ngcontent-c1="" class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
-        <span class="mat-button-wrapper" style="color:#fff; margin-left:25px">
-          <mat-icon _ngcontent-c1="" class="mat-icon ng-tns-c1-0 material-icons" role="img" aria-hidden="true" mat-button (click)="sidenavleft.toggle()">menu</mat-icon>
-        </span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
-      </button>
-      <span _ngcontent-c1="" fxflex="" class="ng-tns-c1-0" style="flex: 1 1 1e-09px; box-sizing: border-box;"></span>
-    </div>
-  </mat-card>
-</mat-content>
-<mat-sidenav-container autosize class="mat-drawer-container mat-sidenav-container mat-drawer-transition">
-  <mat-sidenav #sidenavleft class="example-sidenav" mode="side" position="left" opened="true">
-    <nav class="ng-star-inserted" style="">
-      <ul style="list-style-type:none; padding-left:0px;">
-        <!---->
-        <li class="ng-star-inserted">
-          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
-            <mat-icon>home</mat-icon>&nbsp;&nbsp;<a routerlinkactive="" class="" [routerLink]="['/home']">
-              <span>Dashboard</span>
-            </a>
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a class="">
-            <mat-icon class="material-icons">shopping_cart</mat-icon>&nbsp;&nbsp; Sales
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-            <mat-icon class="material-icons">label</mat-icon>&nbsp;&nbsp; Inventory
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-            <mat-icon class="material-icons">layers</mat-icon>&nbsp;&nbsp; Merchandising
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-            <mat-icon class="material-icons">inbox</mat-icon>&nbsp;&nbsp; A/R
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
-            <mat-icon class="material-icons">exposure</mat-icon>&nbsp;&nbsp; Accounting
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-            <mat-icon class="material-icons">exposure</mat-icon>&nbsp;&nbsp; Reports
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" (click)="showFiller = !showFiller" style="cursor:pointer">
-            <mat-icon class="material-icons">settings</mat-icon>&nbsp;&nbsp; Configuration
-          </a>
-        </li>
-        <ul style="list-style-type:none;" *ngIf="showFiller">
-          <li class="ng-star-inserted">
-            <a style="cursor:pointer">
-              <span (click)="showFiller1 = !showFiller1">Codes</span>
-            </a>
-          </li>
-          <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFiller1">
-            <li class="ng-star-inserted">
-              <a [routerLink]="['/app/configuration/codes/advertising']">
-                <span>Advertising</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/arfinance']">
-                <span>A/R Finance</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/chargeback']">
-                <span>Chargeback</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/followup']">
-                <span>Follow Up</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a style="cursor:pointer">
-                <span (click)="showFillerinventory = !showFillerinventory">Inventory</span>
-              </a>
-            </li>
-            <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillerinventory">
-              <li class="ng-star-inserted">
-                <a [routerLink]="['/app/configuration/codes/inventory/inventoryadj']">
-                  <span>Adjustment</span>
-                </a>
-              </li>
-              <li class="ng-star-inserted">
-                <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorystatus']">
-                  <span>Status</span>
-                </a>
-              </li>
-              <li class="ng-star-inserted">
-                <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorytran']">
-                  <span>Transfer</span>
-                </a>
-              </li>
-            </ul>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunity']">
-                <span>Opportunity</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunityresult']">
-                <span>Opportunity Result</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/payablehold']">
-                <span>Payable Hold</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a style="cursor:pointer">
-                <span (click)="showFillermodel = !showFillermodel">Model</span>
-              </a>
-            </li>
-            <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillermodel">
-              <li class="ng-star-inserted">
-                <a [routerLink]="['/app/configuration/codes/modelcost']">
-                  <span>Cost</span>
-                </a>
-              </li>
-              <li class="ng-star-inserted">
-                <a [routerLink]="['/app/configuration/codes/modeldiscontd']">
-                  <span>Discontinued</span>
-                </a>
-              </li>
-              <li class="ng-star-inserted">
-                <a [routerLink]="['/app/configuration/codes/modelprice']">
-                  <span>Price</span>
-                </a>
-              </li>
-              <li class="ng-star-inserted">
-                <a [routerLink]="['/app/configuration/codes/modelpromo']">
-                  <span>Promotion</span>
-                </a>
-              </li>
-            </ul>
-            <li class="ng-star-inserted">
-              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/purchaseorder']">
-                <span>Purchase Order</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/purchaseorderdiscount']">
-                <span>Purchase Order Discount</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/sodiscount']">
-                <span>Sales Order Discount</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/soreferral']">
-                <span>Sales Order Referral</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/returnreason']">
-                <span>Return Reason</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/salesservicepersontype']">
-                <span>Sales/Service Person</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/serviceorder']">
-                <span>Service Order</span>
-              </a>
-            </li>
-            <li class="ng-star-inserted">
-              <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/serviceorderreason']">
-                <span>Service Order Reason</span>
-              </a>
-            </li>
-          </ul>
-        </ul>
-        <li class="ng-star-inserted">
-          <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-            <mat-icon class="material-icons">build</mat-icon>&nbsp;&nbsp; System
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </mat-sidenav>
+<mat-sidenav-container class="" autosize>
   <!-- for filter start-->
   <mat-sidenav #sidenav1 mode="over" position="end" disableClose>
     <mat-content style="background-color:#2196f3; padding:10px;">
@@ -230,149 +28,147 @@
     </div>
   </mat-sidenav>
   <!-- for filter end-->
-  <mat-sidenav-content class="">
-    <div class="page-inner">
+  <!--<mat-sidenav-content class="">-->
+  <div class="page-inner">
 
-      <div class="page-title rightside-title">
-        <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addPHcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
-        <button id="editback" *ngIf="editFlag" (click)="editPHcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
-      </div>
-      <div id="main-wrapper" class="mat-sidenav-margin">
-        <!-- Add CODES Start -->
-        <div class="rightside-content" *ngIf="addFlag">
-          <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="savePHcode(codeForm.value)" novalidate>
-            <div class="mat-warn">{{errormsg}}</div><br />
-            <div layout="row">
-              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
-                <mat-hint placeholder="Code" align="end">{{code.length || 0}}/6</mat-hint>
-                <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
-                  This is required
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required maxlength="30">
-                <mat-hint placeholder="Description" align="end">{{description.length || 0}}/30</mat-hint>
-                <mat-error *ngIf="codeForm.controls['description'].hasError('required') ">
-                  This is required
-                </mat-error>
-                <!--<mat-error *ngIf="description.errors.pattern">Please enter valid input for Description.</mat-error>-->
-              </mat-form-field>
-            </div>
-            <div layout="row">
-              <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
-              <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
-            </div>
-            <br /><br />
-            <div class="" align="right">
-              <div class="">
-                <button mat-raised-button type="button" (click)="clearPHaddcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
-              </div>
-            </div>
-          </form>
-        </div>
-        <!-- Add CODES end -->
-        <!-- for edit CODES start -->
-        <div class="rightside-content" *ngIf="editFlag">
-          <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="updatePHeditcode(editcode,codeeditForm.value)" novalidate>
-            <!--<br/><br/>-->
-            <div class="mat-warn">{{editerrormsg}}</div><br />
-
-            <div layout="row">
-              <mat-form-field flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Code" disabled value="{{editcode}}">
-              </mat-form-field>
-              <span class="mat-warn">{{edicodeerrorMsg}}</span>
-
-              <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
-                <mat-hint placeholder="Description" align="end">{{editdescription.length || 0}}/30</mat-hint>
-                <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
-                <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
-                  This is required
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div layout="row"><span flex="50">&nbsp;</span><span class="mat-warn" flex="50" style="margin-left:20px;">{{editdescerrorMsg}}</span></div>
-            <div layout="row">
-              <mat-form-field flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Effective Date" disabled value="{{effectiveDate | date: 'MM/dd/yyyy'}}">
-              </mat-form-field>
-              <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
-                <input matInput placeholder="Discontinued Date" [min]="effectiveDate" [matDatepicker]="dp3" [(ngModel)]="discontinuedDate" [ngModelOptions]="{standalone: true}" name="discontinuedDate" disabled>
-                <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-              </mat-form-field>
-            </div>
-            <div class="" align="right">
-              <div class="">
-                <button mat-raised-button type="button" (click)="clearPHeditcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
-              </div>
-            </div>
-
-          </form>
-        </div>
-        <!-- edit CODES end -->
-        <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="displayFlag">
-          <mat-icons class="material-icons" (click)="callPHCodes();" flex="1">add</mat-icons><span (click)="callPHCodes();" style="color:white">&nbsp;CODE</span>
-          <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;FILTER</span>
-        </mat-content>
-        <table class="table1 tblborder" width="100%" *ngIf="displayFlag" cellpadding="0" cellspacing="0">
-          <tr *ngFor="let row of pagedItems" class="tblbordertr">
-            <td style="width:40%;">{{row.Code}} <br> Description: {{row.Description}}</td>
-            <td style="width:40%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
-            <td style="width:10%;"><a style="cursor:pointer" (click)="editPHcodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
-          </tr>
-          <tr>
-            <td colspan="3" align="right">
-              <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
-                <span class="mat-paginator-page">
-                  Page :
-                  <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)" class="select-border">
-                    <option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</option>
-                  </select>
-                </span>
-                <span class="mat-paginator-page">
-                  Rows per page :
-                  <select name="rowspage" [(ngModel)]="rowspage" (change)="setPage(selectpage)" class="select-border">
-                    <option value="5" selected="selected">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                  </select>
-                </span>
-                <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
-                <span class="first-enable mat-paginator-page" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
-                  <a style="visibility:hidden;"> First </a>
-                </span>
-                <span class="first-disable mat-paginator-page" *ngIf="pager.currentPage === 1">
-                  <a style="visibility:hidden;"> First </a>
-                </span>
-                <span class="prev-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
-                  <a style="visibility:hidden;"> Prev </a>
-                </span>
-                <span class="prev-disable" *ngIf="pager.currentPage === 1">
-                  <a style="visibility:hidden;"> Prev </a>
-                </span>
-                <span class="next-enable" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages" (click)="setPage(pager.currentPage + 1)">
-                  <a style="visibility:hidden;"> Next </a>
-                </span>
-                <span class="next-disable" *ngIf="pager.currentPage === pager.totalPages">
-                  <a style="visibility:hidden;"> Next </a>
-                </span>
-                <span class="last-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
-                  <a style="visibility:hidden;"> Last </a>
-                </span>
-                <span class="last-disable" *ngIf="pager.currentPage === pager.totalPages">
-                  <a style="visibility:hidden;"> Last </a>
-                </span>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
+    <div class="page-title rightside-title">
+      <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addPHcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
+      <button id="editback" *ngIf="editFlag" (click)="editPHcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
     </div>
-    <div class="footer">&copy; 2017 - PointCentric</div>
-  </mat-sidenav-content>
+    <div id="main-wrapper" class="mat-sidenav-margin">
+      <!-- Add CODES Start -->
+      <div class="rightside-content" *ngIf="addFlag">
+        <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="savePHcode(codeForm.value)" novalidate>
+          <div class="mat-warn">{{errormsg}}</div><br />
+          <div layout="row">
+            <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
+              <mat-hint placeholder="Code" align="end">{{code.length || 0}}/6</mat-hint>
+              <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
+                This is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required maxlength="30">
+              <mat-hint placeholder="Description" align="end">{{description.length || 0}}/30</mat-hint>
+              <mat-error *ngIf="codeForm.controls['description'].hasError('required') ">
+                This is required
+              </mat-error>
+              <!--<mat-error *ngIf="description.errors.pattern">Please enter valid input for Description.</mat-error>-->
+            </mat-form-field>
+          </div>
+          <div layout="row">
+            <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
+            <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
+          </div>
+          <br /><br />
+          <div class="" align="right">
+            <div class="">
+              <button mat-raised-button type="button" (click)="clearPHaddcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Add CODES end -->
+      <!-- for edit CODES start -->
+      <div class="rightside-content" *ngIf="editFlag">
+        <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="updatePHeditcode(editcode,codeeditForm.value)" novalidate>
+          <!--<br/><br/>-->
+          <div class="mat-warn">{{editerrormsg}}</div><br />
+
+          <div layout="row">
+            <mat-form-field flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Code" disabled value="{{editcode}}" required>
+            </mat-form-field>
+            <span class="mat-warn">{{edicodeerrorMsg}}</span>
+
+            <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
+              <mat-hint placeholder="Description" align="end">{{editdescription.length || 0}}/30</mat-hint>
+              <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
+              <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
+                This is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div layout="row"><span flex="50">&nbsp;</span><span class="mat-warn" flex="50" style="margin-left:20px;">{{editdescerrorMsg}}</span></div>
+          <div layout="row">
+            <mat-form-field flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Effective Date" disabled value="{{effectiveDate | date: 'MM/dd/yyyy'}}">
+            </mat-form-field>
+            <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
+              <input matInput placeholder="Discontinued Date" [min]="effectiveDate" [matDatepicker]="dp3" [(ngModel)]="discontinuedDate" [ngModelOptions]="{standalone: true}" name="discontinuedDate" disabled>
+              <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="" align="right">
+            <div class="">
+              <button mat-raised-button type="button" (click)="clearPHeditcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <!-- edit CODES end -->
+      <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="displayFlag">
+        <mat-icons class="material-icons" (click)="callPHCodes();" flex="1">add</mat-icons><span (click)="callPHCodes();" style="color:white">&nbsp;CODE</span>
+        <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;FILTER</span>
+      </mat-content>
+      <table class="table1 tblborder" width="100%" *ngIf="displayFlag" cellpadding="0" cellspacing="0">
+        <tr *ngFor="let row of pagedItems" class="tblbordertr">
+          <td style="width:40%;">{{row.Code}} <br> Description: {{row.Description}}</td>
+          <td style="width:40%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
+          <td style="width:10%;"><a style="cursor:pointer" (click)="editPHcodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="right">
+            <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
+              <span class="mat-paginator-page">
+                Page :
+                <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)" class="select-border">
+                  <option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</option>
+                </select>
+              </span>
+              <span class="mat-paginator-page">
+                Rows per page :
+                <select name="rowspage" [(ngModel)]="rowspage" (change)="setPage(selectpage)" class="select-border">
+                  <option value="5" selected="selected">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+              </span>
+              <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
+              <span class="first-enable mat-paginator-page" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
+                <a style="visibility:hidden;"> First </a>
+              </span>
+              <span class="first-disable mat-paginator-page" *ngIf="pager.currentPage === 1">
+                <a style="visibility:hidden;"> First </a>
+              </span>
+              <span class="prev-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
+                <a style="visibility:hidden;"> Prev </a>
+              </span>
+              <span class="prev-disable" *ngIf="pager.currentPage === 1">
+                <a style="visibility:hidden;"> Prev </a>
+              </span>
+              <span class="next-enable" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages" (click)="setPage(pager.currentPage + 1)">
+                <a style="visibility:hidden;"> Next </a>
+              </span>
+              <span class="next-disable" *ngIf="pager.currentPage === pager.totalPages">
+                <a style="visibility:hidden;"> Next </a>
+              </span>
+              <span class="last-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
+                <a style="visibility:hidden;"> Last </a>
+              </span>
+              <span class="last-disable" *ngIf="pager.currentPage === pager.totalPages">
+                <a style="visibility:hidden;"> Last </a>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </mat-sidenav-container>

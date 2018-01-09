@@ -1,0 +1,91 @@
+ <mat-content class="mat-codes-toolbar mat-codes-primary" *ngIf="user">
+  <mat-card class="mat-toolbar-layout">
+    <div class="mat-toolbar-row" style="flex-direction: row; box-sizing: border-box; display: flex;">
+      <a _ngcontent-c1="" class="logo ng-tns-c1-0" fxhide="true" fxhide.gt-sm="false" href="/" style="display: block; padding-left:20px; padding-top:0px;">
+        <img _ngcontent-c1="" class="ng-tns-c1-0" src="../assets/images/logo-white.png">
+      </a>
+      <button _ngcontent-c1="" class="mat-icon-button ng-tns-c1-0" mat-icon-button="" style="margin-left:25px;">
+        <span class="mat-button-wrapper" style="color:#fff;">
+          <mat-icon _ngcontent-c1="" class="mat-icon ng-tns-c1-0 material-icons" role="img" aria-hidden="true" mat-button (click)="sidenav.toggle()">menu</mat-icon>
+        </span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
+      </button>
+      <span _ngcontent-c1="" fxflex="" class="ng-tns-c1-0" style="flex: 1 1 1e-09px; box-sizing: border-box;"></span>
+      <div class="rightside-header">
+
+          <button aria-haspopup="true" class="mat-icon-button" mat-icon-button="">
+            <div class="mat-button-wrapper">  
+                  <mat-icon class="icon-color mat-icon material-icons" role="img" aria-hidden="true" [matMenuTriggerFor]="cart">shopping_cart</mat-icon>
+                  <mat-menu #cart="matMenu">
+                    <span mat-menu-item>Item 1</span>
+                    <span mat-menu-item>Item 2</span>
+                  </mat-menu>                
+                <div class="td-notification-count td-notification-after">
+                  99+
+                </div>
+            </div>
+          </button>
+          <button aria-haspopup="true" class="mat-icon-button">
+            <div class="mat-button-wrapper"> 
+                  <mat-icon class="icon-color mat-icon ng-tns-c28-91 material-icons" role="img" aria-hidden="true" [matMenuTriggerFor]="notification">notifications</mat-icon>
+                  <mat-menu #notification="matMenu">
+                    <span mat-menu-item>Notification 1</span>
+                    <span mat-menu-item>Notification 1</span>
+                  </mat-menu>                
+                <div class="td-notification-count td-notification-after">
+                  10
+                </div>
+            </div>
+          </button>
+          <button aria-haspopup="true" class="mat-icon-button">
+            <div class="mat-button-wrapper">
+                  <mat-icon class="icon-color mat-icon ng-tns-c28-91 material-icons" role="img" aria-hidden="true">help</mat-icon>
+            </div>
+          </button>
+
+          <button aria-haspopup="true" class="mat-icon-button ng-tns-c1-0" mat-icon-button="">
+            <div class="mat-button-wrapper">
+                  <img src="assets/images/user-icon.png" width="30" [matMenuTriggerFor]="user" />
+                  <mat-menu #user="matMenu">
+                    <div class="mat-menu-content ng-trigger ng-trigger-fadeInItems" style="opacity: 1; width:235px;">
+                      <mat-list class="mat-list" role="list">
+                        <mat-list-item class="mat-list-item mat-list-item-avatar mat-2-line" role="listitem">
+                          <div class="mat-list-item-content">
+                            <img src="assets/images/user-icon.png" width="30">&nbsp;&nbsp;{{this.username}}
+                          </div>
+                        </mat-list-item>
+                        <hr />
+                      </mat-list>
+                      <mat-nav-list class="mat-nav-list" role="list">
+                        <mat-list-item class="mat-list-item" mat-list-item="" role="listitem" style="cursor:auto;">
+                          <div class="mat-list-item-content" style="color:#ccc;">
+                            <mat-icon class="icon-color mat-icon material-icons" role="img" aria-hidden="true" style="color:#ccc;">person</mat-icon>&nbsp;&nbsp;Profile & Settings
+                          </div>
+                        </mat-list-item><hr />
+                        <mat-list-item class="mat-list-item" mat-list-item="" role="listitem">
+                          <div class="mat-list-item-content">
+                            <mat-icon class="icon-color mat-icon material-icons" role="img" aria-hidden="true">exit_to_app</mat-icon><a href="index.html">&nbsp;&nbsp;Sign Out</a>
+                          </div>
+                        </mat-list-item>
+                      </mat-nav-list>
+                    </div>
+                  </mat-menu>
+            </div>
+
+          </button>
+
+        </div>
+    </div>
+  </mat-card>
+</mat-content> 
+
+<mat-sidenav-container autosize class="mat-drawer-container mat-sidenav-container mat-drawer-transition">
+  <mat-sidenav opened="{{this.user}}" #sidenav mode="side" class="example-sidenav" position="left">
+    <nav class="ng-star-inserted" style="">
+      <app-sidemenu></app-sidemenu>
+    </nav>
+  </mat-sidenav>
+
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+   
+</mat-sidenav-container>

@@ -73,6 +73,10 @@ import { PurchaseorderdiscountComponent } from './Configuration/Codes/purchaseor
 import { SalesservicepersontypeComponent } from './Configuration/Codes/salesservicepersontype/salesservicepersontype.component';
 import { ServiceorderComponent } from './Configuration/Codes/serviceorder/serviceorder.component';
 import { ServiceorderreasonComponent } from './Configuration/Codes/serviceorderreason/serviceorderreason.component';
+import { HeaderComponent } from './header/header.component';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { FooterComponent } from './footer/footer.component';
+import { AuthenticationServiceService } from './_services/authentication-service.service';
 
 @NgModule({
 exports: [
@@ -134,7 +138,10 @@ exports: [
      PurchaseorderdiscountComponent,
      SalesservicepersontypeComponent,
      ServiceorderComponent,
-     ServiceorderreasonComponent
+     ServiceorderreasonComponent,
+     HeaderComponent,
+     SidemenuComponent,
+     FooterComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,
@@ -144,7 +151,7 @@ exports: [
     JsonpModule,
 MatInputModule,MatIconModule,MatTableModule,MatButtonModule,MatMenuModule,MatSelectModule,
     MatTabsModule, MatNativeDateModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatListModule, MatDatepickerModule],
-  providers: [LoginService,PagerService,{ provide: MatPaginatorIntl, useClass: CustomPaginator}],
+  providers: [LoginService,PagerService,AuthenticationServiceService,{ provide: MatPaginatorIntl, useClass: CustomPaginator}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

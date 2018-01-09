@@ -1,7 +1,7 @@
 
 .footer {
   border-top: 1px solid #ccc;
-  margin-top: 10%;
+  margin-top: 3%;
   padding: 10px;
   font-family: 'robotoregular';
 }
@@ -33,6 +33,17 @@
   font-style: normal;
 }
 
+.mat-drawer-content {
+  overflow-x:hidden !important;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  visibility: visible !important;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgba(0,0,0,.6) !important;
+}
 .mat-cell a {
   color: #757575 !important;
 }
@@ -146,13 +157,16 @@
     color: #999;
     text-decoration: none !important;
   }
-.table strong, span {
+.table strong {
   color: #18b5f9;
 }
 .ng-star-inserted ul li {
   padding: 15px;
   /*border-bottom:1px solid #ccc;*/
   
+}
+.menu-active {
+  color: #18b5f9 !important;
 }
 
 .mat-sidenav {
@@ -309,7 +323,7 @@ form {
     background: #2e9cf4 !important;
     color: #fff;
     /*margin: -8px -8px 0 -8px !important;*/
-    padding: 20px 0 0 5px;
+    padding: 20px 0 10px 5px;
     box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
   }
 .mat-table-header-bg {
@@ -2273,7 +2287,8 @@ mark {
 
 .mat-form-field-prefix .mat-icon-button, .mat-form-field-suffix .mat-icon-button {
   height: 1.5em;
-  width: 1.5em
+  width: 1.5em;
+  margin-right:10px;
 }
 
   .mat-form-field-prefix .mat-icon-button .mat-icon, .mat-form-field-suffix .mat-icon-button .mat-icon {
@@ -7024,7 +7039,7 @@ body, html, mat-sidenav-container {
 router-outlet ~ * {
   display: block;
   width: 100%;
-  height: 100%
+  /*height: 100%*/
 }
 
 .mat-sidenav {
@@ -25380,6 +25395,10 @@ body .text-nodecoration {
   text-decoration: none
 }
 
+.mat-datepicker-content .mat-calendar {
+  1. width: 216px;
+  2. height: 278px;
+}
 
 /** custome css start */
 /* Write your custom CSS here */

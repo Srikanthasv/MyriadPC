@@ -28,7 +28,11 @@
   font-weight: normal;
   font-style: normal;
 }
-
+.img-responsive[_ngcontent-c26] {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
 /* search bar code start*/
 #custom-search-input {
   margin: 0;
@@ -25293,4 +25297,9 @@ body .text-truncate {
 
 body .text-nodecoration {
   text-decoration: none
+}
+.img-responsive {
+  display: block;
+  height: auto;
+  max-width: 100%;
 }

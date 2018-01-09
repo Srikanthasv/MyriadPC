@@ -67,7 +67,8 @@ export class AdvertisingService {
     return this.http.put(strUrl, body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
-        if (Data) {
+        //console.log("Response:: " + JSON.stringify(response));
+        if (Data) {          
           return true;
         } else {
           return false;

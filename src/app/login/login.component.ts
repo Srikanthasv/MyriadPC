@@ -7,6 +7,7 @@ import { User } from './user';
 import { LoginService } from '../_services/login.service';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
+import { AuthenticationServiceService } from '../_services/authentication-service.service';
 
 
 @Component({
@@ -28,11 +29,13 @@ formSubmitted: boolean = false;
     private router: Router,
     private loginService: LoginService,
     private http: Http,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,private authenticationService:AuthenticationServiceService) {
     this.errorMsg = '';
   }
 
   ngOnInit() {
+  this.authenticationService.getLoggedIn.emit(false);
+
     this.loginForm = this.fb.group({
       'username' : [null, Validators.compose([Validators.required])],
       'password' : [null, Validators.compose([Validators.required])],
@@ -43,9 +46,14 @@ formSubmitted: boolean = false;
     if (this.loginForm.valid)
     {
       let link = ['/home'];
+     //  this.router.navigate(link);
+      //  localStorage.setItem('currentUser', JSON.stringify({ username: "username", token: "token" }));
+        //    this.authenticationService.getLoggedIn.emit(true);
+
     if (form.username != '' || form.password != '') {
       this.loginService.login(form.username, form.password)
         .subscribe(res => {
+          this.authenticationService.getLoggedIn.emit(true);
           this.router.navigate(link);
         },
         err => {
