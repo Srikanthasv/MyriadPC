@@ -77,6 +77,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthenticationServiceService } from './_services/authentication-service.service';
+import { AppSettings } from './_services/AppSettings';
 
 @NgModule({
 exports: [
@@ -151,7 +152,7 @@ exports: [
     JsonpModule,
 MatInputModule,MatIconModule,MatTableModule,MatButtonModule,MatMenuModule,MatSelectModule,
     MatTabsModule, MatNativeDateModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatListModule, MatDatepickerModule],
-  providers: [LoginService,PagerService,AuthenticationServiceService,{ provide: MatPaginatorIntl, useClass: CustomPaginator}],
+  providers: [LoginService,PagerService,AuthenticationServiceService,AppSettings,{ provide: MatPaginatorIntl, useClass: CustomPaginator}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -11,6 +11,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import {AppSettings} from './AppSettings';
+
 
 @Injectable()
 export class AdvertisingService {
@@ -36,7 +38,8 @@ export class AdvertisingService {
 
   getAdvData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/", options)
+    console.log("AppSettings=="+AppSettings.API_ENDPOINT);
+    return this.http.get(AppSettings.API_ENDPOINT+"CustomerAdvertisingSource/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
