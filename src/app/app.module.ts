@@ -78,6 +78,7 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthenticationServiceService } from './_services/authentication-service.service';
 import { AppSettings } from './_services/AppSettings';
+import { AdditionalservicesComponent } from './Configuration/Codes/additionalservices/additionalservices.component';
 
 @NgModule({
 exports: [
@@ -138,6 +139,7 @@ exports: [
      PurchaseorderComponent,
      PurchaseorderdiscountComponent,
      SalesservicepersontypeComponent,
+     AdditionalservicesComponent,
      ServiceorderComponent,
      ServiceorderreasonComponent,
      HeaderComponent,
@@ -151,7 +153,7 @@ exports: [
     HttpClientModule,
     JsonpModule,
 MatInputModule,MatIconModule,MatTableModule,MatButtonModule,MatMenuModule,MatSelectModule,
-    MatTabsModule, MatNativeDateModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatListModule, MatDatepickerModule],
+    MatTabsModule, MatNativeDateModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatListModule, MatDatepickerModule, MatSlideToggleModule],
   providers: [LoginService,PagerService,AuthenticationServiceService,AppSettings,{ provide: MatPaginatorIntl, useClass: CustomPaginator}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

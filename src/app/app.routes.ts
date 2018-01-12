@@ -26,6 +26,7 @@ import { PurchaseorderdiscountComponent } from './Configuration/Codes/purchaseor
 import { SalesservicepersontypeComponent } from './Configuration/Codes/salesservicepersontype/salesservicepersontype.component';
 import { ServiceorderComponent } from './Configuration/Codes/serviceorder/serviceorder.component';
 import { ServiceorderreasonComponent } from './Configuration/Codes/serviceorderreason/serviceorderreason.component';
+import { AdditionalservicesComponent } from './Configuration/Codes/additionalservices/additionalservices.component';
 
 // Route Configuration  
 export const routes: Routes = [  
@@ -53,7 +54,8 @@ export const routes: Routes = [
   { path: 'app/configuration/codes/purchaseorderdiscount', component: PurchaseorderdiscountComponent },
   { path: 'app/configuration/codes/salesservicepersontype', component: SalesservicepersontypeComponent },
   { path: 'app/configuration/codes/serviceorder', component: ServiceorderComponent },
-  { path: 'app/configuration/codes/serviceorderreason', component: ServiceorderreasonComponent }
+  { path: 'app/configuration/codes/serviceorderreason', component: ServiceorderreasonComponent },
+  { path: 'app/configuration/codes/additionalservices', component: AdditionalservicesComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);  

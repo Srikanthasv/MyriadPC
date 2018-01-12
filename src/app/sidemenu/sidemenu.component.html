@@ -50,6 +50,11 @@
             </li>
             <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFiller1">
               <li class="ng-star-inserted">
+                <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/additionalservices']">
+                  <span>Additional Services</span>
+                </a>
+              </li>
+              <li class="ng-star-inserted">
                 <a [routerLink]="['/app/configuration/codes/advertising']">
                   <span>Advertising</span>
                 </a>
@@ -173,7 +178,7 @@
                   <span>Service Order Reason</span>
                 </a>
               </li>
-            </ul>            
+            </ul>
           </ul>
           <li class="ng-star-inserted">
             <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
