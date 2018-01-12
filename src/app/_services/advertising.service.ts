@@ -38,8 +38,7 @@ export class AdvertisingService {
 
   getAdvData() {
     let options = this.getOptions('');
-    console.log("AppSettings=="+AppSettings.API_ENDPOINT);
-    return this.http.get(AppSettings.API_ENDPOINT+"CustomerAdvertisingSource/", options)
+    return this.http.get(AppSettings.CRMENDPOINT +"api/CustomerAdvertisingSource/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -52,7 +51,7 @@ export class AdvertisingService {
 
   submitAdv(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5007/api/CustomerAdvertisingSource", body, options)
+    return this.http.post(AppSettings.CRMENDPOINT+"api/CustomerAdvertisingSource", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -64,13 +63,12 @@ export class AdvertisingService {
   }
 
   updateAdv(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5007/api/CustomerAdvertisingSource/";
+    var strUrl = AppSettings.CRMENDPOINT + "api/CustomerAdvertisingSource/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
-        //console.log("Response:: " + JSON.stringify(response));
         if (Data) {          
           return true;
         } else {
