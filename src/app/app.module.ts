@@ -79,6 +79,9 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthenticationServiceService } from './_services/authentication-service.service';
 import { AppSettings } from './_services/AppSettings';
 import { AdditionalservicesComponent } from './Configuration/Codes/additionalservices/additionalservices.component';
+import { TreeModule } from 'angular-tree-component';
+import { ARtransactionComponent } from './Configuration/Codes/artransaction/artransaction.component';
+
 
 @NgModule({
 exports: [
@@ -113,7 +116,8 @@ exports: [
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
+  MatTooltipModule,
+  TreeModule,
   ],
    declarations: [
     AppComponent,
@@ -121,6 +125,7 @@ exports: [
     HomeComponent,
     AdvertisingComponent,
      ARFinanceComponent,
+     ARtransactionComponent,
      ChargebackComponent,
      FollowupComponent,
      InventorytranComponent,

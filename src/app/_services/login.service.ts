@@ -13,6 +13,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../login/user';
+import { AppSettings } from './AppSettings';
 
 
 @Injectable()
@@ -29,7 +30,7 @@ export class LoginService {
     headers.append('Cache-Control', 'no-cache');
     headers.append("Accept", "application/json");
     var params = 'grant_type=password&client_id=js&username=' + username + '&password=' + password + '&client_secret=609642b3-0eee-4254-9f8f-362cd00f7d9d';
-    return this.http.post('http://pointcentricapi-local:5000/connect/token', params, { headers: headers })
+    return this.http.post(AppSettings.IDENTITYENDPOINT +'connect/token', params, { headers: headers })
       .map((response: Response) => {
         let token = response.json() && response.json().access_token;
         if (token) {

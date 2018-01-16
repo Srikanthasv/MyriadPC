@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class OpportunityresultService {
@@ -38,7 +39,7 @@ export class OpportunityresultService {
 
   getORData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5003/api/OpportunityResult/", options)
+    return this.http.get(AppSettings.SALESENDPOINT +"api/OpportunityResult/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -50,7 +51,7 @@ export class OpportunityresultService {
   }
   submitOR(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5003/api/OpportunityResult", body, options)
+    return this.http.post(AppSettings.SALESENDPOINT +"api/OpportunityResult", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -62,7 +63,7 @@ export class OpportunityresultService {
   }
 
   updateOR(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5003/api/OpportunityResult/";
+    var strUrl = AppSettings.SALESENDPOINT +"api/OpportunityResult/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

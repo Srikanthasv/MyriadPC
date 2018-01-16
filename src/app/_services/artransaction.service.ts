@@ -14,8 +14,7 @@ import { Observable } from 'rxjs/Observable';
 import { AppSettings } from './AppSettings';
 
 @Injectable()
-export class PurchaseorderdiscountService {
-
+export class ARtransactionService {
   public token: string;
 
   constructor(private http: Http, private router: Router) {
@@ -37,9 +36,9 @@ export class PurchaseorderdiscountService {
     return options;
   }
 
-  getPODSData() {
+  getARTData() {
     let options = this.getOptions('');
-    return this.http.get(AppSettings.INVENTORYENDPOINT +"api/PoDiscountCode/", options)
+    return this.http.get(AppSettings.ACCOUNTSENDPOINT +"api/ArTransactionCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -50,9 +49,9 @@ export class PurchaseorderdiscountService {
       });
   }
 
-  submitPODS(body) {
+  submitART(body) {
     let options = this.getOptions("ctype");
-    return this.http.post(AppSettings.INVENTORYENDPOINT +"api/PoDiscountCode", body, options)
+    return this.http.post(AppSettings.ACCOUNTSENDPOINT +"api/ArTransactionCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -63,8 +62,8 @@ export class PurchaseorderdiscountService {
       });
   }
 
-  updatePODS(Id, body) {
-    var strUrl = AppSettings.INVENTORYENDPOINT +"api/PoDiscountCode/";
+  updateART(Id, body) {
+    var strUrl = AppSettings.ACCOUNTSENDPOINT +"api/ArTransactionCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

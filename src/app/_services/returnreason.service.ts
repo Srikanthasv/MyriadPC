@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class ReturnreasonService {
@@ -37,7 +38,7 @@ export class ReturnreasonService {
 
   getRRData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5003/api/ReturnReasonCode/", options)
+    return this.http.get(AppSettings.SALESENDPOINT +"api/ReturnReasonCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -50,7 +51,7 @@ export class ReturnreasonService {
 
   submitRR(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5003/api/ReturnReasonCode", body, options)
+    return this.http.post(AppSettings.SALESENDPOINT +"api/ReturnReasonCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -62,7 +63,7 @@ export class ReturnreasonService {
   }
 
   updateRR(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5003/api/ReturnReasonCode/";
+    var strUrl = AppSettings.SALESENDPOINT +"api/ReturnReasonCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

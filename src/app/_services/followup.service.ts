@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class FollowupService {
@@ -38,7 +39,7 @@ export class FollowupService {
 
   getFUData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5007/api/CustomerFollowUp/", options)
+    return this.http.get(AppSettings.CRMENDPOINT +"api/CustomerFollowUp/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -51,7 +52,7 @@ export class FollowupService {
 
   submitFU(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5007/api/CustomerFollowUp", body, options)
+    return this.http.post(AppSettings.CRMENDPOINT +"api/CustomerFollowUp", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -63,7 +64,7 @@ export class FollowupService {
   }
 
   updateFU(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5007/api/CustomerFollowUp/";
+    var strUrl = AppSettings.CRMENDPOINT +"api/CustomerFollowUp/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

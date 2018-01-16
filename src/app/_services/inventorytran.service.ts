@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class InventoryTranService {
@@ -38,7 +39,7 @@ export class InventoryTranService {
 
   getITData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5002/api/TransferSourceCode/", options)
+    return this.http.get(AppSettings.INVENTORYENDPOINT +"api/TransferSourceCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -51,7 +52,7 @@ export class InventoryTranService {
 
   submitIT(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5002/api/TransferSourceCode", body, options)
+    return this.http.post(AppSettings.INVENTORYENDPOINT +"api/TransferSourceCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -63,7 +64,7 @@ export class InventoryTranService {
   }
 
   updateIT(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5002/api/TransferSourceCode/";
+    var strUrl = AppSettings.INVENTORYENDPOINT +"api/TransferSourceCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

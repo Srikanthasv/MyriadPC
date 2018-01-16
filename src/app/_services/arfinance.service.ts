@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class ARFinService {
@@ -37,7 +38,7 @@ export class ARFinService {
 
   getARData() {    
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5004/api/ArFinanceCode/", options)
+    return this.http.get(AppSettings.ACCOUNTSENDPOINT + "api/ArFinanceCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -51,7 +52,7 @@ export class ARFinService {
   submitAR(body)
   {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5004/api/ArFinanceCode", body, options)
+    return this.http.post(AppSettings.ACCOUNTSENDPOINT + "api/ArFinanceCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -64,7 +65,7 @@ export class ARFinService {
 
   updateAR(Id,body)
   {
-    var strUrl = "http://pointcentricapi-local:5004/api/ArFinanceCode/";
+    var strUrl = AppSettings.ACCOUNTSENDPOINT + "api/ArFinanceCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

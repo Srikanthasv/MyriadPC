@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class SoreferralService {
@@ -37,7 +38,7 @@ export class SoreferralService {
 
   getSoReferralData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5003/api/SoReferralCode/", options)
+    return this.http.get(AppSettings.SALESENDPOINT +"api/SoReferralCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -50,7 +51,7 @@ export class SoreferralService {
 
   submitSoReferral(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5003/api/SoReferralCode", body, options)
+    return this.http.post(AppSettings.SALESENDPOINT +"api/SoReferralCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -62,7 +63,7 @@ export class SoreferralService {
   }
 
   updateSoReferral(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5003/api/SoReferralCode/";
+    var strUrl = AppSettings.SALESENDPOINT +"/api/SoReferralCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

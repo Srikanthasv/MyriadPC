@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class PurchaseorderService {
@@ -38,7 +39,7 @@ export class PurchaseorderService {
 
   getPOData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5002/api/PoSortCode/", options)
+    return this.http.get(AppSettings.INVENTORYENDPOINT +"api/PoSortCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -51,7 +52,7 @@ export class PurchaseorderService {
 
   submitPO(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5002/api/PoSortCode", body, options)
+    return this.http.post(AppSettings.INVENTORYENDPOINT +"api/PoSortCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -63,7 +64,7 @@ export class PurchaseorderService {
   }
 
   updatePO(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5002/api/PoSortCode/";
+    var strUrl = AppSettings.INVENTORYENDPOINT +"api/PoSortCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

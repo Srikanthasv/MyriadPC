@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class ChargebackService {
@@ -37,7 +38,7 @@ export class ChargebackService {
 
   getCBData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5001/api/ApChargeBackCode/", options)
+    return this.http.get(AppSettings.MONOLITHENDPOINT +"api/ApChargeBackCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -50,7 +51,7 @@ export class ChargebackService {
 
   submitCB(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5001/api/ApChargeBackCode", body, options)
+    return this.http.post(AppSettings.MONOLITHENDPOINT +"api/ApChargeBackCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -62,7 +63,7 @@ export class ChargebackService {
   }
 
   updateCB(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5001/api/ApChargeBackCode/";
+    var strUrl = AppSettings.MONOLITHENDPOINT +"api/ApChargeBackCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

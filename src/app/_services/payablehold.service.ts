@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class PayableholdService {
@@ -38,7 +39,7 @@ export class PayableholdService {
 
   getPHData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5001/api/ApHoldCode/", options)
+    return this.http.get(AppSettings.MONOLITHENDPOINT +"api/ApHoldCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -51,7 +52,7 @@ export class PayableholdService {
 
   submitPH(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5001/api/ApHoldCode", body, options)
+    return this.http.post(AppSettings.MONOLITHENDPOINT +"api/ApHoldCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -63,7 +64,7 @@ export class PayableholdService {
   }
 
   updatePH(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5001/api/ApHoldCode/";
+    var strUrl = AppSettings.MONOLITHENDPOINT +"api/ApHoldCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

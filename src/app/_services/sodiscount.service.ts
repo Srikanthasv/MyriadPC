@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class SodiscountService {
@@ -37,7 +38,7 @@ export class SodiscountService {
 
   getSODiscData() {
     let options = this.getOptions('');
-    return this.http.get("http://pointcentricapi-local:5003/api/DiscountReasonCode/", options)
+    return this.http.get(AppSettings.SALESENDPOINT +"api/DiscountReasonCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -50,7 +51,7 @@ export class SodiscountService {
 
   submitSODisc(body) {
     let options = this.getOptions("ctype");
-    return this.http.post("http://pointcentricapi-local:5003/api/DiscountReasonCode", body, options)
+    return this.http.post(AppSettings.SALESENDPOINT +"api/DiscountReasonCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -62,7 +63,7 @@ export class SodiscountService {
   }
 
   updateSODisc(Id, body) {
-    var strUrl = "http://pointcentricapi-local:5003/api/DiscountReasonCode/";
+    var strUrl = AppSettings.SALESENDPOINT +"api/DiscountReasonCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)

@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
-import {AppSettings} from './AppSettings';
+import { AppSettings } from './AppSettings';
 
 
 @Injectable()
