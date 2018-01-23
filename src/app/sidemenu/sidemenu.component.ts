@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
 selector: 'app-sidemenu',
@@ -6,428 +8,260 @@ templateUrl: './sidemenu.component.html',
 styleUrls: ['./sidemenu.component.css']
 })
 export class SidemenuComponent implements OnInit {
-sidenavArray:any=[];
-pages:any=[];
-showLevel1 = null;
-showLevel2 = null;
-showLevel3 = null;
+pages: any = [];
+ismenuactive: boolean = false;
 active: boolean = false;
 showMenu: boolean = false;
-
 selected: any;
-constructor() {
+route: string;
+page: string = "";
+color: string = "#515253";
+
+  constructor(location: Location, router: Router) {
+    router.events.subscribe((val) => {
+      if (location.path() != '') {
+        this.route = location.path();
+      } else {
+        this.route = 'Home'
+      }
+    });
+    //if (this.route != '' || this.route != null)
+    //{
+    //  var splitted = this.route.split("/");      
+    //  console.log("Path1:: " + this.route + " :: " + splitted);
+    //}
     
   
-
-this.sidenavArray=[
-{
-	"icon":"home",
-	"routeUrl":['/home'],
-	"desc":"Dashboard",
-	"submenu":[]
-},
-{
-	"icon":"shopping_cart",
-	"routeUrl":[],
-	"desc":"Sales",
-	"submenu":[]
-},
-{
-	"icon":"label",
-	"routeUrl":[],
-	"desc":"Inventory",
-	"submenu":[]
-},
-{
-	"icon":"layers",
-	"routeUrl":[],
-	"desc":"Merchandising",
-	"submenu":[]
-},
-{
-	"icon":"inbox",
-	"routeUrl":[],
-	"desc":"A/R",
-	"submenu":[]
-},
-{
-	"icon":"exposure",
-	"routeUrl":[],
-	"desc":"Accounting",
-	"submenu":[]
-},
-{
-	"icon":"exposure",
-	"routeUrl":[],
-	"desc":"Reports",
-	"submenu":[]
-},
-{
-	"icon":"settings",
-	"routeUrl":[],
-	"desc":"Configuration",
-	"submenu":[
-		{
-			"icon":"",
-			"routeUrl":[],
-			"desc":"Codes",
-			"submenu":[
-				{
-					"icon":"",
-					"routeUrl":['/app/configuration/codes/advertising'],
-					"desc":"Advertising",
-					"submenu":[]
-				},
-				{
-					"icon":"",
-					"routeUrl":['/app/configuration/codes/arfinance'],
-					"desc":"A/R Finance",
-					"submenu":[]
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/chargeback'],
-          "desc": "Chargeback",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/followup'],
-          "desc": "Follow Up",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": [],
-          "desc": "Inventory",
-          "submenu": [
-            {
-              "icon": "",
-              "routeUrl": ['/app/configuration/codes/inventory/inventoryadj'],
-              "desc": "Adjustment",
-              "submenu": []
-            },
-            {
-              "icon": "",
-              "routeUrl": ['/app/configuration/codes/inventory/inventorystatus'],
-              "desc": "Status",
-              "submenu": []
-            },
-            {
-              "icon": "",
-              "routeUrl": ['/app/configuration/codes/inventory/inventorytran'],
-              "desc": "Transfer",
-              "submenu": []
-            }
-          ]
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/opportunity'],
-          "desc": "Opportunity",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/opportunityresult'],
-          "desc": "Opportunity Result",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/payablehold'],
-          "desc": "Payable Hold",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": [],
-          "desc": "Model",
-          "submenu": [
-            {
-              "icon": "",
-              "routeUrl": ['/app/configuration/codes/modelcost'],
-              "desc": "Cost",
-              "submenu": []
-            },
-            {
-              "icon": "",
-              "routeUrl": ['/app/configuration/codes/modeldiscontd'],
-              "desc": "Discontinued",
-              "submenu": []
-            },
-            {
-              "icon": "",
-              "routeUrl": ['/app/configuration/codes/modelprice'],
-              "desc": "Price",
-              "submenu": []
-            },
-            {
-              "icon": "",
-              "routeUrl": ['/app/configuration/codes/modelpromo'],
-              "desc": "Promotion",
-              "submenu": []
-            }
-          ]
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/purchaseorder'],
-          "desc": "Purchase Order",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/purchaseorderdiscount'],
-          "desc": "Purchase Order Discount",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/sodiscount'],
-          "desc": "Sales Order Discount",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/soreferral'],
-          "desc": "Sales Order Referral",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/returnreason'],
-          "desc": "Return Reason",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/salesservicepersontype'],
-          "desc": "Sales/Service Person",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/serviceorder'],
-          "desc": "Service Order",
-          "submenu": []
-        },
-        {
-          "icon": "",
-          "routeUrl": ['/app/configuration/codes/serviceorderreason'],
-          "desc": "Service Order Reason",
-          "submenu": []
-        }
-	]
-	}
-	]
-},
-{
-  "icon": "build",
-  "routeUrl": [],
-  "desc": "System",
-  "submenu": []
-}
-
-  ];
-
   this.pages = [
     {
+      "title":"home",
       "icon": "home",
       "routeUrl": ['/home'],
       "category": "Dashboard",
       "subs": []
     },
     {
+      "title": "",
       "icon": "shopping_cart",
       "routeUrl": [],
       "category": "Sales",
       "subs": []
     },
     {
+      "title": "",
       "icon": "label",
       "routeUrl": [],
       "category": "Inventory",
       "subs": []
     },
     {
+      "title": "",
       "icon": "layers",
       "routeUrl": [],
       "category": "Merchandising",
       "subs": []
     },
     {
+      "title": "",
       "icon": "inbox",
       "routeUrl": [],
       "category": "A/R",
       "subs": []
     },
     {
+      "title": "",
       "icon": "exposure",
       "routeUrl": [],
       "category": "Accounting",
       "subs": []
     },
     {
+      "title": "",
       "icon": "exposure",
       "routeUrl": [],
       "category": "Reports",
       "subs": []
     },
     {
+      "title": "",
       "icon": "settings",
       "routeUrl": [],
       "category": "Configuration",
       "subs": [
         {
+          "title": "",
           "icon": "",
           "routeUrl": [],
           "subcategory": "Codes",
-          "manufactures": [
+          "subs": [
             {
+              "title": "advertising",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/advertising'],
-              "manufacture": "Advertising",
+              "subcategory": "Advertising",
               "subs": []
             },
             {
+              "title": "arfinance",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/arfinance'],
-              "manufacture": "A/R Finance",
+              "subcategory": "A/R Finance",
               "subs": []
             },
             {
+              "title": "Chargeback",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/chargeback'],
-              "manufacture": "Chargeback",
+              "subcategory": "Chargeback",
               "subs": []
             },
             {
+              "title": "followup",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/followup'],
-              "manufacture": "Follow Up",
+              "subcategory": "Follow Up",
               "subs": []
             },
             {
+              "title": "",
               "icon": "",
               "routeUrl": [],
-              "manufacture": "Inventory",
-              "subcat": [
+              "subcategory": "Inventory",
+              "subs": [
                 {
+                  "title": "inventoryadj",
                   "icon": "",
                   "routeUrl": ['/app/configuration/codes/inventory/inventoryadj'],
-                  "cat": "Adjustment",
+                  "subcategory": "Adjustment",
                   "subs": []
                 },
                 {
+                  "title": "inventorystatus",
                   "icon": "",
                   "routeUrl": ['/app/configuration/codes/inventory/inventorystatus'],
-                  "cat": "Status",
+                  "subcategory": "Status",
                   "subs": []
                 },
                 {
+                  "title": "inventorytran",
                   "icon": "",
                   "routeUrl": ['/app/configuration/codes/inventory/inventorytran'],
-                  "cat": "Transfer",
+                  "subcategory": "Transfer",
                   "subs": []
                 }
               ]
             },
             {
+              "title": "opportunity",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/opportunity'],
-              "manufacture": "Opportunity",
+              "subcategory": "Opportunity",
               "subs": []
             },
             {
+              "title": "opportunityresult",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/opportunityresult'],
-              "manufacture": "Opportunity Result",
+              "subcategory": "Opportunity Result",
               "subs": []
             },
             {
+              "title": "payablehold",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/payablehold'],
-              "manufacture": "Payable Hold",
+              "subcategory": "Payable Hold",
               "subs": []
             },
             {
+              "title": "",
               "icon": "",
               "routeUrl": [],
-              "manufacture": "Model",
-              "subcat": [
+              "subcategory": "Model",
+              "subs": [
                 {
+                  "title": "modelcost",
                   "icon": "",
                   "routeUrl": ['/app/configuration/codes/modelcost'],
-                  "cat": "Cost",
+                  "subcategory": "Cost",
                   "subs": []
                 },
                 {
+                  "title": "modeldiscontd",
                   "icon": "",
                   "routeUrl": ['/app/configuration/codes/modeldiscontd'],
-                  "cat": "Discontinued",
+                  "subcategory": "Discontinued",
                   "subs": []
                 },
                 {
+                  "title": "modelprice",
                   "icon": "",
                   "routeUrl": ['/app/configuration/codes/modelprice'],
-                  "cat": "Price",
+                  "subcategory": "Price",
                   "subs": []
                 },
                 {
+                  "title": "modelpromo",
                   "icon": "",
                   "routeUrl": ['/app/configuration/codes/modelpromo'],
-                  "cat": "Promotion",
+                  "subcategory": "Promotion",
                   "subs": []
                 }
               ]
             },
             {
+              "title": "purchaseorder",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/purchaseorder'],
-              "manufacture": "Purchase Order",
+              "subcategory": "Purchase Order",
               "subs": []
             },
             {
+              "title": "purchaseorderdiscount",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/purchaseorderdiscount'],
-              "manufacture": "Purchase Order Discount",
+              "subcategory": "Purchase Order Discount",
               "subs": []
             },
             {
+              "title": "sodiscount",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/sodiscount'],
-              "manufacture": "Sales Order Discount",
+              "subcategory": "Sales Order Discount",
               "subs": []
             },
             {
+              "title": "soreferral",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/soreferral'],
-              "manufacture": "Sales Order Referral",
+              "subcategory": "Sales Order Referral",
               "subs": []
             },
             {
+              "title": "returnreason",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/returnreason'],
-              "manufacture": "Return Reason",
+              "subcategory": "Return Reason",
               "subs": []
             },
             {
+              "title": "salesservicepersontype",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/salesservicepersontype'],
-              "manufacture": "Sales/Service Person",
+              "subcategory": "Sales/Service Person",
               "subs": []
             },
             {
+              "title": "serviceorder",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/serviceorder'],
-              "manufacture": "Service Order",
+              "subcategory": "Service Order",
               "subs": []
             },
             {
+              "title": "serviceorderreason",
               "icon": "",
               "routeUrl": ['/app/configuration/codes/serviceorderreason'],
-              "manufacture": "Service Order Reason",
+              "subcategory": "Service Order Reason",
               "subs": []
             }
           ]
@@ -435,6 +269,7 @@ this.sidenavArray=[
       ]
     },
     {
+      "title": "",
       "icon": "build",
       "routeUrl": [],
       "category": "System",
@@ -443,78 +278,41 @@ this.sidenavArray=[
 
   ];
 
-
+  }
+  
+  ngOnInit() {
+    console.log("init:: active::" + this.ismenuactive);
   }
 
 
-  changeShowStatus(item)
-  {
-  //this.showMenu = !this.showMenu;
-    return item = !item;
-}
-
-ngOnInit() {
-}
-
-  toggleLevel1(idx)
-  {
-    if (this.isLevel1Shown(idx)) {
-       this.showLevel1 = null;
-    }
-    else
+  
+  toggleView(ary, data, index) {
+    //console.log("Path:: " + this.route);
+    if (this.route != '')
     {
-      this.showLevel1 = idx;      
+      console.log("Path :: " + this.route);
+      var splitted = this.route.split("/");
+      this.page = splitted[splitted.length - 1];
+      //console.log("page :: " + this.page);
+      //console.log("page1 :: " + data.title);
+      if (this.page === data.title)
+      {this.color = "#2196f3";}
+      else
+      { this.color = "#515253";}
     }
-};
+    for (var i = 0; i < ary.length; i++) {
 
-  toggleLevel2(idx) {
-  if (this.isLevel2Shown(idx))
-  {
-    this.showLevel1 = null;
-    this.showLevel2 = null;
-  }
-  else
-  {
-    this.showLevel1 = idx;
-    this.showLevel2 = idx;
-    this.active = true;
+      if (i != index) {
+        ary[i].expanded = false;
+       
+      }
+      else {
+        data.expanded = !data.expanded;
+               
+        //console.log("index:: active::" + this.ismenuactive);
+      }
+    }
+
   }
 
-};
-
-toggleLevel3(idx)
-{
-  console.log("Level3:: " + idx);
-  if (this.isLevel3Shown(idx)) {
-    this.showLevel1 = null;
-    this.showLevel2 = null;
-    this.showLevel3 = null;
-  }
-  else {
-    this.showLevel1 = idx;
-    this.showLevel2 = idx;
-    this.showLevel3 = idx;
-  }
-}
-  isLevel1Shown(idx)
-  {
-    
-    return this.showLevel1 === idx;
-  };
-
-  isLevel2Shown(idx) {
-  return this.showLevel2 === idx;
-  };
-
-  isLevel3Shown(idx) {
-    //console.log("Level3:: " + this.showLevel3 === idx);
-    return this.showLevel3 === idx;
-  };
-  select(item) {
-    this.selected = (this.selected === item ? null : item);    
-  }
-  isActive(item) {
-    //console.log("Item:: " + item + " :: " + this.selected === item);
-    return this.selected === item;
-  }
 }

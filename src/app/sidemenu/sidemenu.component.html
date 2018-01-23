@@ -1,5 +1,230 @@
+<div id="dynamic-content" class="f-clear-padding">
+  <div class="md-accordion" *ngFor="let data of pages;let i=index">
+      <div (click)="toggleView(pages, data, i)" class="md-toolbar">
+        <div  class="md-toolbar-tools">
+          <div class="mh" ><a layout="row" href="#" [routerLink]="data.routeUrl"><mat-icon class="material-icons">{{data.icon}}</mat-icon><span [ngStyle]="{'color': color}">{{data.category}}</span></a></div>
+        </div>
+      </div>
+      <div [ngClass]="{dataContent:true,activeContent:data.expanded}">
+        <div style="padding: 10px 10px 10px 5px" class="md-accordion" *ngFor="let data1 of data.subs;let i1=index">
+          <div (click)="toggleView(data.subs, data1, i1)" class="md-toolbar">
+            <div class="md-toolbar-tools">
+              <div><a href="#" [routerLink]="data1.routeUrl"><mat-icon class="material-icons">{{data1.icon}}</mat-icon><span [ngStyle]="{'color': color}">{{data1.subcategory}}</span></a></div>
+            </div>
+          </div>
+          <div [ngClass]="{dataContent:true,activeContent:data1.expanded}">
+            <div style="padding: 10px 10px 10px 0" class="md-accordion" *ngFor="let data2 of data1.subs;let i2=index">
+              <div (click)="toggleView(data1.subs, data2, i2)" class="md-toolbar">
+                <div class="md-toolbar-tools">
+                  <div><a href="#" [routerLink]="data2.routeUrl"><mat-icon class="material-icons">{{data2.icon}}</mat-icon>{{data2.subcategory}}</a></div>
+                </div>
+              </div>
+              <div [ngClass]="{dataContent:true,activeContent:data2.expanded}">
+                <div style="padding-left:10px;" class="md-accordion" *ngFor="let data3 of data2.subs;let i3=index">
+                  <div class="md-toolbar-tools">
+                    <div><a href="#" [routerLink]="data3.routeUrl"><mat-icon class="material-icons">{{data3.icon}}</mat-icon>{{data3.subcategory}}</a></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
+<!--<ul style="list-style-type:none; padding-left:0px;">
+
+  <li class="ng-star-inserted" (click)="select('Dashboard')">
+    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" [ngClass]="{menuactive: isActive('Dashboard')}" [routerLink]="['/home']">
+      <mat-icon>home</mat-icon>&nbsp;&nbsp;<span>Dashboard</span>
+    </a>
+  </li>
+  <li class="ng-star-inserted" (click)="select('Sales')">
+    <a class="">
+      <mat-icon class="material-icons">shopping_cart</mat-icon>&nbsp;&nbsp; Sales
+    </a>
+  </li>
+  <li class="ng-star-inserted" (click)="select('Inventory')">
+    <a routerlinkactive="docs-component-viewer-sidenav-item-selected">
+      <mat-icon class="material-icons">label</mat-icon>&nbsp;&nbsp; Inventory
+    </a>
+  </li>
+  <li class="ng-star-inserted" (click)="select('Merchandising')">
+    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+      <mat-icon class="material-icons">layers</mat-icon>&nbsp;&nbsp; Merchandising
+    </a>
+  </li>
+  <li class="ng-star-inserted" (click)="select('A/R')">
+    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+      <mat-icon class="material-icons">inbox</mat-icon>&nbsp;&nbsp; A/R
+    </a>
+  </li>
+  <li class="ng-star-inserted" (click)="select('Accounting')">
+    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
+      <mat-icon class="material-icons">exposure</mat-icon>&nbsp;&nbsp; Accounting
+    </a>
+  </li>
+  <li class="ng-star-inserted" (click)="select('Reports')">
+    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+      <mat-icon class="material-icons">exposure</mat-icon>&nbsp;&nbsp; Reports
+    </a>
+  </li>
+  <li class="ng-star-inserted" (click)="select('Configuration')">
+    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" (click)="showFiller = !showFiller" style="cursor:pointer" [ngClass]="{menuactive: isActive('Configuration')}">
+      <mat-icon class="material-icons">settings</mat-icon>&nbsp;&nbsp; Configuration
+    </a>
+  </li>
+  <ul style="list-style-type:none;" *ngIf="showFiller">
+    <li class="ng-star-inserted" (click)="select('Codes')">
+      <a style="cursor:pointer" class="menu-active" [ngClass]="{menuactive: isActive('Configuration')}">
+        <span (click)="showFiller1 = !showFiller1">Codes</span>
+      </a>
+    </li>
+    <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFiller1">
+      <li class="ng-star-inserted" (click)="select('Additional Services')">
+        <a [routerLink]="['/app/configuration/codes/additionalservices']" [ngClass]="{menuactive: isActive('Additional Services')}">
+          <span>Additional Services</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Advertising')">
+        <a [routerLink]="['/app/configuration/codes/advertising']" [ngClass]="{menuactive: isActive('Advertising')}">
+          <span>Advertising</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('arfinance')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/arfinance']" [ngClass]="{menuactive: isActive('arfinance')}">
+          <span>A/R Finance</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('A/R Transaction')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/artransaction']"  [ngClass]="{menuactive: isActive('A/R Transaction')}">
+          <span>A/R Transaction</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Chargeback')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/chargeback']"  [ngClass]="{menuactive: isActive('Chargeback')}">
+          <span>Chargeback</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Follow Up')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/followup']"  [ngClass]="{menuactive: isActive('Follow Up')}">
+          <span>Follow Up</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('')">
+        <a style="cursor:pointer">
+          <span (click)="showFillerinventory = !showFillerinventory">Inventory</span>
+        </a>
+      </li>
+      <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillerinventory">
+        <li class="ng-star-inserted" (click)="select('Adjustment')">
+          <a [routerLink]="['/app/configuration/codes/inventory/inventoryadj']"  [ngClass]="{menuactive: isActive('Adjustment')}">
+            <span>Adjustment</span>
+          </a>
+        </li>
+        <li class="ng-star-inserted" (click)="select('Status')">
+          <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorystatus']"  [ngClass]="{menuactive: isActive('Status')}">
+            <span>Status</span>
+          </a>
+        </li>
+        <li class="ng-star-inserted" (click)="select('Transfer')">
+          <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorytran']"  [ngClass]="{menuactive: isActive('Transfer')}">
+            <span>Transfer</span>
+          </a>
+        </li>
+      </ul>
+      <li class="ng-star-inserted" (click)="select('Opportunity')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunity']"  [ngClass]="{menuactive: isActive('Opportunity')}">
+          <span>Opportunity</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Opportunity Result')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunityresult']"  [ngClass]="{menuactive: isActive('Opportunity Result')}">
+          <span>Opportunity Result</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Payable Hold')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/payablehold']"  [ngClass]="{menuactive: isActive('Payable Hold')}">
+          <span>Payable Hold</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('')">
+        <a style="cursor:pointer">
+          <span (click)="showFillermodel = !showFillermodel">Model</span>
+        </a>
+      </li>
+      <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillermodel">
+        <li class="ng-star-inserted" (click)="select('Cost')">
+          <a [routerLink]="['/app/configuration/codes/modelcost']"  [ngClass]="{menuactive: isActive('Cost')}">
+            <span>Cost</span>
+          </a>
+        </li>
+        <li class="ng-star-inserted" (click)="select('Discontinued')">
+          <a [routerLink]="['/app/configuration/codes/modeldiscontd']"  [ngClass]="{menuactive: isActive('Discontinued')}">
+            <span>Discontinued</span>
+          </a>
+        </li>
+        <li class="ng-star-inserted" (click)="select('Price')">
+          <a [routerLink]="['/app/configuration/codes/modelprice']"  [ngClass]="{menuactive: isActive('Price')}">
+            <span>Price</span>
+          </a>
+        </li>
+        <li class="ng-star-inserted" (click)="select('Promotion')">
+          <a [routerLink]="['/app/configuration/codes/modelpromo']"  [ngClass]="{menuactive: isActive('Promotion')}">
+            <span>Promotion</span>
+          </a>
+        </li>
+      </ul>
+      <li class="ng-star-inserted" (click)="select('Purchase Order')">
+        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/purchaseorder']"  [ngClass]="{menuactive: isActive('Purchase Order')}">
+          <span>Purchase Order</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Purchase Order Discount')">
+        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/purchaseorderdiscount']"  [ngClass]="{menuactive: isActive('Purchase Order Discount')}">
+          <span>Purchase Order Discount</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Sales Order Discount')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/sodiscount']"  [ngClass]="{menuactive: isActive('Sales Order Discount')}">
+          <span>Sales Order Discount</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Sales Order Referral')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/soreferral']"  [ngClass]="{menuactive: isActive('Sales Order Referral')}">
+          <span>Sales Order Referral</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Return Reason')">
+        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/returnreason']"  [ngClass]="{menuactive: isActive('Return Reason')}">
+          <span>Return Reason</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Sales/Service Person')">
+        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/salesservicepersontype']"  [ngClass]="{menuactive: isActive('Sales/Service Person')}">
+          <span>Sales/Service Person</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Service Order')">
+        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/serviceorder']"  [ngClass]="{menuactive: isActive('Service Order')}">
+          <span>Service Order</span>
+        </a>
+      </li>
+      <li class="ng-star-inserted" (click)="select('Service Order Reason')">
+        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/serviceorderreason']"  [ngClass]="{menuactive: isActive('Service Order Reason')}">
+          <span>Service Order Reason</span>
+        </a>
+      </li>
+    </ul>
+  </ul>
+  <li class="ng-star-inserted" (click)="select('')">
+    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
+      <mat-icon class="material-icons">build</mat-icon>&nbsp;&nbsp; System
+    </a>
+  </li>
+</ul>-->
 <!--<ul style="list-style-type:none; padding-left:0px;">
   <li *ngFor="let p of pages; let i=index" text-wrap  [ngClass]="{active: isActive(p.category)}" (click)="select(p.category);" class="ng-star-inserted">
     <a [routerLink]="p.routeUrl"><span>{{p.category}}</span></a>
@@ -20,10 +245,8 @@
             </ul>
         </li>
       </ul>
-  </li> 
+  </li>
 </ul>-->
-
-
 <!--<ul style="list-style-type:none; padding-left:0px;">
   <li class="ng-star-inserted" *ngFor="let sm of sidenavArray;let i= index of sidenavArray.length;">
     <span routerlinkactive="docs-component-viewer-sidenav-item-selected" *ngIf="sm.routeUrl.length !== 0 ">
@@ -42,7 +265,7 @@
                       <span (click)="showFiller2 = !showFiller2" style="cursor:pointer" class="menu-active">
                         <mat-icon class="material-icons">{{ssm.icon}}</mat-icon>&nbsp;&nbsp;
                           <span>{{ssm.desc}}</span>
-                      </span>          
+                      </span>
                       <ul style="list-style-type:none;" *ngIf="showFiller2">
                         <li class="ng-star-inserted" *ngFor="let sssm of ssm.submenu">
                           <a style="cursor:pointer" class="menu-active" [routerLink]="sssm.routeUrl">
@@ -57,7 +280,7 @@
                             </ul>
 
                           </a>
-                              
+
                         </li>
                       </ul>
                   </span>
@@ -73,197 +296,3 @@
       </span>
     </li>
 </ul>-->
-
-<ul style="list-style-type:none; padding-left:0px;">
-  
-  <li class="ng-star-inserted">
-    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
-      <mat-icon>home</mat-icon>&nbsp;&nbsp;<a routerlinkactive="" class="" [routerLink]="['/home']">
-        <span>Dashboard</span>
-      </a>
-    </a>
-  </li>
-  <li class="ng-star-inserted">
-    <a class="">
-      <mat-icon class="material-icons">shopping_cart</mat-icon>&nbsp;&nbsp; Sales
-    </a>
-  </li>
-  <li class="ng-star-inserted">
-    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-      <mat-icon class="material-icons">label</mat-icon>&nbsp;&nbsp; Inventory
-    </a>
-  </li>
-  <li class="ng-star-inserted">
-    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-      <mat-icon class="material-icons">layers</mat-icon>&nbsp;&nbsp; Merchandising
-    </a>
-  </li>
-  <li class="ng-star-inserted">
-    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-      <mat-icon class="material-icons">inbox</mat-icon>&nbsp;&nbsp; A/R
-    </a>
-  </li>
-  <li class="ng-star-inserted">
-    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="">
-      <mat-icon class="material-icons">exposure</mat-icon>&nbsp;&nbsp; Accounting
-    </a>
-  </li>
-  <li class="ng-star-inserted">
-    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-      <mat-icon class="material-icons">exposure</mat-icon>&nbsp;&nbsp; Reports
-    </a>
-  </li>
-  <li class="ng-star-inserted">
-    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" (click)="showFiller = !showFiller" style="cursor:pointer" class="menu-active">
-      <mat-icon class="material-icons">settings</mat-icon>&nbsp;&nbsp; Configuration
-    </a>
-  </li>
-  <ul style="list-style-type:none;" *ngIf="showFiller">
-    <li class="ng-star-inserted">
-      <a style="cursor:pointer" class="menu-active">
-        <span (click)="showFiller1 = !showFiller1">Codes</span>
-      </a>
-    </li>
-    <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFiller1">
-      <li class="ng-star-inserted">
-        <a [routerLink]="['/app/configuration/codes/additionalservices']">
-          <span>Additional Services</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a [routerLink]="['/app/configuration/codes/advertising']">
-          <span>Advertising</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/arfinance']">
-          <span>A/R Finance</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/artransaction']">
-          <span>A/R Transaction</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/chargeback']">
-          <span>Chargeback</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/followup']">
-          <span>Follow Up</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a style="cursor:pointer">
-          <span (click)="showFillerinventory = !showFillerinventory">Inventory</span>
-        </a>
-      </li>
-      <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillerinventory">
-        <li class="ng-star-inserted">
-          <a [routerLink]="['/app/configuration/codes/inventory/inventoryadj']">
-            <span>Adjustment</span>
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorystatus']">
-            <span>Status</span>
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/inventory/inventorytran']">
-            <span>Transfer</span>
-          </a>
-        </li>
-      </ul>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunity']">
-          <span>Opportunity</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/opportunityresult']">
-          <span>Opportunity Result</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/payablehold']">
-          <span>Payable Hold</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a style="cursor:pointer">
-          <span (click)="showFillermodel = !showFillermodel">Model</span>
-        </a>
-      </li>
-      <ul style="list-style-type:none; padding-left:20px;" *ngIf="showFillermodel">
-        <li class="ng-star-inserted">
-          <a [routerLink]="['/app/configuration/codes/modelcost']">
-            <span>Cost</span>
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a [routerLink]="['/app/configuration/codes/modeldiscontd']">
-            <span>Discontinued</span>
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a [routerLink]="['/app/configuration/codes/modelprice']">
-            <span>Price</span>
-          </a>
-        </li>
-        <li class="ng-star-inserted">
-          <a [routerLink]="['/app/configuration/codes/modelpromo']">
-            <span>Promotion</span>
-          </a>
-        </li>
-      </ul>
-      <li class="ng-star-inserted">
-        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/purchaseorder']">
-          <span>Purchase Order</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/purchaseorderdiscount']">
-          <span>Purchase Order Discount</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/sodiscount']">
-          <span>Sales Order Discount</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/soreferral']">
-          <span>Sales Order Referral</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a routerlinkactive="" class="" [routerLink]="['/app/configuration/codes/returnreason']">
-          <span>Return Reason</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/salesservicepersontype']">
-          <span>Sales/Service Person</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/serviceorder']">
-          <span>Service Order</span>
-        </a>
-      </li>
-      <li class="ng-star-inserted">
-        <a style="cursor:pointer" [routerLink]="['/app/configuration/codes/serviceorderreason']">
-          <span>Service Order Reason</span>
-        </a>
-      </li>
-    </ul>
-  </ul>
-  <li class="ng-star-inserted">
-    <a routerlinkactive="docs-component-viewer-sidenav-item-selected" href="" class="">
-      <mat-icon class="material-icons">build</mat-icon>&nbsp;&nbsp; System
-    </a>
-  </li>
-</ul>

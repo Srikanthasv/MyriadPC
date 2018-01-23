@@ -46,11 +46,7 @@ formSubmitted: boolean = false;
     if (this.loginForm.valid)
     {
       let link = ['/home'];
-     //  this.router.navigate(link);
-      //  localStorage.setItem('currentUser', JSON.stringify({ username: "username", token: "token" }));
-        //    this.authenticationService.getLoggedIn.emit(true);
-
-    if (form.username != '' || form.password != '') {
+      if (form.username != '' || form.password != '') {
       this.loginService.login(form.username, form.password)
         .subscribe(res => {
           this.authenticationService.getLoggedIn.emit(true);

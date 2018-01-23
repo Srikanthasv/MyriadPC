@@ -2,13 +2,100 @@ ul li {
   cursor: pointer;
 }
 
-/*.active {
-  color: blue;
-}*/
-
   .active ul {
     display: block !important;
   }
-.menuactive ul {
-  display: block !important;
+.menuactive {
+  color: #2196f3 !important;
+}
+
+/*  Accordian */
+.md-accordion .expandCollapse {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  font-size: 23px !important;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  display: block;
+  margin-top: -2px;
+  margin-left: -2px;
+  overflow: hidden;
+}
+
+  .md-accordion .expandCollapse:active {
+    border: 0px;
+  }
+
+  .md-accordion .expandCollapse:before, .md-accordion .expandCollapse:after {
+    width: 30px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 32px;
+    text-align: center;
+    -webkit-transition: .3s all ease-out;
+    transition: .3s all ease-out;
+  }
+
+  .md-accordion .expandCollapse:before {
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    content: "|";
+    margin-top: -3px;
+  }
+
+  .md-accordion .expandCollapse:after {
+    opacity: 1;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    content: "|";
+    margin-left: -3px;
+  }
+
+.md-accordion .active:before {
+  opacity: 1;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  margin-left: 3px;
+  margin-top: 0px;
+}
+
+.md-accordion .dataContent {
+  /*background: #F2F2F2;*/
+  height: 0px;
+  overflow: hidden;
+  -webkit-transition: .3s all ease-out;
+  transition: .3s all ease-out;
+}
+
+.md-accordion .activeContent {
+  height: auto;
+  padding: 0 0 0 10px;
+  display: block;
+}
+
+.md-accordion .md-toolbar {
+  cursor: pointer;
+  /*border-bottom: 1px solid rgb(63,107,181)*/
+  /*padding: 10px 0 10px 20px;*/
+}
+.md-accordion {
+  padding: 10px 0 15px 20px;
+}
+.md-accordion mat-icon, a {
+  text-decoration: none !important;
+  color: #515253;
+}
+
+.md-toolbar-tools a:active, a:hover, mat-icon:hover {
+  color: #2196f3;
+}
+
+.md-toolbar-tools span {
+  padding-left: 10px;
 }

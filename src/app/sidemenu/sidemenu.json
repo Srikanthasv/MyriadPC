@@ -1,0 +1,211 @@
+ [
+  {
+    "icon": "home",
+    "routeUrl": [ "/home" ],
+    "category": "Dashboard",
+    "subs": []
+  },
+  {
+    "icon": "shopping_cart",
+    "routeUrl": [],
+    "category": "Sales",
+    "subs": []
+  },
+  {
+    "icon": "label",
+    "routeUrl": [],
+    "category": "Inventory",
+    "subs": []
+  },
+  {
+    "icon": "layers",
+    "routeUrl": [],
+    "category": "Merchandising",
+    "subs": []
+  },
+  {
+    "icon": "inbox",
+    "routeUrl": [],
+    "category": "A/R",
+    "subs": []
+  },
+  {
+    "icon": "exposure",
+    "routeUrl": [],
+    "category": "Accounting",
+    "subs": []
+  },
+  {
+    "icon": "exposure",
+    "routeUrl": [],
+    "category": "Reports",
+    "subs": []
+  },
+  {
+    "icon": "settings",
+    "routeUrl": [],
+    "category": "Configuration",
+    "subs": [
+      {
+        "icon": "",
+        "routeUrl": [],
+        "subcategory": "Codes",
+        "subs": [
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/advertising" ],
+            "subcategory": "Advertising",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/arfinance" ],
+            "subcategory": "A/R Finance",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/chargeback" ],
+            "subcategory": "Chargeback",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/followup" ],
+            "subcategory": "Follow Up",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [],
+            "subcategory": "Inventory",
+            "subs": [
+              {
+                "icon": "",
+                "routeUrl": [ "/app/configuration/codes/inventory/inventoryadj" ],
+                "subcategory": "Adjustment",
+                "subs": []
+              },
+              {
+                "icon": "",
+                "routeUrl": [ "/app/configuration/codes/inventory/inventorystatus" ],
+                "subcategory": "Status",
+                "subs": []
+              },
+              {
+                "icon": "",
+                "routeUrl": [ "/app/configuration/codes/inventory/inventorytran" ],
+                "subcategory": "Transfer",
+                "subs": []
+              }
+            ]
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/opportunity" ],
+            "subcategory": "Opportunity",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/opportunityresult" ],
+            "subcategory": "Opportunity Result",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/payablehold" ],
+            "subcategory": "Payable Hold",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [],
+            "subcategory": "Model",
+            "subs": [
+              {
+                "icon": "",
+                "routeUrl": [ "/app/configuration/codes/modelcost" ],
+                "subcategory": "Cost",
+                "subs": []
+              },
+              {
+                "icon": "",
+                "routeUrl": [ "/app/configuration/codes/modeldiscontd" ],
+                "subcategory": "Discontinued",
+                "subs": []
+              },
+              {
+                "icon": "",
+                "routeUrl": [ "/app/configuration/codes/modelprice" ],
+                "subcategory": "Price",
+                "subs": []
+              },
+              {
+                "icon": "",
+                "routeUrl": [ "/app/configuration/codes/modelpromo" ],
+                "subcategory": "Promotion",
+                "subs": []
+              }
+            ]
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/purchaseorder" ],
+            "subcategory": "Purchase Order",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/purchaseorderdiscount" ],
+            "subcategory": "Purchase Order Discount",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/sodiscount" ],
+            "subcategory": "Sales Order Discount",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/soreferral" ],
+            "subcategory": "Sales Order Referral",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/returnreason" ],
+            "subcategory": "Return Reason",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/salesservicepersontype" ],
+            "subcategory": "Sales/Service Person",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/serviceorder" ],
+            "subcategory": "Service Order",
+            "subs": []
+          },
+          {
+            "icon": "",
+            "routeUrl": [ "/app/configuration/codes/serviceorderreason" ],
+            "subcategory": "Service Order Reason",
+            "subs": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "icon": "build",
+    "routeUrl": [],
+    "category": "System",
+    "subs": []
+  }
+
+]
