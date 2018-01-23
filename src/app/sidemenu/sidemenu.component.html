@@ -2,27 +2,27 @@
   <div class="md-accordion" *ngFor="let data of pages;let i=index">
       <div (click)="toggleView(pages, data, i)" class="md-toolbar">
         <div  class="md-toolbar-tools">
-          <div class="mh" ><a layout="row" href="#" [routerLink]="data.routeUrl"><mat-icon class="material-icons">{{data.icon}}</mat-icon><span [ngStyle]="{'color': color}">{{data.category}}</span></a></div>
+          <div class="mh" ><a layout="row" href="#" [routerLink]="data.routeUrl"><mat-icon class="material-icons">{{data.icon}}</mat-icon><span [ngStyle]="{'color': data.title === page ? '#2196f3' : '#515253'}">{{data.category}}</span></a></div>
         </div>
       </div>
       <div [ngClass]="{dataContent:true,activeContent:data.expanded}">
         <div style="padding: 10px 10px 10px 5px" class="md-accordion" *ngFor="let data1 of data.subs;let i1=index">
           <div (click)="toggleView(data.subs, data1, i1)" class="md-toolbar">
             <div class="md-toolbar-tools">
-              <div><a href="#" [routerLink]="data1.routeUrl"><mat-icon class="material-icons">{{data1.icon}}</mat-icon><span [ngStyle]="{'color': color}">{{data1.subcategory}}</span></a></div>
+              <div><a href="#" [routerLink]="data1.routeUrl"><mat-icon class="material-icons">{{data1.icon}}</mat-icon><span [ngStyle]="{'color': data1.title === page ? '#2196f3' : '#515253'}">{{data1.subcategory}}</span></a></div>
             </div>
           </div>
           <div [ngClass]="{dataContent:true,activeContent:data1.expanded}">
             <div style="padding: 10px 10px 10px 0" class="md-accordion" *ngFor="let data2 of data1.subs;let i2=index">
               <div (click)="toggleView(data1.subs, data2, i2)" class="md-toolbar">
                 <div class="md-toolbar-tools">
-                  <div><a href="#" [routerLink]="data2.routeUrl"><mat-icon class="material-icons">{{data2.icon}}</mat-icon>{{data2.subcategory}}</a></div>
+                  <div><a href="#" [routerLink]="data2.routeUrl"><mat-icon class="material-icons">{{data2.icon}}</mat-icon><span [ngStyle]="{'color': data2.title === page ? '#2196f3' : '#515253'}">{{data2.subcategory}}</span></a></div>
                 </div>
               </div>
               <div [ngClass]="{dataContent:true,activeContent:data2.expanded}">
                 <div style="padding-left:10px;" class="md-accordion" *ngFor="let data3 of data2.subs;let i3=index">
                   <div class="md-toolbar-tools">
-                    <div><a href="#" [routerLink]="data3.routeUrl"><mat-icon class="material-icons">{{data3.icon}}</mat-icon>{{data3.subcategory}}</a></div>
+                    <div><a href="#" [routerLink]="data3.routeUrl"><mat-icon class="material-icons">{{data3.icon}}</mat-icon><span [ngStyle]="{'color': data3.title === page ? '#2196f3' : '#515253'}">{{data3.subcategory}}</span></a></div>
                   </div>
                 </div>
             </div>

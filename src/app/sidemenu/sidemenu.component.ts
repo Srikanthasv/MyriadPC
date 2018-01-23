@@ -14,22 +14,32 @@ active: boolean = false;
 showMenu: boolean = false;
 selected: any;
 route: string;
-page: string = "";
+page: string = "home";
 color: string = "#515253";
 
   constructor(location: Location, router: Router) {
     router.events.subscribe((val) => {
-      if (location.path() != '') {
+      console.log("location :: " + location.path());
+      if (location.path() === undefined) {
+        this.route = 'home';
+      } else  {
         this.route = location.path();
-      } else {
-        this.route = 'Home'
       }
     });
-    //if (this.route != '' || this.route != null)
-    //{
-    //  var splitted = this.route.split("/");      
-    //  console.log("Path1:: " + this.route + " :: " + splitted);
-    //}
+    console.log("route:: " + this.route);
+   
+    if (this.route === undefined)
+    {
+      console.log("Path3:: " + this.route);
+      this.route = 'home';
+      this.page = 'home';
+    }
+    else if (this.route !== '' || this.route !== null)
+    {
+      var splitted = this.route.split("/");      
+      console.log("Path2:: " + this.route + " :: " + splitted);
+      this.page = splitted[splitted.length - 1];
+    }
     
   
   this.pages = [
@@ -94,6 +104,13 @@ color: string = "#515253";
           "routeUrl": [],
           "subcategory": "Codes",
           "subs": [
+            {
+              "title": "additionalservices",
+              "icon": "",
+              "routeUrl": ['/app/configuration/codes/additionalservices'],
+              "subcategory": "Additional Services",
+              "subs": []
+            },
             {
               "title": "advertising",
               "icon": "",
@@ -295,10 +312,10 @@ color: string = "#515253";
       this.page = splitted[splitted.length - 1];
       //console.log("page :: " + this.page);
       //console.log("page1 :: " + data.title);
-      if (this.page === data.title)
-      {this.color = "#2196f3";}
-      else
-      { this.color = "#515253";}
+      //if (this.page === data.title)
+      //{this.color = "#2196f3";}
+      //else
+      //{ this.color = "#515253";}
     }
     for (var i = 0; i < ary.length; i++) {
 
