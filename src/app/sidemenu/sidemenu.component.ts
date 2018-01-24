@@ -5,87 +5,74 @@ import { JsonService } from '../_services/json.service';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
 @Component({
-selector: 'app-sidemenu',
-templateUrl: './sidemenu.component.html',
-styleUrls: ['./sidemenu.component.css'],
+  selector: 'app-sidemenu',
+  templateUrl: './sidemenu.component.html',
+  styleUrls: ['./sidemenu.component.css'],
   providers: [JsonService]
 
 })
 export class SidemenuComponent implements OnInit {
-pages: any = [];
-ismenuactive: boolean = false;
-active: boolean = false;
-showMenu: boolean = false;
-selected: any;
-route: string;
-page: string = "home";
-color: string = "#515253";
+  pages: any = [];
+  ismenuactive: boolean = false;
+  active: boolean = false;
+  showMenu: boolean = false;
+  selected: any;
+  route: string;
+  page: string = "home";
+  color: string = "#515253";
 
-  constructor(location: Location, router: Router,private jsonService: JsonService) {
+  constructor(location: Location, router: Router, private jsonService: JsonService) {
     router.events.subscribe((val) => {
       console.log("location :: " + location.path());
       if (location.path() === undefined) {
         this.route = 'home';
-      } else  {
+      } else {
         this.route = location.path();
       }
     });
     console.log("route:: " + this.route);
-   
-    if (this.route === undefined)
-    {
+
+    if (this.route === undefined) {
       console.log("Path3:: " + this.route);
       this.route = 'home';
       this.page = 'home';
     }
-    else if (this.route !== '' || this.route !== null)
-    {
-      var splitted = this.route.split("/");      
+    else if (this.route !== '' || this.route !== null) {
+      var splitted = this.route.split("/");
       console.log("Path2:: " + this.route + " :: " + splitted);
       this.page = splitted[splitted.length - 1];
     }
-    
+
     this.jsonService.getSideMenuJson().subscribe(res => {
       this.pages = res;
-     
+
     },
-    err => {
-      console.log("error loading sidemenu json:" + err);
-    }
+      err => {
+        console.log("error loading sidemenu json:" + err);
+      }
     );
 
   }
-  
+
   ngOnInit() {
-    console.log("init:: active::" + this.ismenuactive);
+    
   }
 
 
-  
+
   toggleView(ary, data, index) {
-    //console.log("Path:: " + this.route);
-    if (this.route != '')
-    {
+    if (this.route != '') {
       console.log("Path :: " + this.route);
       var splitted = this.route.split("/");
       this.page = splitted[splitted.length - 1];
-      //console.log("page :: " + this.page);
-      //console.log("page1 :: " + data.title);
-      //if (this.page === data.title)
-      //{this.color = "#2196f3";}
-      //else
-      //{ this.color = "#515253";}
     }
     for (var i = 0; i < ary.length; i++) {
 
       if (i != index) {
         ary[i].expanded = false;
-       
       }
       else {
         data.expanded = !data.expanded;
-               
-        //console.log("index:: active::" + this.ismenuactive);
       }
     }
 
