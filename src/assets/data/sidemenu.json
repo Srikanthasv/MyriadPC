@@ -82,6 +82,13 @@
               "subs": []
             },
             {
+              "title": "artransaction",
+              "icon": "",
+              "routeUrl": ["/app/configuration/codes/artransaction"],
+              "subcategory": "A/R Transaction Codes ",
+              "subs": []
+            },
+            {
               "title": "Chargeback",
               "icon": "",
               "routeUrl": ["/app/configuration/codes/chargeback"],
@@ -233,12 +240,20 @@
             {
               "title": "serviceorderreason",
               "icon": "",
-              "routeUrl": ["/app/configuration/codes/serviceorderreason"],
+              "routeUrl": [ "/app/configuration/codes/serviceorderreason" ],
               "subcategory": "Service Order Reason",
               "subs": []
             }
           ]
+        },
+        {
+          "title": "companies",
+          "icon": "",
+          "routeUrl": ["app/configuration/companies/companies"],
+          "subcategory": "Companies",
+          "subs":[]
         }
+
       ]
     },
     {
