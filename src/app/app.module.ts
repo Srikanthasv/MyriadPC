@@ -80,6 +80,7 @@ import { AuthenticationServiceService } from './_services/authentication-service
 import { AppSettings } from './_services/AppSettings';
 import { AdditionalservicesComponent } from './Configuration/Codes/additionalservices/additionalservices.component';
 import { ARtransactionComponent } from './Configuration/Codes/artransaction/artransaction.component';
+import { CompaniesComponent } from './Configuration/companies/companies.component';
 
 
 @NgModule({
@@ -147,7 +148,8 @@ exports: [
      ServiceorderreasonComponent,
      HeaderComponent,
      SidemenuComponent,
-     FooterComponent
+     FooterComponent,
+     CompaniesComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,

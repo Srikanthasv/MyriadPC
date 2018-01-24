@@ -28,6 +28,7 @@ import { ServiceorderComponent } from './Configuration/Codes/serviceorder/servic
 import { ServiceorderreasonComponent } from './Configuration/Codes/serviceorderreason/serviceorderreason.component';
 import { AdditionalservicesComponent } from './Configuration/Codes/additionalservices/additionalservices.component';
 import { ARtransactionComponent } from './Configuration/Codes/artransaction/artransaction.component';
+import { CompaniesComponent } from './Configuration/companies/companies.component';
 
 // Route Configuration  
 export const routes: Routes = [  
@@ -57,7 +58,8 @@ export const routes: Routes = [
   { path: 'app/configuration/codes/serviceorder', component: ServiceorderComponent },
   { path: 'app/configuration/codes/serviceorderreason', component: ServiceorderreasonComponent },
   { path: 'app/configuration/codes/additionalservices', component: AdditionalservicesComponent },
-  { path: 'app/configuration/codes/artransaction', component: ARtransactionComponent }
+  { path: 'app/configuration/codes/artransaction', component: ARtransactionComponent },
+  { path: 'app/configuration/companies/companies', component: CompaniesComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);  
