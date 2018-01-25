@@ -61,6 +61,12 @@
             <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
             <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
           </div>
+          <div layout="row">
+            <mat-slide-toggle flex="50" flex-sm="50" flex-md="50" color="primary" [(ngModel)]="IsSellable">Sellable</mat-slide-toggle>
+            <mat-slide-toggle flex="50" flex-sm="50" flex-md="50" color="primary" [(ngModel)]="NeedApproval">Requires Approval</mat-slide-toggle>
+          </div>
+          Sell:: {{this.IsSellable}}
+          Approve:: {{this.NeedApproval}}
           <br /><br />
           <div class="" align="right">
             <div class="">

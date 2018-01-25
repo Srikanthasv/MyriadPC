@@ -30,8 +30,8 @@ export class InventorystatusComponent implements OnInit {
   editFlag: boolean = false;
   effectiveDate: any;
   discontinuedDate: any;
-  IsSellable: string = "false";
-  NeedApproval: string = "false";
+  IsSellable: boolean = false;
+  NeedApproval: boolean = false;
 
   editdescription: any;
   prevDescription: any;
