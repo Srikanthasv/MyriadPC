@@ -11,7 +11,7 @@
         <mat-form-field flex="50" flex-sm="50" flex-md="50">
           <mat-select placeholder="Sort By" [(ngModel)]="sortby">
             <mat-option value="Code" selected="selected">Code</mat-option>
-            <mat-option value="Description">Description</mat-option>
+            <mat-option value="companyName">Name</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:10px;">
@@ -22,8 +22,8 @@
         </mat-form-field>
       </mat-card><br><br>
       <mat-card style="float:right;">
-        <button type="button" mat-raised-button class="" (click)="clearFUsort()" style="line-height:36px">CLEAR</button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" mat-raised-button color="primary" class="" (click)="sortFUcodes();sidenav1.close();" style="line-height:36px">SEARCH</button>
+        <button type="button" mat-raised-button class="" (click)="clearsort()" style="line-height:36px">CLEAR</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" mat-raised-button color="primary" class="" (click)="sortCompanies();sidenav1.close();" style="line-height:36px">SEARCH</button>
       </mat-card>
     </div>
   </mat-sidenav>
@@ -32,47 +32,139 @@
   <div class="page-inner">
 
     <div class="page-title rightside-title">
-      <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addFUcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
-      <button id="editback" *ngIf="editFlag" (click)="editFUcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
+      <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
+      <button id="editback" *ngIf="editFlag" (click)="editcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
     </div>
     <div id="main-wrapper" class="mat-sidenav-margin">
       <!-- Add CODES Start -->
       <div class="rightside-content" *ngIf="addFlag">
-        <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="saveFUcode(codeForm.value)" novalidate>
-          <div class="mat-warn">{{errormsg}}</div><br />
-          <div layout="row">
-            <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-              <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
-              <mat-hint placeholder="Code" align="end">{{code.length || 0}}/6</mat-hint>
-              <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
-                This is required
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-              <input matInput placeholder="Description" [(ngModel)]="description" name="description" [formControl]="codeForm.controls['description']" required maxlength="30">
-              <mat-hint placeholder="Description" align="end">{{description.length || 0}}/30</mat-hint>
-              <mat-error *ngIf="codeForm.controls['description'].hasError('required') ">
-                This is required
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div layout="row">
-            <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
-            <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
-          </div>
-          <br /><br />
-          <div class="" align="right">
-            <div class="">
-              <button mat-raised-button type="button" (click)="clearFUaddcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
-              <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
+        <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="saveCompany(codeForm.value)" novalidate>
+            <div class="mat-warn">{{errormsg}}</div><br />
+            <div layout="row">
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
+                <mat-hint placeholder="Code" align="end">{{code.length || 0}}/6</mat-hint>
+                <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
+                  This is required
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Company Name" [(ngModel)]="companyName" name="company Name" [formControl]="codeForm.controls['companyName']" required maxlength="60">
+                <mat-hint placeholder="company Name" align="end">{{companyName.length || 0}}/60</mat-hint>
+                <mat-error *ngIf="codeForm.controls['companyName'].hasError('required') ">
+                  This is required
+                </mat-error>
+              </mat-form-field>
             </div>
-          </div>
+            <div layout="row">
+              <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
+              <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
+            </div>
+             <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Division Code" [(ngModel)]="division" name="code" [formControl]="codeForm.controls['division']" required maxlength="6">
+                  <mat-hint placeholder="Division Code" align="end">{{division.length || 0}}/6</mat-hint>
+                  <mat-error *ngIf="codeForm.controls['division'].hasError('required') ">
+                    This is required
+                  </mat-error>
+                </mat-form-field>
+               <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                 <input matInput placeholder="Division Description" [(ngModel)]="divDesc" name="divDesc" [formControl]="codeForm.controls['divDesc']" required maxlength="60">
+                 <mat-hint placeholder="Division Description" align="end">{{divDesc.length || 0}}/60</mat-hint>
+                 <mat-error *ngIf="codeForm.controls['divDesc'].hasError('required') ">
+                   This is required
+                 </mat-error>
+               </mat-form-field>
+             </div>
+              <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Dba" [(ngModel)]="dba" name="dba" [formControl]="codeForm.controls['dba']" maxlength="20">
+                  <mat-hint placeholder="Dba" align="end">{{dba.length || 0}}/20</mat-hint>
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Tax ID" [(ngModel)]="taxId" name="taxId" [formControl]="codeForm.controls['taxId']" maxlength="20">
+                  <mat-hint placeholder="Tax ID" align="end">{{taxId.length || 0}}/20</mat-hint>
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Contact" [(ngModel)]="contact" name="contact" [formControl]="codeForm.controls['contact']" maxlength="50">
+                  <mat-hint placeholder="Contact" align="end">{{contact.length || 0}}/50</mat-hint>
+                </mat-form-field>
+              </div>
+              <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Address 1" [(ngModel)]="addr1" name="addr1" [formControl]="codeForm.controls['addr1']" maxlength="50">
+                  <mat-hint placeholder="Address 1" align="end">{{addr1.length || 0}}/50</mat-hint>
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Address 2" [(ngModel)]="addr2" name="addr2" [formControl]="codeForm.controls['addr2']" maxlength="50">
+                  <mat-hint placeholder="Address 2" align="end">{{addr2.length || 0}}/50</mat-hint>
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Address 3" [(ngModel)]="addr3" name="addr3" [formControl]="codeForm.controls['addr3']" maxlength="50">
+                  <mat-hint placeholder="Address 3" align="end">{{addr3.length || 0}}/50</mat-hint>
+                </mat-form-field>
+              </div>
+            <div layout="row">
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="City" [(ngModel)]="city" name="city" [formControl]="codeForm.controls['city']" maxlength="40">
+                <mat-hint placeholder="City" align="end">{{city.length || 0}}/40</mat-hint>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="State" [(ngModel)]="state" name="state" [formControl]="codeForm.controls['state']" maxlength="5">
+                <mat-hint placeholder="State" align="end">{{state.length || 0}}/5</mat-hint>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Postal Code" [(ngModel)]="postalcode" name="postalcode" [formControl]="codeForm.controls['postalcode']" maxlength="10">
+                <mat-hint placeholder="Postal Code" align="end">{{postalcode.length || 0}}/10</mat-hint>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <mat-select placeholder="Country" [(ngModel)]="cntyselected" [formControl]="codeForm.controls['country']">
+                  <mat-option *ngFor="let l of countryData; let i = index" class="multiple-field-box" [value]="l.Id">
+                    {{ l.Name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div layout="row">
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Website" [(ngModel)]="website" name="website" [formControl]="codeForm.controls['website']" maxlength="50">
+                <mat-hint placeholder="Website" align="end">{{website.length || 0}}/50</mat-hint>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Email Address" [(ngModel)]="email" name="email" [formControl]="codeForm.controls['email']" maxlength="150">
+                <mat-hint placeholder="Email Address" align="end">{{email.length || 0}}/150</mat-hint>
+              </mat-form-field>
+            </div>
+            <div layout="row">
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Phone Number" [(ngModel)]="phno" name="phno" [formControl]="codeForm.controls['phno']" maxlength="20">
+                <mat-hint placeholder="Phone Number" align="end">{{phno.length || 0}}/20</mat-hint>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Extension" [(ngModel)]="extension" name="extension" [formControl]="codeForm.controls['extension']" maxlength="5">
+                <mat-hint placeholder="Extension" align="end">{{extension.length || 0}}/5</mat-hint>
+              </mat-form-field>
+            </div>
+            <div layout="row">
+              <mat-form-field flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Effective Date" [min]="dtToday" [matDatepicker]="dp3" [(ngModel)]="effectiveDate" [ngModelOptions]="{standalone: true}" name="effectiveDate" disabled>
+                <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
+                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <br /><br />
+            <div class="" align="right">
+              <div class="">
+                <button mat-raised-button type="button" (click)="clearContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
+              </div>
+            </div>
         </form>
       </div>
       <!-- Add CODES end -->
       <!-- for edit CODES start -->
       <div class="rightside-content" *ngIf="editFlag">
-        <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="updateFUeditcode(editcode,codeeditForm.value)" novalidate>
+        <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="updateCompany(editcode,codeeditForm.value)" novalidate>
           <!--<br/><br/>-->
           <div class="mat-warn">{{editerrormsg}}</div><br />
 
@@ -103,7 +195,7 @@
           </div>
           <div class="" align="right">
             <div class="">
-              <button mat-raised-button type="button" (click)="clearFUeditcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button mat-raised-button type="button" (click)="cleareditcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
               <button mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
             </div>
           </div>
@@ -112,14 +204,15 @@
       </div>
       <!-- edit CODES end -->
       <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="displayFlag">
-        <mat-icons class="material-icons" (click)="callFUCodes();" flex="1">add</mat-icons><span (click)="callFUCodes();" style="color:white">&nbsp;CODE</span>
+        <mat-icons class="material-icons" (click)="callcodes();" flex="1">add</mat-icons><span (click)="callcodes();" style="color:white">&nbsp;CODE</span>
         <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;FILTER</span>
       </mat-content>
       <table class="table1 tblborder" width="100%" *ngIf="displayFlag" cellpadding="0" cellspacing="0">
         <tr *ngFor="let row of pagedItems" class="tblbordertr">
-          <td style="width:40%;">{{row.Code}} <br> Description: {{row.Description}}</td>
-          <td style="width:40%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
-          <td style="width:10%;"><a style="cursor:pointer" (click)="editFUcodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+          <td style="width:30%;">{{row.Code}} <br> Company Name: {{row.CompanyName}}</td>
+          <td style="width:30%;">Contact:  <br> Dba: {{row.Dba}}</td>
+          <td style="width:30%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
+          <td style="width:10%;"><a style="cursor:pointer" (click)="setCompanydetails(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
         </tr>
         <tr>
           <td colspan="3" align="right">

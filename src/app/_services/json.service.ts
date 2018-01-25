@@ -10,7 +10,7 @@ export class JsonService {
   public getSideMenuJson() {
         return this.http.get(this.sidemenuPath)
       .map((response: Response) => {
-        console.log("sidemenu="+response);
+        //console.log("sidemenu="+response);
         let Data = response.json() ;
         if (Data) {
           return response.json();

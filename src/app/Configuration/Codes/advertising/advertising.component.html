@@ -98,7 +98,7 @@
               <input matInput placeholder="Effective Date" disabled value="{{effectiveDate | date: 'MM/dd/yyyy'}}">
             </mat-form-field>
             <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
-              <input matInput placeholder="Discontinued Date" [min]="effectiveDate" [matDatepicker]="dp3" [(ngModel)]="discontinuedDate" [ngModelOptions]="{standalone: true}" name="discontinuedDate" disabled>
+              <input matInput placeholder="Discontinued Date" [min]="effectiveDate | date: 'MM/dd/yyyy'" [matDatepicker]="dp3" [(ngModel)]="discontinuedDate" [ngModelOptions]="{standalone: true}" name="discontinuedDate" disabled>
               <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
               <mat-datepicker #dp3 disabled="false"></mat-datepicker>
             </mat-form-field>

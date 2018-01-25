@@ -20,7 +20,6 @@ export class FooterComponent implements OnInit {
   }
   ngOnInit() {
     this.zone.run(() => {
-      console.log('---' + this.user);
       var obj1 = JSON.parse(localStorage.getItem('currentUser'));
       //alert(obj1);
       if (obj1 != 'undefined' && obj1 != null) {

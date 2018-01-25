@@ -23,23 +23,23 @@ export class SidemenuComponent implements OnInit {
 
   constructor(location: Location, router: Router, private jsonService: JsonService) {
     router.events.subscribe((val) => {
-      console.log("location :: " + location.path());
+      //console.log("location :: " + location.path());
       if (location.path() === undefined) {
         this.route = 'home';
       } else {
         this.route = location.path();
       }
     });
-    console.log("route:: " + this.route);
+    //console.log("route:: " + this.route);
 
     if (this.route === undefined) {
-      console.log("Path3:: " + this.route);
+      //console.log("Path3:: " + this.route);
       this.route = 'home';
       this.page = 'home';
     }
     else if (this.route !== '' || this.route !== null) {
       var splitted = this.route.split("/");
-      console.log("Path2:: " + this.route + " :: " + splitted);
+      //console.log("Path2:: " + this.route + " :: " + splitted);
       this.page = splitted[splitted.length - 1];
     }
 
@@ -62,7 +62,7 @@ export class SidemenuComponent implements OnInit {
 
   toggleView(ary, data, index) {
     if (this.route != '') {
-      console.log("Path :: " + this.route);
+      //console.log("Path :: " + this.route);
       var splitted = this.route.split("/");
       this.page = splitted[splitted.length - 1];
     }

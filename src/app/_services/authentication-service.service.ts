@@ -14,7 +14,7 @@ export class AuthenticationServiceService {
 
  constructor() {
   var obj1 = JSON.parse(localStorage.getItem('currentUser'));
-  console.log("______"+obj1);
+  
  	if(obj1 != 'undefined' && obj1!= null){
  		this.getLoggedIn.emit(true);
    }

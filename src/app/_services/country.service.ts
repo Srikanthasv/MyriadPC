@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Observable';
 import { AppSettings } from './AppSettings';
 
 @Injectable()
-export class CompaniesService {
+export class CountryService {
   public token: string;
 
   constructor(private http: Http, private router: Router) {
@@ -36,9 +36,9 @@ export class CompaniesService {
     return options;
   }
 
-  getCompanies() {
+  getCountries() {
     let options = this.getOptions('');
-    return this.http.get(AppSettings.MONOLITHENDPOINT + "api/Company/", options)
+    return this.http.get(AppSettings.MONOLITHENDPOINT + "api/AddressCountry/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -47,40 +47,6 @@ export class CompaniesService {
           return "";
         }
       });
-  }
-
-  submitCompany(body) {
-    let options = this.getOptions("ctype");
-    console.log("options :: " + options);
-    console.log("Body :: " + body);
-    return this.http.post(AppSettings.MONOLITHENDPOINT + "api/Company", body, options)
-      .map((response: Response) => {
-        let Data = response.json() && response.json().Data;
-        if (Data) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-  }
-
-  updateCompany(Id, body) {
-    var strUrl = AppSettings.MONOLITHENDPOINT + "api/Company/";
-    strUrl = strUrl.concat(Id)
-    let options = this.getOptions("ctype");
-    return this.http.put(strUrl, body, options)
-      .map((response: Response) => {
-        let Data = response.json() && response.json().Data;
-        if (Data) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-  }
-
-  deleteCompany(Id, body) {
-
   }
 
 }
