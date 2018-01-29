@@ -85,7 +85,7 @@
               "title": "artransaction",
               "icon": "",
               "routeUrl": ["/app/configuration/codes/artransaction"],
-              "subcategory": "A/R Transaction Codes ",
+              "subcategory": "A/R Transaction",
               "subs": []
             },
             {

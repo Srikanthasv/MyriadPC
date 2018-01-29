@@ -55,39 +55,20 @@
                   This is required
                 </mat-error>
               </mat-form-field>
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Dba" [(ngModel)]="dba" name="dba" [formControl]="codeForm.controls['dba']" maxlength="20">
+                <mat-hint placeholder="Dba" align="end">{{dba.length || 0}}/20</mat-hint>
+              </mat-form-field>
             </div>
             <div layout="row">
               <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
               <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
             </div>
-             <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Division Code" [(ngModel)]="division" name="code" [formControl]="codeForm.controls['division']" required maxlength="6">
-                  <mat-hint placeholder="Division Code" align="end">{{division.length || 0}}/6</mat-hint>
-                  <mat-error *ngIf="codeForm.controls['division'].hasError('required') ">
-                    This is required
-                  </mat-error>
-                </mat-form-field>
-               <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                 <input matInput placeholder="Division Description" [(ngModel)]="divDesc" name="divDesc" [formControl]="codeForm.controls['divDesc']" required maxlength="60">
-                 <mat-hint placeholder="Division Description" align="end">{{divDesc.length || 0}}/60</mat-hint>
-                 <mat-error *ngIf="codeForm.controls['divDesc'].hasError('required') ">
-                   This is required
-                 </mat-error>
-               </mat-form-field>
-             </div>
-              <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Dba" [(ngModel)]="dba" name="dba" [formControl]="codeForm.controls['dba']" maxlength="20">
-                  <mat-hint placeholder="Dba" align="end">{{dba.length || 0}}/20</mat-hint>
-                </mat-form-field>
+             
+              <div layout="row">                
                 <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
                   <input matInput placeholder="Tax ID" [(ngModel)]="taxId" name="taxId" [formControl]="codeForm.controls['taxId']" maxlength="20">
                   <mat-hint placeholder="Tax ID" align="end">{{taxId.length || 0}}/20</mat-hint>
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Contact" [(ngModel)]="contact" name="contact" [formControl]="codeForm.controls['contact']" maxlength="50">
-                  <mat-hint placeholder="Contact" align="end">{{contact.length || 0}}/50</mat-hint>
                 </mat-form-field>
               </div>
               <div layout="row">
@@ -209,7 +190,7 @@
       </mat-content>
       <table class="table1 tblborder" width="100%" *ngIf="displayFlag" cellpadding="0" cellspacing="0">
         <tr *ngFor="let row of pagedItems" class="tblbordertr">
-          <td style="width:30%;">{{row.Code}} <br> Company Name: {{row.CompanyName}}</td>
+          <td style="width:30%;">{{row.Code}} <br> Company Name: {{row.Address.CompanyName}}</td>
           <td style="width:30%;">Contact:  <br> Dba: {{row.Dba}}</td>
           <td style="width:30%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
           <td style="width:10%;"><a style="cursor:pointer" (click)="setCompanydetails(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>

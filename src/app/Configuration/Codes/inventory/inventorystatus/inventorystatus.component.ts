@@ -32,6 +32,9 @@ export class InventorystatusComponent implements OnInit {
   discontinuedDate: any;
   IsSellable: boolean = false;
   NeedApproval: boolean = false;
+  editIsSellable: boolean = false;
+  editNeedApproval: boolean = false;
+  checked = false;
 
   editdescription: any;
   prevDescription: any;
@@ -81,7 +84,9 @@ export class InventorystatusComponent implements OnInit {
   ngOnInit() {
     this.codeForm = this.fb.group({
       'code': [null, Validators.compose([Validators.required])],
-      'description': [null, Validators.compose([Validators.required])]
+      'description': [null, Validators.compose([Validators.required])],
+      'IsSellable': [null],
+      'NeedApproval': [null]
     });
     this.codeeditForm = this.fb.group({
       'editdescription': [null, Validators.compose([Validators.required])],
@@ -171,7 +176,7 @@ export class InventorystatusComponent implements OnInit {
         );
     }
   }
-  editIScodes(id, code, desc, startDate, endDate) {
+  editIScodes(id, code, desc, startDate, endDate, isSellable, needApproval) {
     this.editFlag = true;
     this.displayFlag = false;
     this.editcode = code;
@@ -185,6 +190,8 @@ export class InventorystatusComponent implements OnInit {
       this.discontinuedDate = splitted[0];
     }
     this.id = id;
+    this.editIsSellable = isSellable;
+    this.editNeedApproval = needApproval;
     this.prevDiscDate = endDate;
     this.editerrormsg = "";
     this.editcodeerrorMsg = "";
@@ -210,8 +217,8 @@ export class InventorystatusComponent implements OnInit {
         "Id": this.id,
         "Code": this.editcode,
         "Description": this.editdescription,
-        "IsSellable": this.IsSellable,
-        "NeedApproval": this.NeedApproval,
+        "IsSellable": this.editIsSellable,
+        "NeedApproval": this.editNeedApproval,
         "StartDate": this.effectiveDate,
         "EndDate": this.discontinuedDate
       });

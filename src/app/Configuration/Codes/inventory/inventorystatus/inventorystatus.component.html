@@ -61,12 +61,12 @@
             <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
             <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
           </div>
+          <div layout="row">&nbsp;</div>
+          <div layout="row">&nbsp;</div>
           <div layout="row">
-            <mat-slide-toggle flex="50" flex-sm="50" flex-md="50" color="primary" [(ngModel)]="IsSellable">Sellable</mat-slide-toggle>
-            <mat-slide-toggle flex="50" flex-sm="50" flex-md="50" color="primary" [(ngModel)]="NeedApproval">Requires Approval</mat-slide-toggle>
+            <mat-slide-toggle flex="50" flex-sm="50" flex-md="50" color="primary" name="IsSellable" [(ngModel)]="IsSellable" [ngModelOptions]="{standalone: true}">Sellable</mat-slide-toggle>
+            <mat-slide-toggle flex="50" flex-sm="50" flex-md="50" color="primary" name="NeedApproval" [(ngModel)]="NeedApproval" [ngModelOptions]="{standalone: true}">Requires Approval</mat-slide-toggle>
           </div>
-          Sell:: {{this.IsSellable}}
-          Approve:: {{this.NeedApproval}}
           <br /><br />
           <div class="" align="right">
             <div class="">
@@ -98,6 +98,13 @@
             </mat-form-field>
           </div>
           <div layout="row"><span flex="50">&nbsp;</span><span class="mat-warn" flex="50" style="margin-left:20px;">{{editdescerrorMsg}}</span></div>
+          <div layout="row">&nbsp;</div>
+          <div layout="row">
+            <mat-slide-toggle flex="50" flex-sm="50" flex-md="50" color="primary" name="editIsSellable" [(ngModel)]="editIsSellable" [ngModelOptions]="{standalone: true}">Sellable</mat-slide-toggle>
+            <mat-slide-toggle flex="50" flex-sm="50" flex-md="50" color="primary" name="editNeedApproval" [(ngModel)]="editNeedApproval" [ngModelOptions]="{standalone: true}">Requires Approval</mat-slide-toggle>
+          </div>
+          <div layout="row">&nbsp;</div>
+          <div layout="row">&nbsp;</div>
           <div layout="row">
             <mat-form-field flex="50" flex-sm="50" flex-md="50">
               <input matInput placeholder="Effective Date" disabled value="{{effectiveDate | date: 'MM/dd/yyyy'}}">
@@ -108,6 +115,7 @@
               <mat-datepicker #dp3 disabled="false"></mat-datepicker>
             </mat-form-field>
           </div>
+          
           <div class="" align="right">
             <div class="">
               <button mat-raised-button type="button" (click)="clearISeditcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -126,7 +134,7 @@
         <tr *ngFor="let row of pagedItems" class="tblbordertr">
           <td style="width:40%;">{{row.Code}} <br> Description: {{row.Description}}</td>
           <td style="width:40%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
-          <td style="width:10%;"><a style="cursor:pointer" (click)="editIScodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+          <td style="width:10%;"><a style="cursor:pointer" (click)="editIScodes(row.Id,row.Code,row.Description,row.StartDate,row.EndDate,row.IsSellable,row.NeedApproval);"><i class="material-icons">create</i> EDIT </a></td>
         </tr>
         <tr>
           <td colspan="3" align="right">
@@ -177,5 +185,5 @@
       </table>
     </div>
   </div>
-  </mat-sidenav-container>
+</mat-sidenav-container>
 
