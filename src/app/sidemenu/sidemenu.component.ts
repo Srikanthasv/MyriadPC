@@ -26,6 +26,7 @@ export class SidemenuComponent implements OnInit {
       //console.log("location :: " + location.path());
       if (location.path() === undefined) {
         this.route = 'home';
+        //AppSettings. isHeader
       } else {
         this.route = location.path();
       }

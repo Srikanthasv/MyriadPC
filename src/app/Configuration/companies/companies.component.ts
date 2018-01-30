@@ -23,8 +23,17 @@ export class CompaniesComponent implements OnInit {
   public codesList: any = "";
   countryList: any = "";
   countryData: any[];
+  stateList: any = "";
+  stateData: any[];
   public codeForm: FormGroup;
   codeeditForm: FormGroup;
+  PhoneForm: FormGroup;
+  editPhoneForm: FormGroup;
+  EmailForm: FormGroup;
+  editEmailForm: FormGroup;
+  DivisionForm: FormGroup;
+  editDivisionForm: FormGroup;
+
   sortby: any;
   sortorder: any;
   data: any[];
@@ -32,6 +41,10 @@ export class CompaniesComponent implements OnInit {
   pager: any = {};
   pagedItems: any[];
   selectpage: number = 1;
+
+  selPhone: number = 1;
+  PhpagedItems: any[];
+  Phpager: any = {};
   rowspage: number = 5;
   displayFlag: boolean = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -46,19 +59,21 @@ export class CompaniesComponent implements OnInit {
   prevDiscDate: any;
   editcode: any;
   id: any;
+  AddressId: any;
   acToken: any;
   codeerrorMsg: string = '';
   descerrorMsg: string = '';
+  addr1errorMsg: string = '';
   editcodeerrorMsg: string = '';
   editdescerrorMsg: string = '';
+  eaddr1errorMsg: string = "";
   errormsg: string;
   bReturn: boolean = false;
   editerrormsg: string = "";
   minDate: Date;
   addFlag: boolean = false;
   companyName: string = "";
-  division: string = "";
-  divDesc: string = "";
+  
   dba: string = "";
   taxId: string = "";
   contact: string = "";
@@ -68,13 +83,73 @@ export class CompaniesComponent implements OnInit {
   city: string = "";
   state: string = "";
   postalcode: string = "";
+
   country: string = "";
   cntyselected: string;
+  stateselected: string;
   website: string = "";
-  email: string = "";
+  //email: string = "";
+  //phno: string = "";
+  //extension: string = "";
+  ecompanyName: string = "";
+  edba: string = "";
+  etaxId: string = "";
+  eaddr1: string = "";
+  eaddr2: string = "";
+  eaddr3: string = "";
+  ecity: string = "";
+  estate: string = "";
+  epostalcode: string = "";
+  ecountry: string = "";
+  estateselected: string;
+  ewebsite: string = "";
+  dtToday: Date = new Date();
+
+  AddPhFlag: boolean = false;
+  PhdisplayFlag: boolean = true;
+  pheditFlag: boolean = false;
   phno: string = "";
   extension: string = "";
-  dtToday: Date = new Date();
+  phdescription: string = "";
+  phTypeselected: string = "";
+  cntCode: string = "";
+
+  ephno: string = "";
+  edextension: string = "";
+  ephdescription: string = "";
+  ephTypeselected: string = "";
+  ecntCode: string = "";
+  ecntyselected: string = "";
+
+  selMail: number = 1;
+  mailpagedItems: any[];
+  mailpager: any = {};
+  MaildisplayFlag = true;
+  AddMailFlag = false;
+  MaileditFlag: boolean = false;
+  email: string = "";
+  emailTypeselected: string = "";
+  emaildescription: string = "";
+  editemail: string = "";
+  editmailTypeselected: string = "";
+  editmaildescription: string = "";
+  editetype: string = "";
+
+
+  selDiv: number = 1;
+  DivpagedItems: any[];
+  Divpager: any = {};
+  DivdisplayFlag = true;
+  AddDivFlag = false;
+  DiveditFlag: boolean = false;
+  divCode: string = "";
+  divDesc: string = "";
+  divStartDate: any;
+  divEndDate: any;
+  EditdivCode: string = "";
+  EditdivDesc: string = "";
+  EditdivStartDate: any;
+  EditdivEndDate: any;
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -86,7 +161,8 @@ export class CompaniesComponent implements OnInit {
     this.sortby = "Code";
     this.sortorder = "asc";
     this.getData();
-    this.getCompanies();
+    this.getCountries();
+    this.getStates();
   }
   setPage(page: number) {
     this.selectpage = Number(page);
@@ -99,32 +175,106 @@ export class CompaniesComponent implements OnInit {
     this.selectpage = Number(this.pager.currentPage);
   }
 
+  setPhonePage(page: number) {
+    this.selPhone = Number(page);
+
+    if (page < 1 || page > this.Phpager.totalPages) {
+      return;
+    }
+    this.Phpager = this.pagerService.getPager(this.codesList.Data.length, this.selPhone, this.rowspage);
+    this.PhpagedItems = this.codesList.Data.slice(this.Phpager.startIndex, this.Phpager.endIndex + 1);
+    this.selPhone = Number(this.Phpager.currentPage);
+  }
+
+  setMailPage(page: number) {
+    this.selMail = Number(page);
+
+    if (page < 1 || page > this.Phpager.totalPages) {
+      return;
+    }
+    this.mailpager = this.pagerService.getPager(this.codesList.Data.length, this.selMail, this.rowspage);
+    this.mailpagedItems = this.codesList.Data.slice(this.mailpager.startIndex, this.mailpager.endIndex + 1);
+    this.selMail = Number(this.mailpager.currentPage);
+  }
+
+  setDivPage(page: number) {
+    this.selDiv = Number(page);
+
+    if (page < 1 || page > this.Phpager.totalPages) {
+      return;
+    }
+    this.Divpager = this.pagerService.getPager(this.codesList.Data.length, this.selDiv, this.rowspage);
+    this.DivpagedItems = this.codesList.Data.slice(this.Divpager.startIndex, this.Divpager.endIndex + 1);
+    this.selDiv = Number(this.Divpager.currentPage);
+  }
+
 
   ngOnInit() {
     this.codeForm = this.fb.group({
       'code': [null, Validators.compose([Validators.required])],
       'companyName': [null, Validators.compose([Validators.required])],
-      'division': [null, Validators.compose([Validators.required])],
-      'divDesc': [null, Validators.compose([Validators.required])],
       'dba': [null],
       'taxId': [null],
-      'contact': [null],
-      'addr1': [null],
+      'addr1': [null, Validators.compose([Validators.required])],
       'addr2': [null],
       'addr3': [null],
-      'city': [null],
+      'city': [null, Validators.compose([Validators.required])],
       'state': [null],
-      'postalcode': [null],
-      'country': [null],
+      'postalcode': [null, Validators.compose([Validators.required])],
       'website': [null],
-      'email': [null],
-      'phno': [null],
-      'extension': [null],
       'effectiveDate' : [null]
     });
     this.codeeditForm = this.fb.group({
-      'editdescription': [null, Validators.compose([Validators.required])],
-      
+      'editcode': [null, Validators.compose([Validators.required])],
+      'ecompanyName': [null, Validators.compose([Validators.required])],
+      'edba': [null],
+      'etaxId': [null],
+      'eaddr1': [null, Validators.compose([Validators.required])],
+      'eaddr2': [null],
+      'eaddr3': [null],
+      'ecity': [null, Validators.compose([Validators.required])],
+      'estate': [null],
+      'epostalcode': [null, Validators.compose([Validators.required])],
+      'ewebsite': [null],
+      'discontinuedDate': [null]      
+    });
+    this.PhoneForm = this.fb.group({
+      'phno': [null, Validators.compose([Validators.required])],
+      'phTypeselected': [null, Validators.compose([Validators.required])],
+      'extension': [null],
+      'phdescription': [null],
+      'cntyselected': [null],
+      'cntCode': [null]
+    });
+    this.editPhoneForm = this.fb.group({
+      'ephno': [null, Validators.compose([Validators.required])],
+      'ephTypeselected': [null, Validators.compose([Validators.required])],
+      'edextension': [null],
+      'ephdescription': [null],
+      'ecntyselected': [null],
+      'ecntCode': [null]
+    });
+    this.EmailForm = this.fb.group({
+      'email': [null, Validators.compose([Validators.required])],
+      'etype': [null, Validators.compose([Validators.required])],
+      'emaildescription': [null],
+    });
+    this.editEmailForm = this.fb.group({
+      'editemail': [null, Validators.compose([Validators.required])],
+      'editetype': [null, Validators.compose([Validators.required])],
+      'editmaildescription': [null],
+    });
+    this.DivisionForm = this.fb.group({
+      'divCode': [null, Validators.compose([Validators.required])],
+      'divDesc': [null, Validators.compose([Validators.required])],
+      'divStartDate': [null, Validators.compose([Validators.required])],
+      'divEndDate': [null, Validators.compose([Validators.required])]
+    });
+    this.editDivisionForm = this.fb.group({
+      'EditdivCode': [null, Validators.compose([Validators.required])],
+      'EditdivDesc': [null, Validators.compose([Validators.required])],
+      'EditdivStartDate': [null, Validators.compose([Validators.required])],
+      'EditdivEndDate': [null, Validators.compose([Validators.required])]
     });
   }
 
@@ -134,7 +284,7 @@ export class CompaniesComponent implements OnInit {
       .subscribe(res => {
         this.codesList = res;
         this.data = this.codesList.Data;
-        this.sortCompanies();
+        this.sortData();
       },
       err => {
         this.errorMsg = "Company(s) not found.";
@@ -142,7 +292,7 @@ export class CompaniesComponent implements OnInit {
       }
       );
   }
-  getCompanies()
+  getCountries()
   {
     this.CountryService.getCountries()
       .subscribe(res => {
@@ -155,7 +305,24 @@ export class CompaniesComponent implements OnInit {
       }
       );
   }
-  sortCompanies() {
+  getStates()
+  {
+    this.CountryService.getStates()
+      .subscribe(res => {
+        this.stateList = res;
+        this.stateData = this.stateList.Data.sort((a: any, b: any) => {
+          if (a["Name"] < b["Name"]) return -1;
+          if (a["Name"] > b["Name"]) return 1;
+        });
+      },
+      err => {
+        this.errorMsg = "State(s) not found.";
+        console.log("error:" + err);
+      }
+    );
+   
+  }
+  sortData() {
     let orderType = this.sortorder
     let currentField = this.sortby;
 
@@ -174,12 +341,28 @@ export class CompaniesComponent implements OnInit {
     this.setPage(1);
     return this.codesList.Data;
   }
+  callDivision()
+  {
+    this.DivdisplayFlag = false;
+    this.AddDivFlag = true;
+  }
+  callEmails()
+  {
+    this.MaildisplayFlag = false;
+    this.AddMailFlag = true;
+  }
+  callPHs()
+  {
+    this.PhdisplayFlag = false;
+    this.AddPhFlag = true;
+  }
   callcodes() {
     this.addFlag = true;
     this.displayFlag = false;
     this.errormsg = "";
     this.codeerrorMsg = "";
     this.descerrorMsg = "";
+    this.addr1errorMsg = "";
     this.code = "";
     this.description = "";
     this.pgTitle = "Add Company";
@@ -198,11 +381,15 @@ export class CompaniesComponent implements OnInit {
     this.errormsg = "";
     this.codeerrorMsg = "";
     this.descerrorMsg = ""
+    this.addr1errorMsg = "";
   }
   saveCompany(value) {
     this.errormsg = "";
     this.codeerrorMsg = "";
     this.descerrorMsg = "";
+    this.addr1errorMsg = "";
+    this.state = "";
+    this.country = "";
     if (this.codeForm.valid) {
       if ((this.code || '').trim().length === 0) {
         this.codeerrorMsg = "Please enter valid input for Code.";
@@ -212,14 +399,14 @@ export class CompaniesComponent implements OnInit {
         this.descerrorMsg = "Please enter valid input for Company Name."
         return false;
       }
-      if ((this.division || '').trim().length === 0) {
-        this.codeerrorMsg = "Please enter valid input for Division Code.";
+      if ((this.addr1 || '').trim().length === 0) {
+        this.addr1errorMsg = "Please enter valid input for Address 1."
         return false;
       }
-      if ((this.divDesc || '').trim().length === 0) {
-        this.descerrorMsg = "Please enter valid input for Division Description."
-        return false;
-      }
+      var splitted = this.stateselected.split("_", 2);
+      this.state = splitted[0].toString();
+      this.country = splitted[1].toString();
+      
       if ((this.website || '').trim().length === 0) { this.website = null };
       var body = JSON.stringify({
         "Code": this.code,
@@ -230,7 +417,7 @@ export class CompaniesComponent implements OnInit {
         "EndDate": null,
         "SystemProgramId": null,
         "Address": {
-          "AddressCountryId": this.cntyselected.toString(),
+          "AddressCountryId": this.country,
           "Description": "Test 123",
           "CompanyName": this.companyName,
           "Address1": this.addr1,
@@ -248,7 +435,7 @@ export class CompaniesComponent implements OnInit {
           "WebUrl": this.website
         }
       });
-      console.log("Body Before :: " + body);
+      //console.log("Body Before :: " + body);
       this.CompaniesService.submitCompany(body)
         .subscribe(res => {
           this.addFlag = false;
@@ -266,21 +453,34 @@ export class CompaniesComponent implements OnInit {
         );
     }
   }
-  setCompanydetails(id, code, desc, startDate, endDate) {
+  setCompanydetails(id, addrId, code, company, dba, taxid, addr1, addr2, addr3, city, state, country, zip, website, startDate, endDate) {
+    var splitted = "";
     this.editFlag = true;
     this.displayFlag = false;
+    this.id = id;
+    this.AddressId = addrId;
     this.editcode = code;
-    this.editdescription = desc;
-    this.prevDescription = desc;
-    var splitted = startDate.split("T", 2);
-    this.effectiveDate = splitted[0];
+    if (company || null) { this.ecompanyName = company };
+    if (dba || null) { this.edba = dba };    
+    if (taxid || null) { this.etaxId = taxid };
+    if (addr1 || null) { this.eaddr1 = addr1 };
+    if (addr2 || null) { this.eaddr2 = addr2 };
+    if (addr3 || null) { this.eaddr3 = addr3 };
+    if (city || null) { this.ecity = city };
+    this.estateselected = state + "_" + country;
+    if (zip || null) { this.epostalcode = zip };
+    if (website || null){this.ewebsite = website;}      
+    if (startDate || '')
+    {
+      splitted = startDate.split("T", 2);
+      this.effectiveDate = splitted[0];
+    }
     if (endDate || '') {
       splitted = '';      
       splitted = endDate.split("T", 2);
       this.discontinuedDate = splitted[0];
     }
-    this.id = id;
-    this.prevDiscDate = endDate;
+    
     this.editerrormsg = "";
     this.editcodeerrorMsg = "";
     this.editdescerrorMsg = "";
@@ -293,17 +493,63 @@ export class CompaniesComponent implements OnInit {
         this.editcodeerrorMsg = "Please enter valid input for Code."
         return false;
       }
-      if ((this.editdescription || '').trim().length === 0) {
-        this.editdescerrorMsg = "Please enter valid input for Description."
+      if ((this.ecompanyName || '').trim().length === 0) {
+        this.editdescerrorMsg = "Please enter valid input for Company Name."
         return false;
       }
-
+      if ((this.eaddr1 || '').trim().length === 0) {
+        this.eaddr1errorMsg = "Please enter valid input for Address 1."
+        return false;
+      }
+      var splitted = this.estateselected.split("_", 2);
+      this.estate = splitted[0].toString();
+      this.ecountry = splitted[1].toString();
+      
       this.editFlag = false;
       this.displayFlag = true;
       //console.log("Discont Date:: " + this.discontinuedDate);
       //vaues awi get in variables like this.id,this.editcode,this.editdescription,this.effectiveDate,this.discontinuedDate
       //need to integrate the update code service here
-      var body = JSON.stringify({ "Id": this.id, "Code": this.editcode, "Description": this.editdescription, "StartDate": this.effectiveDate, "EndDate": this.discontinuedDate });
+      if ((this.ewebsite || '').trim().length === 0) { this.ewebsite = null };
+      if ((this.edba || '').trim().length === 0) { this.edba = null };
+      if ((this.etaxId || '').trim().length === 0) { this.etaxId = null };
+      if ((this.discontinuedDate || '').trim().length === 0) { this.discontinuedDate = null };
+      if ((this.eaddr2 || '').trim().length === 0) { this.eaddr2 = null };
+      if ((this.eaddr1 || '').trim().length === 0) { this.eaddr1 = null };
+      if ((this.eaddr3 || '').trim().length === 0) { this.eaddr3 = null };
+      if ((this.ecity || '').trim().length === 0) { this.ecity = null };
+      if ((this.epostalcode || '').trim().length === 0) { this.epostalcode = null };
+
+      var body = JSON.stringify({
+        "Id": this.id,
+        "Code": this.editcode,
+        "AddressId": this.AddressId,
+        "Description": "Test 123",
+        "Dba": this.edba,
+        "TaxId": this.etaxId,
+        "StartDate": this.effectiveDate,
+        "EndDate": this.discontinuedDate,
+        "SystemProgramId": null,
+        "Address": {
+          "Id": this.AddressId,
+          "AddressCountryId": this.ecountry,
+          "Description": "Test 123",
+          "CompanyName": this.ecompanyName,
+          "Address1": this.eaddr1,
+          "Address2": this.eaddr2,
+          "Address3": this.eaddr3,
+          "CityName": this.ecity,
+          "CarrierRoute": null,
+          "StateCode": this.estate,
+          "PostalCode": this.epostalcode,
+          "Title": null,
+          "FirstName": null,
+          "LastName": null,
+          "Suffix": null,
+          "JobTitle": null,
+          "WebUrl": this.ewebsite
+        }
+      });
 
       this.CompaniesService.updateCompany(this.id, body)
         .subscribe(res => {

@@ -23,7 +23,7 @@
       </mat-card><br><br>
       <mat-card style="float:right;">
         <button type="button" mat-raised-button class="" (click)="clearsort()" style="line-height:36px">CLEAR</button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" mat-raised-button color="primary" class="" (click)="sortCompanies();sidenav1.close();" style="line-height:36px">SEARCH</button>
+        <button type="button" mat-raised-button color="primary" class="" (click)="sortData();sidenav1.close();" style="line-height:36px">SEARCH</button>
       </mat-card>
     </div>
   </mat-sidenav>
@@ -39,149 +39,627 @@
       <!-- Add CODES Start -->
       <div class="rightside-content" *ngIf="addFlag">
         <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="saveCompany(codeForm.value)" novalidate>
-            <div class="mat-warn">{{errormsg}}</div><br />
-            <div layout="row">
-              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
-                <mat-hint placeholder="Code" align="end">{{code.length || 0}}/6</mat-hint>
-                <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
-                  This is required
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Company Name" [(ngModel)]="companyName" name="company Name" [formControl]="codeForm.controls['companyName']" required maxlength="60">
-                <mat-hint placeholder="company Name" align="end">{{companyName.length || 0}}/60</mat-hint>
-                <mat-error *ngIf="codeForm.controls['companyName'].hasError('required') ">
-                  This is required
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Dba" [(ngModel)]="dba" name="dba" [formControl]="codeForm.controls['dba']" maxlength="20">
-                <mat-hint placeholder="Dba" align="end">{{dba.length || 0}}/20</mat-hint>
-              </mat-form-field>
+          <div class="mat-warn">{{errormsg}}</div><br />
+          <div layout="row">
+            <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="6">
+              <mat-hint placeholder="Code" align="end">{{code.length || 0}}/6</mat-hint>
+              <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
+                This is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Company Name" [(ngModel)]="companyName" name="company Name" [formControl]="codeForm.controls['companyName']" required maxlength="30">
+              <mat-hint placeholder="company Name" align="end">{{companyName.length || 0}}/30</mat-hint>
+              <mat-error *ngIf="codeForm.controls['companyName'].hasError('required') ">
+                This is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Dba" [(ngModel)]="dba" name="dba" [formControl]="codeForm.controls['dba']" maxlength="20">
+              <mat-hint placeholder="Dba" align="end">{{dba.length || 0}}/20</mat-hint>
+            </mat-form-field>
+          </div>
+          <div layout="row">
+            <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
+            <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
+          </div>
+          <div layout="row">
+            <mat-form-field hintLabel="" flex="35" flex-sm="30" flex-md="30">
+              <input matInput placeholder="Tax ID" [(ngModel)]="taxId" name="taxId" [formControl]="codeForm.controls['taxId']" maxlength="20">
+              <mat-hint placeholder="Tax ID" align="end">{{taxId.length || 0}}/20</mat-hint>
+            </mat-form-field>
+          </div>
+          <div layout="row">
+            <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Address 1" [(ngModel)]="addr1" name="addr1" [formControl]="codeForm.controls['addr1']" required maxlength="50">
+              <mat-hint placeholder="Address 1" align="end">{{addr1.length || 0}}/50</mat-hint>
+              <mat-error *ngIf="codeForm.controls['addr1'].hasError('required') ">
+                This is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Address 2" [(ngModel)]="addr2" name="addr2" [formControl]="codeForm.controls['addr2']" maxlength="50">
+              <mat-hint placeholder="Address 2" align="end">{{addr2.length || 0}}/50</mat-hint>
+            </mat-form-field>
+            <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Address 3" [(ngModel)]="addr3" name="addr3" [formControl]="codeForm.controls['addr3']" maxlength="50">
+              <mat-hint placeholder="Address 3" align="end">{{addr3.length || 0}}/50</mat-hint>
+            </mat-form-field>
+          </div>
+          <div layout="row">
+            <span class="mat-warn" flex="50">{{addr1errorMsg}}</span>
+          </div>
+          <div layout="row">
+            <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="City" [(ngModel)]="city" name="city" [formControl]="codeForm.controls['city']" required maxlength="40">
+              <mat-hint placeholder="City" align="end">{{city.length || 0}}/40</mat-hint>
+              <mat-error *ngIf="codeForm.controls['city'].hasError('required') ">
+                This is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <mat-select placeholder="State" [(ngModel)]="stateselected" [formControl]="codeForm.controls['state']">
+                <mat-option *ngFor="let s of stateData; let i = index" class="multiple-field-box" [value]="s.Code + '_' + s.AddressCountryId">
+                  {{ s.Name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="codeForm.controls['state'].hasError('required')">
+                This is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Zip" [(ngModel)]="postalcode" name="postalcode" [formControl]="codeForm.controls['postalcode']" required maxlength="10">
+              <mat-hint placeholder="Zip" align="end">{{postalcode.length || 0}}/10</mat-hint>
+              <mat-error *ngIf="codeForm.controls['postalcode'].hasError('required') ">
+                This is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div layout="row">
+            <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Website" [(ngModel)]="website" name="website" [formControl]="codeForm.controls['website']" maxlength="50">
+              <mat-hint placeholder="Website" align="end">{{website.length || 0}}/50</mat-hint>
+            </mat-form-field>
+          </div>
+          <div layout="row">
+            <mat-form-field flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Effective Date" [min]="dtToday" [matDatepicker]="dp3" [(ngModel)]="effectiveDate" [ngModelOptions]="{standalone: true}" name="effectiveDate" disabled>
+              <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <br /><br />
+          <div class="" align="right">
+            <div class="">
+              <button mat-raised-button type="button" (click)="clearContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
             </div>
-            <div layout="row">
-              <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
-              <span class="mat-warn" flex="50" style="margin-left:20px;">{{descerrorMsg}}</span>
-            </div>
-             
-              <div layout="row">                
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Tax ID" [(ngModel)]="taxId" name="taxId" [formControl]="codeForm.controls['taxId']" maxlength="20">
-                  <mat-hint placeholder="Tax ID" align="end">{{taxId.length || 0}}/20</mat-hint>
-                </mat-form-field>
-              </div>
-              <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Address 1" [(ngModel)]="addr1" name="addr1" [formControl]="codeForm.controls['addr1']" maxlength="50">
-                  <mat-hint placeholder="Address 1" align="end">{{addr1.length || 0}}/50</mat-hint>
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Address 2" [(ngModel)]="addr2" name="addr2" [formControl]="codeForm.controls['addr2']" maxlength="50">
-                  <mat-hint placeholder="Address 2" align="end">{{addr2.length || 0}}/50</mat-hint>
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Address 3" [(ngModel)]="addr3" name="addr3" [formControl]="codeForm.controls['addr3']" maxlength="50">
-                  <mat-hint placeholder="Address 3" align="end">{{addr3.length || 0}}/50</mat-hint>
-                </mat-form-field>
-              </div>
-            <div layout="row">
-              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="City" [(ngModel)]="city" name="city" [formControl]="codeForm.controls['city']" maxlength="40">
-                <mat-hint placeholder="City" align="end">{{city.length || 0}}/40</mat-hint>
-              </mat-form-field>
-              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="State" [(ngModel)]="state" name="state" [formControl]="codeForm.controls['state']" maxlength="5">
-                <mat-hint placeholder="State" align="end">{{state.length || 0}}/5</mat-hint>
-              </mat-form-field>
-              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Postal Code" [(ngModel)]="postalcode" name="postalcode" [formControl]="codeForm.controls['postalcode']" maxlength="10">
-                <mat-hint placeholder="Postal Code" align="end">{{postalcode.length || 0}}/10</mat-hint>
-              </mat-form-field>
-              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <mat-select placeholder="Country" [(ngModel)]="cntyselected" [formControl]="codeForm.controls['country']">
-                  <mat-option *ngFor="let l of countryData; let i = index" class="multiple-field-box" [value]="l.Id">
-                    {{ l.Name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div layout="row">
-              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Website" [(ngModel)]="website" name="website" [formControl]="codeForm.controls['website']" maxlength="50">
-                <mat-hint placeholder="Website" align="end">{{website.length || 0}}/50</mat-hint>
-              </mat-form-field>
-              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Email Address" [(ngModel)]="email" name="email" [formControl]="codeForm.controls['email']" maxlength="150">
-                <mat-hint placeholder="Email Address" align="end">{{email.length || 0}}/150</mat-hint>
-              </mat-form-field>
-            </div>
-            <div layout="row">
-              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Phone Number" [(ngModel)]="phno" name="phno" [formControl]="codeForm.controls['phno']" maxlength="20">
-                <mat-hint placeholder="Phone Number" align="end">{{phno.length || 0}}/20</mat-hint>
-              </mat-form-field>
-              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Extension" [(ngModel)]="extension" name="extension" [formControl]="codeForm.controls['extension']" maxlength="5">
-                <mat-hint placeholder="Extension" align="end">{{extension.length || 0}}/5</mat-hint>
-              </mat-form-field>
-            </div>
-            <div layout="row">
-              <mat-form-field flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Effective Date" [min]="dtToday" [matDatepicker]="dp3" [(ngModel)]="effectiveDate" [ngModelOptions]="{standalone: true}" name="effectiveDate" disabled>
-                <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
-                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-              </mat-form-field>
-            </div>
-            <br /><br />
-            <div class="" align="right">
-              <div class="">
-                <button mat-raised-button type="button" (click)="clearContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button color="primary" mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
-              </div>
-            </div>
+          </div>
         </form>
       </div>
       <!-- Add CODES end -->
       <!-- for edit CODES start -->
       <div class="rightside-content" *ngIf="editFlag">
-        <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="updateCompany(editcode,codeeditForm.value)" novalidate>
-          <!--<br/><br/>-->
-          <div class="mat-warn">{{editerrormsg}}</div><br />
-
-          <div layout="row">
-            <mat-form-field flex="50" flex-sm="50" flex-md="50">
-              <input matInput placeholder="Code" disabled value="{{editcode}}" required>
-            </mat-form-field>
-            <span class="mat-warn">{{edicodeerrorMsg}}</span>
-
-            <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
-              <mat-hint placeholder="Description" align="end">{{editdescription.length || 0}}/30</mat-hint>
-              <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required>
-              <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
-                This is required
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div layout="row"><span flex="50">&nbsp;</span><span class="mat-warn" flex="50" style="margin-left:20px;">{{editdescerrorMsg}}</span></div>
-          <div layout="row">
-            <mat-form-field flex="50" flex-sm="50" flex-md="50">
-              <input matInput placeholder="Effective Date" disabled value="{{effectiveDate | date: 'MM/dd/yyyy'}}">
-            </mat-form-field>
-            <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
-              <input matInput placeholder="Discontinued Date" [min]="effectiveDate" [matDatepicker]="dp3" [(ngModel)]="discontinuedDate" [ngModelOptions]="{standalone: true}" name="discontinuedDate" disabled>
-              <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
-              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div class="" align="right">
-            <div class="">
-              <button mat-raised-button type="button" (click)="cleareditcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
-              <button mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
+        <mat-tab-group>
+          <mat-tab label="Tab 1">
+            <ng-template mat-tab-label>DETAILS</ng-template>
+            <div>
+              <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="updateCompany(editcode,codeeditForm.value)" novalidate>
+                <div class="mat-warn">{{editerrormsg}}</div><br />
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Code" [(ngModel)]="editcode" name="editcode" [formControl]="codeeditForm.controls['editcode']" required maxlength="6">
+                    <mat-hint placeholder="Code" align="end">{{editcode.length || 0}}/6</mat-hint>
+                    <mat-error *ngIf="codeeditForm.controls['editcode'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Company Name" [(ngModel)]="ecompanyName" name="ecompanyName" [formControl]="codeeditForm.controls['ecompanyName']" required maxlength="30">
+                    <mat-hint placeholder="company Name" align="end">{{ecompanyName.length || 0}}/30</mat-hint>
+                    <mat-error *ngIf="codeeditForm.controls['ecompanyName'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field hintLabel="" style="margin-left:40px;" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Dba" [(ngModel)]="edba" name="edba" [formControl]="codeeditForm.controls['edba']" maxlength="20">
+                    <mat-hint placeholder="Dba" align="end">{{edba.length || 0}}/20</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <span class="mat-warn" flex="50">{{codeerrorMsg}}</span>
+                  <span class="mat-warn" flex="50" style="margin-left:20px;">{{editdescerrorMsg}}</span>
+                </div>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="35" flex-sm="30" flex-md="30">
+                    <input matInput placeholder="Tax ID" [(ngModel)]="etaxId" name="etaxId" [formControl]="codeeditForm.controls['etaxId']" maxlength="20">
+                    <mat-hint placeholder="Tax ID" align="end">{{etaxId.length || 0}}/20</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Address 1" [(ngModel)]="eaddr1" name="eaddr1" [formControl]="codeeditForm.controls['eaddr1']" required maxlength="50">
+                    <mat-hint placeholder="Address 1" align="end">{{eaddr1.length || 0}}/50</mat-hint>
+                    <mat-error *ngIf="codeeditForm.controls['eaddr1'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Address 2" [(ngModel)]="eaddr2" name="eaddr2" [formControl]="codeeditForm.controls['eaddr2']" maxlength="50">
+                    <mat-hint placeholder="Address 2" align="end">{{eaddr2.length || 0}}/50</mat-hint>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Address 3" [(ngModel)]="eaddr3" name="eaddr3" [formControl]="codeeditForm.controls['eaddr3']" maxlength="50">
+                    <mat-hint placeholder="Address 3" align="end">{{eaddr3.length || 0}}/50</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <span class="mat-warn" flex="50">{{eaddr1errorMsg}}</span>
+                </div>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="City" [(ngModel)]="ecity" name="ecity" [formControl]="codeeditForm.controls['ecity']" required maxlength="40">
+                    <mat-hint placeholder="City" align="end">{{ecity.length || 0}}/40</mat-hint>
+                    <mat-error *ngIf="codeeditForm.controls['ecity'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <mat-select placeholder="State" [(ngModel)]="estateselected" [formControl]="codeeditForm.controls['estate']">
+                      <mat-option *ngFor="let s of stateData; let i = index" class="multiple-field-box" [value]="s.Code + '_' + s.AddressCountryId">
+                        {{ s.Name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="codeeditForm.controls['estate'].hasError('required')">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Zip" [(ngModel)]="epostalcode" name="epostalcode" [formControl]="codeeditForm.controls['epostalcode']" required maxlength="10">
+                    <mat-hint placeholder="Zip" align="end">{{epostalcode.length || 0}}/10</mat-hint>
+                    <mat-error *ngIf="codeeditForm.controls['epostalcode'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Website" [(ngModel)]="ewebsite" name="ewebsite" [formControl]="codeeditForm.controls['ewebsite']" maxlength="50">
+                    <mat-hint placeholder="Website" align="end">{{ewebsite.length || 0}}/50</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <mat-form-field flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Effective Date" disabled value="{{effectiveDate | date: 'MM/dd/yyyy'}}">
+                  </mat-form-field>
+                  <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
+                    <input matInput placeholder="Discontinued Date" [min]="effectiveDate" [matDatepicker]="dp3" [(ngModel)]="discontinuedDate" [ngModelOptions]="{standalone: true}" name="discontinuedDate" disabled>
+                    <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="" align="right">
+                  <div class="">
+                    <button mat-raised-button type="button" (click)="cleareditcodes()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button mat-raised-button type="submit" color="primary" style="line-height:36px;">SAVE</button>
+                  </div>
+                </div>
+              </form>
             </div>
-          </div>
-
-        </form>
+          </mat-tab>
+          <mat-tab label="Tab 2">
+            <ng-template mat-tab-label>PHONE NUMBERS</ng-template>
+            <div>
+              <div class="rightside-content" *ngIf="AddPhFlag">
+                <form class="add-adv" [formGroup]="PhoneForm" (ngSubmit)="savePhone(PhoneForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Phone Number" [(ngModel)]="phno" name="phno" [formControl]="PhoneForm.controls['phno']" required maxlength="20">
+                      <mat-hint placeholder="Phone Number" align="end">{{phno.length || 0}}/20</mat-hint>
+                      <mat-error *ngIf="PhoneForm.controls['phno'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Extension" [(ngModel)]="extension" name="extension" [formControl]="PhoneForm.controls['extension']" required maxlength="5">
+                      <mat-hint placeholder="Extension" align="end">{{extension.length || 0}}/5</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Type" [(ngModel)]="phTypeselected" [formControl]="codeForm.controls['Ptype']">
+                        <mat-option value="Home">Home</mat-option>
+                        <mat-option value="Work">Work</mat-option>
+                        <mat-option value="Mobile">Mobile</mat-option>
+                        <mat-option value="Fax">Fax</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Description" [(ngModel)]="phdescription" name="phdescription" [formControl]="PhoneForm.controls['phdescription']" maxlength="20">
+                      <mat-hint placeholder="Description" align="end">{{phdescription.length || 0}}/20</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Country" [(ngModel)]="cntyselected" [formControl]="PhoneForm.controls['country']">
+                        <mat-option *ngFor="let c of countryData; let i = index" class="multiple-field-box" [value]="c.Code">
+                          {{ c.Name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Country Code" [(ngModel)]="cntCode" name="cntCode" [formControl]="PhoneForm.controls['cntCode']" maxlength="5">
+                      <mat-hint placeholder="Country Code" align="end">{{cntCode.length || 0}}/5</mat-hint>
+                    </mat-form-field>
+                  </div><br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="clearPhContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="rightside-content" *ngIf="pheditFlag">
+                <form class="add-adv" [formGroup]="editPhoneForm" (ngSubmit)="savePhone(editPhoneForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Phone Number" [(ngModel)]="ephno" name="phno" [formControl]="editPhoneForm.controls['ephno']" required maxlength="20">
+                      <mat-hint placeholder="Phone Number" align="end">{{phno.length || 0}}/20</mat-hint>
+                      <mat-error *ngIf="editPhoneForm.controls['ephno'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Extension" [(ngModel)]="edextension" name="edextension" [formControl]="editPhoneForm.controls['edextension']" required maxlength="5">
+                      <mat-hint placeholder="Extension" align="end">{{edextension.length || 0}}/5</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Type" [(ngModel)]="ephTypeselected" [formControl]="codeForm.controls['ePtype']">
+                        <mat-option value="Home">Home</mat-option>
+                        <mat-option value="Work">Work</mat-option>
+                        <mat-option value="Mobile">Mobile</mat-option>
+                        <mat-option value="Fax">Fax</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Description" [(ngModel)]="ephdescription" name="ephdescription" [formControl]="editPhoneForm.controls['ephdescription']" maxlength="20">
+                      <mat-hint placeholder="Description" align="end">{{ephdescription.length || 0}}/20</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Country" [(ngModel)]="ecntyselected" [formControl]="editPhoneForm.controls['ecountry']">
+                        <mat-option *ngFor="let c of countryData; let i = index" class="multiple-field-box" [value]="c.Code">
+                          {{ c.Name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Country Code" [(ngModel)]="ecntCode" name="ecntCode" [formControl]="editPhoneForm.controls['ecntCode']" maxlength="5">
+                      <mat-hint placeholder="Country Code" align="end">{{ecntCode.length || 0}}/5</mat-hint>
+                    </mat-form-field>
+                  </div><br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="EditclearPhContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+                <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="PhdisplayFlag">
+                  <mat-icons class="material-icons" (click)="callPHs();" flex="1">add</mat-icons><span (click)="callPHs();" style="color:white">&nbsp;PHONE NUMBERS</span>
+                </mat-content>
+                <table class="table1 tblborder" width="100%" *ngIf="displayFlag" cellpadding="0" cellspacing="0">
+                  <tr *ngFor="let row of PhpagedItems" class="tblbordertr">
+                    <td style="width:30%;">Phone Number: {{row.Code}} <br> Extension: {{row.Address.CompanyName}}</td>
+                    <td style="width:30%;">Type:  <br> Dba: {{row.Dba}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="right">
+                      <div *ngIf="PhdisplayFlag && Phpager.pages && Phpager.pages.length" class="mat-paginator-container">
+                        <span class="mat-paginator-page">
+                          Page :
+                          <select name="selPhone" [(ngModel)]="selPhone" (change)="setPhonePage(selPhone)" class="select-border">
+                            <option value="{{page}}" *ngFor="let page of Phpager.pages" selected="selected">{{page}}</option>
+                          </select>
+                        </span>
+                        <span class="mat-paginator-page">
+                          Rows per page :
+                          <select name="rowspage" [(ngModel)]="rowspage" (change)="setPhonePage(selPhone)" class="select-border">
+                            <option value="5" selected="selected">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                          </select>
+                        </span>
+                        <span class="mat-paginator-page">{{this.Phpager.startIndex+1}} - {{this.Phpager.endIndex+1}} of {{Phpager.totalItems}} </span>
+                        <span class="first-enable mat-paginator-page" *ngIf="Phpager.currentPage !== 1" style="cursor: pointer;" (click)="setPhonePage(1)">
+                          <a style="visibility:hidden;"> First </a>
+                        </span>
+                        <span class="first-disable mat-paginator-page" *ngIf="Phpager.currentPage === 1">
+                          <a style="visibility:hidden;"> First </a>
+                        </span>
+                        <span class="prev-enable" style="cursor: pointer;" *ngIf="Phpager.currentPage !== 1" (click)="setPhonePage(Phpager.currentPage - 1)">
+                          <a style="visibility:hidden;"> Prev </a>
+                        </span>
+                        <span class="prev-disable" *ngIf="Phpager.currentPage === 1">
+                          <a style="visibility:hidden;"> Prev </a>
+                        </span>
+                        <span class="next-enable" style="cursor: pointer;" *ngIf="Phpager.currentPage != Phpager.totalPages" (click)="setPhonePage(Phpager.currentPage + 1)">
+                          <a style="visibility:hidden;"> Next </a>
+                        </span>
+                        <span class="next-disable" *ngIf="Phpager.currentPage === Phpager.totalPages">
+                          <a style="visibility:hidden;"> Next </a>
+                        </span>
+                        <span class="last-enable" style="cursor: pointer;" *ngIf="Phpager.currentPage !== Phpager.totalPages" (click)="setPhonePage(Phpager.totalPages)">
+                          <a style="visibility:hidden;"> Last </a>
+                        </span>
+                        <span class="last-disable" *ngIf="Phpager.currentPage === Phpager.totalPages">
+                          <a style="visibility:hidden;"> Last </a>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+          </mat-tab>
+          <mat-tab label="Tab 3">
+            <ng-template mat-tab-label>EMAIL ADDRESSES</ng-template>
+            <div>
+              <div class="rightside-content" *ngIf="AddMailFlag">
+                <form class="add-adv" [formGroup]="EmailForm" (ngSubmit)="saveMail(EmailForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Email Address" [(ngModel)]="email" name="email" [formControl]="EmailForm.controls['email']" required maxlength="150">
+                      <mat-hint placeholder="Email Address" align="end">{{email.length || 0}}/150</mat-hint>
+                      <mat-error *ngIf="EmailForm.controls['email'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Type" [(ngModel)]="emailTypeselected" [formControl]="EmailForm.controls['etype']">
+                        <mat-option value="Home">Home</mat-option>
+                        <mat-option value="Work">Work</mat-option>
+                        <mat-option value="Mobile">Mobile</mat-option>
+                        <mat-option value="Fax">Fax</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Description" [(ngModel)]="emaildescription" name="emaildescription" [formControl]="EmailForm.controls['emaildescription']" maxlength="20">
+                      <mat-hint placeholder="Description" align="end">{{emaildescription.length || 0}}/20</mat-hint>
+                    </mat-form-field>
+                  </div><br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="clearMailContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="rightside-content" *ngIf="MaileditFlag">
+                <form class="add-adv" [formGroup]="editEmailForm" (ngSubmit)="EditMail(editEmailForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Email Address" [(ngModel)]="editemail" name="editemail" [formControl]="editEmailForm.controls['editemail']" required maxlength="150">
+                      <mat-hint placeholder="Email Address" align="end">{{editemail.length || 0}}/150</mat-hint>
+                      <mat-error *ngIf="editEmailForm.controls['editemail'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Type" [(ngModel)]="editmailTypeselected" [formControl]="editEmailForm.controls['editetype']">
+                        <mat-option value="Home">Home</mat-option>
+                        <mat-option value="Work">Work</mat-option>
+                        <mat-option value="Mobile">Mobile</mat-option>
+                        <mat-option value="Fax">Fax</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Description" [(ngModel)]="editmaildescription" name="editmaildescription" [formControl]="editEmailForm.controls['editmaildescription']" maxlength="20">
+                      <mat-hint placeholder="Description" align="end">{{editmaildescription.length || 0}}/20</mat-hint>
+                    </mat-form-field>
+                  </div><br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="clearEditMailContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="MaildisplayFlag">
+                <mat-icons class="material-icons" (click)="callEmails();" flex="1">add</mat-icons><span (click)="callEmails();" style="color:white">&nbsp;EMAIL ADDRESS</span>
+              </mat-content>
+              <table class="table1 tblborder" width="100%" *ngIf="MaildisplayFlag" cellpadding="0" cellspacing="0">
+                <tr *ngFor="let row of mailpagedItems" class="tblbordertr">
+                  <td style="width:30%;">Email Address: {{row.Code}} </td>
+                  <td style="width:30%;">Type: {{row.Type}} </td>
+                </tr>
+                <tr>
+                  <td colspan="3" align="right">
+                    <div *ngIf="maildisplayFlag && mailpager.pages && mailpager.pages.length" class="mat-paginator-container">
+                      <span class="mat-paginator-page">
+                        Page :
+                        <select name="selMail" [(ngModel)]="selMail" (change)="setMailPage(selMail)" class="select-border">
+                          <option value="{{page}}" *ngFor="let page of mailpager.pages" selected="selected">{{page}}</option>
+                        </select>
+                      </span>
+                      <span class="mat-paginator-page">
+                        Rows per page :
+                        <select name="rowspage" [(ngModel)]="rowspage" (change)="setMailPage(selMail)" class="select-border">
+                          <option value="5" selected="selected">5</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                        </select>
+                      </span>
+                      <span class="mat-paginator-page">{{this.mailpager.startIndex+1}} - {{this.mailpager.endIndex+1}} of {{mailpager.totalItems}} </span>
+                      <span class="first-enable mat-paginator-page" *ngIf="mailpager.currentPage !== 1" style="cursor: pointer;" (click)="setMailPage(1)">
+                        <a style="visibility:hidden;"> First </a>
+                      </span>
+                      <span class="first-disable mat-paginator-page" *ngIf="mailpager.currentPage === 1">
+                        <a style="visibility:hidden;"> First </a>
+                      </span>
+                      <span class="prev-enable" style="cursor: pointer;" *ngIf="mailpager.currentPage !== 1" (click)="setMailPage(mailpager.currentPage - 1)">
+                        <a style="visibility:hidden;"> Prev </a>
+                      </span>
+                      <span class="prev-disable" *ngIf="mailpager.currentPage === 1">
+                        <a style="visibility:hidden;"> Prev </a>
+                      </span>
+                      <span class="next-enable" style="cursor: pointer;" *ngIf="mailpager.currentPage != mailpager.totalPages" (click)="setMailPage(mailpager.currentPage + 1)">
+                        <a style="visibility:hidden;"> Next </a>
+                      </span>
+                      <span class="next-disable" *ngIf="mailpager.currentPage === mailpager.totalPages">
+                        <a style="visibility:hidden;"> Next </a>
+                      </span>
+                      <span class="last-enable" style="cursor: pointer;" *ngIf="mailpager.currentPage !== mailpager.totalPages" (click)="setMailPage(mailpager.totalPages)">
+                        <a style="visibility:hidden;"> Last </a>
+                      </span>
+                      <span class="last-disable" *ngIf="mailpager.currentPage === mailpager.totalPages">
+                        <a style="visibility:hidden;"> Last </a>
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </mat-tab>
+          <mat-tab label="Tab 4">
+            <ng-template mat-tab-label>DIVISIONS</ng-template>
+            <div>
+              <div class="rightside-content" *ngIf="AddDivFlag">
+                <form class="add-adv" [formGroup]="DivisionForm" (ngSubmit)="saveDivision(DivisionForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Division Code" [(ngModel)]="divCode" name="divCode" [formControl]="DivisionForm.controls['divCode']" required maxlength="6">
+                      <mat-hint placeholder="Division Code" align="end">{{divCode.length || 0}}/6</mat-hint>
+                      <mat-error *ngIf="DivisionForm.controls['divCode'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Division Description" [(ngModel)]="divDesc" name="divDesc" [formControl]="DivisionForm.controls['divDesc']" required maxlength="20">
+                      <mat-hint placeholder="Division Description" align="end">{{divDesc.length || 0}}/20</mat-hint>
+                      <mat-error *ngIf="DivisionForm.controls['divDesc'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Effective Date" [min]="dtToday" [matDatepicker]="dp4" [(ngModel)]="divStartDate" [ngModelOptions]="{standalone: true}" name="divStartDate" disabled>
+                      <mat-datepicker-toggle matPrefix [for]="dp4"></mat-datepicker-toggle>
+                      <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                  </div><br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="clearDivContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="rightside-content" *ngIf="DiveditFlag">
+                <form class="add-adv" [formGroup]="editDivisionForm" (ngSubmit)="EditDivision(editDivisionForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Division Code" [(ngModel)]="EditdivCode" name="EditdivCode" [formControl]="editDivisionForm.controls['EditdivCode']" required maxlength="6">
+                      <mat-hint placeholder="Division Code" align="end">{{EditdivCode.length || 0}}/6</mat-hint>
+                      <mat-error *ngIf="editDivisionForm.controls['EditdivCode'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Division Description" [(ngModel)]="EditdivDesc" name="EditdivDesc" [formControl]="editDivisionForm.controls['EditdivDesc']" required maxlength="20">
+                      <mat-hint placeholder="Division Description" align="end">{{EditdivDesc.length || 0}}/20</mat-hint>
+                      <mat-error *ngIf="editDivisionForm.controls['EditdivDesc'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Effective Date" disabled value="{{EditdivStartDate | date: 'MM/dd/yyyy'}}">
+                    </mat-form-field>
+                    <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
+                      <input matInput placeholder="Discontinued Date" [min]="EditdivStartDate" [matDatepicker]="dp5" [(ngModel)]="EditdivEndDate" [ngModelOptions]="{standalone: true}" name="EditdivEndDate" disabled>
+                      <mat-datepicker-toggle matPrefix [for]="dp5"></mat-datepicker-toggle>
+                      <mat-datepicker #dp5 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                  </div><br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="clearEditDivContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="DivdisplayFlag">
+                <mat-icons class="material-icons" (click)="callDivision();" flex="1">add</mat-icons><span (click)="callDivision();" style="color:white">&nbsp;DIVISION</span>
+              </mat-content>
+              <table class="table1 tblborder" width="100%" *ngIf="DivdisplayFlag" cellpadding="0" cellspacing="0">
+                <tr *ngFor="let row of DivpagedItems" class="tblbordertr">
+                  <td style="width:30%;">Division Code: {{row.Code}} <br /> Division Description: {{row.Description}} </td>
+                  <td style="width:30%;">Effective Date: {{row.StartDate}} <br /> Discontinued Date: {{row.DiscontinuedDate}} </td>
+                </tr>
+                <tr>
+                  <td colspan="3" align="right">
+                    <div *ngIf="DivdisplayFlag && Divpager.pages && Divpager.pages.length" class="mat-paginator-container">
+                      <span class="mat-paginator-page">
+                        Page :
+                        <select name="selDiv" [(ngModel)]="selDiv" (change)="setMailPage(selDiv)" class="select-border">
+                          <option value="{{page}}" *ngFor="let page of Divpager.pages" selected="selected">{{page}}</option>
+                        </select>
+                      </span>
+                      <span class="mat-paginator-page">
+                        Rows per page :
+                        <select name="rowspage" [(ngModel)]="rowspage" (change)="setMailPage(selDiv)" class="select-border">
+                          <option value="5" selected="selected">5</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                        </select>
+                      </span>
+                      <span class="mat-paginator-page">{{this.Divpager.startIndex+1}} - {{this.Divpager.endIndex+1}} of {{Divpager.totalItems}} </span>
+                      <span class="first-enable mat-paginator-page" *ngIf="Divpager.currentPage !== 1" style="cursor: pointer;" (click)="setMailPage(1)">
+                        <a style="visibility:hidden;"> First </a>
+                      </span>
+                      <span class="first-disable mat-paginator-page" *ngIf="Divpager.currentPage === 1">
+                        <a style="visibility:hidden;"> First </a>
+                      </span>
+                      <span class="prev-enable" style="cursor: pointer;" *ngIf="Divpager.currentPage !== 1" (click)="setMailPage(Divpager.currentPage - 1)">
+                        <a style="visibility:hidden;"> Prev </a>
+                      </span>
+                      <span class="prev-disable" *ngIf="Divpager.currentPage === 1">
+                        <a style="visibility:hidden;"> Prev </a>
+                      </span>
+                      <span class="next-enable" style="cursor: pointer;" *ngIf="Divpager.currentPage != Divpager.totalPages" (click)="setMailPage(Divpager.currentPage + 1)">
+                        <a style="visibility:hidden;"> Next </a>
+                      </span>
+                      <span class="next-disable" *ngIf="Divpager.currentPage === Divpager.totalPages">
+                        <a style="visibility:hidden;"> Next </a>
+                      </span>
+                      <span class="last-enable" style="cursor: pointer;" *ngIf="Divpager.currentPage !== Divpager.totalPages" (click)="setMailPage(Divpager.totalPages)">
+                        <a style="visibility:hidden;"> Last </a>
+                      </span>
+                      <span class="last-disable" *ngIf="Divpager.currentPage === Divpager.totalPages">
+                        <a style="visibility:hidden;"> Last </a>
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
       </div>
       <!-- edit CODES end -->
       <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="displayFlag">
@@ -193,7 +671,7 @@
           <td style="width:30%;">{{row.Code}} <br> Company Name: {{row.Address.CompanyName}}</td>
           <td style="width:30%;">Contact:  <br> Dba: {{row.Dba}}</td>
           <td style="width:30%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
-          <td style="width:10%;"><a style="cursor:pointer" (click)="setCompanydetails(row.Id,row.Code,row.Description,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+          <td style="width:10%;"><a style="cursor:pointer" (click)="setCompanydetails(row.Id,row.AddressId,row.Code,row.Address.CompanyName,row.Dba,row.TaxId,row.Address.Address1,row.Address.Address2,row.Address.Address3,row.Address.CityName,row.Address.StateCode,row.AddressCountryId,row.Address.PostalCode,row.Address.WebUrl,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
         </tr>
         <tr>
           <td colspan="3" align="right">

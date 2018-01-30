@@ -49,4 +49,18 @@ export class CountryService {
       });
   }
 
+  getStates()
+  {
+    let options = this.getOptions('');
+    return this.http.get(AppSettings.MONOLITHENDPOINT + "api/AddressState/", options)
+      .map((response: Response) => {
+        let Data = response.json() && response.json().Data;
+        if (Data) {
+          return response.json();
+        } else {
+          return "";
+        }
+      });
+  }
+
 }
