@@ -14,7 +14,8 @@ import { Observable } from 'rxjs/Observable';
 import { AppSettings } from './AppSettings';
 
 @Injectable()
-export class CompaniesService {
+export class PaymentService {
+
   public token: string;
 
   constructor(private http: Http, private router: Router) {
@@ -36,9 +37,9 @@ export class CompaniesService {
     return options;
   }
 
-  getCompanies() {
+  getMPData() {
     let options = this.getOptions('');
-    return this.http.get(AppSettings.MONOLITHENDPOINT + "api/Company/", options)
+    return this.http.get(AppSettings.ACCOUNTSENDPOINT + "api/ArMethodOfPaymentCode/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
@@ -49,35 +50,21 @@ export class CompaniesService {
       });
   }
 
-  getCompanyDetails(ID) {
-    let options = this.getOptions('');
-    return this.http.get(AppSettings.MONOLITHENDPOINT + "api/Company/"+ID, options)
-      .map((response: Response) => {
-        let Data = response.json() && response.json().Data;
-        if (Data) {
-          return response.json();
-        } else {
-          return "";
-        }
-      });
-  }
-
-
-  submitCompany(body) {
+  submitMP(body) {
     let options = this.getOptions("ctype");
-    return this.http.post(AppSettings.MONOLITHENDPOINT + "api/Company", body, options)
+    return this.http.post(AppSettings.ACCOUNTSENDPOINT + "api/ArMethodOfPaymentCode", body, options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {
-          return response.json();
+          return true;
         } else {
-          return "";
+          return false;
         }
       });
   }
 
-  updateCompany(Id, body) {
-    var strUrl = AppSettings.MONOLITHENDPOINT + "api/Company/";
+  updateMP(Id, body) {
+    var strUrl = AppSettings.ACCOUNTSENDPOINT + "api/ArMethodOfPaymentCode/";
     strUrl = strUrl.concat(Id)
     let options = this.getOptions("ctype");
     return this.http.put(strUrl, body, options)
@@ -89,10 +76,6 @@ export class CompaniesService {
           return false;
         }
       });
-  }
-
-  deleteCompany(Id, body) {
-
   }
 
 }

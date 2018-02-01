@@ -20,6 +20,8 @@ import { CountryService } from '../../_services/country.service';
 })
 export class CompaniesComponent implements OnInit {
   pgTitle: string = "Companies";
+  company: any = "";
+
   public codesList: any = "";
   countryList: any = "";
   countryData: any[];
@@ -73,7 +75,7 @@ export class CompaniesComponent implements OnInit {
   minDate: Date;
   addFlag: boolean = false;
   companyName: string = "";
-  
+
   dba: string = "";
   taxId: string = "";
   contact: string = "";
@@ -156,8 +158,7 @@ export class CompaniesComponent implements OnInit {
     private http: Http,
     private pagerService: PagerService,
     private CompaniesService: CompaniesService,
-    private CountryService: CountryService)
-  {
+    private CountryService: CountryService) {
     this.sortby = "Code";
     this.sortorder = "asc";
     this.getData();
@@ -222,7 +223,7 @@ export class CompaniesComponent implements OnInit {
       'state': [null],
       'postalcode': [null, Validators.compose([Validators.required])],
       'website': [null],
-      'effectiveDate' : [null]
+      'effectiveDate': [null]
     });
     this.codeeditForm = this.fb.group({
       'editcode': [null, Validators.compose([Validators.required])],
@@ -236,7 +237,7 @@ export class CompaniesComponent implements OnInit {
       'estate': [null],
       'epostalcode': [null, Validators.compose([Validators.required])],
       'ewebsite': [null],
-      'discontinuedDate': [null]      
+      'discontinuedDate': [null]
     });
     this.PhoneForm = this.fb.group({
       'phno': [null, Validators.compose([Validators.required])],
@@ -292,8 +293,7 @@ export class CompaniesComponent implements OnInit {
       }
       );
   }
-  getCountries()
-  {
+  getCountries() {
     this.CountryService.getCountries()
       .subscribe(res => {
         this.countryList = res;
@@ -305,8 +305,7 @@ export class CompaniesComponent implements OnInit {
       }
       );
   }
-  getStates()
-  {
+  getStates() {
     this.CountryService.getStates()
       .subscribe(res => {
         this.stateList = res;
@@ -319,8 +318,8 @@ export class CompaniesComponent implements OnInit {
         this.errorMsg = "State(s) not found.";
         console.log("error:" + err);
       }
-    );
-   
+      );
+
   }
   sortData() {
     let orderType = this.sortorder
@@ -341,18 +340,15 @@ export class CompaniesComponent implements OnInit {
     this.setPage(1);
     return this.codesList.Data;
   }
-  callDivision()
-  {
+  callDivision() {
     this.DivdisplayFlag = false;
     this.AddDivFlag = true;
   }
-  callEmails()
-  {
+  callEmails() {
     this.MaildisplayFlag = false;
     this.AddMailFlag = true;
   }
-  callPHs()
-  {
+  callPHs() {
     this.PhdisplayFlag = false;
     this.AddPhFlag = true;
   }
@@ -377,11 +373,21 @@ export class CompaniesComponent implements OnInit {
   }
   clearContent() {
     this.code = "";
-    this.description = "";
+    this.companyName = "";
+    this.dba = "";
+    this.taxId = "";
+    this.addr1 = "";
+    this.addr2 = "";
+    this.addr3 = "";
+    this.city = "";
+    this.state = "";
+    this.postalcode = "";
+    this.website = "";
+    this.effectiveDate = "";
     this.errormsg = "";
     this.codeerrorMsg = "";
     this.descerrorMsg = ""
-    this.addr1errorMsg = "";
+    this.addr1errorMsg = "";   
   }
   saveCompany(value) {
     this.errormsg = "";
@@ -406,8 +412,15 @@ export class CompaniesComponent implements OnInit {
       var splitted = this.stateselected.split("_", 2);
       this.state = splitted[0].toString();
       this.country = splitted[1].toString();
-      
-      if ((this.website || '').trim().length === 0) { this.website = null };
+
+      if ((this.dba || '').trim().length === 0) { this.dba = null; }
+      if ((this.taxId || '').trim().length === 0) { this.taxId = null; }
+      if ((this.addr2 || '').trim().length === 0) { this.addr2 = null;}
+      if ((this.addr3 || '').trim().length === 0) { this.addr3 = null; }
+      if ((this.website || '').trim().length === 0) { this.website = null; }
+      if (this.effectiveDate === undefined) { this.effectiveDate = new Date(); }
+     //console.log("Effective Date:: " + this.effectiveDate);
+
       var body = JSON.stringify({
         "Code": this.code,
         "Description": "Test 123",
@@ -438,9 +451,11 @@ export class CompaniesComponent implements OnInit {
       //console.log("Body Before :: " + body);
       this.CompaniesService.submitCompany(body)
         .subscribe(res => {
+          this.company = res;
           this.addFlag = false;
           this.codesList = "";
           this.displayFlag = true;
+          //this.editFlag = true;
           this.getData();
           this.pgTitle = "Companies";
           this.setPage(1);
@@ -452,6 +467,7 @@ export class CompaniesComponent implements OnInit {
         }
         );
     }
+    
   }
   setCompanydetails(id, addrId, code, company, dba, taxid, addr1, addr2, addr3, city, state, country, zip, website, startDate, endDate) {
     var splitted = "";
@@ -461,7 +477,7 @@ export class CompaniesComponent implements OnInit {
     this.AddressId = addrId;
     this.editcode = code;
     if (company || null) { this.ecompanyName = company };
-    if (dba || null) { this.edba = dba };    
+    if (dba || null) { this.edba = dba };
     if (taxid || null) { this.etaxId = taxid };
     if (addr1 || null) { this.eaddr1 = addr1 };
     if (addr2 || null) { this.eaddr2 = addr2 };
@@ -469,18 +485,17 @@ export class CompaniesComponent implements OnInit {
     if (city || null) { this.ecity = city };
     this.estateselected = state + "_" + country;
     if (zip || null) { this.epostalcode = zip };
-    if (website || null){this.ewebsite = website;}      
-    if (startDate || '')
-    {
+    if (website || null) { this.ewebsite = website; }
+    if (startDate || '') {
       splitted = startDate.split("T", 2);
       this.effectiveDate = splitted[0];
     }
     if (endDate || '') {
-      splitted = '';      
+      splitted = '';
       splitted = endDate.split("T", 2);
       this.discontinuedDate = splitted[0];
     }
-    
+
     this.editerrormsg = "";
     this.editcodeerrorMsg = "";
     this.editdescerrorMsg = "";
@@ -504,7 +519,7 @@ export class CompaniesComponent implements OnInit {
       var splitted = this.estateselected.split("_", 2);
       this.estate = splitted[0].toString();
       this.ecountry = splitted[1].toString();
-      
+
       this.editFlag = false;
       this.displayFlag = true;
       //console.log("Discont Date:: " + this.discontinuedDate);

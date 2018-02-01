@@ -81,6 +81,9 @@ import { AppSettings } from './_services/AppSettings';
 import { AdditionalservicesComponent } from './Configuration/Codes/additionalservices/additionalservices.component';
 import { ARtransactionComponent } from './Configuration/Codes/artransaction/artransaction.component';
 import { CompaniesComponent } from './Configuration/companies/companies.component';
+import { PaymentComponent } from './Configuration/Codes/payments/payments.component';
+//import { DialogOverviewExampleDialog } from './Configuration/Codes/inventory/inventoryadj/inventoryadj.component';
+import { StoresComponent } from './Configuration/stores/stores.component';
 
 
 @NgModule({
@@ -118,6 +121,7 @@ exports: [
     MatToolbarModule,
   MatTooltipModule
   ],
+  //entryComponents: [DialogOverviewExampleDialog],
    declarations: [
     AppComponent,
     LoginComponent,
@@ -149,7 +153,9 @@ exports: [
      HeaderComponent,
      SidemenuComponent,
      FooterComponent,
-     CompaniesComponent
+     CompaniesComponent,
+     PaymentComponent,
+     StoresComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,

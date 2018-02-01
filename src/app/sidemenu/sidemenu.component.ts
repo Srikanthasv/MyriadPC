@@ -51,15 +51,10 @@ export class SidemenuComponent implements OnInit {
       err => {
         console.log("error loading sidemenu json:" + err);
       }
-    );
-
+    );    
   }
 
-  ngOnInit() {
-    
-  }
-
-
+  ngOnInit() { }
 
   toggleView(ary, data, index) {
     if (this.route != '') {

@@ -2,7 +2,6 @@ import { Component, OnInit,NgZone } from '@angular/core';
 import { AuthenticationServiceService } from '../_services/authentication-service.service';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,10 +9,11 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 })
 export class HeaderComponent implements OnInit {
 username: string;
-  user:boolean=false;
+user: boolean = false;
   
   constructor(private zone:NgZone,private authenticationService:AuthenticationServiceService ) {
- this.authenticationService.getLoggedIn.subscribe(name => this.changeName(name));
+    this.authenticationService.getLoggedIn.subscribe(name => this.changeName(name));
+    
 }
     private changeName(name: boolean): void {
         this.user = name;

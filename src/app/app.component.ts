@@ -10,7 +10,8 @@ export class AppComponent implements OnInit {
   title = 'app';
   
   username: string;
-  user:boolean=false;
+  user: boolean = false;
+
   constructor() {
   	 //alert("root");
 

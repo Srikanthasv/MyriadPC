@@ -90,8 +90,8 @@
             <span class="mat-warn">{{edicodeerrorMsg}}</span>
 
             <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:20px;">
-              <mat-hint placeholder="Description" align="end">{{editdescription.length || 0}}/30</mat-hint>
               <input matInput placeholder="Description" [(ngModel)]="editdescription" name="editdescription" [formControl]="codeeditForm.controls['editdescription']" required maxlength="30">
+              <mat-hint placeholder="Description" align="end">{{editdescription.length || 0}}/30</mat-hint>
               <mat-error *ngIf="codeeditForm.controls['editdescription'].hasError('required') ">
                 This is required
               </mat-error>

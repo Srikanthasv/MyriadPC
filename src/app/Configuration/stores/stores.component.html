@@ -1,0 +1,624 @@
+<mat-sidenav-container class="" autosize>
+  <!-- for filter start-->
+  <mat-sidenav #sidenav1 mode="over" position="end" disableClose>
+    <mat-content style="background-color:#2196f3; padding:10px;">
+      <span class="pull-left" style="color:white; font-size:20px">Search</span>
+      <a style="color:white; cursor:pointer; font-size:18px" class="pull-right" (click)="sidenav1.close()"><i class="material-icons">clear</i></a>
+    </mat-content>
+    <br />
+    <div style="padding:20px;">
+      <mat-card layout="">
+        <mat-form-field flex="50" flex-sm="50" flex-md="50">
+          <mat-select placeholder="Sort By" [(ngModel)]="sortby">
+            <mat-option value="Code" selected="selected">Code</mat-option>
+            <mat-option value="companyName">Name</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field flex="50" flex-sm="50" flex-md="50" style="margin-left:10px;">
+          <mat-select placeholder="Sort Order" [(ngModel)]="sortorder">
+            <mat-option value="asc" selected="selected">Ascending</mat-option>
+            <mat-option value="dec">Descending</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card><br><br>
+      <mat-card style="float:right;">
+        <button type="button" mat-raised-button class="" (click)="clearsort()" style="line-height:36px">CLEAR</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" mat-raised-button color="primary" class="" (click)="sortData();sidenav1.close();" style="line-height:36px">SEARCH</button>
+      </mat-card>
+    </div>
+  </mat-sidenav>
+  <div class="page-inner">
+    <div class="page-title rightside-title">
+      <span class="h3">{{pgTitle}}</span><button *ngIf="addFlag" id="addback" (click)="addcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
+      <button id="editback" *ngIf="editFlag" (click)="editcodeback()" class="mat-raised-button back-but" mat-raised-button=""><mat-icon class="material-icons">keyboard_arrow_left</mat-icon>Back</button>
+    </div>
+    <div id="main-wrapper" class="mat-sidenav-margin">
+      <div class="rightside-content" *ngIf="addFlag">
+        <form class="add-adv" [formGroup]="codeForm" (ngSubmit)="saveStores(codeForm.value)" novalidate>
+          <div class="mat-warn">{{errormsg}}</div><br />          
+            <div layout="row">
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Store Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="4" >
+                <!--<mat-hint placeholder="Store Code" align="end">{{code.length || 0}}/4</mat-hint>-->
+                <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
+                  This is required
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Store Name" [(ngModel)]="name" name="name" [formControl]="codeForm.controls['name']" required maxlength="30">
+                <!--<mat-hint placeholder="Store Name" align="end">{{name.length || 0}}/30</mat-hint>-->
+                <mat-error *ngIf="codeForm.controls['name'].hasError('required') ">
+                  This is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div layout="row">
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <mat-select placeholder="Company" [(ngModel)]="company" [formControl]="codeForm.controls['company']" required>
+                  <mat-option *ngFor="let cd of companyData; let i = index" class="multiple-field-box" [value]="cd.Id">
+                    {{ cd.Name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="codeForm.controls['company'].hasError('required')">
+                  This is required
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <mat-select placeholder="Division" [(ngModel)]="division" [formControl]="codeForm.controls['division']" required>
+                  <mat-option *ngFor="let dd of divData; let i = index" class="multiple-field-box" [value]="dd.Id">
+                    {{ dd.Name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="codeForm.controls['division'].hasError('required')">
+                  This is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div layout="row">
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Address 1" [(ngModel)]="addr1" name="addr1" [formControl]="codeForm.controls['addr1']" maxlength="50">
+                <!--<mat-hint placeholder="Address 1" align="end">{{addr1.length || 0}}/50</mat-hint>-->
+                <mat-error *ngIf="codeForm.controls['addr1'].hasError('required') ">
+                  This is required
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Address 2" [(ngModel)]="addr2" name="addr2" [formControl]="codeForm.controls['addr2']" maxlength="50">
+                <!--<mat-hint placeholder="Address 2" align="end">{{addr2.length || 0}}/50</mat-hint>-->
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Address 3" [(ngModel)]="addr3" name="addr3" [formControl]="codeForm.controls['addr3']" maxlength="50">
+                <!--<mat-hint placeholder="Address 3" align="end">{{addr3.length || 0}}/50</mat-hint>-->
+              </mat-form-field>
+            </div>
+            <div layout="row">
+              <span class="mat-warn" flex="50">{{addr1errorMsg}}</span>
+            </div>
+            <div layout="row">
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="City" [(ngModel)]="city" name="city" [formControl]="codeForm.controls['city']" maxlength="40">
+                <!--<mat-hint placeholder="City" align="end">{{city.length || 0}}/40</mat-hint>-->
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <mat-select placeholder="State" [(ngModel)]="stateselected" [formControl]="codeForm.controls['state']">
+                  <mat-option *ngFor="let s of stateData; let i = index" class="multiple-field-box" [value]="s.Code + '_' + s.AddressCountryId">
+                    {{ s.Name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Zip" [(ngModel)]="postalcode" name="postalcode" [formControl]="codeForm.controls['postalcode']" required maxlength="10">
+                <!--<mat-hint placeholder="Zip" align="end">{{postalcode.length || 0}}/10</mat-hint>-->
+              </mat-form-field>
+            </div>
+            <div layout="row">
+              <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                <input matInput placeholder="Website" [(ngModel)]="website" name="website" [formControl]="codeForm.controls['website']" maxlength="50">
+                <!--<mat-hint placeholder="Website" align="end">{{website.length || 0}}/50</mat-hint>-->
+              </mat-form-field>
+            </div>
+          <div layout="row">
+            <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <mat-select placeholder="Tax Code" [(ngModel)]="taxcode" [formControl]="codeForm.controls['taxcode']">
+                <mat-option *ngFor="let cd of txData; let i = index" class="multiple-field-box" [value]="cd.Id">
+                  {{ cd.Name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <mat-select placeholder="Store Default Price" [(ngModel)]="stDefPrice" [formControl]="codeForm.controls['stDefPrice']">
+                <mat-option *ngFor="let dd of stDefPriceData; let i = index" class="multiple-field-box" [value]="dd.Id">
+                  {{ dd.Name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div layout="row">
+            <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="% Deposit Required" [(ngModel)]="depositReq" name="depositReq" [formControl]="codeForm.controls['depositReq']" maxlength="10">
+              <!--<mat-hint placeholder="Zip" align="end">{{postalcode.length || 0}}/10</mat-hint>-->
+            </mat-form-field>
+            <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+              <mat-select placeholder="Base Deposit % on" [(ngModel)]="baseDeposit" [formControl]="codeForm.controls['baseDeposit']">
+                <mat-option value="None">None</mat-option>
+                <mat-option value="Merchandise">Merchandise Only</mat-option>
+                <mat-option value="None">Include Tax, Delivery and Additional Services in Deposit</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div layout="row">
+            <mat-form-field flex="50" flex-sm="50" flex-md="50">
+              <input matInput placeholder="Closed Through Date" [max]="maxDate" [matDatepicker]="dp3" [(ngModel)]="closeDate" [ngModelOptions]="{standalone: true}" name="closeDate" disabled>
+              <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <br /><br />
+          <div class="" align="right">
+            <div class="">
+              <button mat-raised-button type="button" (click)="clearContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="rightside-content" *ngIf="editFlag">
+        <mat-tab-group>
+          <mat-tab label="Tab 1">
+            <ng-template mat-tab-label>DETAILS</ng-template>
+            <div>
+              <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Store Code" [(ngModel)]="editcode" name="editcode" [formControl]="codeeditForm.controls['editcode']" required maxlength="4">
+                  <!--<mat-hint placeholder="Store Code" align="end">{{editcode.length || 0}}/4</mat-hint>-->
+                  <mat-error *ngIf="codeeditForm.controls['editcode'].hasError('required') ">
+                    This is required
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Store Name" [(ngModel)]="ename" name="ename" [formControl]="codeeditForm.controls['ename']" required maxlength="30">
+                  <!--<mat-hint placeholder="Store Name" align="end">{{ename.length || 0}}/30</mat-hint>-->
+                  <mat-error *ngIf="codeeditForm.controls['ename'].hasError('required') ">
+                    This is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <mat-select placeholder="Company" [(ngModel)]="ecompany" [formControl]="codeeditForm.controls['ecompany']" required>
+                    <mat-option *ngFor="let cd of companyData; let i = index" class="multiple-field-box" [value]="cd.Id">
+                      {{ cd.Name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="codeeditForm.controls['ecompany'].hasError('required')">
+                    This is required
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <mat-select placeholder="Division" [(ngModel)]="edivision" [formControl]="codeeditForm.controls['edivision']" required>
+                    <mat-option *ngFor="let dd of divData; let i = index" class="multiple-field-box" [value]="dd.Id">
+                      {{ dd.Name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="codeeditForm.controls['edivision'].hasError('required')">
+                    This is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Address 1" [(ngModel)]="eaddr1" name="eaddr1" [formControl]="codeeditForm.controls['eaddr1']" maxlength="50">
+                  <!--<mat-hint placeholder="Address 1" align="end">{{eaddr1.length || 0}}/50</mat-hint>-->
+                  <mat-error *ngIf="codeeditForm.controls['eaddr1'].hasError('required') ">
+                    This is required
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Address 2" [(ngModel)]="eaddr2" name="eaddr2" [formControl]="codeeditForm.controls['eaddr2']" maxlength="50">
+                  <!--<mat-hint placeholder="Address 2" align="end">{{eaddr2.length || 0}}/50</mat-hint>-->
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Address 3" [(ngModel)]="eaddr3" name="eaddr3" [formControl]="codeeditForm.controls['eaddr3']" maxlength="50">
+                  <!--<mat-hint placeholder="Address 3" align="end">{{eaddr3.length || 0}}/50</mat-hint>-->
+                </mat-form-field>
+              </div>
+              <div layout="row">
+                <span class="mat-warn" flex="50">{{addr1errorMsg}}</span>
+              </div>
+              <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="City" [(ngModel)]="ecity" name="ecity" [formControl]="codeeditForm.controls['ecity']" maxlength="40">
+                  <!--<mat-hint placeholder="City" align="end">{{ecity.length || 0}}/40</mat-hint>-->
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <mat-select placeholder="State" [(ngModel)]="estateselected" [formControl]="codeeditForm.controls['estate']">
+                    <mat-option *ngFor="let s of stateData; let i = index" class="multiple-field-box" [value]="s.Code + '_' + s.AddressCountryId">
+                      {{ s.Name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Zip" [(ngModel)]="epostalcode" name="epostalcode" [formControl]="codeeditForm.controls['epostalcode']" maxlength="10">
+                  <!--<mat-hint placeholder="Zip" align="end">{{postalcode.length || 0}}/10</mat-hint>-->
+                </mat-form-field>
+              </div>
+              <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Website" [(ngModel)]="ewebsite" name="ewebsite" [formControl]="codeeditForm.controls['ewebsite']" maxlength="50">
+                  <!--<mat-hint placeholder="Website" align="end">{{ewebsite.length || 0}}/50</mat-hint>-->
+                </mat-form-field>
+              </div>
+              <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <mat-select placeholder="Tax Code" [(ngModel)]="etaxcode" [formControl]="codeeditForm.controls['etaxcode']">
+                    <mat-option *ngFor="let cd of txData; let i = index" class="multiple-field-box" [value]="cd.Id">
+                      {{ cd.Name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <mat-select placeholder="Store Default Price" [(ngModel)]="estDefPrice" [formControl]="codeeditForm.controls['estDefPrice']">
+                    <mat-option *ngFor="let dd of stDefPriceData; let i = index" class="multiple-field-box" [value]="dd.Id">
+                      {{ dd.Name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div layout="row">
+                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="% Deposit Required" [(ngModel)]="edepositReq" name="edepositReq" [formControl]="codeeditForm.controls['edepositReq']" maxlength="10">
+                  <!--<mat-hint placeholder="Zip" align="end">{{edepositReq.length || 0}}/10</mat-hint>-->
+                </mat-form-field>
+                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                  <mat-select placeholder="Base Deposit % on" [(ngModel)]="ebaseDeposit" [formControl]="codeeditForm.controls['ebaseDeposit']">
+                    <mat-option value="None">None</mat-option>
+                    <mat-option value="Merchandise">Merchandise Only</mat-option>
+                    <mat-option value="None">Include Tax, Delivery and Additional Services in Deposit</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div layout="row">
+                <mat-form-field flex="50" flex-sm="50" flex-md="50">
+                  <input matInput placeholder="Closed Through Date" [max]="maxDate" [matDatepicker]="dp3" [(ngModel)]="ecloseDate" [ngModelOptions]="{standalone: true}" name="ecloseDate" disabled>
+                  <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
+                  <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <br /><br />
+              <div class="" align="right">
+                <div class="">
+                  <button mat-raised-button type="button" (click)="clearContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                </div>
+              </div><br />
+            </div>
+          </mat-tab>
+          <mat-tab label="Tab 2">
+            <ng-template mat-tab-label>LOCATIONS</ng-template>
+            <div>
+              <div class="rightside-content" *ngIf="addLocFlag">
+                <form class="add-adv" [formGroup]="LocForm" (ngSubmit)="savePhone(LocForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Location Code" [(ngModel)]="locCode" name="locCode" [formControl]="LocForm.controls['locCode']" required maxlength="6">
+                      <!--<mat-hint placeholder="Location Code" align="end">{{locCode.length || 0}}/6</mat-hint>-->
+                      <mat-error *ngIf="LocForm.controls['locCode'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Location Type" [(ngModel)]="locTypeselected" [formControl]="LocForm.controls['loctype']" required>
+                        <mat-option value="Showroom">Showroom</mat-option>
+                        <mat-option value="Work">Warehouse</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Sequence" [(ngModel)]="sequence" name="sequence" [formControl]="LocForm.controls['sequence']" maxlength="6">
+                      <!--<mat-hint placeholder="Sequence" align="end">{{sequence.length || 0}}/6</mat-hint>-->
+                    </mat-form-field>
+                  </div>
+                  <br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="clearLocContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div><br />
+                </form>
+              </div>
+
+              <div class="rightside-content" *ngIf="editLocFlag">
+                <form class="add-adv" [formGroup]="editLocForm" (ngSubmit)="savePhone(editLocForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Location Code" [(ngModel)]="elocCode" name="elocCode" [formControl]="editLocForm.controls['elocCode']" required maxlength="6">
+                      <!--<mat-hint placeholder="Location Code" align="end">{{elocCode.length || 0}}/6</mat-hint>-->
+                      <mat-error *ngIf="editLocForm.controls['elocCode'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Location Type" [(ngModel)]="elocTypeselected" [formControl]="editLocForm.controls['eloctype']" required>
+                        <mat-option value="Showroom">Showroom</mat-option>
+                        <mat-option value="Work">Warehouse</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Sequence" [(ngModel)]="esequence" name="esequence" [formControl]="editLocForm.controls['esequence']" maxlength="6">
+                      <!--<mat-hint placeholder="Sequence" align="end">{{esequence.length || 0}}/6</mat-hint>-->
+                    </mat-form-field>
+                  </div>
+                  <br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="clearELocContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div><br />
+                </form>
+              </div>
+
+              <div>
+                <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="LocFlag">
+                  <mat-icons class="material-icons" (click)="callLocations();" flex="1">add</mat-icons><span (click)="callLocations();" style="color:white">&nbsp;LOCATION</span>
+                </mat-content>
+                <table class="table1 tblborder" width="100%" *ngIf="LocFlag" cellpadding="0" cellspacing="0">
+                  <tr *ngFor="let row of pagedItems" class="tblbordertr">
+                    <td style="width:30%;">Location Code: {{row.Code}} <br> Location Type: {{row.Name}}</td>
+                    <td style="width:30%;">Pick Sequence: {{row.LCD}}</td>
+                    <td style="width:10%;"><a style="cursor:pointer" (click)="editStores(row.Id,row.AddressId,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="right">
+                      <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
+                        <span class="mat-paginator-page">
+                          Page :
+                          <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)" class="select-border">
+                            <option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</option>
+                          </select>
+                        </span>
+                        <span class="mat-paginator-page">
+                          Rows per page :
+                          <select name="rowspage" [(ngModel)]="rowspage" (change)="setPage(selectpage)" class="select-border">
+                            <option value="5" selected="selected">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                          </select>
+                        </span>
+                        <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
+                        <span class="first-enable mat-paginator-page" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
+                          <a style="visibility:hidden;"> First </a>
+                        </span>
+                        <span class="first-disable mat-paginator-page" *ngIf="pager.currentPage === 1">
+                          <a style="visibility:hidden;"> First </a>
+                        </span>
+                        <span class="prev-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
+                          <a style="visibility:hidden;"> Prev </a>
+                        </span>
+                        <span class="prev-disable" *ngIf="pager.currentPage === 1">
+                          <a style="visibility:hidden;"> Prev </a>
+                        </span>
+                        <span class="next-enable" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages" (click)="setPage(pager.currentPage + 1)">
+                          <a style="visibility:hidden;"> Next </a>
+                        </span>
+                        <span class="next-disable" *ngIf="pager.currentPage === pager.totalPages">
+                          <a style="visibility:hidden;"> Next </a>
+                        </span>
+                        <span class="last-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
+                          <a style="visibility:hidden;"> Last </a>
+                        </span>
+                        <span class="last-disable" *ngIf="pager.currentPage === pager.totalPages">
+                          <a style="visibility:hidden;"> Last </a>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </mat-tab>
+          <mat-tab label="Tab 3">
+            <ng-template mat-tab-label>PHONE NUMBERS</ng-template>
+            <div>
+
+              <div>
+                <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="PhFlag">
+                  <mat-icons class="material-icons" (click)="callPhones();" flex="1">add</mat-icons><span (click)="callPhones();" style="color:white">&nbsp;PHONE NUMBERS</span>
+                </mat-content>
+                <table class="table1 tblborder" width="100%" *ngIf="LocFlag" cellpadding="0" cellspacing="0">
+                  <tr *ngFor="let row of pagedItems" class="tblbordertr">
+                    <td style="width:30%;">Phone Number: {{row.Code}} <br> Extension: {{row.Name}}</td>
+                    <td style="width:30%;">Type: {{row.LCD}}</td>
+                    <td style="width:10%;"><a style="cursor:pointer" (click)="editStores(row.Id,row.AddressId,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="right">
+                      <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
+                        <span class="mat-paginator-page">
+                          Page :
+                          <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)" class="select-border">
+                            <option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</option>
+                          </select>
+                        </span>
+                        <span class="mat-paginator-page">
+                          Rows per page :
+                          <select name="rowspage" [(ngModel)]="rowspage" (change)="setPage(selectpage)" class="select-border">
+                            <option value="5" selected="selected">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                          </select>
+                        </span>
+                        <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
+                        <span class="first-enable mat-paginator-page" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
+                          <a style="visibility:hidden;"> First </a>
+                        </span>
+                        <span class="first-disable mat-paginator-page" *ngIf="pager.currentPage === 1">
+                          <a style="visibility:hidden;"> First </a>
+                        </span>
+                        <span class="prev-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
+                          <a style="visibility:hidden;"> Prev </a>
+                        </span>
+                        <span class="prev-disable" *ngIf="pager.currentPage === 1">
+                          <a style="visibility:hidden;"> Prev </a>
+                        </span>
+                        <span class="next-enable" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages" (click)="setPage(pager.currentPage + 1)">
+                          <a style="visibility:hidden;"> Next </a>
+                        </span>
+                        <span class="next-disable" *ngIf="pager.currentPage === pager.totalPages">
+                          <a style="visibility:hidden;"> Next </a>
+                        </span>
+                        <span class="last-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
+                          <a style="visibility:hidden;"> Last </a>
+                        </span>
+                        <span class="last-disable" *ngIf="pager.currentPage === pager.totalPages">
+                          <a style="visibility:hidden;"> Last </a>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Tab 4">
+            <ng-template mat-tab-label>GENERAL LEDGER</ng-template>
+            <div>
+              <div class="rightside-content" *ngIf="editLocFlag">
+                <form class="add-adv" [formGroup]="editLocForm" (ngSubmit)="savePhone(editLocForm.value)" novalidate>
+
+                </form>
+              </div>
+
+              <div>
+                <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="GLFlag">
+                  <mat-icons class="material-icons" (click)="callGL();" flex="1">add</mat-icons><span (click)="callGL();" style="color:white">&nbsp;G/L</span>
+                </mat-content>
+                <table class="table1 tblborder" width="100%" *ngIf="LocFlag" cellpadding="0" cellspacing="0">
+                  <tr *ngFor="let row of pagedItems" class="tblbordertr">
+                    <td style="width:30%;">Accounts Payable: {{row.Code}}</td>
+                    <td style="width:30%;">Accounts Payable Discount: {{row.LCD}}</td>
+                    <td style="width:10%;"><a style="cursor:pointer" (click)="editStores(row.Id,row.AddressId,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="right">
+                      <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
+                        <span class="mat-paginator-page">
+                          Page :
+                          <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)" class="select-border">
+                            <option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</option>
+                          </select>
+                        </span>
+                        <span class="mat-paginator-page">
+                          Rows per page :
+                          <select name="rowspage" [(ngModel)]="rowspage" (change)="setPage(selectpage)" class="select-border">
+                            <option value="5" selected="selected">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                          </select>
+                        </span>
+                        <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
+                        <span class="first-enable mat-paginator-page" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
+                          <a style="visibility:hidden;"> First </a>
+                        </span>
+                        <span class="first-disable mat-paginator-page" *ngIf="pager.currentPage === 1">
+                          <a style="visibility:hidden;"> First </a>
+                        </span>
+                        <span class="prev-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
+                          <a style="visibility:hidden;"> Prev </a>
+                        </span>
+                        <span class="prev-disable" *ngIf="pager.currentPage === 1">
+                          <a style="visibility:hidden;"> Prev </a>
+                        </span>
+                        <span class="next-enable" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages" (click)="setPage(pager.currentPage + 1)">
+                          <a style="visibility:hidden;"> Next </a>
+                        </span>
+                        <span class="next-disable" *ngIf="pager.currentPage === pager.totalPages">
+                          <a style="visibility:hidden;"> Next </a>
+                        </span>
+                        <span class="last-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
+                          <a style="visibility:hidden;"> Last </a>
+                        </span>
+                        <span class="last-disable" *ngIf="pager.currentPage === pager.totalPages">
+                          <a style="visibility:hidden;"> Last </a>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div>
+        <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="displayFlag">
+          <mat-icons class="material-icons" (click)="callCodes();" flex="1">add</mat-icons><span (click)="callCodes();" style="color:white">&nbsp;CODE</span>
+          <mat-icons class="material-icons" (click)="sidenav1.open()" flex="5">filter_list</mat-icons><span (click)="sidenav1.open()" style="color:white">&nbsp;FILTER</span>
+        </mat-content>
+
+        <table class="table1 tblborder" width="100%" *ngIf="displayFlag" cellpadding="0" cellspacing="0">
+          <tr *ngFor="let row of pagedItems" class="tblbordertr">
+            <td style="width:30%;">{{row.Code}} <br> Name: {{row.Name}}</td>
+            <td style="width:30%;">Last Closed Date: {{row.LCD}}</td>
+            <td style="width:30%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
+            <td style="width:10%;"><a style="cursor:pointer" (click)="editStores(row.Id,row.AddressId,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+          </tr>
+          <tr>
+            <td colspan="3" align="right">
+              <div *ngIf="displayFlag && pager.pages && pager.pages.length" class="mat-paginator-container">
+                <span class="mat-paginator-page">
+                  Page :
+                  <select name="selectpage" [(ngModel)]="selectpage" (change)="setPage(selectpage)" class="select-border">
+                    <option value="{{page}}" *ngFor="let page of pager.pages" selected="selected">{{page}}</option>
+                  </select>
+                </span>
+                <span class="mat-paginator-page">
+                  Rows per page :
+                  <select name="rowspage" [(ngModel)]="rowspage" (change)="setPage(selectpage)" class="select-border">
+                    <option value="5" selected="selected">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                  </select>
+                </span>
+                <span class="mat-paginator-page">{{this.pager.startIndex+1}} - {{this.pager.endIndex+1}} of {{pager.totalItems}} </span>
+                <span class="first-enable mat-paginator-page" *ngIf="pager.currentPage !== 1" style="cursor: pointer;" (click)="setPage(1)">
+                  <a style="visibility:hidden;"> First </a>
+                </span>
+                <span class="first-disable mat-paginator-page" *ngIf="pager.currentPage === 1">
+                  <a style="visibility:hidden;"> First </a>
+                </span>
+                <span class="prev-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
+                  <a style="visibility:hidden;"> Prev </a>
+                </span>
+                <span class="prev-disable" *ngIf="pager.currentPage === 1">
+                  <a style="visibility:hidden;"> Prev </a>
+                </span>
+                <span class="next-enable" style="cursor: pointer;" *ngIf="pager.currentPage != pager.totalPages" (click)="setPage(pager.currentPage + 1)">
+                  <a style="visibility:hidden;"> Next </a>
+                </span>
+                <span class="next-disable" *ngIf="pager.currentPage === pager.totalPages">
+                  <a style="visibility:hidden;"> Next </a>
+                </span>
+                <span class="last-enable" style="cursor: pointer;" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
+                  <a style="visibility:hidden;"> Last </a>
+                </span>
+                <span class="last-disable" *ngIf="pager.currentPage === pager.totalPages">
+                  <a style="visibility:hidden;"> Last </a>
+                </span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</mat-sidenav-container>
