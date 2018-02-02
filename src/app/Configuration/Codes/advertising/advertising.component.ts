@@ -255,8 +255,8 @@ editcodeback() {
   sortcodes(){
   	let  orderType=this.sortorder
         let currentField = this.sortby;
-        console.log("Order:: " + this.sortorder);
-        console.log("sort:: " + this.sortby);
+        //console.log("Order:: " + this.sortorder);
+        //console.log("sort:: " + this.sortby);
   	 // this.searchbox=false;
 
     this.codesList.Data.sort((a: any, b: any) => {

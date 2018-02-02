@@ -39,14 +39,14 @@
             <div layout="row">
               <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
                 <input matInput placeholder="Store Code" [(ngModel)]="code" name="code" [formControl]="codeForm.controls['code']" required maxlength="4" >
-                <!--<mat-hint placeholder="Store Code" align="end">{{code.length || 0}}/4</mat-hint>-->
+                <mat-hint placeholder="Store Code" align="end">{{code.length || 0}}/4</mat-hint>
                 <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
                   This is required
                 </mat-error>
               </mat-form-field>
               <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
                 <input matInput placeholder="Store Name" [(ngModel)]="name" name="name" [formControl]="codeForm.controls['name']" required maxlength="30">
-                <!--<mat-hint placeholder="Store Name" align="end">{{name.length || 0}}/30</mat-hint>-->
+                <mat-hint placeholder="Store Name" align="end">{{name.length || 0}}/30</mat-hint>
                 <mat-error *ngIf="codeForm.controls['name'].hasError('required') ">
                   This is required
                 </mat-error>
@@ -77,18 +77,18 @@
             <div layout="row">
               <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
                 <input matInput placeholder="Address 1" [(ngModel)]="addr1" name="addr1" [formControl]="codeForm.controls['addr1']" maxlength="50">
-                <!--<mat-hint placeholder="Address 1" align="end">{{addr1.length || 0}}/50</mat-hint>-->
+                <mat-hint placeholder="Address 1" align="end">{{addr1.length || 0}}/50</mat-hint>
                 <mat-error *ngIf="codeForm.controls['addr1'].hasError('required') ">
                   This is required
                 </mat-error>
               </mat-form-field>
               <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                <input matInput placeholder="Address 2" [(ngModel)]="addr2" name="addr2" [formControl]="codeForm.controls['addr2']" maxlength="50">
-                <!--<mat-hint placeholder="Address 2" align="end">{{addr2.length || 0}}/50</mat-hint>-->
+                <input matInput placeholder="Address 2" [(ngModel)]="addr2" name="addr2" [formControl]="codeForm.controls['addr2']" maxlength="30">
+                <mat-hint placeholder="Address 2" align="end">{{addr2.length || 0}}/30</mat-hint>
               </mat-form-field>
               <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
                 <input matInput placeholder="Address 3" [(ngModel)]="addr3" name="addr3" [formControl]="codeForm.controls['addr3']" maxlength="50">
-                <!--<mat-hint placeholder="Address 3" align="end">{{addr3.length || 0}}/50</mat-hint>-->
+                <mat-hint placeholder="Address 3" align="end">{{addr3.length || 0}}/50</mat-hint>
               </mat-form-field>
             </div>
             <div layout="row">
@@ -97,7 +97,7 @@
             <div layout="row">
               <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
                 <input matInput placeholder="City" [(ngModel)]="city" name="city" [formControl]="codeForm.controls['city']" maxlength="40">
-                <!--<mat-hint placeholder="City" align="end">{{city.length || 0}}/40</mat-hint>-->
+                <mat-hint placeholder="City" align="end">{{city.length || 0}}/40</mat-hint>
               </mat-form-field>
               <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
                 <mat-select placeholder="State" [(ngModel)]="stateselected" [formControl]="codeForm.controls['state']">
@@ -108,13 +108,13 @@
               </mat-form-field>
               <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
                 <input matInput placeholder="Zip" [(ngModel)]="postalcode" name="postalcode" [formControl]="codeForm.controls['postalcode']" required maxlength="10">
-                <!--<mat-hint placeholder="Zip" align="end">{{postalcode.length || 0}}/10</mat-hint>-->
+                <mat-hint placeholder="Zip" align="end">{{postalcode.length || 0}}/10</mat-hint>
               </mat-form-field>
             </div>
             <div layout="row">
               <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
                 <input matInput placeholder="Website" [(ngModel)]="website" name="website" [formControl]="codeForm.controls['website']" maxlength="50">
-                <!--<mat-hint placeholder="Website" align="end">{{website.length || 0}}/50</mat-hint>-->
+                <mat-hint placeholder="Website" align="end">{{website.length || 0}}/50</mat-hint>
               </mat-form-field>
             </div>
           <div layout="row">
@@ -167,156 +167,158 @@
           <mat-tab label="Tab 1">
             <ng-template mat-tab-label>DETAILS</ng-template>
             <div>
-              <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Store Code" [(ngModel)]="editcode" name="editcode" [formControl]="codeeditForm.controls['editcode']" required maxlength="4">
-                  <!--<mat-hint placeholder="Store Code" align="end">{{editcode.length || 0}}/4</mat-hint>-->
-                  <mat-error *ngIf="codeeditForm.controls['editcode'].hasError('required') ">
-                    This is required
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Store Name" [(ngModel)]="ename" name="ename" [formControl]="codeeditForm.controls['ename']" required maxlength="30">
-                  <!--<mat-hint placeholder="Store Name" align="end">{{ename.length || 0}}/30</mat-hint>-->
-                  <mat-error *ngIf="codeeditForm.controls['ename'].hasError('required') ">
-                    This is required
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <mat-select placeholder="Company" [(ngModel)]="ecompany" [formControl]="codeeditForm.controls['ecompany']" required>
-                    <mat-option *ngFor="let cd of companyData; let i = index" class="multiple-field-box" [value]="cd.Id">
-                      {{ cd.Name }}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="codeeditForm.controls['ecompany'].hasError('required')">
-                    This is required
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <mat-select placeholder="Division" [(ngModel)]="edivision" [formControl]="codeeditForm.controls['edivision']" required>
-                    <mat-option *ngFor="let dd of divData; let i = index" class="multiple-field-box" [value]="dd.Id">
-                      {{ dd.Name }}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="codeeditForm.controls['edivision'].hasError('required')">
-                    This is required
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Address 1" [(ngModel)]="eaddr1" name="eaddr1" [formControl]="codeeditForm.controls['eaddr1']" maxlength="50">
-                  <!--<mat-hint placeholder="Address 1" align="end">{{eaddr1.length || 0}}/50</mat-hint>-->
-                  <mat-error *ngIf="codeeditForm.controls['eaddr1'].hasError('required') ">
-                    This is required
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Address 2" [(ngModel)]="eaddr2" name="eaddr2" [formControl]="codeeditForm.controls['eaddr2']" maxlength="50">
-                  <!--<mat-hint placeholder="Address 2" align="end">{{eaddr2.length || 0}}/50</mat-hint>-->
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Address 3" [(ngModel)]="eaddr3" name="eaddr3" [formControl]="codeeditForm.controls['eaddr3']" maxlength="50">
-                  <!--<mat-hint placeholder="Address 3" align="end">{{eaddr3.length || 0}}/50</mat-hint>-->
-                </mat-form-field>
-              </div>
-              <div layout="row">
-                <span class="mat-warn" flex="50">{{addr1errorMsg}}</span>
-              </div>
-              <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="City" [(ngModel)]="ecity" name="ecity" [formControl]="codeeditForm.controls['ecity']" maxlength="40">
-                  <!--<mat-hint placeholder="City" align="end">{{ecity.length || 0}}/40</mat-hint>-->
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <mat-select placeholder="State" [(ngModel)]="estateselected" [formControl]="codeeditForm.controls['estate']">
-                    <mat-option *ngFor="let s of stateData; let i = index" class="multiple-field-box" [value]="s.Code + '_' + s.AddressCountryId">
-                      {{ s.Name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Zip" [(ngModel)]="epostalcode" name="epostalcode" [formControl]="codeeditForm.controls['epostalcode']" maxlength="10">
-                  <!--<mat-hint placeholder="Zip" align="end">{{postalcode.length || 0}}/10</mat-hint>-->
-                </mat-form-field>
-              </div>
-              <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Website" [(ngModel)]="ewebsite" name="ewebsite" [formControl]="codeeditForm.controls['ewebsite']" maxlength="50">
-                  <!--<mat-hint placeholder="Website" align="end">{{ewebsite.length || 0}}/50</mat-hint>-->
-                </mat-form-field>
-              </div>
-              <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <mat-select placeholder="Tax Code" [(ngModel)]="etaxcode" [formControl]="codeeditForm.controls['etaxcode']">
-                    <mat-option *ngFor="let cd of txData; let i = index" class="multiple-field-box" [value]="cd.Id">
-                      {{ cd.Name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <mat-select placeholder="Store Default Price" [(ngModel)]="estDefPrice" [formControl]="codeeditForm.controls['estDefPrice']">
-                    <mat-option *ngFor="let dd of stDefPriceData; let i = index" class="multiple-field-box" [value]="dd.Id">
-                      {{ dd.Name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div layout="row">
-                <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="% Deposit Required" [(ngModel)]="edepositReq" name="edepositReq" [formControl]="codeeditForm.controls['edepositReq']" maxlength="10">
-                  <!--<mat-hint placeholder="Zip" align="end">{{edepositReq.length || 0}}/10</mat-hint>-->
-                </mat-form-field>
-                <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                  <mat-select placeholder="Base Deposit % on" [(ngModel)]="ebaseDeposit" [formControl]="codeeditForm.controls['ebaseDeposit']">
-                    <mat-option value="None">None</mat-option>
-                    <mat-option value="Merchandise">Merchandise Only</mat-option>
-                    <mat-option value="None">Include Tax, Delivery and Additional Services in Deposit</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div layout="row">
-                <mat-form-field flex="50" flex-sm="50" flex-md="50">
-                  <input matInput placeholder="Closed Through Date" [max]="maxDate" [matDatepicker]="dp3" [(ngModel)]="ecloseDate" [ngModelOptions]="{standalone: true}" name="ecloseDate" disabled>
-                  <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
-                  <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <br /><br />
-              <div class="" align="right">
-                <div class="">
-                  <button mat-raised-button type="button" (click)="clearContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+              <form class="add-adv" [formGroup]="codeeditForm" (ngSubmit)="editStores(codeeditForm.value)" novalidate>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Store Code" [(ngModel)]="editcode" name="editcode" [formControl]="codeeditForm.controls['editcode']" required maxlength="4">
+                    <mat-hint placeholder="Store Code" align="end">{{editcode.length || 0}}/4</mat-hint>
+                    <mat-error *ngIf="codeeditForm.controls['editcode'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Store Name" [(ngModel)]="ename" name="ename" [formControl]="codeeditForm.controls['ename']" required maxlength="30">
+                    <mat-hint placeholder="Store Name" align="end">{{ename.length || 0}}/30</mat-hint>
+                    <mat-error *ngIf="codeeditForm.controls['ename'].hasError('required') ">
+                     This is required
+                    </mat-error>
+                  </mat-form-field>
                 </div>
-              </div><br />
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <mat-select placeholder="Company" [(ngModel)]="ecompany" [formControl]="codeeditForm.controls['ecompany']" required>
+                      <mat-option *ngFor="let cd of companyData; let i = index" class="multiple-field-box" [value]="cd.Id">
+                        {{ cd.Name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="codeeditForm.controls['ecompany'].hasError('required')">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <mat-select placeholder="Division" [(ngModel)]="edivision" [formControl]="codeeditForm.controls['edivision']" required>
+                      <mat-option *ngFor="let dd of divData; let i = index" class="multiple-field-box" [value]="dd.Id">
+                        {{ dd.Name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="codeeditForm.controls['edivision'].hasError('required')">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Address 1" [(ngModel)]="eaddr1" name="eaddr1" [formControl]="codeeditForm.controls['eaddr1']" maxlength="50">
+                    <mat-hint placeholder="Address 1" align="end">{{eaddr1.length || 0}}/50</mat-hint>
+                    <mat-error *ngIf="codeeditForm.controls['eaddr1'].hasError('required') ">
+                      This is required
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Address 2" [(ngModel)]="eaddr2" name="eaddr2" [formControl]="codeeditForm.controls['eaddr2']" maxlength="30">
+                    <mat-hint placeholder="Address 2" align="end">{{eaddr2.length || 0}}/30</mat-hint>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Address 3" [(ngModel)]="eaddr3" name="eaddr3" [formControl]="codeeditForm.controls['eaddr3']" maxlength="50">
+                    <mat-hint placeholder="Address 3" align="end">{{eaddr3.length || 0}}/50</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <span class="mat-warn" flex="50">{{addr1errorMsg}}</span>
+                </div>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="City" [(ngModel)]="ecity" name="ecity" [formControl]="codeeditForm.controls['ecity']" maxlength="40">
+                    <mat-hint placeholder="City" align="end">{{ecity.length || 0}}/40</mat-hint>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <mat-select placeholder="State" [(ngModel)]="estateselected" [formControl]="codeeditForm.controls['estate']">
+                      <mat-option *ngFor="let s of stateData; let i = index" class="multiple-field-box" [value]="s.Code + '_' + s.AddressCountryId">
+                        {{ s.Name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Zip" [(ngModel)]="epostalcode" name="epostalcode" [formControl]="codeeditForm.controls['epostalcode']" maxlength="10">
+                    <mat-hint placeholder="Zip" align="end">{{postalcode.length || 0}}/10</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Website" [(ngModel)]="ewebsite" name="ewebsite" [formControl]="codeeditForm.controls['ewebsite']" maxlength="50">
+                    <mat-hint placeholder="Website" align="end">{{ewebsite.length || 0}}/50</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <mat-select placeholder="Tax Code" [(ngModel)]="etaxcode" [formControl]="codeeditForm.controls['etaxcode']">
+                      <mat-option *ngFor="let cd of txData; let i = index" class="multiple-field-box" [value]="cd.Id">
+                        {{ cd.Name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <mat-select placeholder="Store Default Price" [(ngModel)]="estDefPrice" [formControl]="codeeditForm.controls['estDefPrice']">
+                      <mat-option *ngFor="let dd of stDefPriceData; let i = index" class="multiple-field-box" [value]="dd.Id">
+                        {{ dd.Name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="% Deposit Required" [(ngModel)]="edepositReq" name="edepositReq" [formControl]="codeeditForm.controls['edepositReq']" maxlength="10">
+                    <mat-hint placeholder="Zip" align="end">{{edepositReq.length || 0}}/10</mat-hint>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                    <mat-select placeholder="Base Deposit % on" [(ngModel)]="ebaseDeposit" [formControl]="codeeditForm.controls['ebaseDeposit']">
+                      <mat-option value="None">None</mat-option>
+                      <mat-option value="Merchandise">Merchandise Only</mat-option>
+                      <mat-option value="None">Include Tax, Delivery and Additional Services in Deposit</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div layout="row">
+                  <mat-form-field flex="50" flex-sm="50" flex-md="50">
+                    <input matInput placeholder="Closed Through Date" [max]="maxDate" [matDatepicker]="dp3" [(ngModel)]="ecloseDate" [ngModelOptions]="{standalone: true}" name="ecloseDate" disabled>
+                    <mat-datepicker-toggle matPrefix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <br /><br />
+                <div class="" align="right">
+                  <div class="">
+                    <button mat-raised-button type="button" (click)="clearContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                  </div>
+                </div><br />
+              </form>
             </div>
           </mat-tab>
           <mat-tab label="Tab 2">
             <ng-template mat-tab-label>LOCATIONS</ng-template>
             <div>
               <div class="rightside-content" *ngIf="addLocFlag">
-                <form class="add-adv" [formGroup]="LocForm" (ngSubmit)="savePhone(LocForm.value)" novalidate>
+                <form class="add-adv" [formGroup]="LocForm" (ngSubmit)="saveLocation(LocForm.value)" novalidate>
                   <div layout="row">
                     <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
                       <input matInput placeholder="Location Code" [(ngModel)]="locCode" name="locCode" [formControl]="LocForm.controls['locCode']" required maxlength="6">
-                      <!--<mat-hint placeholder="Location Code" align="end">{{locCode.length || 0}}/6</mat-hint>-->
+                      <mat-hint placeholder="Location Code" align="end">{{locCode.length || 0}}/6</mat-hint>
                       <mat-error *ngIf="LocForm.controls['locCode'].hasError('required') ">
                         This is required
                       </mat-error>
                     </mat-form-field>
-                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
-                      <mat-select placeholder="Location Type" [(ngModel)]="locTypeselected" [formControl]="LocForm.controls['loctype']" required>
-                        <mat-option value="Showroom">Showroom</mat-option>
-                        <mat-option value="Work">Warehouse</mat-option>
-                      </mat-select>
-                    </mat-form-field>
+                      <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                        <mat-select placeholder="Location Type" [(ngModel)]="locTypeselected" [formControl]="LocForm.controls['loctype']" required>
+                          <mat-option value="Showroom">Showroom</mat-option>
+                          <mat-option value="Work">Warehouse</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                   </div>
                   <div layout="row">
                     <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
                       <input matInput placeholder="Sequence" [(ngModel)]="sequence" name="sequence" [formControl]="LocForm.controls['sequence']" maxlength="6">
-                      <!--<mat-hint placeholder="Sequence" align="end">{{sequence.length || 0}}/6</mat-hint>-->
+                      <mat-hint placeholder="Sequence" align="end">{{sequence.length || 0}}/6</mat-hint>
                     </mat-form-field>
                   </div>
                   <br /><br />
@@ -330,11 +332,11 @@
               </div>
 
               <div class="rightside-content" *ngIf="editLocFlag">
-                <form class="add-adv" [formGroup]="editLocForm" (ngSubmit)="savePhone(editLocForm.value)" novalidate>
+                <form class="add-adv" [formGroup]="editLocForm" (ngSubmit)="editLocation(editLocForm.value)" novalidate>
                   <div layout="row">
                     <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
                       <input matInput placeholder="Location Code" [(ngModel)]="elocCode" name="elocCode" [formControl]="editLocForm.controls['elocCode']" required maxlength="6">
-                      <!--<mat-hint placeholder="Location Code" align="end">{{elocCode.length || 0}}/6</mat-hint>-->
+                      <mat-hint placeholder="Location Code" align="end">{{elocCode.length || 0}}/6</mat-hint>
                       <mat-error *ngIf="editLocForm.controls['elocCode'].hasError('required') ">
                         This is required
                       </mat-error>
@@ -349,7 +351,7 @@
                   <div layout="row">
                     <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
                       <input matInput placeholder="Sequence" [(ngModel)]="esequence" name="esequence" [formControl]="editLocForm.controls['esequence']" maxlength="6">
-                      <!--<mat-hint placeholder="Sequence" align="end">{{esequence.length || 0}}/6</mat-hint>-->
+                      <mat-hint placeholder="Sequence" align="end">{{esequence.length || 0}}/6</mat-hint>
                     </mat-form-field>
                   </div>
                   <br /><br />
@@ -420,12 +422,108 @@
                   </tr>
                 </table>
               </div>
-
             </div>
           </mat-tab>
           <mat-tab label="Tab 3">
             <ng-template mat-tab-label>PHONE NUMBERS</ng-template>
             <div>
+              <div class="rightside-content" *ngIf="AddPhFlag">
+                <form class="add-adv" [formGroup]="PhForm" (ngSubmit)="savePhone(PhForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Phone Number" [(ngModel)]="phno" name="phno" [formControl]="PhForm.controls['phno']" required maxlength="20">
+                      <mat-hint placeholder="Phone Number" align="end">{{phno.length || 0}}/20</mat-hint>
+                      <mat-error *ngIf="PhForm.controls['phno'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Extension" [(ngModel)]="extension" name="extension" [formControl]="PhForm.controls['extension']" required maxlength="5">
+                      <mat-hint placeholder="Extension" align="end">{{extension.length || 0}}/5</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Type" [(ngModel)]="phTypeselected" [formControl]="PhForm.controls['Ptype']">
+                        <mat-option value="Home">Home</mat-option>
+                        <mat-option value="Work">Work</mat-option>
+                        <mat-option value="Mobile">Mobile</mat-option>
+                        <mat-option value="Fax">Fax</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Description" [(ngModel)]="phdescription" name="phdescription" [formControl]="PhForm.controls['phdescription']" maxlength="20">
+                      <mat-hint placeholder="Description" align="end">{{phdescription.length || 0}}/20</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Country" [(ngModel)]="cntyselected" [formControl]="PhForm.controls['country']">
+                        <mat-option *ngFor="let c of countryData; let i = index" class="multiple-field-box" [value]="c.Code">
+                          {{ c.Name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Country Code" [(ngModel)]="cntCode" name="cntCode" [formControl]="PhForm.controls['cntCode']" maxlength="5">
+                      <mat-hint placeholder="Country Code" align="end">{{cntCode.length || 0}}/5</mat-hint>
+                    </mat-form-field>
+                  </div><br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="clearPhContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="rightside-content" *ngIf="EditPhFlag">
+                <form class="add-adv" [formGroup]="editPhForm" (ngSubmit)="editPhone(editPhForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Phone Number" [(ngModel)]="ephno" name="ephno" [formControl]="editPhForm.controls['ephno']" required maxlength="20">
+                      <mat-hint placeholder="Phone Number" align="end">{{ephno.length || 0}}/20</mat-hint>
+                      <mat-error *ngIf="editPhForm.controls['ephno'].hasError('required') ">
+                        This is required
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Extension" [(ngModel)]="edextension" name="edextension" [formControl]="editPhForm.controls['edextension']" maxlength="5">
+                      <mat-hint placeholder="Extension" align="end">{{edextension.length || 0}}/5</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Type" [(ngModel)]="ephTypeselected" [formControl]="editPhForm.controls['ePtype']" required>
+                        <mat-option value="Home">Home</mat-option>
+                        <mat-option value="Work">Work</mat-option>
+                        <mat-option value="Mobile">Mobile</mat-option>
+                        <mat-option value="Fax">Fax</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Description" [(ngModel)]="ephdescription" name="ephdescription" [formControl]="editPhForm.controls['ephdescription']" maxlength="20">
+                      <mat-hint placeholder="Description" align="end">{{ephdescription.length || 0}}/20</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Country" [(ngModel)]="ecntyselected" [formControl]="editPhForm.controls['ecountry']">
+                        <mat-option *ngFor="let c of countryData; let i = index" class="multiple-field-box" [value]="c.Code">
+                          {{ c.Name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <input matInput placeholder="Country Code" [(ngModel)]="ecntCode" name="ecntCode" [formControl]="editPhForm.controls['ecntCode']" maxlength="5">
+                      <mat-hint placeholder="Country Code" align="end">{{ecntCode.length || 0}}/5</mat-hint>
+                    </mat-form-field>
+                  </div><br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="EditclearPhContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
 
               <div>
                 <mat-content class="codes-color ng-star-inserted" layout="row" *ngIf="PhFlag">
@@ -490,9 +588,27 @@
           <mat-tab label="Tab 4">
             <ng-template mat-tab-label>GENERAL LEDGER</ng-template>
             <div>
-              <div class="rightside-content" *ngIf="editLocFlag">
-                <form class="add-adv" [formGroup]="editLocForm" (ngSubmit)="savePhone(editLocForm.value)" novalidate>
-
+              <div class="rightside-content" *ngIf="EditGLFlag">
+                <form class="add-adv" [formGroup]="editGLForm" (ngSubmit)="EditGL(editGLForm.value)" novalidate>
+                  <div layout="row">
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="Accounts Payable" [(ngModel)]="accpselected" [formControl]="editGLForm.controls['accpayable']" required>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div layout="row">
+                    <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
+                      <mat-select placeholder="A/P Discounts" [(ngModel)]="acdiscselected" [formControl]="editGLForm.controls['APdiscounts']" required>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <br /><br />
+                  <div class="" align="right">
+                    <div class="">
+                      <button mat-raised-button type="button" (click)="clearGLContent()" style="line-height:36px;">CANCEL</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button color="primary" mat-raised-button type="submit" style="line-height:36px;">SAVE</button>
+                    </div>
+                  </div>
                 </form>
               </div>
 
@@ -567,9 +683,9 @@
         <table class="table1 tblborder" width="100%" *ngIf="displayFlag" cellpadding="0" cellspacing="0">
           <tr *ngFor="let row of pagedItems" class="tblbordertr">
             <td style="width:30%;">{{row.Code}} <br> Name: {{row.Name}}</td>
-            <td style="width:30%;">Last Closed Date: {{row.LCD}}</td>
+            <td style="width:30%;">Last Closed Date: </td>
             <td style="width:30%;">Effective date: {{row.StartDate | date: 'MM/dd/yyyy'}}<br>Discontinued Date:{{row.EndDate | date: 'MM/dd/yyyy'}} </td>
-            <td style="width:10%;"><a style="cursor:pointer" (click)="editStores(row.Id,row.AddressId,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
+            <td style="width:10%;"><a style="cursor:pointer" (click)="editStores(row.Id,row.Code, row.Name,row.StartDate,row.EndDate);"><i class="material-icons">create</i> EDIT </a></td>
           </tr>
           <tr>
             <td colspan="3" align="right">

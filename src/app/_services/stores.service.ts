@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from './AppSettings';
 
 @Injectable()
 export class StoresService {
@@ -36,9 +37,9 @@ export class StoresService {
     return options;
   }
 
-  getCData() {
+  getStores() {
     let options = this.getOptions('');
-    return this.http.get("", options)
+    return this.http.get(AppSettings.MONOLITHENDPOINT + "api/Store/", options)
       .map((response: Response) => {
         let Data = response.json() && response.json().Data;
         if (Data) {

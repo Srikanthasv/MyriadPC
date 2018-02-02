@@ -18,6 +18,8 @@ import { CountryService } from '../../_services/country.service';
 })
 export class StoresComponent implements OnInit {
   public codesList: any = "";
+  countryList: any = "";
+  countryData: any[];
   stateList: any = "";
   stateData: any[];
   companyData: any[];
@@ -32,7 +34,6 @@ export class StoresComponent implements OnInit {
   editLocForm: FormGroup;
   PhForm: FormGroup;
   editPhForm: FormGroup;
-  GLForm: FormGroup;
   editGLForm: FormGroup;
 
   sortby: any;
@@ -43,38 +44,38 @@ export class StoresComponent implements OnInit {
   displayFlag: boolean = true;
   maxDate: Date = new Date();
  
-  code: any;
-  name: any;
-  company: any;
-  division: any;
-  addr1: any;
-  addr2: any;
-  addr3: any;
-  city: any;
-  state: any;
-  postalcode: any;
-  website: any;
-  taxcode: any;
-  stDefPrice: any;
-  depositReq: any;
-  baseDeposit: any;
-  closeDate: any;
-  editcode: any;
-  ename: any;
-  ecompany: any;
-  edivision: any;
-  eaddr1: any;
-  eaddr2: any;
-  eaddr3: any;
-  ecity: any;
-  estate: any;
-  epostalcode: any;
-  ewebsite: any;
-  etaxcode: any;
-  estDefPrice: any;
-  edepositReq: any;
-  ebaseDeposit: any;
-  ecloseDate: any;
+  code: any="";
+  name: any = "";
+  company: any = "";
+  division: any = "";
+  addr1: any = "";
+  addr2: any = "";
+  addr3: any = "";
+  city: any = "";
+  state: any = "";
+  postalcode: any = "";
+  website: any = "";
+  taxcode: any = "";
+  stDefPrice: any = "";
+  depositReq: any = "";
+  baseDeposit: any = "";
+  closeDate: any = "";
+  editcode: any = "";
+  ename: any = "";
+  ecompany: any = "";
+  edivision: any = "";
+  eaddr1: any = "";
+  eaddr2: any = "";
+  eaddr3: any = "";
+  ecity: any = "";
+  estate: any = "";
+  epostalcode: any = "";
+  ewebsite: any = "";
+  etaxcode: any = "";
+  estDefPrice: any = "";
+  edepositReq: any = "";
+  ebaseDeposit: any = "";
+  ecloseDate: any = "";
   id: any;
 
   editFlag: boolean = false;
@@ -100,24 +101,39 @@ export class StoresComponent implements OnInit {
 
   LocFlag: boolean = true;
   addLocFlag: boolean = false;
-  locCode: any;
+  locCode: any = "";
   locTypeselected: any;
   loctype: any;
-  sequence: any;
+  sequence: any = "";
   editLocFlag: boolean = false;
-  elocCode: any;
+  elocCode: any="";
   elocTypeselected: any;
-  eloctype: any;
-  esequence: any;
+  eloctype: any = "";
+  esequence: any = "";
 
 
   PhFlag = true;
   AddPhFlag: boolean = false;
   EditPhFlag = false;
+  phno: string = "";
+  extension: string = "";
+  phdescription: string = "";
+  phTypeselected: string = "";
+  cntCode: string = "";
+  ephno: string = "";
+  edextension: string = "";
+  ephdescription: string = "";
+  ephTypeselected: string = "";
+  ecntCode: string = "";
+  ecntyselected: string = "";
 
 
   GLFlag = true;
   EditGLFlag = false;
+  accpayable: any;
+  APdiscounts: any;
+  accpselected: any;
+  acdiscselected: any;
 
 
   addr1errorMsg: string = "";
@@ -133,6 +149,7 @@ export class StoresComponent implements OnInit {
     this.sortby = "Code";
     this.sortorder = "asc";
     this.getData();
+    this.getCountries();
     this.getStates();
     this.maxDate.setDate(this.maxDate.getDate() - 1);
   }
@@ -187,12 +204,24 @@ export class StoresComponent implements OnInit {
       'esequence': [null],
     });
     this.PhForm = this.fb.group({
+      'phno': [null, Validators.compose([Validators.required])],
+      'phTypeselected': [null, Validators.compose([Validators.required])],
+      'extension': [null],
+      'phdescription': [null],
+      'cntyselected': [null],
+      'cntCode': [null]
     });
     this.editPhForm = this.fb.group({
-    });
-    this.GLForm = this.fb.group({
+      'ephno': [null, Validators.compose([Validators.required])],
+      'ephTypeselected': [null, Validators.compose([Validators.required])],
+      'edextension': [null],
+      'ephdescription': [null],
+      'ecntyselected': [null],
+      'ecntCode': [null]
     });
     this.editGLForm = this.fb.group({
+      'accpayable': [null, Validators.compose([Validators.required])],
+      'APdiscounts': [null, Validators.compose([Validators.required])]
     });
   }
   setPage(page: number) {
@@ -207,18 +236,30 @@ export class StoresComponent implements OnInit {
   }
 
   getData() {
-
-    //this.StoresService.getCData()
-    //  .subscribe(res => {
-    //    this.codesList = res;
-    //    this.data = this.codesList.Data;
-    //    this.sortData();
-    //  },
-    //  err => {
-    //    this.errorMsg = "Stores not found.";
-    //    console.log("error:" + err);
-    //  }
-    //  );
+    //console.log("here");
+    this.StoresService.getStores()
+      .subscribe(res => {
+        this.codesList = res;
+        this.data = this.codesList.Data;
+        this.sortData();
+      },
+      err => {
+        this.errorMsg = "Stores not found.";
+        console.log("error:" + err);
+      }
+      );
+  }
+  getCountries() {
+    this.CountryService.getCountries()
+      .subscribe(res => {
+        this.countryList = res;
+        this.countryData = this.countryList.Data;
+      },
+      err => {
+        this.errorMsg = "Country(s) not found.";
+        console.log("error:" + err);
+      }
+      );
   }
   getStates() {
     this.CountryService.getStates()
@@ -239,28 +280,22 @@ export class StoresComponent implements OnInit {
 
   callLocations()
   {
-    this.editLocFlag =false;
+    this.editLocFlag =true;
     this.LocFlag = false;
-    this.addLocFlag = true;
+    this.addLocFlag = false;
   }
   callPhones() {
-    this.editLocFlag = false;
-    this.LocFlag = false;
-    this.addLocFlag = false;
     this.PhFlag = false;
-    this.AddPhFlag = true;
+    //this.AddPhFlag = true;
+    this.EditPhFlag = true;
   }
   callGL() {
-    this.editLocFlag = false;
-    this.LocFlag = false;
-    this.addLocFlag = false;
     this.GLFlag = false;
     this.EditGLFlag = true;
   }
 
   callCodes() {
-    //this.addFlag = true;
-    this.editFlag = true;
+    this.addFlag = true;
     this.displayFlag = false;
     this.errormsg = "";
     this.codeerrorMsg = "";
@@ -317,14 +352,12 @@ export class StoresComponent implements OnInit {
       //  );
     }
   }
-  editStores(id, code, desc, startDate, endDate) {
+  editStores(id, code, Name, startDate, endDate) {
     this.editFlag = true;
     this.displayFlag = false;
     this.editcode = code;
-    this.editdescription = desc;
-    this.prevDescription = desc;
-    var splitted = startDate.split("T", 2);
-    
+    this.ename = Name;
+    var splitted = startDate.split("T", 2);    
     this.id = id;
     this.prevDiscDate = endDate;
     this.editerrormsg = "";
@@ -410,6 +443,7 @@ export class StoresComponent implements OnInit {
 
     });
     this.data = this.codesList.Data;
+    this.setPage(1);
     return this.codesList.Data;
   }
 
