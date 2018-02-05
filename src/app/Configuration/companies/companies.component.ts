@@ -606,4 +606,9 @@ export class CompaniesComponent implements OnInit {
     this.editcodeerrorMsg = "";
     this.editdescerrorMsg = "";
   }
+
+  clickDivs()
+  {
+    this.DivdisplayFlag = true;
+  }
 }

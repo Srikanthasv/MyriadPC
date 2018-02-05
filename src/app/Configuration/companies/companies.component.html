@@ -540,7 +540,7 @@
             </div>
           </mat-tab>
           <mat-tab label="Tab 4">
-            <ng-template mat-tab-label>DIVISIONS</ng-template>
+            <ng-template mat-tab-label (click)="clickDivs()">DIVISIONS</ng-template>
             <div>
               <div class="rightside-content" *ngIf="AddDivFlag">
                 <form class="add-adv" [formGroup]="DivisionForm" (ngSubmit)="saveDivision(DivisionForm.value)" novalidate>
