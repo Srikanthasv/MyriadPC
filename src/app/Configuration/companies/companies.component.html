@@ -607,7 +607,7 @@
               </mat-content>{{this.company}}
               <table class="table1 tblborder" width="100%" *ngIf="DivdisplayFlag" cellpadding="0" cellspacing="0">
                 <tr *ngFor="let row of DivpagedItems" class="tblbordertr">
-                  <td style="width:30%;">Division Code: {{row.Code}} <br /> Division Description: {{row.Description}} </td>
+                  <td style="width:30%;">Division Code: {{row.Code}} <br /> Division Description: {{row.Name}} </td>
                   <td style="width:30%;">Effective Date: {{row.StartDate}} <br /> Discontinued Date: {{row.DiscontinuedDate}} </td>
                 </tr>
                 <tr>

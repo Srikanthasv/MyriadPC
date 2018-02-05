@@ -8,6 +8,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { PagerService } from '../../_services/PagerService';
 import { CompaniesService } from '../../_services/companies.service';
 import { CountryService } from '../../_services/country.service';
+import { DivisionsService } from '../../_services/divisions.service';
 //import { Company } from '../../Model/company.model';
 
 
@@ -16,7 +17,7 @@ import { CountryService } from '../../_services/country.service';
   selector: 'app-companies',
   templateUrl: './companies.component.html',
   styleUrls: ['../../../assets/css/configuration/configuration.css'],
-  providers: [CompaniesService, CountryService]
+  providers: [CompaniesService, CountryService, DivisionsService]
 })
 export class CompaniesComponent implements OnInit {
   pgTitle: string = "Companies";
@@ -27,6 +28,9 @@ export class CompaniesComponent implements OnInit {
   countryData: any[];
   stateList: any = "";
   stateData: any[];
+  divList: any = "";
+  divData: any[];
+
   public codeForm: FormGroup;
   codeeditForm: FormGroup;
   PhoneForm: FormGroup;
@@ -158,12 +162,14 @@ export class CompaniesComponent implements OnInit {
     private http: Http,
     private pagerService: PagerService,
     private CompaniesService: CompaniesService,
-    private CountryService: CountryService) {
+    private CountryService: CountryService,
+    private DivisionsService: DivisionsService) {
     this.sortby = "Code";
     this.sortorder = "asc";
     this.getData();
     this.getCountries();
     this.getStates();
+    this.getDivisions();
   }
   setPage(page: number) {
     this.selectpage = Number(page);
@@ -204,8 +210,8 @@ export class CompaniesComponent implements OnInit {
     if (page < 1 || page > this.Phpager.totalPages) {
       return;
     }
-    this.Divpager = this.pagerService.getPager(this.codesList.Data.length, this.selDiv, this.rowspage);
-    this.DivpagedItems = this.codesList.Data.slice(this.Divpager.startIndex, this.Divpager.endIndex + 1);
+    this.Divpager = this.pagerService.getPager(this.divList.Data.length, this.selDiv, this.rowspage);
+    this.DivpagedItems = this.divList.Data.slice(this.Divpager.startIndex, this.Divpager.endIndex + 1);
     this.selDiv = Number(this.Divpager.currentPage);
   }
 
@@ -320,6 +326,23 @@ export class CompaniesComponent implements OnInit {
       }
       );
 
+  }
+  getDivisions() {
+
+    this.DivisionsService.getDivisions()
+      .subscribe(res => {
+        this.divList = res;
+        this.divData = this.divList.Data.sort((a: any, b: any) => {
+          if (a["Name"] < b["Name"]) return -1;
+          if (a["Name"] > b["Name"]) return 1;
+        });
+        this.setDivPage(1);
+      },
+      err => {
+        this.errorMsg = "Company(s) not found.";
+        console.log("error:" + err);
+      }
+      );
   }
   sortData() {
     let orderType = this.sortorder
