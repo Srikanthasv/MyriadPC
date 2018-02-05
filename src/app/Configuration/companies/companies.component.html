@@ -47,6 +47,9 @@
               <mat-error *ngIf="codeForm.controls['code'].hasError('required') ">
                 This is required
               </mat-error>
+              <mat-error *ngIf="codeForm.controls['code'].hasError('patternInvalid') ">
+                Invalid!
+              </mat-error>
             </mat-form-field>
             <mat-form-field style="margin-left:20px;" hintLabel="" flex="50" flex-sm="50" flex-md="50">
               <input matInput placeholder="Company Name" [(ngModel)]="companyName" name="companyName" [formControl]="codeForm.controls['companyName']" required maxlength="30">
@@ -113,6 +116,9 @@
               <mat-hint placeholder="Zip" align="end">{{postalcode.length || 0}}/10</mat-hint>
               <mat-error *ngIf="codeForm.controls['postalcode'].hasError('required') ">
                 This is required
+              </mat-error>
+              <mat-error *ngIf="codeForm.controls['postalcode'].hasError('patternInvalid') ">
+                Invalid!
               </mat-error>
             </mat-form-field>
           </div>
@@ -607,7 +613,7 @@
               </mat-content>{{this.company}}
               <table class="table1 tblborder" width="100%" *ngIf="DivdisplayFlag" cellpadding="0" cellspacing="0">
                 <tr *ngFor="let row of DivpagedItems" class="tblbordertr">
-                  <td style="width:30%;">Division Code: {{row.Code}} <br /> Division Description: {{row.Name}} </td>
+                  <td style="width:30%;">Division Code: {{row.Code}} <br /> Division Description: {{row.Description}} </td>
                   <td style="width:30%;">Effective Date: {{row.StartDate}} <br /> Discontinued Date: {{row.DiscontinuedDate}} </td>
                 </tr>
                 <tr>
