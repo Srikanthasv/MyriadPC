@@ -222,7 +222,7 @@ export class CompaniesComponent implements OnInit {
       'city': [null, Validators.compose([Validators.required])],
       'state': [null],
       'postalcode': [null, Validators.compose([Validators.required,patternValidator(/[0-9]$/)])],
-      'website': [null],
+      'website': [null,Validators.compose([patternValidator(/^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/)])],
       'effectiveDate': [null]
     });
     this.codeeditForm = this.fb.group({
