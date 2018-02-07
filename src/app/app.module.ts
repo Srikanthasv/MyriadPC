@@ -84,6 +84,7 @@ import { CompaniesComponent } from './Configuration/companies/companies.componen
 import { PaymentComponent } from './Configuration/Codes/payments/payments.component';
 //import { DialogOverviewExampleDialog } from './Configuration/Codes/inventory/inventoryadj/inventoryadj.component';
 import { StoresComponent } from './Configuration/stores/stores.component';
+import { FinancialstatementComponent } from './Configuration/financialstatement/financialstatement.component';
 
 
 @NgModule({
@@ -155,7 +156,8 @@ exports: [
      FooterComponent,
      CompaniesComponent,
      PaymentComponent,
-     StoresComponent
+     StoresComponent,
+     FinancialstatementComponent
   ],
   imports: [
   ReactiveFormsModule,HttpModule ,routing,

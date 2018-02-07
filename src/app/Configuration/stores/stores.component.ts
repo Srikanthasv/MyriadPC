@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { MatPaginator, MatSort, MatTableDataSource, MatPaginatorModule } from '@angular/material';
+
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { PagerService } from '../../_services/PagerService';
 import { StoresService } from '../../_services/stores.service';
@@ -137,8 +137,8 @@ export class StoresComponent implements OnInit {
 
 
   addr1errorMsg: string = "";
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  
+  
 
   constructor(private fb: FormBuilder,
     private router: Router,

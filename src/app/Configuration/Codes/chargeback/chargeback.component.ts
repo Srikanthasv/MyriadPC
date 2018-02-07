@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { PagerService } from '../../../_services/PagerService';
 import { ChargebackService } from '../../../_services/chargeback.service';
@@ -67,13 +66,7 @@ export class ChargebackComponent implements OnInit {
     this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
     this.selectpage = Number(this.pager.currentPage);
   }
-
-  displayedColumns = ['Id', 'Code', 'Description', 'StartDate', 'EndDate', 'TimeStamp'];
-  dataSource: MatTableDataSource<CBCodeData>;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
+  
   ngOnInit() {
     this.codeForm = this.fb.group({
       'code': [null, Validators.compose([Validators.required])],
@@ -93,8 +86,8 @@ export class ChargebackComponent implements OnInit {
       .subscribe(res => {
         this.codesList = res;
         this.data = this.codesList.Data;
-        this.dataSource = new MatTableDataSource(this.data);
-        this.dataSource.paginator = this.paginator;
+        
+        
         this.sortCBcodes();
       },
       err => {
@@ -269,17 +262,10 @@ export class ChargebackComponent implements OnInit {
     });
     this.setPage(1);
     this.data = this.codesList.Data;
-    this.dataSource = new MatTableDataSource(this.data);
-    this.dataSource.paginator = this.paginator;
+    
+    
     return this.codesList.Data;
   } 
 
 }
-export interface CBCodeData {
-  Id: any;
-  Code: any;
-  StartDate: any;
-  EndDate: any;
-  Description: any;
-  TimeStamp: any;
-}
+

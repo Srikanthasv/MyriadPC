@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { MatPaginator, MatSort, MatTableDataSource, MatPaginatorModule } from '@angular/material';
+
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { PagerService } from '../../_services/PagerService';
 import { CompaniesService } from '../../_services/companies.service';
@@ -49,8 +49,8 @@ export class CompaniesComponent implements OnInit {
   Phpager: any = {};
   rowspage: number = 5;
   displayFlag: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  
+  
   code: any;
   description: any;
   editFlag: boolean = false;
@@ -606,9 +606,5 @@ export class CompaniesComponent implements OnInit {
     this.editcodeerrorMsg = "";
     this.editdescerrorMsg = "";
   }
-
-  clickDivs()
-  {
-    this.DivdisplayFlag = true;
-  }
+  
 }

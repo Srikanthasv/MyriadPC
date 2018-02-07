@@ -254,6 +254,13 @@
         "subs": []
       },
       {
+        "title": "financialstatement",
+        "icon": "",
+        "routeUrl": [ "app/configuration/financialstatement/financialstatement" ],
+        "subcategory": "Financial Statement",
+        "subs": []
+      },
+      {
         "title": "stores",
         "icon": "",
         "routeUrl": [ "app/configuration/stores/stores" ],

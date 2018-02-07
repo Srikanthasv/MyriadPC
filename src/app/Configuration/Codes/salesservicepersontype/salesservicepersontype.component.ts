@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { MatPaginator, MatSort, MatTableDataSource, MatPaginatorModule } from '@angular/material';
+
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { PagerService } from '../../../_services/PagerService';
 import { SalesservicepersontypeService } from '../../../_services/salesservicepersontype.service';
@@ -68,12 +68,8 @@ export class SalesservicepersontypeComponent implements OnInit {
     this.pagedItems = this.codesList.Data.slice(this.pager.startIndex, this.pager.endIndex + 1);
     this.selectpage = Number(this.pager.currentPage);
   }
-
-  displayedColumns = ['Id', 'Code', 'Description', 'StartDate', 'EndDate', 'TimeStamp'];
-  dataSource: MatTableDataSource<SalesservicepersontypeData>;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  
+  
 
   ngOnInit() {
     this.codeForm = this.fb.group({
@@ -93,8 +89,8 @@ export class SalesservicepersontypeComponent implements OnInit {
       .subscribe(res => {
         this.codesList = res;
         this.data = this.codesList.Data;
-        this.dataSource = new MatTableDataSource(this.data);
-        this.dataSource.paginator = this.paginator;
+        
+        
         this.sortSSPTcodes();
       },
       err => {
@@ -266,18 +262,9 @@ export class SalesservicepersontypeComponent implements OnInit {
     });
     this.setPage(1);
     this.data = this.codesList.Data;
-    this.dataSource = new MatTableDataSource(this.data);
-    this.dataSource.paginator = this.paginator;
+    
+    
     return this.codesList.Data;
   }
 
-}
-
-export interface SalesservicepersontypeData {
-  Id: any;
-  Code: any;
-  StartDate: any;
-  EndDate: any;
-  Description: any;
-  TimeStamp: any;
 }

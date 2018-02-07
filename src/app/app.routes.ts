@@ -31,6 +31,7 @@ import { ARtransactionComponent } from './Configuration/Codes/artransaction/artr
 import { CompaniesComponent } from './Configuration/companies/companies.component';
 import { PaymentComponent } from './Configuration/Codes/payments/payments.component';
 import { StoresComponent } from './Configuration/stores/stores.component';
+import { FinancialstatementComponent } from './Configuration/financialstatement/financialstatement.component';
 
 // Route Configuration  
 export const routes: Routes = [  
@@ -63,7 +64,8 @@ export const routes: Routes = [
   { path: 'app/configuration/codes/artransaction', component: ARtransactionComponent },
   { path: 'app/configuration/companies/companies', component: CompaniesComponent },
   { path: 'app/configuration/codes/payments', component: PaymentComponent },
-  { path: 'app/configuration/stores/stores', component: StoresComponent }
+  { path: 'app/configuration/stores/stores', component: StoresComponent },
+  { path: 'app/configuration/financialstatement/financialstatement', component: FinancialstatementComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);  

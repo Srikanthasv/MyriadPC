@@ -15,7 +15,7 @@ import { AdvertisingService } from '../../../_services/advertising.service';
 })
 export class AdvertisingComponent implements OnInit {
 
-  displayedColumns = ['Id', 'Code', 'Description', 'StartDate', 'EndDate', 'TimeStamp'];
+  
 
 public codesList:any="";
 public codeForm: FormGroup;
